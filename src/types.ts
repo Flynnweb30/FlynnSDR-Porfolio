@@ -1,19 +1,15 @@
-export type PageRoute = 'home' | 'calls' | 'experience' | 'references' | 'playbook' | 'leadership' | 'contact';
+export type PageRoute = 'home' | 'calls' | 'experience' | 'references' | 'contact';
 
-export interface WorkExperience {
-  role: string;
+export interface ScheduleFormData {
+  fullName: string;
+  email: string;
   company: string;
-  industry: string;
-  location: string;
-  period: string;
-  achievements: string[];
-  kpis?: string[];
-}
-
-export interface Testimonial {
-  name: string;
   role: string;
-  company: string;
-  quote: string;
-  image: string;
+  inquiryType: string;
+  employmentPreference: 'Part-Time' | 'Full-Time';
+  selectedDate: string;
+  selectedTime: string;
+  message: string;
+  consent: boolean;
+  submissionTimestamp: string;
 }

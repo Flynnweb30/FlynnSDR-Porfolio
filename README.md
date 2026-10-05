@@ -1,71 +1,49 @@
 # Flynn James Q. Pontino — Senior SDR Portfolio
 
-Production-ready React/Vite static portfolio for GitHub + Render. Positioning is strictly Senior SDR / B2B Cold Caller / Appointment Setter.
+Production-ready Vite + React static portfolio for GitHub + Render.
 
-## Local development
+## Local
 
 ```bash
 npm install
-npm run dev
-```
-
-## Build / QA
-
-```bash
-npm run build
 npm run lint
+npm run build
+npm run preview
 ```
 
-## Render Static Site
+## Render
 
-- **Environment:** Static Site
-- **Build Command:** `npm install && npm run build`
-- **Publish Directory:** `dist`
-- **Rewrite:** `/*` → `/index.html` (already included in `render.yaml`)
+- Environment: Static Site
+- Build command: `npm install && npm run build`
+- Publish directory: `dist`
+- Rewrite: `/*` → `/index.html`
 
-### Required Render environment variables
+### Required environment variables
 
-```text
-VITE_EMAILJS_SERVICE_ID=...
-VITE_EMAILJS_NOTIFICATION_TEMPLATE_ID=...
-VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID=...
-VITE_EMAILJS_PUBLIC_KEY=...
-VITE_NOTIFICATION_EMAIL=va.flynnjames@gmail.com
-```
+- `VITE_EMAILJS_PUBLIC_KEY`
+- `VITE_EMAILJS_SERVICE_ID`
+- `VITE_EMAILJS_OWNER_TEMPLATE_ID`
+- `VITE_EMAILJS_PROSPECT_TEMPLATE_ID`
+- `VITE_AUDIO_1_URL`
+- `VITE_AUDIO_2_URL`
+- `VITE_AUDIO_3_URL`
 
-Optional audio overrides:
+The scheduling workflow sends two EmailJS templates when configured: one to Flynn and one to the prospect. If EmailJS is not configured, the form validates locally and falls back to a prefilled email containing the complete inquiry data.
 
-```text
-VITE_AUDIO_1_URL=...
-VITE_AUDIO_2_URL=...
-VITE_AUDIO_3_URL=...
-```
+## EmailJS template variables
 
-If audio overrides are blank, the site uses the three supplied Google Drive file IDs as fallback sources. For the most reliable browser playback, use direct HTTPS audio-file URLs in the three `VITE_AUDIO_*_URL` variables.
+The frontend passes these variables to both templates:
 
-## EmailJS setup
+`fullName`, `email`, `company`, `role`, `inquiryType`, `employmentPreference`, `selectedDate`, `selectedTime`, `message`, `consent`, `submissionTimestamp`, `timestamp`, `to_email`, `prospect_email`, `body`.
 
-Create two EmailJS templates using the centralized definitions in `src/data/emailTemplates.ts`:
+### Template A — Flynn receives
 
-1. **Flynn Notification** — sends every submitted field to Flynn.
-2. **Prospect Confirmation** — confirms the inquiry and requested schedule to the prospect.
+Use `{{body}}` as the email body or compose from the individual variables. Set the destination to Flynn's work email.
 
-Template variables:
+### Template B — Prospect receives
 
-`{{name}}`, `{{email}}`, `{{company}}`, `{{role}}`, `{{inquiryType}}`, `{{workPreference}}`, `{{dateTime}}`, `{{message}}`, `{{consent}}`, `{{timestamp}}`, `{{to_email}}`
-
-Set the notification template's recipient to `{{to_email}}` or to Flynn's fixed notification address. The confirmation template's recipient should be `{{email}}`.
-
-The scheduling form requires the consent checkbox:
-
-> I'm okay with Flynn emailing me about my inquiry. No spam, ever.
+Use `{{body}}` or the individual variables. Set the destination to `{{prospect_email}}`.
 
 ## SEO
 
-- `robots.txt` and `sitemap.xml` are in `public/`.
-- Canonical URL and Open Graph metadata are in `index.html`.
-- Render SPA rewrite keeps direct page routes working.
-
-## Architecture
-
-Reusable navigation, footer, scheduling, resume, audio, testimonials, data, email-template definitions, and SEO/deployment configuration are centralized. Pages are route-based while remaining a single static Vite build suitable for Render.
+`public/robots.txt` and `public/sitemap.xml` are included and use the production Render URL.

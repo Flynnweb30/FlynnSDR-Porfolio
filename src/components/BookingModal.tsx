@@ -1,71 +1,37 @@
-import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import { ArrowRight, CalendarDays, CheckCircle2, Loader2, X } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { X, Calendar, Clock, CheckCircle2, Send } from 'lucide-react';
+import { ScheduleFormData } from '../types';
+import { personalInfo } from '../data/flynnData';
 
-interface Props { isOpen: boolean; onClose: () => void; defaultPreference?: 'Part-Time' | 'Full-Time' | ''; }
+const dates = Array.from({length: 7}, (_, i) => { const d = new Date(); d.setDate(d.getDate()+i+1); return d; });
+const times = ['9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
+const inquiryTypes = ['Senior SDR role','Part-time SDR role','Full-time SDR role','Outbound / appointment-setting project','General inquiry'];
 
-const env = import.meta.env;
-const serviceId = env.VITE_EMAILJS_SERVICE_ID as string | undefined;
-const notificationTemplateId = env.VITE_EMAILJS_NOTIFICATION_TEMPLATE_ID as string | undefined;
-const confirmationTemplateId = env.VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID as string | undefined;
-const publicKey = env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
-const notificationRecipient = env.VITE_NOTIFICATION_EMAIL || 'va.flynnjames@gmail.com';
+const formatDate = (d: Date) => d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
 
-export default function BookingModal({ isOpen, onClose, defaultPreference = '' }: Props) {
-  const [form, setForm] = useState({ name: '', email: '', company: '', role: '', inquiryType: 'Senior SDR opportunity', workPreference: defaultPreference, dateTime: '', message: '', consent: false });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [error, setError] = useState('');
-
-  if (!isOpen) return null;
-
-  const update = (key: keyof typeof form, value: string | boolean) => setForm((current) => ({ ...current, [key]: value }));
-
-  const submit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setError('');
-    if (!form.consent) { setError('Please confirm the email consent before submitting.'); return; }
-    setStatus('sending');
-    const timestamp = new Date().toISOString();
-    const vars = { ...form, consent: form.consent ? 'Yes' : 'No', timestamp, to_email: notificationRecipient };
-    try {
-      if (!serviceId || !notificationTemplateId || !confirmationTemplateId || !publicKey) throw new Error('Email service is not configured yet.');
-      await emailjs.send(serviceId, notificationTemplateId, vars, publicKey);
-      await emailjs.send(serviceId, confirmationTemplateId, vars, publicKey);
-      setStatus('success');
-    } catch (err) {
-      setStatus('error');
-      setError(err instanceof Error ? err.message : 'The inquiry could not be sent. Please email Flynn directly.');
-    }
-  };
-
-  const reset = () => { setForm({ name: '', email: '', company: '', role: '', inquiryType: 'Senior SDR opportunity', workPreference: defaultPreference, dateTime: '', message: '', consent: false }); setStatus('idle'); setError(''); onClose(); };
-
-  return <div className="fixed inset-0 z-[100] grid place-items-center bg-slate-950/60 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="schedule-title">
-    <div className="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl border border-slate-200 bg-white shadow-2xl">
-      <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-white/95 p-5 backdrop-blur">
-        <div><p className="eyebrow">15-minute intro</p><h2 id="schedule-title" className="text-2xl font-black">Schedule a conversation with Flynn</h2></div>
-        <button onClick={onClose} aria-label="Close scheduling form" className="rounded-full p-2 hover:bg-slate-100"><X size={20}/></button>
-      </div>
-      <div className="p-5 sm:p-7">
-        {status === 'success' ? <div className="py-12 text-center"><CheckCircle2 className="mx-auto mb-5 text-emerald-600" size={58}/><h3 className="mb-2 text-3xl font-black">Inquiry received.</h3><p className="mx-auto max-w-md text-slate-600">Your details and requested schedule were sent successfully. Flynn will follow up with the next step.</p><button onClick={reset} className="btn-primary mt-7">Done</button></div> : <form onSubmit={submit} className="space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Name" required><input required value={form.name} onChange={e => update('name', e.target.value)} /></Field>
-            <Field label="Email" required><input required type="email" value={form.email} onChange={e => update('email', e.target.value)} /></Field>
-            <Field label="Company" required><input required value={form.company} onChange={e => update('company', e.target.value)} /></Field>
-            <Field label="Role" required><input required value={form.role} onChange={e => update('role', e.target.value)} placeholder="e.g. Founder, Head of Sales" /></Field>
-            <Field label="Inquiry type" required><select required value={form.inquiryType} onChange={e => update('inquiryType', e.target.value)}><option>Senior SDR opportunity</option><option>Part-Time SDR inquiry</option><option>Full-Time SDR inquiry</option><option>Outbound sales support</option><option>Other</option></select></Field>
-            <Field label="Work preference" required><select required value={form.workPreference} onChange={e => update('workPreference', e.target.value)}><option value="">Select one</option><option>Part-Time</option><option>Full-Time</option></select></Field>
-          </div>
-          <Field label="Preferred date & time" required><input required type="datetime-local" value={form.dateTime} onChange={e => update('dateTime', e.target.value)} /></Field>
-          <Field label="Message"><textarea rows={4} value={form.message} onChange={e => update('message', e.target.value)} placeholder="Tell Flynn what you are hiring for, target market, hours, or outbound goals." /></Field>
-          <label className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700"><input required type="checkbox" checked={form.consent} onChange={e => update('consent', e.target.checked)} className="mt-1 h-4 w-4"/><span><strong>I'm okay with Flynn emailing me about my inquiry. No spam, ever.</strong></span></label>
-          {error && <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error} {!serviceId && <span>Please configure the EmailJS variables before deployment.</span>}</div>}
-          <button type="submit" disabled={status === 'sending'} className="btn-primary w-full justify-center disabled:opacity-60">{status === 'sending' ? <><Loader2 className="animate-spin" size={17}/> Sending…</> : <>Confim Schedule <ArrowRight size={17}/></>}</button>
-          <p className="flex items-center justify-center gap-2 text-center text-xs text-slate-500"><CalendarDays size={14}/> Requested time is subject to final confirmation.</p>
-        </form>}
-      </div>
-    </div>
-  </div>;
+function templateA(data: ScheduleFormData) {
+  return `NEW FLYNN INTRO INQUIRY\n\nFull name: ${data.fullName}\nEmail: ${data.email}\nCompany: ${data.company || 'Not provided'}\nRole: ${data.role || 'Not provided'}\nInquiry type: ${data.inquiryType}\nPart-time/full-time preference: ${data.employmentPreference}\nSelected date: ${data.selectedDate}\nSelected time: ${data.selectedTime}\nMessage: ${data.message || 'Not provided'}\nConsent status: ${data.consent ? 'Yes' : 'No'}\nSubmission timestamp: ${data.submissionTimestamp}`;
+}
+function templateB(data: ScheduleFormData) {
+  return `Hi ${data.fullName},\n\nThanks for reaching out to Flynn. Your 15-minute intro request has been received.\n\nSubmitted details:\n• Company: ${data.company || 'Not provided'}\n• Role: ${data.role || 'Not provided'}\n• Inquiry: ${data.inquiryType}\n• Preference: ${data.employmentPreference}\n• Selected date: ${data.selectedDate}\n• Selected time: ${data.selectedTime}\n• Message: ${data.message || 'Not provided'}\n\nNext step: Flynn will review the request and confirm the meeting details directly.\n\nBest,\nFlynn James Q. Pontino\nSenior SDR\n${personalInfo.email}`;
 }
 
-function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) { return <label className="block"><span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-600">{label}{required ? ' *' : ''}</span>{React.cloneElement(children as React.ReactElement, { className: 'field' })}</label>; }
+async function sendEmailJS(templateId: string, data: ScheduleFormData, body: string) {
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  if (!serviceId || !publicKey || !templateId) return false;
+  const payload = { service_id: serviceId, template_id: templateId, user_id: publicKey, template_params: { ...data, body, to_email: personalInfo.email, prospect_email: data.email, timestamp: data.submissionTimestamp } };
+  const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  return res.ok;
+}
+
+export default function BookingModal({ isOpen, onClose, initialPreference }: { isOpen:boolean; onClose:()=>void; initialPreference?:'Part-Time'|'Full-Time' }) {
+  const [preference,setPreference] = useState<'Part-Time'|'Full-Time'>(initialPreference || 'Full-Time');
+  const [fullName,setFullName] = useState(''); const [email,setEmail] = useState(''); const [company,setCompany] = useState(''); const [role,setRole] = useState('');
+  const [inquiryType,setInquiryType] = useState('Senior SDR role'); const [selectedDate,setSelectedDate] = useState(formatDate(dates[0])); const [selectedTime,setSelectedTime] = useState(times[1]); const [message,setMessage] = useState(''); const [consent,setConsent] = useState(false); const [sent,setSent] = useState(false); const [loading,setLoading] = useState(false); const [error,setError] = useState('');
+  const dateOptions = useMemo(()=>dates.map(formatDate),[]);
+  if (!isOpen) return null;
+  const submit = async (e:React.FormEvent) => { e.preventDefault(); setError(''); if(!consent){setError('Please provide consent before submitting.');return;} setLoading(true); const data:ScheduleFormData={fullName,email,company,role,inquiryType,employmentPreference:preference,selectedDate,selectedTime,message,consent,submissionTimestamp:new Date().toISOString()}; try { const a=await sendEmailJS(import.meta.env.VITE_EMAILJS_OWNER_TEMPLATE_ID,data,templateA(data)); const b=await sendEmailJS(import.meta.env.VITE_EMAILJS_PROSPECT_TEMPLATE_ID,data,templateB(data)); if(!a || !b){ const subject=encodeURIComponent(`15-Minute Intro Request — ${fullName}`); const body=encodeURIComponent(templateA(data)); window.location.href=`mailto:${personalInfo.email}?subject=${subject}&body=${body}`; } setSent(true); } catch { setError('The form could not send automatically. Your email app has been opened with the complete inquiry details.'); const subject=encodeURIComponent(`15-Minute Intro Request — ${fullName}`); const body=encodeURIComponent(templateA(data)); window.location.href=`mailto:${personalInfo.email}?subject=${subject}&body=${body}`; } finally { setLoading(false); } };
+  const reset=()=>{setSent(false);setError('');};
+  return <div className="modal-backdrop"><div className="modal booking-modal"><button className="modal-close" onClick={onClose}><X/></button>{sent?<div className="success-state"><CheckCircle2 size={48}/><p className="eyebrow">Request Received</p><h2>Thanks, {fullName.split(' ')[0] || 'there'}.</h2><p>Your selected slot and submitted details have been captured. Flynn will confirm the meeting directly.</p><div className="summary-card"><div><b>Date</b><span>{selectedDate}</span></div><div><b>Time</b><span>{selectedTime}</span></div><div><b>Preference</b><span>{preference}</span></div></div><button className="btn btn-primary" onClick={reset}>Submit Another Inquiry</button></div>:<form onSubmit={submit}><p className="eyebrow">Schedule 15-Minute Intro</p><h2>Tell Flynn what you need.</h2><p className="modal-copy">Choose a schedule, tell Flynn about the opportunity, and receive a clear confirmation.</p><div className="form-grid"><label>Full name<input required value={fullName} onChange={e=>setFullName(e.target.value)} /></label><label>Email<input required type="email" value={email} onChange={e=>setEmail(e.target.value)} /></label><label>Company<input value={company} onChange={e=>setCompany(e.target.value)} /></label><label>Role<input value={role} onChange={e=>setRole(e.target.value)} placeholder="Founder, Head of Sales, Recruiter…" /></label><label>Inquiry type<select value={inquiryType} onChange={e=>setInquiryType(e.target.value)}>{inquiryTypes.map(x=><option key={x}>{x}</option>)}</select></label><label>Preference<select value={preference} onChange={e=>setPreference(e.target.value as 'Part-Time'|'Full-Time')}><option>Full-Time</option><option>Part-Time</option></select></label><label><span><Calendar size={14}/> Selected date</span><select value={selectedDate} onChange={e=>setSelectedDate(e.target.value)}>{dateOptions.map(x=><option key={x}>{x}</option>)}</select></label><label><span><Clock size={14}/> Selected time</span><select value={selectedTime} onChange={e=>setSelectedTime(e.target.value)}>{times.map(x=><option key={x}>{x}</option>)}</select></label></div><label>Message<textarea rows={4} value={message} onChange={e=>setMessage(e.target.value)} placeholder="Campaign, target market, role scope, or anything Flynn should know…" /></label><label className="consent"><input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)} required /><span>I'm okay with Flynn emailing me about my inquiry. No spam, ever.</span></label>{error&&<p className="form-error">{error}</p>}<button className="btn btn-primary btn-wide" disabled={loading}>{loading?<><span className="spinner"/> Sending…</>:<><Send size={15}/> Confirm Schedule</>}</button><p className="form-note">Your submission includes the selected schedule, inquiry details, consent status, and timestamp.</p></form>}</div></div>;
+}

@@ -1,47 +1,73 @@
-# Centralized Email Templates
+# Scheduling Email Templates
 
-Create two EmailJS templates using these exact variable names.
+The static frontend passes the same scheduling variables to both EmailJS templates.
 
-## 1. Flynn Notification
+Variables:
 
-**To:** Flynn
-**Subject:** New Senior SDR inquiry — {{name}} / {{company}}
+- `{{fullName}}`
+- `{{email}}`
+- `{{company}}`
+- `{{role}}`
+- `{{inquiryType}}`
+- `{{employmentPreference}}`
+- `{{selectedDate}}`
+- `{{selectedTime}}`
+- `{{message}}`
+- `{{consent}}`
+- `{{submissionTimestamp}}`
+- `{{timestamp}}`
+- `{{prospect_email}}`
+- `{{to_email}}`
+- `{{body}}`
 
-New inquiry received from the portfolio.
+## Template A — Flynn receives
 
-Name: {{name}}
+**Subject:** New 15-Minute Intro Inquiry — `{{fullName}}`
+
+```text
+NEW FLYNN INTRO INQUIRY
+
+Full name: {{fullName}}
 Email: {{email}}
 Company: {{company}}
 Role: {{role}}
 Inquiry type: {{inquiryType}}
-Part-Time/Full-Time preference: {{employmentPreference}}
-Requested date: {{date}}
-Requested time: {{time}}
-Timezone: {{timezone}}
+Part-time/full-time preference: {{employmentPreference}}
+Selected date: {{selectedDate}}
+Selected time: {{selectedTime}}
 Message: {{message}}
-Consent: {{consent}}
-Timestamp: {{timestamp}}
+Consent status: {{consent}}
+Submission timestamp: {{submissionTimestamp}}
 
-## 2. Prospect Confirmation
+Reply to the prospect at: {{email}}
+```
 
-**To:** {{email}}
-**Subject:** Flynn — inquiry received and schedule request confirmed
+Set the destination email to Flynn's work email.
 
-Hi {{name}},
+## Template B — Prospect receives
 
-Thanks for reaching out about a Senior SDR opportunity. I received your inquiry and schedule request.
+**Subject:** Intro Request Received — Flynn James Q. Pontino
 
-Company: {{company}}
-Role: {{role}}
-Inquiry type: {{inquiryType}}
-Preference: {{employmentPreference}}
-Requested date: {{date}}
-Requested time: {{time}}
-Timezone: {{timezone}}
-Message: {{message}}
+```text
+Hi {{fullName}},
 
-Next step: Flynn will review the details and follow up by email with the next step.
+Thanks for reaching out to Flynn. Your 15-minute intro request has been received.
 
-Thanks,
+Submitted details:
+• Company: {{company}}
+• Role: {{role}}
+• Inquiry: {{inquiryType}}
+• Preference: {{employmentPreference}}
+• Selected date: {{selectedDate}}
+• Selected time: {{selectedTime}}
+• Message: {{message}}
+
+Next step: Flynn will review the request and confirm the meeting details directly.
+
+Best,
 Flynn James Q. Pontino
-Senior SDR | B2B Cold Caller | Appointment Setter
+Senior SDR
+va.flynnjames@gmail.com
+```
+
+Set the destination email to `{{prospect_email}}`.
