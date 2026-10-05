@@ -12,6 +12,7 @@ import BookingModal from './components/BookingModal';
 import ResumeModal from './components/ResumeModal';
 import LoadingScreen from './components/LoadingScreen';
 import { PageRoute } from './types';
+import { personalInfo } from './data/flynnData';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageRoute>('home');
@@ -45,7 +46,26 @@ export default function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    setCurrentPage(parseCurrentRoute());
+    const initialRoute = parseCurrentRoute();
+    setCurrentPage(initialRoute);
+
+    const seo: Record<string, { title: string; description: string }> = {
+      home: { title: 'Senior SDR | B2B Cold Caller & Lead Generation', description: 'Senior SDR portfolio for Flynn James Q. Pontino — 11+ years in B2B cold calling, prospecting, qualification, appointment setting, and outbound sales.' },
+      calls: { title: 'B2B Cold Calling Examples | Flynn James Q. Pontino', description: 'Hear real outbound call examples demonstrating prospecting, objection handling, qualification, rescheduling, and appointment setting.' },
+      experience: { title: 'Senior SDR Experience | Flynn James Q. Pontino', description: '11+ years of B2B outbound sales, cold calling, lead generation, qualification, appointment setting, and CRM-driven prospecting.' },
+      references: { title: 'Senior SDR References & Results | Flynn James Q. Pontino', description: 'Professional references and documented SDR performance across digital marketing, SaaS, B2B events, and outbound sales.' },
+      leadership: { title: 'SDR Leadership & Mentoring | Flynn James Q. Pontino', description: 'Senior SDR leadership experience including coaching, onboarding, KPI tracking, call feedback, and mentoring junior SDRs.' },
+      'hire-me': { title: 'Hire a Senior SDR | Flynn James Q. Pontino', description: 'Hire Flynn for senior SDR, B2B cold calling, lead qualification, appointment setting, and outbound pipeline generation.' },
+      contact: { title: 'Contact Flynn | Senior SDR & B2B Cold Caller', description: 'Contact Flynn James Q. Pontino or schedule a 15-minute introduction for Senior SDR and B2B outbound opportunities.' },
+      academy: { title: 'B2B SDR Playbook | Flynn James Q. Pontino', description: 'Practical B2B prospecting, qualification, objection handling, appointment setting, and outbound sales frameworks.' },
+      playbook: { title: 'B2B SDR Playbook | Flynn James Q. Pontino', description: 'Practical B2B prospecting, qualification, objection handling, appointment setting, and outbound sales frameworks.' },
+    };
+    const meta = seo[initialRoute] || seo.home;
+    document.title = meta.title;
+    const description = document.querySelector('meta[name="description"]');
+    description?.setAttribute('content', meta.description);
+    const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    canonical?.setAttribute('href', `${personalInfo.portfolioUrl}${initialRoute === 'home' ? '/' : `/${initialRoute}`}`);
 
     window.addEventListener('popstate', handleRouteChange);
     window.addEventListener('hashchange', handleRouteChange);
@@ -57,6 +77,10 @@ export default function App() {
 
   const handleNavigate = (page: PageRoute) => {
     setCurrentPage(page);
+    const titleMap: Record<string, string> = { home: 'Senior SDR | B2B Cold Caller & Lead Generation', calls: 'B2B Cold Calling Examples | Flynn James Q. Pontino', experience: 'Senior SDR Experience | Flynn James Q. Pontino', references: 'Senior SDR References & Results | Flynn James Q. Pontino', leadership: 'SDR Leadership & Mentoring | Flynn James Q. Pontino', 'hire-me': 'Hire a Senior SDR | Flynn James Q. Pontino', contact: 'Contact Flynn | Senior SDR & B2B Cold Caller', academy: 'B2B SDR Playbook | Flynn James Q. Pontino', playbook: 'B2B SDR Playbook | Flynn James Q. Pontino' };
+    document.title = titleMap[page] || titleMap.home;
+    const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    canonical?.setAttribute('href', `${personalInfo.portfolioUrl}${page === 'home' ? '/' : `/${page}`}`);
 
     if (page === 'home') {
       window.history.pushState(null, '', '/');

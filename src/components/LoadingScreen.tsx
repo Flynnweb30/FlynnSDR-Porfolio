@@ -7,7 +7,7 @@ interface LoadingScreenProps {
 export default function LoadingScreen({ onLoaded }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [isFading, setIsFading] = useState(false);
-  const [isDone, setIsDone] = useState(() => { try { return localStorage.getItem('flynn_intro_seen') === '1'; } catch { return false; } });
+  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     if (isDone) { onLoaded?.(); return; }
@@ -25,7 +25,6 @@ export default function LoadingScreen({ onLoaded }: LoadingScreenProps) {
           setIsFading(true);
           setTimeout(() => {
             setIsDone(true);
-            try { localStorage.setItem('flynn_intro_seen', '1'); } catch {}
             if (onLoaded) onLoaded();
           }, 600);
         }, 200);

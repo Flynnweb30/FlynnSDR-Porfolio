@@ -93,6 +93,25 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
         </div>
       </section>
 
+      {/* Availability & Compensation */}
+      <section className="pb-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs">
+              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">Full-Time</div>
+              <div className="mt-1 text-2xl font-black font-display">Starting at $1,050/month</div>
+              <p className="mt-2 text-xs leading-relaxed text-zinc-600">Full-time outbound SDR support covering prospect research, cold calling, qualification, appointment setting, CRM updates, follow-up, and consistent campaign execution during agreed market hours.</p>
+            </div>
+            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs">
+              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">Part-Time</div>
+              <div className="mt-1 text-2xl font-black font-display">Typically $600–$900/month</div>
+              <p className="mt-2 text-xs leading-relaxed text-zinc-600">Designed for roughly 20–25 hours/week, with outbound calling, prospect qualification, appointment setting, CRM follow-up, and reporting. Performance incentives or commission can be added when appropriate.</p>
+            </div>
+          </div>
+          <p className="text-[11px] text-zinc-500 text-center mt-3">Compensation is negotiable based on scope, hours, market, campaign complexity, and performance expectations.</p>
+        </div>
+      </section>
+
       {/* Main Grid */}
       <section className="py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">

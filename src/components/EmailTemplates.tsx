@@ -81,7 +81,7 @@ Usually this means one of two things:
 1. Sourcing qualified outbound meetings is not a current priority for your team.
 2. You’re interested, but completely swamped right now.
 
-If it’s #1, let me know and I will gladly close the loop and not bother you again.
+If it’s #1, let me know and I will gladly follow up once and respect your decision.
 
 If it’s #2, would next month make more sense to reconnect?
 

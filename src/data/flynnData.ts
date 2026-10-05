@@ -3,8 +3,8 @@ import { WorkExperience, CallRecording } from '../types';
 export const personalInfo = {
   fullName: 'Flynn James Q. Pontino',
   shortName: 'Flynn',
-  title: 'Senior SDR | B2B Outbound Sales | Telemarketing & Lead Generation',
-  tagline: 'Senior SDR who sources $1.8M+ pipeline · 120–150% quota · 30+ meetings/month — ready to build qualified pipeline from day one.',
+  title: 'Senior SDR | B2B Cold Caller | Appointment Setter | Lead Generation',
+  tagline: 'Senior SDR focused on B2B cold calling, qualification, appointment setting, and qualified pipeline generation — ready to contribute from day one.',
   executiveSummary:
     'Results-driven SDR with 11+ years in B2B outbound sales and telemarketing, generating $1.8M+ in pipeline and consistently exceeding quotas by 120–150%. Expert in high-volume cold calling (150+ calls/day), appointment setting, multi-channel prospecting, and BANT/MEDDIC qualification. Delivers 30+ qualified meetings/month across US, UK, AU, and SG markets. Proven team leader who mentors SDRs, improves call performance, and drives consistent pipeline growth.',
   phone: '+63 930 635 9306',
@@ -16,6 +16,7 @@ export const personalInfo = {
   availability: 'Available — Remote roles · Immediate Start',
   yearsExperience: '11+ years',
   pipelineSourced: '$1.8M+',
+  roleKeywords: 'Senior SDR | B2B Cold Caller | Appointment Setter | Lead Qualifier | Lead Generation Specialist | Outbound Sales Professional',
   meetingsPerMonth: '30+',
   callsPerDay: '150+',
   quotaAttainment: '120–150%',
@@ -198,7 +199,7 @@ export const whyInterviewFlynn = [
 export const callRecordings: CallRecording[] = [
   {
     id: 'call-1',
-    title: 'Value-First Hook & Monday 9:30 AM Booking',
+    title: 'Value-First Hook & Monday 9:30 AM Appointment',
     prospect: 'Andy',
     company: 'Region Digital',
     industry: 'Digital Growth Agency',
@@ -209,7 +210,7 @@ export const callRecordings: CallRecording[] = [
     skillTag: 'Objections Mastered · Reschedule Recovery',
     dealSize: '$2,400 Website Package',
     challenge: 'Prospect stated he was busy for the rest of the week.',
-    tacticalWin: 'Flynn did not force the current week; gracefully pivoted to early next week and closed Monday 9:30 AM.',
+    tacticalWin: 'Flynn did not force the current week; he pivoted to early next week and secured a Monday 9:30 AM appointment.',
     keyMetric: 'Under 80 Seconds: Cold to Booked Meeting',
     transcript: [
       { time: '00:03', speaker: 'Flynn', text: 'Hey Andy, can you hear me now?' },
@@ -226,7 +227,7 @@ export const callRecordings: CallRecording[] = [
   },
   {
     id: 'call-2',
-    title: 'Urgent Reschedule Recovery in 56 Seconds',
+    title: 'Reschedule Recovery in 56 Seconds',
     prospect: 'Andy (Follow-up)',
     company: 'Region Digital',
     industry: 'Digital Growth Agency',
@@ -250,7 +251,7 @@ export const callRecordings: CallRecording[] = [
   },
   {
     id: 'call-3',
-    title: 'Turning Hostile Skepticism into a Confirmed Zoom Demo',
+    title: 'Handling a Skeptical Objection & Booking a Zoom Demo',
     prospect: 'Hussein / Aldis',
     company: 'Aldis Clean',
     industry: 'Commercial Cleaning Services',
@@ -261,7 +262,7 @@ export const callRecordings: CallRecording[] = [
     skillTag: 'Consultative Qualification · Tension Disarmament',
     dealSize: '$18,000 Target Contract',
     challenge: 'Prospect was immediately defensive: "You built a website for me without my consent?!"',
-    tacticalWin: 'Disarmed tension with transparency ("We do this for 100 businesses, if you love it keep it, if not no hard feelings"), collected email, locked Thursday 11:00 AM Zoom.',
+    tacticalWin: 'Used transparent context to lower resistance, collected the prospect email, and secured a Thursday 11:00 AM Zoom appointment.',
     keyMetric: '100% Objection Overturn to SQL',
     transcript: [
       { time: '00:07', speaker: 'Prospect', text: 'Aldis Clean, how may I help you?' },
@@ -282,7 +283,7 @@ export const callRecordings: CallRecording[] = [
   },
   {
     id: 'call-4',
-    title: 'Commercial Contractor Discovery & Same-Call Calendar Lock',
+    title: 'Commercial Contractor Discovery & Appointment Setting',
     prospect: 'Moises',
     company: 'CJ Builders',
     industry: 'General Construction & Remodeling',

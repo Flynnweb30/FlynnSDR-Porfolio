@@ -51,7 +51,7 @@ Included:
 
 ## Notes
 
-The intro animation displays “Flynn” for first-time visitors and stores a local flag so returning visitors are not forced through the animation again.
+The intro animation displays “Flynn” for approximately 1.5–2.3 seconds on every page refresh, including hard refreshes, while preserving the existing visual design.
 
 ### Template A — Flynn Notification
 

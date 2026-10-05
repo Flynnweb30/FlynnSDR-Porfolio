@@ -30,10 +30,10 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   const [expandedTranscriptId, setExpandedTranscriptId] = useState<string | null>(null);
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
   const audioSources: Record<string, string> = {
-    'call-1': import.meta.env.VITE_AUDIO_CALL_1_URL || '',
-    'call-2': import.meta.env.VITE_AUDIO_CALL_2_URL || '',
-    'call-3': import.meta.env.VITE_AUDIO_CALL_3_URL || '',
-    'call-4': import.meta.env.VITE_AUDIO_CALL_4_URL || '',
+    'call-1': import.meta.env.VITE_AUDIO_CALL_1_URL || 'https://www.image2url.com/r2/default/audio/1791216159831-6e22f168-363c-4217-8949-a62c1135a508.opus',
+    'call-2': import.meta.env.VITE_AUDIO_CALL_2_URL || 'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
+    'call-3': import.meta.env.VITE_AUDIO_CALL_3_URL || 'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
+    'call-4': import.meta.env.VITE_AUDIO_CALL_4_URL || 'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
   };
 
   const handleTogglePlay = async (callId: string) => {
@@ -326,24 +326,21 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       </section>
 
       {/* =========================================================================
-          PAGE 1 BOTTOM: A TRACK RECORD THAT CLOSES. (Matching PDF Page 1)
+          PAGE 1 BOTTOM: A TRACK RECORD BUILT FOR RESULTS.
          ========================================================================= */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-10 tracking-tight">
-            A TRACK RECORD THAT CLOSES.
+            A TRACK RECORD BUILT FOR RESULTS.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             {/* Card 1: Regen Digital */}
             <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
-              <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200">
-                {/* US / Partner flag badge */}
-                <div className="w-full h-full bg-gradient-to-r from-blue-700 via-white to-red-600 flex items-center justify-center text-[10px] font-bold text-white shadow-inner">
-                  🇺🇸 / 🇳🇴
-                </div>
+              <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
+                <img src="https://user29984.na.imgto.link/public/20261005/regen-digital.avif" alt="Regen Digital company logo" loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
 
               <div className="space-y-1 text-left">
@@ -352,23 +349,21 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
                 <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / NORWEGIAN</div>
                 <div className="text-base font-black font-display text-[#0077b6]">
-                  $1,800,000+
+                   $200,000+
                 </div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
-                  85% Qualified<br/>
+                  85% Qualified Opportunities<br/>
                   120–150% Quota Attainment<br/>
                   Level 4 Tier in 3 Weeks<br/>
-                  <strong className="text-zinc-900">$2,400 Ticket</strong>
+                  <strong className="text-zinc-900">$960 Incentives</strong>
                 </div>
               </div>
             </div>
 
             {/* Card 2: Seek Marketing / IHTE */}
             <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
-              <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200">
-                <div className="w-full h-full bg-gradient-to-r from-red-600 via-white to-blue-700 flex items-center justify-center text-[10px] font-bold text-white shadow-inner">
-                  🇺🇸 / 🇨🇦
-                </div>
+              <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
+                <img src="https://user29984.na.imgto.link/public/20261005/seek-marketing.avif" alt="Seek Marketing Partners company logo" loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
 
               <div className="space-y-1 text-left">
@@ -377,23 +372,21 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
                 <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / CANADIAN / UK</div>
                 <div className="text-base font-black font-display text-[#0077b6]">
-                  $1,800,000+
+                  $1.8M+
                 </div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
                   150+ Daily Outbound Dials<br/>
-                  Senior SDR / Appointment Setter<br/>
-                  +18% Script Response<br/>
-                  <strong className="text-zinc-900">$1,500–$10,000 Tickets</strong>
+                  120% Quota Attainment<br/>
+                  +18% Response Rate<br/>
+                  <strong className="text-zinc-900">Qualified Pipeline</strong>
                 </div>
               </div>
             </div>
 
             {/* Card 3: Averps / Found Inc */}
             <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
-              <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200">
-                <div className="w-full h-full bg-blue-900 flex items-center justify-center text-[10px] font-bold text-white shadow-inner">
-                  🇬🇧 / 🇸🇬
-                </div>
+              <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
+                <img src="https://user29984.na.imgto.link/public/20261005/averps-pte-ltd.avif" alt="Averps Pte Ltd company logo" loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
 
               <div className="space-y-1 text-left">
@@ -402,13 +395,13 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
                 <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">UK / SINGAPORE</div>
                 <div className="text-base font-black font-display text-[#0077b6]">
-                  $1,200,000+
+                  $1.2M+
                 </div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
                   100% SQL Target Met<br/>
                   22% Demo Conversion<br/>
-                  BANT Qualification<br/>
-                  <strong className="text-zinc-900">$6,500–$40,000 Tickets</strong>
+                  +15% Qualification Lift<br/>
+                  <strong className="text-zinc-900">Qualified Pipeline</strong>
                 </div>
               </div>
             </div>
@@ -467,17 +460,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 
                 <div className="grid grid-cols-2 gap-4 py-1 text-xs">
                   <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Sale amount</span>
-                    <strong className="text-2xl font-black font-display text-[#0077b6]">$2,400</strong>
+                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Call result</span>
+                    <strong className="text-2xl font-black font-display text-[#0077b6]">77 sec</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">The sale</span>
-                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Website / Business Package</strong>
+                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Appointment result</span>
+                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Monday 9:30 AM</strong>
                   </div>
                 </div>
 
                 <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Objection handling in a website / business package sale for $2,400. Turned a busy, distracted prospect into a confirmed Monday 9:30 AM discovery session in 77 seconds.
+                  Handled a busy prospect without forcing the timing, then pivoted to an early-week option and secured a confirmed Monday 9:30 AM discovery session in 77 seconds.
                 </p>
 
                 {/* Audio controls */}
@@ -542,17 +535,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 
                 <div className="grid grid-cols-2 gap-4 py-1 text-xs">
                   <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Sale amount</span>
-                    <strong className="text-2xl font-black font-display text-[#0077b6]">$18,000</strong>
+                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Call result</span>
+                    <strong className="text-2xl font-black font-display text-[#0077b6]">06:54</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">The sale</span>
-                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Commercial Cleaning Contract</strong>
+                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Appointment result</span>
+                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Thursday 11:00 AM Zoom</strong>
                   </div>
                 </div>
 
                 <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Consultative discovery for a commercial services contract with a contract scope of $18,000. Overturned aggressive defensiveness into an eager Thursday 11:00 AM Zoom demo.
+                  Handled an initially defensive prospect with transparent context, clarified the business goal, collected the email, and secured a Thursday 11:00 AM Zoom appointment.
                 </p>
 
                 <div className="pt-2 flex items-center gap-3">
@@ -615,17 +608,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 
                 <div className="grid grid-cols-2 gap-4 py-1 text-xs">
                   <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Sale amount</span>
-                    <strong className="text-2xl font-black font-display text-[#0077b6]">$1,897</strong>
+                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Call result</span>
+                    <strong className="text-2xl font-black font-display text-[#0077b6]">02:39</strong>
                   </div>
                   <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">The sale</span>
-                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">General Construction Scope</strong>
+                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Appointment result</span>
+                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Monday 4:45 PM</strong>
                   </div>
                 </div>
 
                 <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Mirroring psychology in a B2B contractor discovery for $1,897 package. Navigated busy jobsite commotion and locked Monday 4:45 PM consultation in 2 minutes.
+                  Used a low-friction opener with a busy contractor, clarified the service scope, captured the best email, and booked a Monday 4:45 PM consultation.
                 </p>
 
                 <div className="pt-2 flex items-center gap-3">
