@@ -1,1 +1,6 @@
-{"name":"Flynn SDR Portfolio","description":"Senior SDR portfolio for B2B cold calling, outbound sales, appointment setting, qualification, objection handling, and SDR leadership.","requestFramePermissions":[],"majorCapabilities":[]}
+{
+  "name": "Most Wanted",
+  "description": "Elite digital marketing and growth agency website for Most Wanted",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

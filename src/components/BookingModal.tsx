@@ -1,37 +1,81 @@
-import React, { useMemo, useState } from 'react';
-import { X, Calendar, Clock, CheckCircle2, Send } from 'lucide-react';
-import { ScheduleFormData } from '../types';
-import { personalInfo } from '../data/flynnData';
+import React, { useEffect, useMemo, useState } from 'react';
+import { X, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
+import { sendInquiryEmails } from '../lib_email';
 
-const dates = Array.from({length: 7}, (_, i) => { const d = new Date(); d.setDate(d.getDate()+i+1); return d; });
-const times = ['9:00 AM','10:00 AM','11:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
-const inquiryTypes = ['Senior SDR role','Part-time SDR role','Full-time SDR role','Outbound / appointment-setting project','General inquiry'];
+interface BookingModalProps { isOpen: boolean; onClose: () => void; defaultPreference?: 'Part-Time' | 'Full-Time'; }
 
-const formatDate = (d: Date) => d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
-
-function templateA(data: ScheduleFormData) {
-  return `NEW FLYNN INTRO INQUIRY\n\nFull name: ${data.fullName}\nEmail: ${data.email}\nCompany: ${data.company || 'Not provided'}\nRole: ${data.role || 'Not provided'}\nInquiry type: ${data.inquiryType}\nPart-time/full-time preference: ${data.employmentPreference}\nSelected date: ${data.selectedDate}\nSelected time: ${data.selectedTime}\nMessage: ${data.message || 'Not provided'}\nConsent status: ${data.consent ? 'Yes' : 'No'}\nSubmission timestamp: ${data.submissionTimestamp}`;
-}
-function templateB(data: ScheduleFormData) {
-  return `Hi ${data.fullName},\n\nThanks for reaching out to Flynn. Your 15-minute intro request has been received.\n\nSubmitted details:\n• Company: ${data.company || 'Not provided'}\n• Role: ${data.role || 'Not provided'}\n• Inquiry: ${data.inquiryType}\n• Preference: ${data.employmentPreference}\n• Selected date: ${data.selectedDate}\n• Selected time: ${data.selectedTime}\n• Message: ${data.message || 'Not provided'}\n\nNext step: Flynn will review the request and confirm the meeting details directly.\n\nBest,\nFlynn James Q. Pontino\nSenior SDR\n${personalInfo.email}`;
-}
-
-async function sendEmailJS(templateId: string, data: ScheduleFormData, body: string) {
-  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-  if (!serviceId || !publicKey || !templateId) return false;
-  const payload = { service_id: serviceId, template_id: templateId, user_id: publicKey, template_params: { ...data, body, to_email: personalInfo.email, prospect_email: data.email, timestamp: data.submissionTimestamp } };
-  const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-  return res.ok;
+function nextBusinessDays(count = 7) {
+  const days: { label: string; date: string; iso: string }[] = [];
+  const cursor = new Date();
+  cursor.setHours(12, 0, 0, 0);
+  while (days.length < count) {
+    cursor.setDate(cursor.getDate() + 1);
+    const day = cursor.getDay();
+    if (day === 0 || day === 6) continue;
+    days.push({ label: cursor.toLocaleDateString('en-US', { weekday: 'long' }), date: cursor.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }), iso: cursor.toISOString().slice(0, 10) });
+  }
+  return days;
 }
 
-export default function BookingModal({ isOpen, onClose, initialPreference }: { isOpen:boolean; onClose:()=>void; initialPreference?:'Part-Time'|'Full-Time' }) {
-  const [preference,setPreference] = useState<'Part-Time'|'Full-Time'>(initialPreference || 'Full-Time');
-  const [fullName,setFullName] = useState(''); const [email,setEmail] = useState(''); const [company,setCompany] = useState(''); const [role,setRole] = useState('');
-  const [inquiryType,setInquiryType] = useState('Senior SDR role'); const [selectedDate,setSelectedDate] = useState(formatDate(dates[0])); const [selectedTime,setSelectedTime] = useState(times[1]); const [message,setMessage] = useState(''); const [consent,setConsent] = useState(false); const [sent,setSent] = useState(false); const [loading,setLoading] = useState(false); const [error,setError] = useState('');
-  const dateOptions = useMemo(()=>dates.map(formatDate),[]);
+export default function BookingModal({ isOpen, onClose, defaultPreference }: BookingModalProps) {
+  const days = useMemo(() => nextBusinessDays(), []);
+  const [selectedDay, setSelectedDay] = useState(days[0]?.iso || '');
+  const [selectedTime, setSelectedTime] = useState('10:00 AM');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
+  const [role, setRole] = useState('');
+  const [inquiryType, setInquiryType] = useState('Interview');
+  const [preference, setPreference] = useState(defaultPreference || 'Full-Time');
+  const [message, setMessage] = useState('');
+  const [consent, setConsent] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  useEffect(() => { if (defaultPreference) setPreference(defaultPreference); }, [defaultPreference]);
   if (!isOpen) return null;
-  const submit = async (e:React.FormEvent) => { e.preventDefault(); setError(''); if(!consent){setError('Please provide consent before submitting.');return;} setLoading(true); const data:ScheduleFormData={fullName,email,company,role,inquiryType,employmentPreference:preference,selectedDate,selectedTime,message,consent,submissionTimestamp:new Date().toISOString()}; try { const a=await sendEmailJS(import.meta.env.VITE_EMAILJS_OWNER_TEMPLATE_ID,data,templateA(data)); const b=await sendEmailJS(import.meta.env.VITE_EMAILJS_PROSPECT_TEMPLATE_ID,data,templateB(data)); if(!a || !b){ const subject=encodeURIComponent(`15-Minute Intro Request — ${fullName}`); const body=encodeURIComponent(templateA(data)); window.location.href=`mailto:${personalInfo.email}?subject=${subject}&body=${body}`; } setSent(true); } catch { setError('The form could not send automatically. Your email app has been opened with the complete inquiry details.'); const subject=encodeURIComponent(`15-Minute Intro Request — ${fullName}`); const body=encodeURIComponent(templateA(data)); window.location.href=`mailto:${personalInfo.email}?subject=${subject}&body=${body}`; } finally { setLoading(false); } };
-  const reset=()=>{setSent(false);setError('');};
-  return <div className="modal-backdrop"><div className="modal booking-modal"><button className="modal-close" onClick={onClose}><X/></button>{sent?<div className="success-state"><CheckCircle2 size={48}/><p className="eyebrow">Request Received</p><h2>Thanks, {fullName.split(' ')[0] || 'there'}.</h2><p>Your selected slot and submitted details have been captured. Flynn will confirm the meeting directly.</p><div className="summary-card"><div><b>Date</b><span>{selectedDate}</span></div><div><b>Time</b><span>{selectedTime}</span></div><div><b>Preference</b><span>{preference}</span></div></div><button className="btn btn-primary" onClick={reset}>Submit Another Inquiry</button></div>:<form onSubmit={submit}><p className="eyebrow">Schedule 15-Minute Intro</p><h2>Tell Flynn what you need.</h2><p className="modal-copy">Choose a schedule, tell Flynn about the opportunity, and receive a clear confirmation.</p><div className="form-grid"><label>Full name<input required value={fullName} onChange={e=>setFullName(e.target.value)} /></label><label>Email<input required type="email" value={email} onChange={e=>setEmail(e.target.value)} /></label><label>Company<input value={company} onChange={e=>setCompany(e.target.value)} /></label><label>Role<input value={role} onChange={e=>setRole(e.target.value)} placeholder="Founder, Head of Sales, Recruiter…" /></label><label>Inquiry type<select value={inquiryType} onChange={e=>setInquiryType(e.target.value)}>{inquiryTypes.map(x=><option key={x}>{x}</option>)}</select></label><label>Preference<select value={preference} onChange={e=>setPreference(e.target.value as 'Part-Time'|'Full-Time')}><option>Full-Time</option><option>Part-Time</option></select></label><label><span><Calendar size={14}/> Selected date</span><select value={selectedDate} onChange={e=>setSelectedDate(e.target.value)}>{dateOptions.map(x=><option key={x}>{x}</option>)}</select></label><label><span><Clock size={14}/> Selected time</span><select value={selectedTime} onChange={e=>setSelectedTime(e.target.value)}>{times.map(x=><option key={x}>{x}</option>)}</select></label></div><label>Message<textarea rows={4} value={message} onChange={e=>setMessage(e.target.value)} placeholder="Campaign, target market, role scope, or anything Flynn should know…" /></label><label className="consent"><input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)} required /><span>I'm okay with Flynn emailing me about my inquiry. No spam, ever.</span></label>{error&&<p className="form-error">{error}</p>}<button className="btn btn-primary btn-wide" disabled={loading}>{loading?<><span className="spinner"/> Sending…</>:<><Send size={15}/> Confirm Schedule</>}</button><p className="form-note">Your submission includes the selected schedule, inquiry details, consent status, and timestamp.</p></form>}</div></div>;
+
+  const selectedDate = days.find(d => d.iso === selectedDay);
+  const reset = () => { setIsBooked(false); setError(''); onClose(); };
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!consent) { setError('Please confirm the email consent before submitting.'); return; }
+    setLoading(true); setError('');
+    try {
+      await sendInquiryEmails({
+        fullName: name, email, company, role, inquiryType, employmentPreference: preference,
+        selectedDate: selectedDate?.date || selectedDay, selectedTime, message, consent,
+        timestamp: new Date().toISOString(), timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, source: window.location.href,
+      });
+      setIsBooked(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to send the inquiry. Please try again.');
+    } finally { setLoading(false); }
+  };
+
+  return <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fade-in text-[#0d0e0c]">
+    <div className="relative w-full max-w-2xl bg-white border border-[#dededb] rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+      <div className="p-5 sm:p-6 bg-[#f7f7f6] border-b border-[#dededb] flex items-center justify-between">
+        <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-xl bg-sky-50 border border-[#0077b6]/20 text-[#0077b6] flex items-center justify-center"><Calendar className="w-5 h-5" /></div><div><h3 className="text-lg font-black uppercase font-display tracking-tight">Schedule 15-Minute Intro With Flynn</h3><p className="text-xs text-zinc-500">Direct 1-on-1 intro for SDR hiring and outbound opportunities.</p></div></div>
+        <button onClick={onClose} className="p-2 text-zinc-400 hover:text-black rounded-lg hover:bg-zinc-200/60"><X className="w-5 h-5" /></button>
+      </div>
+      <div className="p-6 sm:p-8">
+        {isBooked ? <div className="text-center py-8 space-y-6"><div className="w-16 h-16 bg-emerald-50 border border-emerald-200 text-emerald-600 rounded-full mx-auto flex items-center justify-center"><CheckCircle2 className="w-10 h-10" /></div><h4 className="text-2xl font-black uppercase font-display">Inquiry Sent</h4><p className="text-sm text-zinc-600 max-w-md mx-auto">Thanks, <strong>{name}</strong>. Your request for <strong>{selectedDate?.date} at {selectedTime}</strong> was sent to Flynn, and a confirmation was sent to <strong>{email}</strong>.</p><button onClick={reset} className="px-8 py-3 bg-[#0077b6] text-white font-extrabold text-xs uppercase rounded-xl">Close & Return</button></div> :
+        <form onSubmit={submit} className="space-y-6 text-left">
+          <div className="space-y-2"><label className="text-xs font-display uppercase tracking-wider font-extrabold text-zinc-700">1. Select a Day</label><div className="grid grid-cols-2 sm:grid-cols-4 gap-2">{days.map(d => <button type="button" key={d.iso} onClick={() => setSelectedDay(d.iso)} className={`p-3 rounded-xl border text-center ${selectedDay === d.iso ? 'bg-[#0077b6] text-white border-[#0077b6]' : 'bg-[#f7f7f6] border-[#dededb] text-zinc-700'}`}><div className="text-xs font-display uppercase font-bold">{d.label}</div><div className="text-[10px] opacity-80">{d.date}</div></button>)}</div></div>
+          <div className="space-y-2"><label className="text-xs font-display uppercase tracking-wider font-extrabold text-zinc-700">2. Pick a Time</label><div className="grid grid-cols-2 sm:grid-cols-4 gap-2">{['9:30 AM','10:00 AM','11:00 AM','1:30 PM','2:30 PM','4:00 PM','4:45 PM'].map(t => <button type="button" key={t} onClick={() => setSelectedTime(t)} className={`py-2 px-3 rounded-xl border text-xs font-display uppercase ${selectedTime === t ? 'bg-[#0077b6] text-white border-[#0077b6]' : 'bg-[#f7f7f6] border-[#dededb] text-zinc-700'}`}>{t}</button>)}</div></div>
+          <div className="space-y-3 pt-2 border-t border-zinc-100"><label className="text-xs font-display uppercase tracking-wider font-extrabold text-zinc-700">3. Your Details</label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3"><input required value={name} onChange={e=>setName(e.target.value)} placeholder="Full Name *" className="field"/><input required type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Work Email *" className="field"/></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3"><input required value={company} onChange={e=>setCompany(e.target.value)} placeholder="Company *" className="field"/><input value={role} onChange={e=>setRole(e.target.value)} placeholder="Role / Title" className="field"/></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3"><select value={inquiryType} onChange={e=>setInquiryType(e.target.value)} className="field"><option>Interview</option><option>Part-Time SDR Inquiry</option><option>Full-Time SDR Inquiry</option><option>Partnership</option><option>Other</option></select><select value={preference} onChange={e=>setPreference(e.target.value as 'Part-Time'|'Full-Time')} className="field"><option>Part-Time</option><option>Full-Time</option></select></div>
+            <textarea rows={3} value={message} onChange={e=>setMessage(e.target.value)} placeholder="Message / goals for the intro" className="field resize-none"/>
+            <label className="flex items-start gap-2.5 text-xs text-zinc-600 cursor-pointer"><input type="checkbox" required checked={consent} onChange={e=>setConsent(e.target.checked)} className="mt-0.5 accent-[#0077b6]"/><span>I'm okay with Flynn emailing me about my inquiry. No spam, ever.</span></label>
+          </div>
+          {error && <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700">{error}</div>}
+          <button type="submit" disabled={loading || !consent} className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white font-extrabold text-xs uppercase rounded-xl flex items-center justify-center gap-2 disabled:opacity-50">{loading ? 'Sending Inquiry…' : <>Confirm Schedule <ArrowRight className="w-4 h-4"/></>}</button>
+        </form>}
+      </div>
+    </div>
+  </div>;
 }

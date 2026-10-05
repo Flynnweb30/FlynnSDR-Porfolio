@@ -1,7 +1,81 @@
 import React from 'react';
-import { Headphones, Calendar, ExternalLink } from 'lucide-react';
-import { siteConfig } from '../data/flynnData';
-export default function CallsPage({onOpenBooking}:{onOpenBooking:()=>void}) {
- const titles=['Permission-Based Opener','Value-First Cold Call','Objection Handling & Qualification'];
- return <div className="page"><section className="page-hero"><div className="container"><p className="eyebrow"><Headphones size={15}/> Call Library</p><h1>Hear My Opener.</h1><p>Real outbound examples focused on opening conversations, handling resistance, qualifying fit, and securing the next step.</p></div></section><section className="section"><div className="container audio-grid">{titles.map((title,i)=>{const url=siteConfig.audioUrls[i];return <article className="audio-card" key={title}><div className="audio-number">0{i+1}</div><h3>{title}</h3><p>Outbound call sample #{i+1}. Listen for tone, permission, objection handling, qualification, and appointment-setting technique.</p>{url?<audio controls preload="metadata" src={url}>Your browser does not support audio playback.</audio>:<div className="audio-unavailable">Audio source configured via <code>VITE_AUDIO_{i+1}_URL</code>.</div>} {url&&<a href={url} target="_blank" rel="noreferrer" className="text-link">Open source <ExternalLink size={14}/></a>}</article>})}</div></section><section className="cta-strip"><div className="container"><h2>Want to hear how I approach your market?</h2><button className="btn btn-primary" onClick={onOpenBooking}><Calendar size={16}/> Schedule 15-Minute Intro</button></div></section></div>;
+import ColdCallVault from '../components/ColdCallVault';
+import { Headphones, CheckCircle2, ArrowRight } from 'lucide-react';
+import { PageRoute } from '../types';
+
+interface CallsPageProps {
+  onNavigate: (page: PageRoute) => void;
+  onOpenBooking: (preference?: 'Part-Time' | 'Full-Time') => void;
+}
+
+export default function CallsPage({ onNavigate, onOpenBooking }: CallsPageProps) {
+  return (
+    <div className="pt-20 sm:pt-24 pb-20 bg-[#fafaf8] text-[#0d0e0c]">
+      
+      {/* Header Banner - Matching existing design's Sales Call Library Header */}
+      <section className="py-12 border-b border-[#dededb] bg-[#f7f7f6]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="space-y-3 text-left">
+            
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#dededb] rounded-full text-[11px] font-mono uppercase tracking-widest text-[#0077b6] font-bold shadow-2xs">
+              <Headphones className="w-3.5 h-3.5" />
+              <span>Sales Call Library</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight">
+              Hear My Opener: Real Dials, Real Bookings.
+            </h1>
+
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-3xl">
+              No hypothetical roleplays or scripted videos. Below are 4 unedited cold call recordings of Flynn dialing B2B prospects, disarming skepticism on the fly, recovering lost pipeline, and securing confirmed appointments.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 pt-1">
+              <span className="flex items-center gap-1.5 text-emerald-600 font-bold">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>4 Real Outbound Audio Recordings</span>
+              </span>
+              <span>·</span>
+              <span>Synchronized Verbatim Transcripts</span>
+              <span>·</span>
+              <span>Coach Tactical Breakdowns</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Embedded Master Cold Call Vault Component */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-10">
+        <ColdCallVault />
+      </div>
+
+      {/* Bottom CTA Banner */}
+      <section className="mt-16 py-14 bg-white border-t border-[#dededb] text-center">
+        <div className="max-w-3xl mx-auto px-4 space-y-4">
+          <h3 className="text-2xl sm:text-3xl font-black font-display uppercase tracking-tight text-[#0d0e0c]">
+            Like What You Hear?
+          </h3>
+          <p className="text-sm text-zinc-600 max-w-xl mx-auto font-sans">
+            Bring this level of outbound phone stamina, active listening, and objection de-escalation to your sales organization today.
+          </p>
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={onOpenBooking}
+              className="px-6 py-3 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white font-bold text-xs uppercase font-display tracking-wider rounded-xl shadow-xs cursor-pointer"
+            >
+              Schedule 15-Minute Intro
+            </button>
+            <button
+              onClick={() => onNavigate('hire-me')}
+              className="px-6 py-3 bg-[#fafaf8] hover:bg-zinc-100 border border-zinc-300 text-zinc-900 font-bold text-xs uppercase font-display tracking-wider rounded-xl transition-colors cursor-pointer"
+            >
+              Review Role Packages & Hire Flynn
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
 }

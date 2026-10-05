@@ -1,49 +1,72 @@
 # Flynn James Q. Pontino — Senior SDR Portfolio
 
-Production-ready Vite + React static portfolio for GitHub + Render.
+Production-ready Vite/React static portfolio for GitHub + Render. The existing visual system is preserved; content and functionality are focused on Senior SDR, B2B cold calling, appointment setting, lead generation, prospect qualification, objection handling, and SDR mentoring.
 
-## Local
+## Local setup
 
 ```bash
 npm install
-npm run lint
-npm run build
-npm run preview
+npm run dev
 ```
 
-## Render
+## Production build
 
-- Environment: Static Site
-- Build command: `npm install && npm run build`
-- Publish directory: `dist`
+```bash
+npm run build
+```
+
+Publish directory: `dist`
+
+## Render Static Site
+
+- Build Command: `npm run build`
+- Publish Directory: `dist`
 - Rewrite: `/*` → `/index.html`
+- Environment variables: all `VITE_*` variables from `.env.example`
 
-### Required environment variables
+## EmailJS
 
-- `VITE_EMAILJS_PUBLIC_KEY`
-- `VITE_EMAILJS_SERVICE_ID`
-- `VITE_EMAILJS_OWNER_TEMPLATE_ID`
-- `VITE_EMAILJS_PROSPECT_TEMPLATE_ID`
-- `VITE_AUDIO_1_URL`
-- `VITE_AUDIO_2_URL`
-- `VITE_AUDIO_3_URL`
+The scheduler sends two EmailJS templates using the same submitted variables:
 
-The scheduling workflow sends two EmailJS templates when configured: one to Flynn and one to the prospect. If EmailJS is not configured, the form validates locally and falls back to a prefilled email containing the complete inquiry data.
+`fullName`, `email`, `company`, `role`, `inquiryType`, `employmentPreference`, `selectedDate`, `selectedTime`, `message`, `consent`, `timestamp`, `timezone`, `source`.
 
-## EmailJS template variables
+Template A (Flynn Notification) should send the complete inquiry to Flynn.
+Template B (Prospect Confirmation) should send the submitted details, selected schedule, consent status, and next-step message to the prospect.
 
-The frontend passes these variables to both templates:
+The public key, service ID, and template IDs are configured through Vite environment variables.
 
-`fullName`, `email`, `company`, `role`, `inquiryType`, `employmentPreference`, `selectedDate`, `selectedTime`, `message`, `consent`, `submissionTimestamp`, `timestamp`, `to_email`, `prospect_email`, `body`.
+## Audio
 
-### Template A — Flynn receives
-
-Use `{{body}}` as the email body or compose from the individual variables. Set the destination to Flynn's work email.
-
-### Template B — Prospect receives
-
-Use `{{body}}` or the individual variables. Set the destination to `{{prospect_email}}`.
+The HTML5 audio player is wired to `VITE_AUDIO_CALL_1_URL` through `VITE_AUDIO_CALL_4_URL`. Use the four supplied recording URLs as the values. The player does not use YouTube, synthetic audio, or placeholder media.
 
 ## SEO
 
-`public/robots.txt` and `public/sitemap.xml` are included and use the production Render URL.
+Included:
+- canonical URL
+- robots.txt
+- sitemap.xml
+- Open Graph metadata
+- crawlable static HTML shell
+- responsive mobile-first layout
+
+## Notes
+
+The intro animation displays “Flynn” for first-time visitors and stores a local flag so returning visitors are not forced through the animation again.
+
+### Template A — Flynn Notification
+
+Subject: `New {{inquiryType}} — {{employmentPreference}} — {{fullName}}`
+
+Body:
+
+`New portfolio inquiry received.\n\nName: {{fullName}}\nEmail: {{email}}\nCompany: {{company}}\nRole: {{role}}\nInquiry: {{inquiryType}}\nPreference: {{employmentPreference}}\nDate: {{selectedDate}}\nTime: {{selectedTime}}\nMessage: {{message}}\nConsent: {{consent}}\nTimestamp: {{timestamp}}\nTimezone: {{timezone}}\nSource: {{source}}`
+
+### Template B — Prospect Confirmation
+
+Subject: `Flynn — Inquiry Received for {{selectedDate}} at {{selectedTime}}`
+
+Body:
+
+`Hi {{fullName}},\n\nThanks for reaching out to Flynn. Your inquiry has been received.\n\nSelected date: {{selectedDate}}\nSelected time: {{selectedTime}}\nInquiry type: {{inquiryType}}\nPreference: {{employmentPreference}}\nCompany: {{company}}\nRole: {{role}}\n\nFlynn will review your request and follow up with the next steps.\n\nYou consented to receive email about this inquiry: {{consent}}.`
+
+For Template B, set the EmailJS recipient/to-email field to `{{email}}`.

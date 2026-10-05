@@ -1,101 +1,316 @@
+import { WorkExperience, CallRecording } from '../types';
+
 export const personalInfo = {
   fullName: 'Flynn James Q. Pontino',
   shortName: 'Flynn',
-  title: 'Senior SDR | B2B Cold Calling | Outbound Sales | Appointment Setting',
-  tagline: 'I turn cold conversations into qualified opportunities.',
+  title: 'Senior SDR | B2B Outbound Sales | Telemarketing & Lead Generation',
+  tagline: 'Senior SDR who sources $1.8M+ pipeline · 120–150% quota · 30+ meetings/month — ready to build qualified pipeline from day one.',
   executiveSummary:
-    'Senior SDR with 11+ years of B2B outbound sales, cold calling, appointment setting, lead generation, qualification, and objection handling across US, UK, Australian, and Singapore markets. Known for disciplined prospecting, high call volume, precise qualification, and practical SDR mentoring.',
+    'Results-driven SDR with 11+ years in B2B outbound sales and telemarketing, generating $1.8M+ in pipeline and consistently exceeding quotas by 120–150%. Expert in high-volume cold calling (150+ calls/day), appointment setting, multi-channel prospecting, and BANT/MEDDIC qualification. Delivers 30+ qualified meetings/month across US, UK, AU, and SG markets. Proven team leader who mentors SDRs, improves call performance, and drives consistent pipeline growth.',
   phone: '+63 930 635 9306',
   email: 'va.flynnjames@gmail.com',
-  location: 'Toledo, Cebu, Philippines · Remote',
+  location: 'Toledo, Cebu, Philippines (Remote: US, UK, AU, SG, CA)',
   linkedin: 'https://linkedin.com/in/fjpontino',
   linkedinHandle: 'linkedin.com/in/fjpontino',
-  discord: 'flynn30',
-  discordUrl: 'https://discord.com/users/flynn30',
   portfolioUrl: 'https://flynn-james-pontino-resume.onrender.com',
-  availability: 'Available · Remote · Immediate Start',
+  availability: 'Available — Remote roles · Immediate Start',
   yearsExperience: '11+ years',
   pipelineSourced: '$1.8M+',
   meetingsPerMonth: '30+',
   callsPerDay: '150+',
   quotaAttainment: '120–150%',
-  heroImage: '/images/flynn-in-office-2.avif',
-  teamImage: '/images/team-flynn-1.avif',
+  heroImage: '/assets/flynn-in-office-2.avif',
+  teamImage: '/assets/team-flynn-1.avif',
+  heroImageFallback: 'https://user29984.na.imgto.link/public/20261005/flynn-in-office-2.avif',
+  teamImageFallback: 'https://user29984.na.imgto.link/public/20261005/team-flynn-1.avif',
 };
 
 export const keyAchievements = [
-  ['11+', 'Years B2B outbound'],
-  ['$1.8M+', 'Pipeline sourced'],
-  ['120–150%', 'Quota attainment'],
-  ['30+', 'Qualified meetings/month'],
-  ['150+', 'Calls/day capability'],
-  ['US · UK · AU · SG', 'Markets covered'],
+  { label: 'Quota Attainment', value: '120–150%', detail: 'Consistently exceeded across roles' },
+  { label: 'Meetings / Month', value: '30+', detail: 'Verified high-intent SQLs' },
+  { label: 'Daily Call Volume', value: '150+', detail: 'Relentless phone stamina' },
+  { label: 'Pipeline Sourced', value: '$1.8M+', detail: 'Revenue-generating pipeline' },
+  { label: 'Company Performance', value: 'Top 5%', detail: 'Ranked top tier company-wide' },
+  { label: 'Performer Awards', value: '3x', detail: 'Employee of the Month & Top Rep' },
 ];
 
 export const coreSkills = [
-  'B2B Cold Calling', 'Outbound Prospecting', 'Appointment Setting', 'Lead Generation',
-  'BANT / MEDDIC Qualification', 'Objection Handling', 'ICP Prospecting',
-  'Multi-Channel Outreach', 'CRM Management', 'Pipeline Hygiene', 'SDR Mentoring', 'KPI Reporting'
+  'B2B Lead Generation',
+  'Cold Calling (150/day)',
+  'Outbound Prospecting',
+  'BANT/MEDDIC Qualification',
+  'Appointment Setting',
+  'Pipeline Management',
+  'Objection Handling',
+  'Multi-Channel Outreach',
+  'Consultative Selling',
+  'Sales Forecasting',
+  'Team Leadership',
+  'CRM Data Management',
 ];
 
-export const workExperience = [
-  {
-    role: 'Junior Sales Team Lead', company: 'Regen Digital', period: 'Jul 2026 – Oct 2026',
-    bullets: ['Mentored junior SDRs on prospecting, qualification, objection handling, and call quality.', 'Tracked team activity and coached toward consistent daily and weekly KPIs.', 'Supported onboarding through interview shadowing, call reviews, and practical feedback.']
-  },
-  {
-    role: 'Senior Sales Development Representative', company: 'Regen Digital', period: 'May 2026 – Oct 2026',
-    bullets: ['Reached Level 4 top-tier performance in under 3 weeks.', 'Generated qualified appointments through B2B cold calling, research, qualification, and disciplined follow-up.', 'Engaged decision-makers and maintained accurate CRM notes for clean handoffs.']
-  },
-  {
-    role: 'Outbound Sales Representative', company: 'Seek Marketing Partners', period: 'Nov 2025 – Apr 2026',
-    bullets: ['Exceeded quota by 120% while generating 150+ outbound touches/day.', 'Contributed $1.8M+ in sourced pipeline and 30+ qualified meetings/month.', 'Improved response rates by 18% through customized objection-handling scripts and LinkedIn touchpoints.']
-  },
-  {
-    role: 'Sales Development Representative', company: 'Averps Pte Ltd', period: 'Feb 2025 – Nov 2025',
-    bullets: ['Achieved a 22% demo conversion rate from outbound prospecting.', 'Delivered $1.2M in qualified pipeline for Account Executives.', 'Built targeted email and LinkedIn outreach around ICP and BANT qualification.']
-  },
-  {
-    role: 'Delegate Sales Acquisition Representative', company: 'Public Sector Network', period: 'Nov 2022 – Jan 2025',
-    bullets: ['Exceeded acquisition targets by 15% YoY.', 'Used LinkedIn Sales Navigator to improve connection-to-meeting performance.', 'Mentored junior SDRs and produced weekly client performance reports.']
-  },
-  {
-    role: 'Telemarketing · Senior SDR · Client Acquisition Manager', company: 'Pacific Outsource Teleservices', period: 'Mar 2015 – Jan 2022',
-    bullets: ['Generated 100+ leads/week and 30–40+ appointments/month across multiple B2B campaigns.', 'Consistently delivered 120–150% quota performance.', 'Led and mentored SDRs while expanding outbound coverage across US, UK, AU, and SG.']
-  }
+export const toolsAndTech = [
+  { name: 'HubSpot CRM', category: 'CRM', level: 'Power User', note: 'Full lead lifecycle, cadences, and forecasting' },
+  { name: 'Salesforce', category: 'CRM', level: 'Expert', note: 'Lead routing, opportunity stages, and reports' },
+  { name: 'Pipedrive', category: 'CRM', level: 'Advanced', note: 'Visual deal stages and activity tracking' },
+  { name: 'LinkedIn Sales Nav', category: 'Prospecting', level: 'Expert', note: 'Boolean filters, persona tracking, 28% higher connect-to-meet' },
+  { name: 'Apollo.io', category: 'Data & Dialing', level: 'Expert', note: 'TAM prospecting, verified direct dials, sequences' },
+  { name: 'ZoomInfo', category: 'Data', level: 'Advanced', note: 'Org charts, mobile numbers, enterprise buying committee' },
+  { name: 'Outreach.io', category: 'Sequencing', level: 'Expert', note: 'Multi-touch cadence orchestration and call logging' },
+  { name: 'Lusha', category: 'Enrichment', level: 'Advanced', note: 'B2B direct dials and email verification' },
+  { name: 'Google Workspace', category: 'Productivity', level: 'Expert', note: 'Docs, Sheets, Slides, Drive' },
+  { name: 'MS Excel', category: 'Data Analysis', level: 'Advanced', note: 'Lead lists, pivot tables, data cleanup' },
+  { name: 'Calendly', category: 'Scheduling', level: 'Expert', note: 'Zero-friction calendar booking and routing' },
+  { name: 'Zoom / Teams', category: 'Video', level: 'Expert', note: 'Discovery screenshare and AE warm handoffs' },
 ];
 
-export const testimonials = [
+export const workExperience: WorkExperience[] = [
   {
-    name: 'TL Dee',
-    role: 'Sr. Operations Sales Lead',
-    company: 'Regen Digital US',
-    quote: 'Flynn ramped to Level 4 top-tier in under 3 weeks. His cold call discipline, objection handling, and ability to mentor junior SDRs made him an invaluable asset to our sales floor.',
-    image: 'https://user29984.na.imgto.link/public/20261005/tl-dee.avif'
+    role: 'Junior Sales Team Lead',
+    company: 'Regen Digital',
+    industry: 'Web Design & Marketing',
+    location: 'Remote (Dover, DE)',
+    period: 'Jul 2026 – Oct 2026',
+    achievements: [
+      'Coach SDRs on objection handling, qualification, prospecting discipline, and proven call strategies.',
+      'Monitor team metrics and develop sales talent through accountability, coaching, and results-driven leadership.',
+      'Support onboarding through structured mentoring, shadowing, and constructive feedback sessions.',
+      'Foster a high-performance, collaborative team culture that consistently exceeds monthly KPIs by 15%+.',
+    ],
+    kpis: ['Coached 20+ SDRs', '+15% Monthly KPI Exceeded', 'Daily Dial Sprints'],
   },
   {
-    name: 'Toby Whitaker',
-    role: 'Head of Sales',
-    company: 'Seek Marketing Partners (UK)',
-    quote: 'Flynn generated over $1.8M in pipeline for our team while crushing his quota by 120%. His customized objection-handling scripts and LinkedIn touchpoints lifted response rates by 18%.',
-    image: 'https://user29984.na.imgto.link/public/20261005/toby-whitaker.avif'
+    role: 'Senior Sales Development Representative',
+    company: 'Regen Digital',
+    industry: 'Web Design & Marketing',
+    location: 'Remote (Dover, DE)',
+    period: 'May 2026 – Oct 2026',
+    achievements: [
+      'Generate qualified sales opportunities through strategic outbound prospecting and consultative selling.',
+      'Engage C-level decision-makers, qualify prospects using BANT, and book high-value revenue-generating appointments.',
+      'Achieved Level 4 (highest company tier) within 3 weeks, exceeding 60+ KPIs for calls, connects, and meetings.',
+      'Maintain 100% CRM data accuracy, enabling precise pipeline forecasting and reporting.',
+    ],
+    kpis: ['Level 4 Tier in 3 Weeks', '60+ KPIs Exceeded', '100% CRM Accuracy'],
   },
   {
-    name: 'Van Ng',
-    role: 'Account Manager',
-    company: 'Averps Pte Ltd (Singapore)',
-    quote: 'A top-performing SDR who blends relentless outbound execution with precision qualification. Flynn achieved a 22% demo conversion rate and delivered $1.2M in qualified pipeline for our AEs.',
-    image: 'https://user29984.na.imgto.link/public/20261005/vanessa-ng.avif'
-  }
+    role: 'Outbound Sales Representative',
+    company: 'Seek Marketing Partners',
+    industry: 'Marketing & Advertising',
+    location: 'Remote (Bury, UK)',
+    period: 'Nov 2025 – Apr 2026',
+    achievements: [
+      'Crushed quota by 120% with 150+ daily cold calls & LinkedIn outreach, generating 30+ qualified meetings/month.',
+      'Owned full sales pipeline: contributed $1.8M in sourced opportunities; improved forecasting accuracy by 30%.',
+      'Increased response rates 18% through new objection-handling scripts and optimized multi-channel cadences.',
+      'Managed end-to-end lead lifecycle in HubSpot, from initial outreach to appointment confirmation and handoff.',
+    ],
+    kpis: ['120% Quota Attainment', '$1.8M Sourced', '+18% Response Rate', '150+ Calls/Day'],
+  },
+  {
+    role: 'Sales Development Representative',
+    company: 'Averps Pte Ltd',
+    industry: 'Enterprise SaaS & IT',
+    location: 'Remote (Singapore)',
+    period: 'Feb 2025 – Nov 2025',
+    achievements: [
+      'Achieved 100% SQL target with 22% demo conversion rate from cold outbound sequences and strategic follow-ups.',
+      'Built and optimized email/LinkedIn cadences generating $1.2M in qualified opportunities for Account Executives.',
+      'Pioneered BANT qualification framework, improving opportunity qualification rates by 15%.',
+      'Collaborated with marketing to refine ICP and develop targeted account-based outreach campaigns.',
+    ],
+    kpis: ['100% SQL Target', '22% Demo Conversion', '$1.2M Qualified Pipeline', '+15% Qualification Lift'],
+  },
+  {
+    role: 'Delegate Sales Acquisition Representative',
+    company: 'Public Sector Network',
+    industry: 'B2B Events & Conferences',
+    location: 'Remote (Toronto, Canada)',
+    period: 'Nov 2022 – Jan 2025',
+    achievements: [
+      'Exceeded acquisition targets by 15% YoY; achieved 20% lead-to-attendee conversion rate (top 5% company-wide).',
+      'Leveraged LinkedIn Sales Navigator to achieve 28% higher connection-to-meeting rate; mentored 3 junior SDRs.',
+      'AI personalization pilot increased email open rates by 22% and reply rates by 12%.',
+      'Prepared and presented comprehensive weekly client reports to stakeholders, driving data-driven decisions.',
+    ],
+    kpis: ['+15% YoY Target', 'Top 5% Company-Wide', '+28% Connection-to-Meeting Rate'],
+  },
+  {
+    role: 'Telemarketing | Senior SDR | Client Acquisition Manager',
+    company: 'Pacific Outsource Teleservices',
+    industry: 'BPO / Lead Generation',
+    location: 'Office-based (Philippines)',
+    period: 'Mar 2015 – Jan 2022',
+    achievements: [
+      'Generated 100+ leads/week and 30–40+ appointments/month across 30+ clients; exceeded quota by 120–150% consistently.',
+      'Led and mentored 5 SDRs: increased team productivity by 20% and reduced onboarding time by 25%.',
+      'Expanded market presence into US, UK, AU, and SG, boosting appointment conversion rates by 18%.',
+      'Introduced a new performance tracking system that improved team KPIs and reduced reporting errors by 40%.',
+    ],
+    kpis: ['120–150% Quota across 7 Years', '30–40+ Appts/Month', 'Expanded into US/UK/AU/SG'],
+  },
+  {
+    role: 'Sales Specialist',
+    company: 'Global Empire Corporation',
+    industry: 'Retail / BPO',
+    location: 'Office-based (Cebu, Philippines)',
+    period: 'Sep 2014 – Sep 2015',
+    achievements: [
+      'Achieved 150% of sales quota within first 6 months; earned "Employee of the Month" award twice.',
+      'Reduced customer churn by 14% through proactive relationship management and strategic follow-ups.',
+      'Cross-trained 8 new hires, shortening onboarding time by 20% and improving first-month attainment.',
+      'Recognized as top agent for consistently delivering 95%+ customer satisfaction scores.',
+    ],
+    kpis: ['150% Quota', '2x Employee of the Month', '95%+ CSAT'],
+  },
 ];
 
-export const siteConfig = {
-  title: 'Flynn James Q. Pontino — Senior SDR Portfolio',
-  description: 'Senior SDR portfolio focused on B2B cold calling, outbound prospecting, appointment setting, qualification, objection handling, and SDR leadership.',
-  siteUrl: 'https://flynn-james-pontino-resume.onrender.com',
-  audioUrls: [
-    import.meta.env.VITE_AUDIO_1_URL || '',
-    import.meta.env.VITE_AUDIO_2_URL || '',
-    import.meta.env.VITE_AUDIO_3_URL || ''
-  ]
+export const education = {
+  degree: 'Bachelor of Science in Electrical Engineering (BSEE)',
+  institution: 'University of Cebu',
+  period: '2009 – 2014',
+  certifications: [
+    'Six Sigma White Belt (SSWB)',
+    'Lean Six Sigma White Belt (LSSWB)',
+    'Top Performer Award (Regen Digital)',
+  ],
 };
+
+export const whyInterviewFlynn = [
+  {
+    title: '11+ Years Outbound Sales Experience',
+    desc: 'Zero ramp-up time needed. Ready to execute on high-volume dials and deliver immediate pipeline contribution from Day 1.',
+  },
+  {
+    title: 'Executive Presence with C-Level Buyers',
+    desc: 'Impeccable communication, active listening, and calm authority that wins the respect of Founders, CEOs, and VPs.',
+  },
+  {
+    title: 'CRM & Data Expert (HubSpot Power User)',
+    desc: 'Maintains 100% CRM data accuracy, converting daily dial activity into actionable forecasting insights for leadership.',
+  },
+  {
+    title: 'Proven in Remote, KPI-Driven Teams',
+    desc: 'Thrives on autonomy across US, UK, AU, and SG time zones with relentless daily activity and quota ownership.',
+  },
+];
+
+export const callRecordings: CallRecording[] = [
+  {
+    id: 'call-1',
+    title: 'Value-First Hook & Monday 9:30 AM Booking',
+    prospect: 'Andy',
+    company: 'Region Digital',
+    industry: 'Digital Growth Agency',
+    duration: '01:17',
+    durationSeconds: 77,
+    outcome: 'Monday 9:30 AM Discovery Session Scheduled',
+    date: 'Actual Outbound Dial',
+    skillTag: 'Objections Mastered · Reschedule Recovery',
+    dealSize: '$2,400 Website Package',
+    challenge: 'Prospect stated he was busy for the rest of the week.',
+    tacticalWin: 'Flynn did not force the current week; gracefully pivoted to early next week and closed Monday 9:30 AM.',
+    keyMetric: 'Under 80 Seconds: Cold to Booked Meeting',
+    transcript: [
+      { time: '00:03', speaker: 'Flynn', text: 'Hey Andy, can you hear me now?' },
+      { time: '00:06', speaker: 'Prospect', text: 'Yes!' },
+      { time: '00:09', speaker: 'Flynn', text: 'Well, Flynn here Andy! I believe we spoke a while back about the free website preview we were offering with no obligation. Wondering if you are available tomorrow?', technique: 'Permission-Based Recall Hook' },
+      { time: '00:25', speaker: 'Prospect', text: 'No, tomorrow I am busy the rest of this week.' },
+      { time: '00:30', speaker: 'Flynn', text: 'What about next week, early next week though?', technique: 'Non-Threatening Forward Pivot' },
+      { time: '00:44', speaker: 'Flynn', text: 'Can I suggest next week maybe the same timing, and you can confirm if it is good or any reschedule you can do let me know?' },
+      { time: '00:54', speaker: 'Prospect', text: 'Okay, you can put it down for Monday. Do you have like 10:00 o\'clock?' },
+      { time: '01:00', speaker: 'Flynn', text: '10:00? Of course! We have 10:00... 10:30?' },
+      { time: '01:06', speaker: 'Prospect', text: 'Yeah, 9:30 is fine.' },
+      { time: '01:09', speaker: 'Flynn', text: 'Sure, I will send you the reschedule invite and kindly acknowledge it okay? Thank you so much Andy!', technique: 'Calendar Commitment Lock' },
+    ],
+  },
+  {
+    id: 'call-2',
+    title: 'Urgent Reschedule Recovery in 56 Seconds',
+    prospect: 'Andy (Follow-up)',
+    company: 'Region Digital',
+    industry: 'Digital Growth Agency',
+    duration: '00:56',
+    durationSeconds: 56,
+    outcome: 'Next Day 10:00 AM Locked On the Fly',
+    date: 'Actual Outbound Dial',
+    skillTag: 'Show-Up Rate Safeguard · Frictionless Pivot',
+    dealSize: '82% Show Rate Protocol',
+    challenge: 'Prospect was on the road heading to work and needed to cancel today\'s meeting.',
+    tacticalWin: 'Flynn maintained total composure, matched prospect urgency, and secured tomorrow at 10:00 AM with zero friction.',
+    keyMetric: 'Zero Pipeline Lost: Immediate Reschedule',
+    transcript: [
+      { time: '00:02', speaker: 'Flynn', text: 'Hey Andy!' },
+      { time: '00:07', speaker: 'Flynn', text: 'Flynn here from Region Digital! Gentle reminder that your free website preview is scheduled for today at 10:30. And your custom website is looking great right now! Does that time still work for you?', technique: 'Pre-Meeting Enthusiasm' },
+      { time: '00:21', speaker: 'Prospect', text: 'I\'m trying to get ready for work, I\'m going to have to cancel today at 10:30. I\'m going to be on the road, I\'m not going to be able to do the thing. Move it to any day this week I\'m off.' },
+      { time: '00:33', speaker: 'Flynn', text: 'Sure, not a problem! We can do it like tomorrow at 10:00?', technique: 'Instant Alternative Solution' },
+      { time: '00:40', speaker: 'Prospect', text: 'That will be fine! Do that for me, I\'m in the middle of getting ready to head out.' },
+      { time: '00:52', speaker: 'Flynn', text: 'Sure, not a problem! See you then Andy, cheers!' },
+    ],
+  },
+  {
+    id: 'call-3',
+    title: 'Turning Hostile Skepticism into a Confirmed Zoom Demo',
+    prospect: 'Hussein / Aldis',
+    company: 'Aldis Clean',
+    industry: 'Commercial Cleaning Services',
+    duration: '06:54',
+    durationSeconds: 414,
+    outcome: 'Thursday 11:00 AM Zoom Meeting Booked',
+    date: 'Actual Outbound Dial',
+    skillTag: 'Consultative Qualification · Tension Disarmament',
+    dealSize: '$18,000 Target Contract',
+    challenge: 'Prospect was immediately defensive: "You built a website for me without my consent?!"',
+    tacticalWin: 'Disarmed tension with transparency ("We do this for 100 businesses, if you love it keep it, if not no hard feelings"), collected email, locked Thursday 11:00 AM Zoom.',
+    keyMetric: '100% Objection Overturn to SQL',
+    transcript: [
+      { time: '00:07', speaker: 'Prospect', text: 'Aldis Clean, how may I help you?' },
+      { time: '00:15', speaker: 'Flynn', text: 'Flynn here! I found you guys online and wanted to share that my team created a custom website preview for your business. It is already done—I was wondering if you had a few moments tomorrow or Friday to look at it and share your thoughts?', technique: 'Value-First Custom Hook' },
+      { time: '00:42', speaker: 'Prospect', text: 'You built a website for me without my permission? Without my consent?!', technique: 'Hostile Defense Objection' },
+      { time: '00:57', speaker: 'Flynn', text: 'Basically we do this for 100 local businesses every day, and since you were on our list, we created one for you. If you love it, you can keep it. If not, no hard feelings!', technique: 'Disarming Tension & Normalizing' },
+      { time: '01:34', speaker: 'Prospect', text: 'Is it that nice someone actually created a website for you? And it\'s for free, as I said. No commitments, it\'s for free? Then you can call me tomorrow then!', technique: 'Objection Overturned to Curiosity' },
+      { time: '01:55', speaker: 'Flynn', text: 'Sure! Do you prefer morning callbacks or afternoon?', technique: 'Assumptive Timing Choice' },
+      { time: '02:01', speaker: 'Prospect', text: 'In the morning, like 11:00 AM.' },
+      { time: '02:09', speaker: 'Flynn', text: 'Perfect, I got 11:00 AM here. My name is Flynn by the way—what was your name?', technique: 'Rapport Lock' },
+      { time: '02:24', speaker: 'Prospect', text: 'My nickname is Aldis, my real name is Hussein.' },
+      { time: '02:33', speaker: 'Flynn', text: 'Hussein! Do you have a best email so we can send you the invite for the meeting? We will screenshare the website via Zoom.', technique: 'Expectation Setting' },
+      { time: '03:25', speaker: 'Prospect', text: 'hussainssay@gmail.com' },
+      { time: '04:10', speaker: 'Flynn', text: 'Wonderful! What is your main goal for the website—more leads, credibility, or something else?', technique: 'BANT Discovery' },
+      { time: '04:40', speaker: 'Prospect', text: 'More leads and to have a platform to engage with my customers.' },
+      { time: '05:58', speaker: 'Flynn', text: 'So we will see you on Thursday at 11:00 AM. I will send the invite right after this call to your email and SMS. Cheers!' },
+    ],
+  },
+  {
+    id: 'call-4',
+    title: 'Commercial Contractor Discovery & Same-Call Calendar Lock',
+    prospect: 'Moises',
+    company: 'CJ Builders',
+    industry: 'General Construction & Remodeling',
+    duration: '02:39',
+    durationSeconds: 159,
+    outcome: 'Monday 4:45 PM Consultation Booked',
+    date: 'Actual Outbound Dial',
+    skillTag: 'Gatekeeper Navigation · Decision-Maker Direct',
+    dealSize: 'Commercial Project Pipeline',
+    challenge: 'Gatekeeper / Busy Contractor fielding calls on jobsite.',
+    tacticalWin: 'Quickly discovered scope (ground-up construction to remodeling), captured direct email, scheduled Monday 4:45 PM consultation.',
+    keyMetric: 'Under 3 Minutes: Cold to Booked Meeting',
+    transcript: [
+      { time: '00:04', speaker: 'Flynn', text: 'Hey, is this CJ Builders?' },
+      { time: '00:07', speaker: 'Prospect', text: 'Yes, it is.' },
+      { time: '00:11', speaker: 'Flynn', text: 'My name is Flynn. I found you online and wanted to let you know my team created a free custom website preview for your business. It is already done. Just wanted to see if you had a few moments early next week to look at it?', technique: 'Low-Friction Hook' },
+      { time: '00:36', speaker: 'Prospect', text: 'Sure, no problem.' },
+      { time: '00:40', speaker: 'Flynn', text: 'Fantastic! Would you prefer a morning session or afternoon?', technique: 'Binary Choice Booking' },
+      { time: '00:47', speaker: 'Prospect', text: 'Afternoon.' },
+      { time: '00:50', speaker: 'Flynn', text: 'I have around Monday 4:45 PM, is that good, or earlier?' },
+      { time: '01:00', speaker: 'Prospect', text: '4:45 is good.' },
+      { time: '01:04', speaker: 'Flynn', text: 'Great, and what is your name again, sorry?' },
+      { time: '01:08', speaker: 'Prospect', text: 'Moises.' },
+      { time: '01:13', speaker: 'Flynn', text: 'Can I have the best email so we can send the invite?' },
+      { time: '01:18', speaker: 'Prospect', text: 'mkaba03@gmail.com' },
+      { time: '01:45', speaker: 'Flynn', text: 'And what is your main goal for the website? More customers, showcasing work, or making it easier to contact you?', technique: 'Pain Point Probing' },
+      { time: '01:56', speaker: 'Prospect', text: 'All of the above! Ground up construction to rehab, residential and commercial.' },
+      { time: '02:37', speaker: 'Flynn', text: 'See you then on Monday at 4:45 PM Moises!' },
+    ],
+  },
+];
