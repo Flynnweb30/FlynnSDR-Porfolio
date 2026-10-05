@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: flynn-sdr-portfolio
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_EMAILJS_PUBLIC_KEY
+        sync: false
+      - key: VITE_EMAILJS_SERVICE_ID
+        sync: false
+      - key: VITE_EMAILJS_NOTIFICATION_TEMPLATE_ID
+        sync: false
+      - key: VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID
+        sync: false
