@@ -34,16 +34,27 @@
       .neon-tube {
         fill: none;
         stroke: #00FF00;
-        stroke-width: 22; /* Increased from 12 */
+        stroke-width: 22;
         stroke-linecap: round;
         stroke-linejoin: round;
       }
       .neon-core {
         fill: none;
         stroke: #FFFFFF;
-        stroke-width: 8; /* Increased from 4 */
+        stroke-width: 8;
         stroke-linecap: round;
         stroke-linejoin: round;
+      }
+      /* New style for the neon orb outline */
+      .orb-tube {
+        fill: none;
+        stroke: #00FF00;
+        stroke-width: 12;
+      }
+      .orb-core {
+        fill: none;
+        stroke: #FFFFFF;
+        stroke-width: 4;
       }
     </style>
   </defs>
@@ -52,10 +63,16 @@
   <rect width="500" height="500" fill="url(#bgGrad)" />
 
   <!-- Glass Orb Base -->
-  <circle cx="250" cy="230" r="160" fill="url(#orbGrad)" stroke="rgba(255,255,255,0.05)" stroke-width="2" />
+  <circle cx="250" cy="230" r="160" fill="url(#orbGrad)" stroke="none" />
   
-  <!-- Glass Orb Edge Highlights -->
-  <path d="M 120 150 A 160 160 0 0 1 250 70" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3" stroke-linecap="round" />
+  <!-- Neon Orb Outline (Now glowing like the F) -->
+  <g filter="url(#neonGlow)">
+    <circle class="orb-tube" cx="250" cy="230" r="160" />
+    <circle class="orb-core" cx="250" cy="230" r="160" />
+  </g>
+
+  <!-- Glass Orb Edge Highlights (Subtle reflections on top) -->
+  <path d="M 120 150 A 160 160 0 0 1 250 70" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3" stroke-linecap="round" />
   <path d="M 380 310 A 160 160 0 0 1 250 390" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2" stroke-linecap="round" />
 
   <!-- Neon Reflection on Glass -->
@@ -66,9 +83,7 @@
 
   <!-- The Thicker Neon Letter "F" -->
   <g filter="url(#neonGlow)">
-    <!-- Green glowing thick tube -->
     <path class="neon-tube" d="M 215 130 L 315 130 M 215 130 L 215 330 M 215 230 L 285 230" />
-    <!-- White hot core of the thick tube -->
     <path class="neon-core" d="M 215 130 L 315 130 M 215 130 L 215 330 M 215 230 L 285 230" />
   </g>
 
