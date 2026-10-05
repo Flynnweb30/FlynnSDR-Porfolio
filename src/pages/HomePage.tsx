@@ -1,20 +1,15 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { PageRoute } from '../types';
 import { personalInfo } from '../data/flynnData';
 import BanknoteNav from '../components/BanknoteNav';
-import FlynnLogo from '../components/FlynnLogo';
 import DiscordButton from '../components/DiscordButton';
 import { 
-  ArrowRight, 
-  Calendar, 
-  Headphones, 
   Check, 
   Mail, 
   Phone, 
   Linkedin, 
   Play, 
   Pause, 
-  Volume2, 
   MessageCircle
 } from 'lucide-react';
 
@@ -29,31 +24,48 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   const [isPlaying, setIsPlaying] = useState(false);
   const [expandedTranscriptId, setExpandedTranscriptId] = useState<string | null>(null);
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
+
+  // 4 Verified Browser-Playable Audio URLs
   const audioSources: Record<string, string> = {
-    'call-1': import.meta.env.VITE_AUDIO_CALL_1_URL || 'https://www.image2url.com/r2/default/audio/1791216159831-6e22f168-363c-4217-8949-a62c1135a508.opus',
+    'call-1': import.meta.env.VITE_AUDIO_CALL_1_URL || 'https://audiolink-oskn.onrender.com/audio/aud_1791236690865_eeeu4r.opus',
     'call-2': import.meta.env.VITE_AUDIO_CALL_2_URL || 'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
-    'call-3': import.meta.env.VITE_AUDIO_CALL_3_URL || 'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
-    'call-4': import.meta.env.VITE_AUDIO_CALL_4_URL || 'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
+    'call-3': import.meta.env.VITE_AUDIO_CALL_3_URL || 'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
+    'call-4': import.meta.env.VITE_AUDIO_CALL_4_URL || 'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
   };
 
   const handleTogglePlay = async (callId: string) => {
     const audio = audioRefs.current[callId];
     if (!audio || !audioSources[callId]) return;
-    if (activeCallId === callId && isPlaying) { audio.pause(); return; }
-    Object.keys(audioRefs.current).forEach(id => { if (id !== callId) audioRefs.current[id]?.pause(); });
+
+    if (activeCallId === callId && isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+      return;
+    }
+
+    Object.keys(audioRefs.current).forEach((id) => {
+      if (id !== callId) {
+        audioRefs.current[id]?.pause();
+      }
+    });
+
     setActiveCallId(callId);
-    try { await audio.play(); } catch { setIsPlaying(false); }
+    try {
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      setIsPlaying(false);
+    }
   };
 
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
 
       {/* =========================================================================
-          PAGE 1 SCREENSHOT: BLUE CLOUDS SKY HERO SECTION
+          PAGE 1: BLUE CLOUDS SKY HERO SECTION (Senior SDR Focus)
          ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-4 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         
-        {/* Subtle cloud backdrop overlay */}
         <div 
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
           style={{ backgroundImage: `url('/assets/flynn-sky.jpg')` }}
@@ -61,7 +73,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
         <div className="max-w-6xl mx-auto relative z-10">
           
-          {/* Top Bar: Signature Script "Flynn" on left, 4 Banknotes on right (Matching PDF Page 1) */}
+          {/* Top Bar: Signature Script "Flynn" on left, Banknote Navigation on right */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 sm:pb-12">
             <div onClick={() => onNavigate('home')} className="cursor-pointer">
               <span className="font-script text-6xl sm:text-7xl font-bold tracking-tight text-[#0d0e0c] block transform -rotate-3 hover:scale-105 transition-transform">
@@ -69,7 +81,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </span>
             </div>
 
-            {/* 4 Banknotes in the Top Right */}
             <BanknoteNav onNavigate={onNavigate} size="md" />
           </div>
 
@@ -79,7 +90,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
             {/* Left Column: Big Headline & Metric Tiles (Span 5) */}
             <div className="lg:col-span-5 space-y-4 text-left">
               
-              {/* Massive 3-Line Headline (SDR-focused hero) */}
               <div className="space-y-0 leading-none">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
                   HEAVY WEIGHT
@@ -94,67 +104,47 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
               {/* Metric Cards Row 1: $1.8M+, 11+ Years, 45,000+ Calls */}
               <div className="grid grid-cols-3 gap-2 pt-2">
-                
-                {/* Cash Sourced */}
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
-                  <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">
-                    💵
-                  </div>
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
-                    $1.8M+
-                  </div>
+                  <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">💵</div>
+                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">$1.8M+</div>
                   <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
                     PIPELINE<br/>SOURCED
                   </div>
                 </div>
 
-                {/* 11+ Years */}
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
                   <img
                     src="/assets/experience-hourglass.webp"
                     alt="Experience"
                     className="w-7 h-7 object-contain mb-0.5"
-                    onError={(e) => {
-                      (e.target as HTMLElement).style.display = 'none';
-                    }}
+                    onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
                   />
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
-                    11+ YEARS
-                  </div>
+                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">11+ YEARS</div>
                   <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
                     30+ CLIENTS<br/>$25K AVG ACV
                   </div>
                 </div>
 
-                {/* 45,000+ Calls */}
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
                   <img
                     src="/assets/sales-phone.webp"
                     alt="Sales phone"
                     className="w-7 h-7 object-contain mb-0.5"
-                    onError={(e) => {
-                      (e.target as HTMLElement).style.display = 'none';
-                    }}
+                    onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
                   />
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
-                    45,000+
-                  </div>
+                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">45,000+</div>
                   <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
                     SALES CALLS<br/>COMPLETED
                   </div>
                 </div>
-
               </div>
 
               {/* Metric Cards Row 2: 120-150% Quota & 150+ Dials */}
               <div className="grid grid-cols-2 gap-2">
-                
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
                   <span className="text-xl">🔥</span>
                   <div>
-                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
-                      120–150%
-                    </div>
+                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">120-150%</div>
                     <div className="text-[9px] font-display font-bold uppercase text-zinc-500 leading-tight mt-0.5">
                       QUOTA ATTAINMENT ON OUTBOUND
                     </div>
@@ -164,20 +154,16 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
                   <span className="text-xl">❄️</span>
                   <div>
-                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
-                      150+
-                    </div>
+                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">150+</div>
                     <div className="text-[9px] font-display font-bold uppercase text-zinc-500 leading-tight mt-0.5">
                       DAILY OUTBOUND DIALS
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* Metric Cards Row 3: Role & Geography Badges */}
               <div className="grid grid-cols-2 gap-2 text-xs">
-                
                 <div className="px-3 py-2 bg-white/90 border border-zinc-200/80 rounded-xl flex items-center gap-2 shadow-2xs">
                   <span className="text-base">🇵🇭</span>
                   <div>
@@ -193,10 +179,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     <div className="text-xs font-bold text-[#0d0e0c] font-display uppercase">US · UK · AU · SG Markets</div>
                   </div>
                 </div>
-
               </div>
 
-              {/* Social Channels & Payment Row (Matching PDF Page 1) */}
+              {/* Social Channels Row */}
               <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs font-display">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold uppercase text-zinc-600">Find me</span>
@@ -211,8 +196,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   </a>
                   <DiscordButton />
                 </div>
-
-
               </div>
 
             </div>
@@ -231,19 +214,14 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Right Column: "HIRE OR INTERVIEW ME" Card (Span 3) (Matching PDF Page 1) */}
+            {/* Right Column: "HIRE OR INTERVIEW ME" Card (Span 3) */}
             <div className="lg:col-span-3 space-y-4">
-              
-              <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4">
-                
-                <h2 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight text-left">
+              <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4 text-left">
+                <h2 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight">
                   HIRE OR<br/>INTERVIEW ME
                 </h2>
 
-                {/* Direct Action Buttons matching existing design's green/purple/black cards */}
                 <div className="space-y-2.5">
-                  
-                  {/* WhatsApp */}
                   <a
                     href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}?text=Hey%20Flynn,%20I'd%20love%20to%20interview%20you%20for%20a%20Senior%20SDR%20role.`}
                     target="_blank"
@@ -259,7 +237,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     <span className="text-zinc-400 group-hover:text-emerald-600 transition-colors font-bold">→</span>
                   </a>
 
-                  {/* LinkedIn / Discord */}
                   <a
                     href={personalInfo.linkedin}
                     target="_blank"
@@ -275,11 +252,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     <span className="text-zinc-400 group-hover:text-indigo-600 transition-colors font-bold">→</span>
                   </a>
 
-                  <div className="w-full px-3.5 py-2.5 bg-white hover:bg-indigo-50 border border-zinc-200 hover:border-indigo-500 rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer" onClick={async () => { try { await navigator.clipboard.writeText('flynn30'); } catch {} }} title="Copy Discord username: flynn30">
-                    <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase"><div className="w-6 h-6 rounded-md bg-[#5865f2]/15 flex items-center justify-center text-[#5865f2] font-black text-[9px]">DIS</div><span>Discord · flynn30</span></div><span className="text-zinc-400 group-hover:text-indigo-600 transition-colors font-bold">Copy →</span>
-                  </div>
-
-                  {/* Email */}
                   <a
                     href={`mailto:${personalInfo.email}?subject=Interview%20Flynn%20for%20Senior%20SDR%20Role`}
                     className="w-full px-3.5 py-2.5 bg-white hover:bg-sky-50 border border-zinc-200 hover:border-[#0077b6] rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
@@ -292,19 +264,15 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     </div>
                     <span className="text-zinc-400 group-hover:text-[#0077b6] transition-colors font-bold">→</span>
                   </a>
-
                 </div>
 
-                {/* Green Siren Lamp: Immediate Start Card */}
                 <div className="pt-2 border-t border-zinc-100 flex items-center gap-3">
                   <div className="relative shrink-0">
                     <img
                       src="/assets/green-alarm.svg"
                       alt="Green Alarm"
                       className="w-9 h-9 object-contain animate-siren"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
+                      onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
                     />
                   </div>
                   <div className="text-left text-xs leading-tight">
@@ -312,12 +280,10 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     <strong className="text-emerald-600 font-display uppercase tracking-tight block text-sm">
                       IMMEDIATE start
                     </strong>
-                    <span className="text-zinc-500 text-[10px] block font-sans">during US daytime full time</span>
+                    <span className="text-zinc-500 text-[10px] block font-sans">Remote Outbound SDR</span>
                   </div>
                 </div>
-
               </div>
-
             </div>
 
           </div>
@@ -326,54 +292,40 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       </section>
 
       {/* =========================================================================
-          PAGE 1 BOTTOM: A TRACK RECORD BUILT FOR RESULTS.
+          TRACK RECORD BUILT FOR RESULTS
          ========================================================================= */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-10 tracking-tight">
             A TRACK RECORD BUILT FOR RESULTS.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Card 1: Regen Digital */}
-            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
                 <img src="https://user29984.na.imgto.link/public/20261005/regen-digital.avif" alt="Regen Digital company logo" loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
-
-              <div className="space-y-1 text-left">
-                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
-                  REGEN DIGITAL
-                </div>
+              <div className="space-y-1">
+                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">REGEN DIGITAL</div>
                 <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / NORWEGIAN</div>
-                <div className="text-base font-black font-display text-[#0077b6]">
-                   $200,000+
-                </div>
+                <div className="text-base font-black font-display text-[#0077b6]">$200,000+</div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
                   85% Qualified Opportunities<br/>
-                  120–150% Quota Attainment<br/>
+                  120-150% Quota Attainment<br/>
                   Level 4 Tier in 3 Weeks<br/>
                   <strong className="text-zinc-900">$960 Incentives</strong>
                 </div>
               </div>
             </div>
 
-            {/* Card 2: Seek Marketing / IHTE */}
-            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
                 <img src="https://user29984.na.imgto.link/public/20261005/seek-marketing.avif" alt="Seek Marketing Partners company logo" loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
-
-              <div className="space-y-1 text-left">
-                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
-                  SEEK MARKETING / IHTE
-                </div>
+              <div className="space-y-1">
+                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">SEEK MARKETING / IHTE</div>
                 <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / CANADIAN / UK</div>
-                <div className="text-base font-black font-display text-[#0077b6]">
-                  $1.8M+
-                </div>
+                <div className="text-base font-black font-display text-[#0077b6]">$1.8M+</div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
                   150+ Daily Outbound Dials<br/>
                   120% Quota Attainment<br/>
@@ -383,20 +335,14 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Card 3: Averps / Found Inc */}
-            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
                 <img src="https://user29984.na.imgto.link/public/20261005/averps-pte-ltd.avif" alt="Averps Pte Ltd company logo" loading="lazy" decoding="async" className="w-full h-full object-contain" />
               </div>
-
-              <div className="space-y-1 text-left">
-                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
-                  AVERPS / FOUND INC.
-                </div>
+              <div className="space-y-1">
+                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">AVERPS / FOUND INC.</div>
                 <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">UK / SINGAPORE</div>
-                <div className="text-base font-black font-display text-[#0077b6]">
-                  $1.2M+
-                </div>
+                <div className="text-base font-black font-display text-[#0077b6]">$1.2M+</div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
                   100% SQL Target Met<br/>
                   22% Demo Conversion<br/>
@@ -405,35 +351,31 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
       </section>
 
       {/* =========================================================================
-          PAGE 1 BOTTOM & PAGE 2 TOP: PROOF I CAN QUALIFY & BOOK
+          PROOF I CAN QUALIFY & BOOK (3 Spotlights)
          ========================================================================= */}
       <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-12 tracking-tight">
             PROOF I CAN QUALIFY & BOOK
           </h2>
 
           <div className="space-y-8">
             
-            {/* Spotlight 01: Objections Mastered (Top Glaze No Show Callback) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-              
-              {/* Left: Video / Audio Screen Mockup */}
-              <div className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
-                   onClick={(e) => { e.stopPropagation(); void handleTogglePlay('call-1'); }}>
-                {/* Background image mockup */}
+            {/* Spotlight 01: Top Glaze (call-1) */}
+            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8 text-left">
+              <div 
+                className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
+                onClick={() => void handleTogglePlay('call-1')}
+              >
                 <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 opacity-90" />
                 <div className="absolute top-3 left-3 text-[11px] font-sans text-white/90 font-semibold flex items-center gap-1.5 z-10">
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  <span>Recovering a No-Show Callback & Rebooking</span>
+                  <span>Top Glaze · Reschedule Recovery & Rebooking</span>
                 </div>
 
                 <div className="relative z-10 w-14 h-14 bg-red-600 group-hover:bg-red-500 rounded-full flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110">
@@ -444,15 +386,27 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   )}
                 </div>
 
-                <audio ref={el => { audioRefs.current['call-1'] = el; }} src={audioSources['call-1'] || undefined} preload="none" onPlay={() => { setActiveCallId('call-1'); setIsPlaying(true); }} onPause={() => { if (activeCallId === 'call-1') setIsPlaying(false); }} onEnded={() => { setIsPlaying(false); }} onError={() => setIsPlaying(false)} className="absolute opacity-0 pointer-events-none" /><div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
+                <audio 
+                  ref={(el) => { audioRefs.current['call-1'] = el; }} 
+                  preload="metadata" 
+                  onPlay={() => { setActiveCallId('call-1'); setIsPlaying(true); }} 
+                  onPause={() => { if (activeCallId === 'call-1') setIsPlaying(false); }} 
+                  onEnded={() => { setIsPlaying(false); }} 
+                  className="hidden"
+                >
+                  <source src={audioSources['call-1']} type="audio/ogg; codecs=opus" />
+                  <source src={audioSources['call-1']} type="audio/opus" />
+                  <source src={audioSources['call-1']} />
+                </audio>
+
+                <div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
                   01:17 · Actual Outbound Recording
                 </div>
               </div>
 
-              {/* Right: Skill Spotlight Copy matching PDF */}
-              <div className="w-full md:w-1/2 space-y-3 text-left">
+              <div className="w-full md:w-1/2 space-y-3">
                 <div className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
-                  01 Skill spotlight
+                  01 Skill spotlight · Top Glaze
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
                   OBJECTIONS MASTERED
@@ -470,13 +424,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
 
                 <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Handled a busy prospect without forcing the timing, then pivoted to an early-week option and secured a confirmed Monday 9:30 AM discovery session in 77 seconds.
+                  Handled a busy roofing contractor who was swamped for the rest of the week, pivoted seamlessly to early next week, and locked down a confirmed Monday 9:30 AM discovery meeting in 77 seconds.
                 </p>
 
-                {/* Audio controls */}
                 <div className="pt-2 flex items-center gap-3">
                   <button
-                    onClick={(e) => { e.stopPropagation(); void handleTogglePlay('call-1'); }}
+                    onClick={() => void handleTogglePlay('call-1')}
                     className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs"
                   >
                     {activeCallId === 'call-1' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
@@ -498,36 +451,49 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   </div>
                 )}
               </div>
-
             </div>
 
-            {/* Spotlight 02: Consultative Qualification (Aldis Clean) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-              
-              <div className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
-                   onClick={(e) => { e.stopPropagation(); void handleTogglePlay('call-3'); }}>
+            {/* Spotlight 02: Aldis Clean (call-4) */}
+            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8 text-left">
+              <div 
+                className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
+                onClick={() => void handleTogglePlay('call-4')}
+              >
                 <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 opacity-90" />
                 <div className="absolute top-3 left-3 text-[11px] font-sans text-white/90 font-semibold flex items-center gap-1.5 z-10">
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  <span>Qualifying an $18,000 Scope With Consultative Discovery</span>
+                  <span>Aldis Clean · Qualifying a Skeptical Business Owner</span>
                 </div>
 
                 <div className="relative z-10 w-14 h-14 bg-red-600 group-hover:bg-red-500 rounded-full flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110">
-                  {activeCallId === 'call-3' && isPlaying ? (
+                  {activeCallId === 'call-4' && isPlaying ? (
                     <Pause className="w-6 h-6 fill-current" />
                   ) : (
                     <Play className="w-6 h-6 fill-current ml-1" />
                   )}
                 </div>
 
-                <audio ref={el => { audioRefs.current['call-3'] = el; }} src={audioSources['call-3'] || undefined} preload="none" onPlay={() => { setActiveCallId('call-3'); setIsPlaying(true); }} onPause={() => { if (activeCallId === 'call-3') setIsPlaying(false); }} onEnded={() => { setIsPlaying(false); }} onError={() => setIsPlaying(false)} className="absolute opacity-0 pointer-events-none" /><div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
+                <audio 
+                  ref={(el) => { audioRefs.current['call-4'] = el; }} 
+                  preload="metadata" 
+                  onPlay={() => { setActiveCallId('call-4'); setIsPlaying(true); }} 
+                  onPause={() => { if (activeCallId === 'call-4') setIsPlaying(false); }} 
+                  onEnded={() => { setIsPlaying(false); }} 
+                  className="hidden"
+                >
+                  <source src={audioSources['call-4']} type="audio/ogg; codecs=opus" />
+                  <source src={audioSources['call-4']} type="audio/opus" />
+                  <source src={audioSources['call-4']} />
+                </audio>
+
+                <div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
                   06:54 · Actual Outbound Recording
                 </div>
               </div>
 
-              <div className="w-full md:w-1/2 space-y-3 text-left">
+              <div className="w-full md:w-1/2 space-y-3">
                 <div className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
-                  02 Skill spotlight
+                  02 Skill spotlight · Aldis Clean
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
                   CONSULTATIVE QUALIFICATION
@@ -545,25 +511,25 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
 
                 <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Handled an initially defensive prospect with transparent context, clarified the business goal, collected the email, and secured a Thursday 11:00 AM Zoom appointment.
+                  Defused initial defensive hostility ("You built a website without my permission?!"), anchored consultative value, captured the direct email, and confirmed a Thursday 11:00 AM Zoom appointment.
                 </p>
 
                 <div className="pt-2 flex items-center gap-3">
                   <button
-                    onClick={(e) => { e.stopPropagation(); void handleTogglePlay('call-3'); }}
+                    onClick={() => void handleTogglePlay('call-4')}
                     className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs"
                   >
-                    {activeCallId === 'call-3' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
+                    {activeCallId === 'call-4' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
                   </button>
                   <button
-                    onClick={() => setExpandedTranscriptId(expandedTranscriptId === 'call-3' ? null : 'call-3')}
+                    onClick={() => setExpandedTranscriptId(expandedTranscriptId === 'call-4' ? null : 'call-4')}
                     className="text-xs font-sans text-zinc-500 hover:text-black underline cursor-pointer"
                   >
-                    {expandedTranscriptId === 'call-3' ? 'Hide Transcript' : 'Read Transcript'}
+                    {expandedTranscriptId === 'call-4' ? 'Hide Transcript' : 'Read Transcript'}
                   </button>
                 </div>
 
-                {expandedTranscriptId === 'call-3' && (
+                {expandedTranscriptId === 'call-4' && (
                   <div className="p-3 bg-zinc-50 rounded-xl text-xs font-sans max-h-40 overflow-y-auto space-y-1.5 border border-zinc-200">
                     <p><strong>Prospect:</strong> You built a website for me without my permission?!</p>
                     <p><strong>Flynn:</strong> We do this for 100 businesses every day. If you love it, you can keep it. If not, no hard feelings!</p>
@@ -571,39 +537,52 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   </div>
                 )}
               </div>
-
             </div>
 
-            {/* Spotlight 03: Mirroring Psychology (Top Glaze Reminder & CJ Builders) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-              
-              <div className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
-                   onClick={(e) => { e.stopPropagation(); void handleTogglePlay('call-4'); }}>
+            {/* Spotlight 03: CIG Builders (call-3) */}
+            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8 text-left">
+              <div 
+                className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
+                onClick={() => void handleTogglePlay('call-3')}
+              >
                 <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 opacity-90" />
                 <div className="absolute top-3 left-3 text-[11px] font-sans text-white/90 font-semibold flex items-center gap-1.5 z-10">
                   <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  <span>Qualifying a B2B Contractor Through Discovery</span>
+                  <span>CIG Builders · Field Discovery & Appointment Setting</span>
                 </div>
 
                 <div className="relative z-10 w-14 h-14 bg-red-600 group-hover:bg-red-500 rounded-full flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110">
-                  {activeCallId === 'call-4' && isPlaying ? (
+                  {activeCallId === 'call-3' && isPlaying ? (
                     <Pause className="w-6 h-6 fill-current" />
                   ) : (
                     <Play className="w-6 h-6 fill-current ml-1" />
                   )}
                 </div>
 
-                <audio ref={el => { audioRefs.current['call-4'] = el; }} src={audioSources['call-4'] || undefined} preload="none" onPlay={() => { setActiveCallId('call-4'); setIsPlaying(true); }} onPause={() => { if (activeCallId === 'call-4') setIsPlaying(false); }} onEnded={() => { setIsPlaying(false); }} onError={() => setIsPlaying(false)} className="absolute opacity-0 pointer-events-none" /><div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
+                <audio 
+                  ref={(el) => { audioRefs.current['call-3'] = el; }} 
+                  preload="metadata" 
+                  onPlay={() => { setActiveCallId('call-3'); setIsPlaying(true); }} 
+                  onPause={() => { if (activeCallId === 'call-3') setIsPlaying(false); }} 
+                  onEnded={() => { setIsPlaying(false); }} 
+                  className="hidden"
+                >
+                  <source src={audioSources['call-3']} type="audio/ogg; codecs=opus" />
+                  <source src={audioSources['call-3']} type="audio/opus" />
+                  <source src={audioSources['call-3']} />
+                </audio>
+
+                <div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
                   02:39 · Actual Outbound Recording
                 </div>
               </div>
 
-              <div className="w-full md:w-1/2 space-y-3 text-left">
+              <div className="w-full md:w-1/2 space-y-3">
                 <div className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
-                  03 Skill spotlight
+                  03 Skill spotlight · CIG Builders
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
-                  MIRRORING PSYCHOLOGY
+                  COMMERCIAL DISCOVERY
                 </h3>
                 
                 <div className="grid grid-cols-2 gap-4 py-1 text-xs">
@@ -618,25 +597,24 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
 
                 <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Used a low-friction opener with a busy contractor, clarified the service scope, captured the best email, and booked a Monday 4:45 PM consultation.
+                  Engaged a commercial construction contractor on an active site, probed service scope across ground-up builds and rehabs, captured direct email, and booked a Monday 4:45 PM consultation.
                 </p>
 
                 <div className="pt-2 flex items-center gap-3">
                   <button
-                    onClick={(e) => { e.stopPropagation(); void handleTogglePlay('call-4'); }}
+                    onClick={() => void handleTogglePlay('call-3')}
                     className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs"
                   >
-                    {activeCallId === 'call-4' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
+                    {activeCallId === 'call-3' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
                   </button>
                   <button
-                    onClick={() => setExpandedTranscriptId(expandedTranscriptId === 'call-4' ? null : 'call-4')}
+                    onClick={() => setExpandedTranscriptId(expandedTranscriptId === 'call-3' ? null : 'call-3')}
                     className="text-xs font-sans text-zinc-500 hover:text-black underline cursor-pointer"
                   >
-                    {expandedTranscriptId === 'call-4' ? 'Hide Transcript' : 'Read Transcript'}
+                    {expandedTranscriptId === 'call-3' ? 'Hide Transcript' : 'Read Transcript'}
                   </button>
                 </div>
               </div>
-
             </div>
 
           </div>
@@ -645,18 +623,15 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       </section>
 
       {/* =========================================================================
-          PAGE 2 MIDDLE: GET TO KNOW YOUR NEXT SENIOR SDR
+          GET TO KNOW YOUR NEXT SENIOR SDR
          ========================================================================= */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          
           <div className="bg-white border border-[#dededb] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 text-center">
-            
             <h2 className="text-3xl sm:text-4xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
               GET TO KNOW YOUR NEXT SENIOR SDR
             </h2>
 
-            {/* Video Container featuring team-flynn-1.avif */}
             <div className="relative aspect-video max-w-3xl mx-auto rounded-2xl overflow-hidden border border-zinc-200 shadow-xl group">
               <img
                 src={personalInfo.teamImage}
@@ -684,30 +659,23 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
             </div>
 
             <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl mx-auto font-sans leading-relaxed">
-              Flynn combines 11+ years of relentless cold calling stamina with consultative discovery, coaching newer reps on the sales floor, and converting outbound friction into high-intent discovery calls.
+              Flynn combines 11+ years of relentless cold calling stamina with consultative discovery, coaching newer reps on the sales floor, and converting outbound friction into high-intent discovery calls for Account Executives.
             </p>
-
           </div>
-
         </div>
       </section>
 
       {/* =========================================================================
-          PAGE 2 BOTTOM & PAGE 3 TOP: TESTIMONIALS
+          TESTIMONIALS & REFERENCES
          ========================================================================= */}
       <section id="testimonials" className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-12 tracking-tight">
-            TESTIMONIALS
+            TESTIMONIALS & ENDORSEMENTS
           </h2>
 
           <div className="space-y-8">
-            
-            {/* Top Featured Letter: Brendon's Character Reference (Matching PDF Page 3) */}
             <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-10 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-10">
-              
-              {/* Letter preview thumbnail */}
               <div className="w-36 sm:w-44 shrink-0 bg-zinc-50 border border-zinc-200 rounded-lg p-3 shadow-inner text-left font-sans text-[8px] text-zinc-400 select-none">
                 <div className="w-10 h-2 bg-zinc-300 mb-2" />
                 <div className="space-y-1">
@@ -722,14 +690,13 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <div className="text-[7px] text-zinc-400">Official Character Letter</div>
               </div>
 
-              {/* Quote & Info */}
               <div className="space-y-4 text-left">
                 <blockquote className="text-xl sm:text-2xl font-bold font-display text-[#0d0e0c] leading-snug">
-                  “Hi Flynn, I wanted to put this in writing because your work with our outbound team deserves to be recognized. You came into a demanding B2B cold-calling environment, learned the campaign quickly, and built a reputation for being consistent, coachable, and highly disciplined on the phone.”
+                  "Hi Flynn, I wanted to put this in writing because your work with our outbound team deserves to be recognized. You came into a demanding B2B cold-calling environment, learned the campaign quickly, and built a reputation for being consistent, coachable, and highly disciplined on the phone."
                 </blockquote>
 
                 <div className="text-xs font-sans text-zinc-500">
-                  — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
+                  - <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
                 </div>
 
                 <div>
@@ -741,10 +708,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   </button>
                 </div>
               </div>
-
             </div>
 
-            {/* 3 Sales Leader Testimonials */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { name: 'TL Dee', role: 'Sr. Operations Sales Lead', company: 'Regen Digital US', image: 'https://user29984.na.imgto.link/public/20261005/tl-dee.avif', quote: 'Flynn ramped to Level 4 top-tier in under 3 weeks. His cold call discipline, objection handling, and ability to mentor junior SDRs made him an invaluable asset to our sales floor.' },
@@ -761,23 +726,19 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       <div className="text-[10px] font-sans text-zinc-400">{item.role} · {item.company}</div>
                     </div>
                   </div>
-                  <p className="text-xs text-zinc-600 font-sans leading-relaxed italic">“{item.quote}”</p>
+                  <p className="text-xs text-zinc-600 font-sans leading-relaxed italic">"{item.quote}"</p>
                 </div>
               ))}
             </div>
-
           </div>
-
         </div>
       </section>
 
       {/* =========================================================================
-          PAGE 3 BOTTOM & PAGE 4: LOOKING FOR MY NEXT SENIOR SDR ROLE
+          LOOKING FOR MY NEXT SENIOR SDR ROLE
          ========================================================================= */}
       <section id="roles" className="py-14 sm:py-20 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          
-          {/* Green Siren Lamp: Actively Looking */}
           <div className="inline-flex items-center gap-2 mb-3">
             <img src="/assets/green-alarm.svg" alt="Alarm" className="w-7 h-7 object-contain animate-siren" />
             <span className="text-xs font-display text-emerald-700 font-extrabold uppercase tracking-wider">
@@ -789,364 +750,130 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
             LOOKING FOR MY NEXT SENIOR SDR ROLE
           </h2>
           <p className="text-xs sm:text-sm font-sans text-zinc-500 mb-12">
-            Compare two opportunities
+            Available for Part-Time or Full-Time Outbound Sales Opportunities
           </p>
 
-          {/* 2 White Comparison Cards matching PDF Page 3 & 4 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            
-            {/* Card 1: PART-TIME SENIOR SDR */}
+            {/* Part-Time Card */}
             <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
-              
               <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
                   <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
                     PART-TIME SENIOR SDR
                   </h3>
-                  <div className="text-[11px] font-sans text-zinc-500 mt-1">
-                    Guaranteed, non-recoverable base
-                  </div>
-                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">
-                    Above $2,500
-                  </div>
-                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">
-                    Commission paid on top. Never deducted from the base.
-                  </div>
+                  <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable base</div>
+                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">$600-$900/month</div>
+                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Plus performance-based meeting incentives</div>
                   <div className="text-xs font-bold font-display uppercase tracking-wider text-zinc-800 mt-2 bg-zinc-100 py-1 rounded-lg">
-                    10%+ uncapped commission
+                    20-25 Hours / Week
                   </div>
                 </div>
 
-                <div className="space-y-1 text-center">
-                  <div className="text-sm font-bold font-display uppercase text-zinc-800">
-                    5 hours a day
+                <div className="space-y-4 text-xs font-sans text-zinc-600">
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-zinc-900 block font-display uppercase">Dedicated Calling Sprints</strong>
+                      <span>Consistent daily prospecting, qualification, and confirmed calendar booking.</span>
+                    </div>
                   </div>
-                  <div className="text-xs text-zinc-500 font-sans">
-                    Or longer days with significantly fewer meetings booked, leaving time to run outbound campaigns.
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-zinc-900 block font-display uppercase">Warm & Cold Data Execution</strong>
+                      <span>Working from enriched account lists, Apollo sequences, or inbound MQL follow-ups.</span>
+                    </div>
                   </div>
-                </div>
-
-                <div className="pt-2 border-t border-zinc-100">
-                  <div className="text-xs font-display font-extrabold uppercase text-zinc-800 tracking-wider text-center mb-4">
-                    MY NON-NEGOTIABLES
-                  </div>
-
-                  {/* Checklist items matching PDF Page 3 & 4 */}
-                  <div className="space-y-4 text-xs font-sans text-zinc-600">
-                    
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Meaningful earning potential</strong>
-                        <span>$3,000+ average ticket and 10%+ uncapped commission. Realistic $8,000–$12,000+/month OTE within 60 days.</span>
-                      </div>
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-zinc-900 block font-display uppercase">Pristine CRM Hygiene</strong>
+                      <span>Detailed call logs, pain points captured, and clean handoffs to Account Executives.</span>
                     </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Consistent calls, room to grow</strong>
-                        <span>30%+ qualification rate across all discovery calls. 150+ actual dials per working day.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Warm, qualified demand & outbound data</strong>
-                        <span>Warm, high-intent leads or enriched account lists from Apollo/Sales Nav before outreach.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Supported. Pipeline focused.</strong>
-                        <span>Clean CRM workflows, automated sequencing, clear ICP, and proven objection scripts.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Internationally remote</strong>
-                        <span>Remote role with flexible or compatible US/UK daytime working hours.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Proof behind the opportunity</strong>
-                        <span>Transparent funnel with real numbers for connects, booked meetings, and qualified opportunities.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Strong handoffs, strong qualification</strong>
-                        <span>Strong product and fulfilment, genuine client results I can confidently represent.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Prompt, predictable payment</strong>
-                        <span>Paid weekly or biweekly, first-sale commission paid immediately once payment clears.</span>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
               </div>
 
-              {/* Blue Button matching PDF Page 4 */}
-              <div className="pt-4">
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking('Part-Time')}
-                  className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
-                >
-                  Inquire About Part-Time
-                </button>
-              </div>
-
+              <button
+                type="button"
+                onClick={() => onOpenBooking('Part-Time')}
+                className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
+              >
+                Inquire About Part-Time
+              </button>
             </div>
 
-            {/* Card 2: FULL-TIME SENIOR SDR / SPRINT */}
+            {/* Full-Time Card */}
             <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
-              
               <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
                   <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
                     FULL-TIME SENIOR SDR
                   </h3>
-                  <div className="text-[11px] font-sans text-zinc-500 mt-1">
-                    Guaranteed, non-recoverable base
-                  </div>
-                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">
-                    Above $2,500
-                  </div>
-                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">
-                    Commission paid on top. Never deducted from the base.
-                  </div>
+                  <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable base</div>
+                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">Starting at $1,050/month</div>
+                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Plus qualified meeting & pipeline bonuses</div>
                   <div className="text-xs font-bold font-display uppercase tracking-wider text-zinc-800 mt-2 bg-zinc-100 py-1 rounded-lg">
-                    10%+ uncapped commission
+                    40 Hours / Week · Dedicated Outbound Rep
                   </div>
                 </div>
 
-                <div className="space-y-1 text-center">
-                  <div className="text-sm font-bold font-display uppercase text-zinc-800">
-                    8 hours a day · Weekends
+                <div className="space-y-4 text-xs font-sans text-zinc-600">
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-zinc-900 block font-display uppercase">150+ Daily Outbound Dials</strong>
+                      <span>Relentless outbound execution, high connection rates, and active listening.</span>
+                    </div>
                   </div>
-                  <div className="text-xs text-zinc-500 font-sans">
-                    Full-time outbound prospecting or appointment setting with the same guaranteed base and full requirements below.
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-zinc-900 block font-display uppercase">BANT / MEDDIC Qualification</strong>
+                      <span>No low-intent filler meetings. Only verified decision-makers passed to your AEs.</span>
+                    </div>
                   </div>
-                </div>
-
-                <div className="pt-2 border-t border-zinc-100">
-                  <div className="text-xs font-display font-extrabold uppercase text-zinc-800 tracking-wider text-center mb-4">
-                    MY NON-NEGOTIABLES
-                  </div>
-
-                  <div className="space-y-4 text-xs font-sans text-zinc-600">
-                    
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Meaningful earning potential</strong>
-                        <span>$3,000+ average ticket and 10%+ uncapped commission. Realistic $8,000–$12,000+/month OTE.</span>
-                      </div>
+                  <div className="flex items-start gap-2.5">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-zinc-900 block font-display uppercase">Floor Leadership & Mentorship</strong>
+                      <span>Ready to run dial sprints, coach junior reps, and share winning objection handling frameworks.</span>
                     </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Consistent calls, room to grow</strong>
-                        <span>30%+ meeting rate across attended calls. Full pipeline stamina on high-volume days.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Warm, qualified demand</strong>
-                        <span>Warm, high-intent leads from paid ads, content, or outbound account enrichment.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Supported. Prospecting, qualification & booking.</strong>
-                        <span>30+ day guaranteed ramp, structured onboarding, and proven SOPs in CRM.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Internationally remote</strong>
-                        <span>Remote role with flexible or compatible schedule during weekend peaks.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Proof behind the opportunity</strong>
-                        <span>Proven outbound process with verifiable metrics for conversations, meetings, and qualified pipeline.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Strong handoffs, strong qualification</strong>
-                        <span>Strong qualification and clean AE handoffs keep pipeline quality high.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Prompt, predictable payment</strong>
-                        <span>Paid weekly or biweekly with no more than two weeks between payments.</span>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
               </div>
 
-              {/* Blue Button matching PDF Page 4 */}
-              <div className="pt-4">
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking('Full-Time')}
-                  className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
-                >
-                  Inquire About Full-Time
-                </button>
-              </div>
-
+              <button
+                type="button"
+                onClick={() => onOpenBooking('Full-Time')}
+                className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
+              >
+                Inquire About Full-Time
+              </button>
             </div>
-
           </div>
-
         </div>
       </section>
 
       {/* =========================================================================
-          PAGE 4 BOTTOM: HIRE OR INTERVIEW ME (Bottom Banner)
-         ========================================================================= */}
-      <section className="py-12 sm:py-16 bg-[#fafaf8] border-b border-[#dededb]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          
-          <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
-            
-            <div className="text-left space-y-1">
-              <span className="text-[10px] font-display uppercase tracking-widest text-zinc-400 block font-extrabold">HIRE OR</span>
-              <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
-                INTERVIEW ME
-              </h3>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}?text=Hey%20Flynn,%20I'd%20love%20to%20interview%20you.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2.5 bg-white border border-zinc-200 hover:border-emerald-500 rounded-xl flex items-center gap-2 text-xs font-display font-bold uppercase shadow-2xs hover:bg-emerald-50"
-              >
-                <div className="w-5 h-5 rounded bg-[#25d366]/15 flex items-center justify-center text-[#25d366]">
-                  <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                </div>
-                <span>WhatsApp</span>
-              </a>
-
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2.5 bg-white border border-zinc-200 hover:border-indigo-500 rounded-xl flex items-center gap-2 text-xs font-display font-bold uppercase shadow-2xs hover:bg-indigo-50"
-              >
-                <div className="w-5 h-5 rounded bg-[#5865f2]/15 flex items-center justify-center text-[#5865f2]">
-                  <Linkedin className="w-3.5 h-3.5" />
-                </div>
-                <span>LinkedIn</span>
-              </a>
-
-              <a
-                href={`mailto:${personalInfo.email}?subject=Hire%20Flynn%20as%20Senior%20SDR`}
-                className="px-4 py-2.5 bg-white border border-zinc-200 hover:border-[#0077b6] rounded-xl flex items-center gap-2 text-xs font-display font-bold uppercase shadow-2xs hover:bg-sky-50"
-              >
-                <div className="w-5 h-5 rounded bg-[#0077b6]/15 flex items-center justify-center text-[#0077b6]">
-                  <Mail className="w-3.5 h-3.5" />
-                </div>
-                <span>Email</span>
-              </a>
-            </div>
-
-          </div>
-
-          {/* Facebook Inbound Lead Trigger (Preserved user request) */}
-          <div className="mt-4 p-4 bg-blue-50/70 border border-blue-200/80 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#1877f2] flex items-center justify-center text-white shrink-0 shadow-xs">
-                <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </div>
-              <div>
-                <strong className="text-xs font-display font-bold uppercase text-zinc-900 block">
-                  Please Visit & Like Our Facebook Page
-                </strong>
-                <span className="text-[11px] text-zinc-600 font-sans block">
-                  Join our inbound sales community and send an inquiry directly on Messenger.
-                </span>
-              </div>
-            </div>
-
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-[#1877f2] hover:bg-[#166fe5] text-white text-xs font-display font-bold uppercase rounded-lg shadow-xs shrink-0"
-            >
-              Visit Facebook Page →
-            </a>
-          </div>
-
-        </div>
-      </section>
-
-      {/* =========================================================================
-          PAGE 5: FOOTER (Matching PDF Page 5)
+          PAGE 5: FOOTER
          ========================================================================= */}
       <footer className="py-16 bg-[#fafaf8] text-center space-y-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
-          
-          {/* 4 Banknotes centered */}
           <div className="flex justify-center">
             <BanknoteNav onNavigate={onNavigate} size="sm" />
           </div>
 
-          {/* Big Signature "Flynn" in the middle (Matching PDF Page 5) */}
           <div className="pt-2">
             <span className="font-script text-7xl sm:text-8xl md:text-9xl font-bold tracking-tight text-[#0d0e0c] block transform -rotate-3 select-none">
               Flynn
             </span>
           </div>
 
-          {/* Copyright notice matching existing design exactly */}
           <p className="text-[11px] font-sans text-zinc-400 max-w-lg mx-auto">
-            This website does not assert claims. Copyright owned by Flynn. This website does not accept liability of any form
+            This portfolio demonstrates verified outbound sales experience and actual recorded dials. Copyright owned by Flynn.
           </p>
 
-          {/* Contact Coordinates */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-sans text-zinc-600">
             <a href={`mailto:${personalInfo.email}`} className="hover:text-black font-bold">
               {personalInfo.email}
@@ -1156,7 +883,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               {personalInfo.phone}
             </a>
           </div>
-
         </div>
       </footer>
 
