@@ -209,7 +209,7 @@ export const callRecordings: CallRecording[] = [
     skillTag: 'Objections Mastered · Reschedule Recovery',
     dealSize: '$2,400 Website Package',
     challenge: 'Prospect stated he was busy for the rest of the week.',
-    tacticalWin: 'Flynn did not force the current week; gracefully pivoted to early next week and closed Monday 9:30 AM.',
+    tacticalWin: 'Flynn did not force the current week; gracefully pivoted to early next week and booked Monday 9:30 AM.',
     keyMetric: 'Under 80 Seconds: Cold to Booked Meeting',
     transcript: [
       { time: '00:03', speaker: 'Flynn', text: 'Hey Andy, can you hear me now?' },

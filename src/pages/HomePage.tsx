@@ -326,13 +326,13 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       </section>
 
       {/* =========================================================================
-          PAGE 1 BOTTOM: A TRACK RECORD THAT CLOSES. (Matching PDF Page 1)
+          PAGE 1 BOTTOM: A TRACK RECORD THAT DELIVERS. (Matching PDF Page 1)
          ========================================================================= */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-10 tracking-tight">
-            A TRACK RECORD THAT CLOSES.
+            A TRACK RECORD THAT DELIVERS.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -388,7 +388,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Card 3: Averps / Found Inc */}
+            {/* Card 3: Averps */}
             <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200">
                 <div className="w-full h-full bg-blue-900 flex items-center justify-center text-[10px] font-bold text-white shadow-inner">
@@ -398,7 +398,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
               <div className="space-y-1 text-left">
                 <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
-                  AVERPS / FOUND INC.
+                  AVERPS
                 </div>
                 <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">UK / SINGAPORE</div>
                 <div className="text-base font-black font-display text-[#0077b6]">
@@ -702,113 +702,114 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       {/* =========================================================================
           PAGE 2 BOTTOM & PAGE 3 TOP: TESTIMONIALS
          ========================================================================= */}
-      <section id="testimonials" className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          
+      <section id="testimonials" className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb] relative overflow-hidden">
+        {/* Subtle cloudy-sky atmosphere — intentionally decorative and lightweight. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-70">
+          <div className="absolute -top-28 left-[-8%] h-72 w-72 rounded-full bg-sky-100/70 blur-3xl" />
+          <div className="absolute top-8 right-[-6%] h-80 w-80 rounded-full bg-white/90 blur-3xl" />
+          <div className="absolute bottom-[-10%] left-[30%] h-64 w-96 rounded-full bg-sky-50/80 blur-3xl" />
+        </div>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-12 tracking-tight">
             TESTIMONIALS
           </h2>
 
-          <div className="space-y-8">
-            
-            {/* Top Featured Letter: Brendon's Character Reference (Matching PDF Page 3) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-10 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-10">
-              
-              {/* Letter preview thumbnail */}
-              <div className="w-36 sm:w-44 shrink-0 bg-zinc-50 border border-zinc-200 rounded-lg p-3 shadow-inner text-left font-sans text-[8px] text-zinc-400 select-none">
-                <div className="w-10 h-2 bg-zinc-300 mb-2" />
-                <div className="space-y-1">
-                  <div className="h-1 bg-zinc-200 w-full" />
-                  <div className="h-1 bg-zinc-200 w-4/5" />
-                  <div className="h-1 bg-zinc-200 w-full" />
-                  <div className="h-1 bg-zinc-200 w-3/4" />
+          {/* Featured professional recommendation — styled as a realistic email letter. */}
+          <div className="bg-white/95 backdrop-blur-sm border border-[#dededb] rounded-2xl p-5 sm:p-8 shadow-sm overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_230px] gap-7 lg:gap-10 items-center">
+              <article className="rounded-xl border border-zinc-200 bg-[#fffefb] shadow-inner overflow-hidden text-left">
+                <div className="px-5 sm:px-7 py-4 border-b border-zinc-200 bg-zinc-50/80 flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">Professional Recommendation</div>
+                    <div className="text-xs text-zinc-500 font-sans mt-1">Regen Digital · Leadership Reference</div>
+                  </div>
+                  <div className="text-[10px] text-zinc-400 font-sans whitespace-nowrap">Character Reference</div>
                 </div>
-                <div className="mt-4 pt-2 border-t border-zinc-200 text-zinc-600 font-bold text-[9px] font-display uppercase">
-                  REGEN DIGITAL
+
+                <div className="px-5 sm:px-7 py-6 sm:py-8 space-y-5 font-sans text-sm sm:text-[15px] leading-relaxed text-zinc-700">
+                  <p>Hi Flynn,</p>
+                  <p>
+                    I’m happy to recommend Flynn based on the work I saw firsthand at Regen Digital. He quickly established himself as a dependable Senior SDR who could handle high-volume outbound prospecting, qualify opportunities with discipline, and stay composed through difficult objections.
+                  </p>
+                  <p>
+                    Flynn reached our Level 4 tier in under three weeks and consistently brought a strong work ethic to every dial sprint. He was also willing to mentor newer SDRs, share practical objection-handling techniques, and help raise the standard across the sales floor.
+                  </p>
+                  <p>
+                    What stood out most was his consistency. Flynn understood that good outbound sales is about creating qualified conversations, not simply chasing activity numbers. He brought that mindset to his calls, qualification, appointment setting, and day-to-day follow-through.
+                  </p>
+                  <p>
+                    I would recommend hiring Flynn without hesitation. Any team looking for a reliable Senior SDR who can prospect, qualify, handle objections, and consistently create quality sales opportunities would benefit from having him on the team.
+                  </p>
+                  <div className="pt-4 border-t border-zinc-200">
+                    <div className="font-display font-black uppercase tracking-tight text-[#0d0e0c]">Brendon Gocaj</div>
+                    <div className="text-xs text-[#0077b6] font-bold mt-0.5">Owner & Director · Regen Digital</div>
+                  </div>
                 </div>
-                <div className="text-[7px] text-zinc-400">Official Character Letter</div>
+              </article>
+
+              {/* Flynn office avatar positioned beside the interview/hiring context. */}
+              <div className="relative flex justify-center lg:justify-end min-h-[190px] sm:min-h-[230px] items-end">
+                <div className="absolute right-4 sm:right-8 bottom-5 w-[170px] sm:w-[205px] h-[150px] sm:h-[185px] rounded-2xl border border-sky-100 bg-sky-50/60 shadow-sm" />
+                <img
+                  src="https://user29984.na.imgto.link/public/20261005/flynn-office.avif"
+                  alt="Flynn in his office"
+                  loading="lazy"
+                  className="relative z-10 w-[190px] sm:w-[225px] max-h-[260px] object-contain object-bottom drop-shadow-xl"
+                />
+                <div className="absolute z-20 bottom-2 left-1/2 lg:left-auto lg:right-0 -translate-x-1/2 lg:translate-x-0 px-3 py-2 rounded-xl bg-white/95 border border-zinc-200 shadow-md text-left whitespace-nowrap">
+                  <div className="text-[9px] font-display uppercase tracking-widest text-zinc-400 font-extrabold">Available for</div>
+                  <div className="text-xs font-display font-black uppercase text-[#0077b6]">Hire / Interview</div>
+                </div>
               </div>
-
-              {/* Quote & Info */}
-              <div className="space-y-4 text-left">
-                <blockquote className="text-xl sm:text-2xl font-bold font-display text-[#0d0e0c] leading-snug">
-                  “Flynn consistently closed 30–40% of qualified opportunities from cold outbound prospects, often within a single 30–60 minute call.”
-                </blockquote>
-
-                <div className="text-xs font-sans text-zinc-500">
-                  — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner, Regen Digital
-                </div>
-
-                <div>
-                  <button
-                    onClick={() => onNavigate('references')}
-                    className="px-4 py-2 bg-[#fafaf8] hover:bg-zinc-100 border border-zinc-300 text-xs font-display font-extrabold uppercase tracking-wider text-zinc-800 rounded-xl cursor-pointer transition-colors shadow-2xs"
-                  >
-                    Read full letter
-                  </button>
-                </div>
-              </div>
-
             </div>
-
-            {/* 3 Testimonials Below (Matching PDF Page 3) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              {/* Testimonial 1: IHTE / Akash */}
-              <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs space-y-3 text-left">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center font-bold text-xs text-blue-800 font-display">
-                    A
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold font-display uppercase text-zinc-900">IHTE</div>
-                    <div className="text-[10px] font-sans text-zinc-400">Akash</div>
-                  </div>
-                  <span className="ml-auto text-sm">🇺🇸</span>
-                </div>
-                <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  “We saw greatness from Flynn the second he started, his first shift he booked qualified discovery calls right away, so it was surprising because we usually don’t see things move that fast.”
-                </p>
-              </div>
-
-              {/* Testimonial 2: FOUND INC. / Joe */}
-              <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs space-y-3 text-left">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-xs text-emerald-800 font-display">
-                    J
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold font-display uppercase text-zinc-900">FOUND INC.</div>
-                    <div className="text-[10px] font-sans text-zinc-400">Joe</div>
-                  </div>
-                  <span className="ml-auto text-sm">🇬🇧</span>
-                </div>
-                <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  “I brought him on for an outbound campaign, and he worked with relentless stamina—150+ calls a day. He executed flawlessly and I can't fault Flynn's work.”
-                </p>
-              </div>
-
-              {/* Testimonial 3: RISEN FOUNDRY / Ethan */}
-              <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs space-y-3 text-left">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center font-bold text-xs text-purple-800 font-display">
-                    E
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold font-display uppercase text-zinc-900">RISEN FOUNDRY</div>
-                    <div className="text-[10px] font-sans text-zinc-400">Ethan</div>
-                  </div>
-                  <span className="ml-auto text-sm">🇺🇸</span>
-                </div>
-                <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  “I had Flynn as my right hand SDR on our B2B accounts. Flynn did everything imaginable: raising KPIs, managing data in CRM, mentoring newer reps, etc.”
-                </p>
-              </div>
-
-            </div>
-
           </div>
 
+          {/* Reference / performance section — same visual language as the existing reference cards. */}
+          <div className="mt-8">
+            <div className="text-center mb-6">
+              <h3 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">Reference / Performance Data</h3>
+              <p className="text-xs text-zinc-500 font-sans mt-1">Selected company references and measurable outbound performance.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+                <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-zinc-200 bg-zinc-50">
+                  <img src="https://user29984.na.imgto.link/public/20261005/regen-digital.avif" alt="Regen Digital" loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <div className="space-y-1">
+                  <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">REGEN DIGITAL</div>
+                  <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / NORWEGIAN</div>
+                  <div className="text-base font-black font-display text-[#0077b6]">$200,000+</div>
+                  <div className="text-[11px] font-sans text-zinc-600 leading-tight">85% Qualified<br/>120–150% Quota Attainment<br/>Level 4 Tier in 3 Weeks<br/><strong className="text-zinc-900">$960 Incentives</strong></div>
+                </div>
+              </div>
+
+              <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+                <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-zinc-200 bg-zinc-50">
+                  <img src="https://user29984.na.imgto.link/public/20261005/seek-marketing.avif" alt="Seek Marketing" loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <div className="space-y-1">
+                  <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">SEEK MARKETING</div>
+                  <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">UK</div>
+                  <div className="text-base font-black font-display text-[#0077b6]">$1.8M+</div>
+                  <div className="text-[11px] font-sans text-zinc-600 leading-tight">120% Quota Attainment<br/>150+ Daily Outbound Dials<br/>+18% Response Rate<br/><strong className="text-zinc-900">Qualified Pipeline</strong></div>
+                </div>
+              </div>
+
+              <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+                <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-zinc-200 bg-zinc-50">
+                  <img src="https://user29984.na.imgto.link/public/20261005/averps-pte-ltd.avif" alt="Averps Pte Ltd" loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <div className="space-y-1">
+                  <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">AVERPS PTE LTD</div>
+                  <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">SINGAPORE</div>
+                  <div className="text-base font-black font-display text-[#0077b6]">$1.2M+</div>
+                  <div className="text-[11px] font-sans text-zinc-600 leading-tight">100% SQL Target<br/>22% Demo Conversion<br/>BANT Qualification<br/><strong className="text-zinc-900">Qualified Pipeline</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

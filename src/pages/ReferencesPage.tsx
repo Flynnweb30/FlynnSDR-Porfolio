@@ -85,57 +85,58 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
       </section>
 
       {/* Featured Primary Character Reference (Brendon Gocaj - Regen Digital) */}
-      <section className="py-14 sm:py-16 bg-[#fafaf8]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="bg-white border-2 border-[#dededb] hover:border-[#0077b6]/60 rounded-2xl p-8 sm:p-12 relative overflow-hidden shadow-xs text-left">
-            
-            <div className="relative z-10 space-y-6">
-              
-              {/* Badge */}
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-50 border border-[#0077b6]/30 rounded-full text-xs font-display text-[#0077b6] font-extrabold uppercase tracking-wider">
-                  <Award className="w-4 h-4" />
-                  <span>Featured Leadership Character Reference</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs font-sans text-emerald-600 font-bold">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Verified Employment & Track Record</span>
-                </div>
-              </div>
-
-              {/* Letter Quote */}
-              <div className="space-y-4">
-                <Quote className="w-12 h-12 text-[#0077b6]/20 -mb-2" />
-                <p className="text-xl sm:text-2xl font-display font-medium text-[#0d0e0c] leading-relaxed italic">
-                  “Flynn consistently exceeded quota, reaching our highest Level 4 tier in just 3 weeks and coaching 20+ SDRs across daily dial sprints and live call shadowing. His phone presence, work ethic, and ability to generate high-intent discovery calls are in the top 5% of all reps I have managed.”
-                </p>
-                
-                <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans">
-                  During his tenure at Regen Digital as Senior SDR and Junior Sales Team Lead, Flynn demonstrated complete ownership over the outbound pipeline. He never made excuses about lead lists or market conditions—he optimized objection handling on the fly, maintained 100% CRM accuracy in HubSpot, and inspired newer reps to embrace phone stamina. Any company seeking a proven outbound pipeline generator should interview Flynn without hesitation.
-                </p>
-              </div>
-
-              {/* Author Sign-off */}
-              <div className="pt-6 border-t border-zinc-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <div className="text-lg font-black text-[#0d0e0c] uppercase font-display tracking-tight">
-                    Brendon Gocaj
+      <section className="py-14 sm:py-16 bg-[#fafaf8] relative overflow-hidden">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-60">
+          <div className="absolute -top-24 right-[-5%] h-72 w-72 rounded-full bg-sky-100/70 blur-3xl" />
+          <div className="absolute bottom-[-12%] left-[8%] h-64 w-80 rounded-full bg-white blur-3xl" />
+        </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="bg-white/95 backdrop-blur-sm border-2 border-[#dededb] hover:border-[#0077b6]/60 rounded-2xl p-5 sm:p-8 shadow-xs overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-8 items-center">
+              <article className="rounded-xl border border-zinc-200 bg-[#fffefb] shadow-inner overflow-hidden text-left">
+                <div className="px-5 sm:px-7 py-4 border-b border-zinc-200 bg-zinc-50/80 flex items-center justify-between gap-4">
+                  <div>
+                    <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">Professional Recommendation</div>
+                    <div className="text-xs text-zinc-500 font-sans mt-1">Regen Digital · Leadership Reference</div>
                   </div>
-                  <div className="text-xs font-sans text-[#0077b6] font-bold">
-                    Owner & Director · Regen Digital (USA / DE)
-                  </div>
-                  <div className="text-[11px] font-sans text-zinc-400">
-                    Direct Manager & Sales Floor Executive
+                  <div className="text-[10px] text-zinc-400 font-sans whitespace-nowrap">Character Reference</div>
+                </div>
+                <div className="px-5 sm:px-7 py-6 sm:py-8 space-y-5 font-sans text-sm sm:text-[15px] leading-relaxed text-zinc-700">
+                  <p>Hi Flynn,</p>
+                  <p>I’m happy to recommend Flynn based on the work I saw firsthand at Regen Digital. He quickly established himself as a dependable Senior SDR who could handle high-volume outbound prospecting, qualify opportunities with discipline, and stay composed through difficult objections.</p>
+                  <p>Flynn reached our Level 4 tier in under three weeks and consistently brought a strong work ethic to every dial sprint. He was also willing to mentor newer SDRs, share practical objection-handling techniques, and help raise the standard across the sales floor.</p>
+                  <p>What stood out most was his consistency. Flynn understood that good outbound sales is about creating qualified conversations, not simply chasing activity numbers. He brought that mindset to his calls, qualification, appointment setting, and day-to-day follow-through.</p>
+                  <p>I would recommend hiring Flynn without hesitation. Any team looking for a reliable Senior SDR who can prospect, qualify, handle objections, and consistently create quality sales opportunities would benefit from having him on the team.</p>
+                  <div className="pt-4 border-t border-zinc-200">
+                    <div className="font-display font-black uppercase tracking-tight text-[#0d0e0c]">Brendon Gocaj</div>
+                    <div className="text-xs text-[#0077b6] font-bold mt-0.5">Owner & Director · Regen Digital</div>
                   </div>
                 </div>
+              </article>
 
-                <div className="flex items-center gap-3">
-                  <div className="px-3.5 py-1.5 rounded-lg bg-[#f7f7f6] border border-[#dededb] text-xs font-sans text-zinc-600">
-                    Ref Code: <span className="text-[#0d0e0c] font-bold font-display uppercase tracking-wider">RD-FP-2026</span>
-                  </div>
+              <div className="relative flex justify-center lg:justify-end min-h-[190px] items-end">
+                <div className="absolute right-3 bottom-5 w-[165px] h-[145px] rounded-2xl border border-sky-100 bg-sky-50/60 shadow-sm" />
+                <img src="https://user29984.na.imgto.link/public/20261005/flynn-office.avif" alt="Flynn in his office" loading="lazy" className="relative z-10 w-[185px] sm:w-[215px] max-h-[245px] object-contain object-bottom drop-shadow-xl" />
+                <div className="absolute z-20 bottom-2 right-0 px-3 py-2 rounded-xl bg-white/95 border border-zinc-200 shadow-md text-left">
+                  <div className="text-[9px] font-display uppercase tracking-widest text-zinc-400 font-extrabold">Available for</div>
+                  <div className="text-xs font-display font-black uppercase text-[#0077b6]">Hire / Interview</div>
                 </div>
               </div>
+            </div>
+          </div>
 
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+              <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-zinc-200 bg-zinc-50"><img src="https://user29984.na.imgto.link/public/20261005/regen-digital.avif" alt="Regen Digital" loading="lazy" className="w-full h-full object-cover" /></div>
+              <div className="space-y-1"><div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">REGEN DIGITAL</div><div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / NORWEGIAN</div><div className="text-base font-black font-display text-[#0077b6]">$200,000+</div><div className="text-[11px] font-sans text-zinc-600 leading-tight">85% Qualified<br/>120–150% Quota Attainment<br/>Level 4 Tier in 3 Weeks<br/><strong className="text-zinc-900">$960 Incentives</strong></div></div>
+            </div>
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+              <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-zinc-200 bg-zinc-50"><img src="https://user29984.na.imgto.link/public/20261005/seek-marketing.avif" alt="Seek Marketing" loading="lazy" className="w-full h-full object-cover" /></div>
+              <div className="space-y-1"><div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">SEEK MARKETING</div><div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">UK</div><div className="text-base font-black font-display text-[#0077b6]">$1.8M+</div><div className="text-[11px] font-sans text-zinc-600 leading-tight">120% Quota Attainment<br/>150+ Daily Outbound Dials<br/>+18% Response Rate<br/><strong className="text-zinc-900">Qualified Pipeline</strong></div></div>
+            </div>
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+              <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-zinc-200 bg-zinc-50"><img src="https://user29984.na.imgto.link/public/20261005/averps-pte-ltd.avif" alt="Averps Pte Ltd" loading="lazy" className="w-full h-full object-cover" /></div>
+              <div className="space-y-1"><div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">AVERPS PTE LTD</div><div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">SINGAPORE</div><div className="text-base font-black font-display text-[#0077b6]">$1.2M+</div><div className="text-[11px] font-sans text-zinc-600 leading-tight">100% SQL Target<br/>22% Demo Conversion<br/>BANT Qualification<br/><strong className="text-zinc-900">Qualified Pipeline</strong></div></div>
             </div>
           </div>
         </div>
