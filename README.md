@@ -1,4 +1,4 @@
-# Flynn James Q. Pontino — Senior SDR Portfolio
+﻿# Flynn James Q. Pontino — Senior SDR Portfolio
 
 Production-ready Vite/React static portfolio for GitHub + Render. The existing visual system is preserved; content and functionality are focused on Senior SDR, B2B cold calling, appointment setting, lead generation, prospect qualification, objection handling, and SDR mentoring.
 
@@ -70,3 +70,4 @@ Body:
 `Hi {{fullName}},\n\nThanks for reaching out to Flynn. Your inquiry has been received.\n\nSelected date: {{selectedDate}}\nSelected time: {{selectedTime}}\nInquiry type: {{inquiryType}}\nPreference: {{employmentPreference}}\nCompany: {{company}}\nRole: {{role}}\n\nFlynn will review your request and follow up with the next steps.\n\nYou consented to receive email about this inquiry: {{consent}}.`
 
 For Template B, set the EmailJS recipient/to-email field to `{{email}}`.
+

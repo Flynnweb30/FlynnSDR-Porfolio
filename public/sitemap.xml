@@ -1,38 +1,43 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://flynn-james-sdr-portfolio.onrender.com/</loc>
+    <loc>https://flynnjames.onrender.com/</loc>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://flynn-james-sdr-portfolio.onrender.com/calls</loc>
+    <loc>https://flynnjames.onrender.com/calls</loc>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://flynn-james-sdr-portfolio.onrender.com/hire-me</loc>
+    <loc>https://flynnjames.onrender.com/hire-me</loc>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://flynn-james-sdr-portfolio.onrender.com/references</loc>
+    <loc>https://flynnjames.onrender.com/references</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://flynn-james-sdr-portfolio.onrender.com/experience</loc>
+    <loc>https://flynnjames.onrender.com/experience</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://flynn-james-sdr-portfolio.onrender.com/academy</loc>
+    <loc>https://flynnjames.onrender.com/academy</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://flynn-james-sdr-portfolio.onrender.com/leadership</loc>
+    <loc>https://flynnjames.onrender.com/leadership</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://flynnjames.onrender.com/contact</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
   </url>
 </urlset>

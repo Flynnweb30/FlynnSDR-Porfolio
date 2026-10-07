@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -50,15 +50,15 @@ export default function App() {
     setCurrentPage(initialRoute);
 
     const seo: Record<string, { title: string; description: string }> = {
-      home: { title: 'Senior SDR | B2B Cold Caller & Lead Generation', description: 'Senior SDR portfolio for Flynn James Q. Pontino — 11+ years in B2B cold calling, prospecting, qualification, appointment setting, and outbound sales.' },
-      calls: { title: 'B2B Cold Calling Examples | Flynn James Q. Pontino', description: 'Hear real outbound call examples demonstrating prospecting, objection handling, qualification, rescheduling, and appointment setting.' },
-      experience: { title: 'Senior SDR Experience | Flynn James Q. Pontino', description: '11+ years of B2B outbound sales, cold calling, lead generation, qualification, appointment setting, and CRM-driven prospecting.' },
-      references: { title: 'Senior SDR References & Results | Flynn James Q. Pontino', description: 'Professional references and documented SDR performance across digital marketing, SaaS, B2B events, and outbound sales.' },
-      leadership: { title: 'SDR Leadership & Mentoring | Flynn James Q. Pontino', description: 'Senior SDR leadership experience including coaching, onboarding, KPI tracking, call feedback, and mentoring junior SDRs.' },
-      'hire-me': { title: 'Hire a Senior SDR | Flynn James Q. Pontino', description: 'Hire Flynn for senior SDR, B2B cold calling, lead qualification, appointment setting, and outbound pipeline generation.' },
-      contact: { title: 'Contact Flynn | Senior SDR & B2B Cold Caller', description: 'Contact Flynn James Q. Pontino or schedule a 15-minute introduction for Senior SDR and B2B outbound opportunities.' },
-      academy: { title: 'B2B SDR Playbook | Flynn James Q. Pontino', description: 'Practical B2B prospecting, qualification, objection handling, appointment setting, and outbound sales frameworks.' },
-      playbook: { title: 'B2B SDR Playbook | Flynn James Q. Pontino', description: 'Practical B2B prospecting, qualification, objection handling, appointment setting, and outbound sales frameworks.' },
+      home: { title: 'Flynn James | Senior SDR & B2B Outbound Pipeline Specialist', description: 'Official Senior SDR portfolio for Flynn James Q. Pontino — 11+ years in B2B cold calling, high-volume prospecting, BANT qualification, appointment setting, and $1.8M+ pipeline generation.' },
+      calls: { title: 'Hear My Opener: Real Cold Calling & Discovery Recordings | Flynn James', description: 'Listen to 4 unedited outbound call recordings of Flynn handling timing objections, recovering lost pipeline, and locking in confirmed B2B discovery meetings.' },
+      experience: { title: '11+ Years B2B Outbound Sales Track Record | Flynn James Senior SDR', description: '11+ years of verified outbound sales results across US, UK, Australia, and Singapore. 120–150% quota attainment and over $1.8M in sourced pipeline.' },
+      references: { title: 'Client References & Executive Endorsements | Flynn James Senior SDR', description: 'Verified leadership references and documented SDR metrics from founders, sales directors, and account executives.' },
+      leadership: { title: 'SDR Sales Floor Leadership & Mentoring Sprints | Flynn James', description: 'Hands-on outbound SDR leadership: running daily dial sprints, coaching junior reps through live call reviews, and shortening new hire ramp time.' },
+      'hire-me': { title: 'Hire Flynn James | Senior SDR & Outbound Appointment Setter', description: 'Hire Flynn James for full-time or part-time Senior SDR execution. 150+ dials/day, rigorous BANT qualification, and 30+ qualified discovery meetings per month.' },
+      contact: { title: 'Direct Contact & 15-Min Intro Scheduling | Flynn James Senior SDR', description: 'Schedule a 15-minute introductory sync with Flynn James to discuss Senior SDR opportunities, pipeline targets, and market coverage.' },
+      academy: { title: 'The 150 Dials/Day Cadence & Qualification Playbook | Flynn James', description: 'Proven 4-stage outbound prospecting playbook: ICP targeting, 14-day multi-channel cadence, real-time objection reversal, and AE handoff protocol.' },
+      playbook: { title: 'The 150 Dials/Day Cadence & Qualification Playbook | Flynn James', description: 'Proven 4-stage outbound prospecting playbook: ICP targeting, 14-day multi-channel cadence, real-time objection reversal, and AE handoff protocol.' },
     };
     const meta = seo[initialRoute] || seo.home;
     document.title = meta.title;
@@ -77,7 +77,7 @@ export default function App() {
 
   const handleNavigate = (page: PageRoute) => {
     setCurrentPage(page);
-    const titleMap: Record<string, string> = { home: 'Senior SDR | B2B Cold Caller & Lead Generation', calls: 'B2B Cold Calling Examples | Flynn James Q. Pontino', experience: 'Senior SDR Experience | Flynn James Q. Pontino', references: 'Senior SDR References & Results | Flynn James Q. Pontino', leadership: 'SDR Leadership & Mentoring | Flynn James Q. Pontino', 'hire-me': 'Hire a Senior SDR | Flynn James Q. Pontino', contact: 'Contact Flynn | Senior SDR & B2B Cold Caller', academy: 'B2B SDR Playbook | Flynn James Q. Pontino', playbook: 'B2B SDR Playbook | Flynn James Q. Pontino' };
+    const titleMap: Record<string, string> = { home: 'Flynn James | Senior SDR & B2B Outbound Pipeline Specialist', calls: 'Hear My Opener: Real Cold Calling & Discovery Recordings | Flynn James', experience: '11+ Years B2B Outbound Sales Track Record | Flynn James Senior SDR', references: 'Client References & Executive Endorsements | Flynn James Senior SDR', leadership: 'SDR Sales Floor Leadership & Mentoring Sprints | Flynn James', 'hire-me': 'Hire Flynn James | Senior SDR & Outbound Appointment Setter', contact: 'Direct Contact & 15-Min Intro Scheduling | Flynn James Senior SDR', academy: 'The 150 Dials/Day Cadence & Qualification Playbook | Flynn James', playbook: 'The 150 Dials/Day Cadence & Qualification Playbook | Flynn James' };
     document.title = titleMap[page] || titleMap.home;
     const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     canonical?.setAttribute('href', `${personalInfo.portfolioUrl}${page === 'home' ? '/' : `/${page}`}`);
@@ -183,3 +183,4 @@ export default function App() {
     </div>
   );
 }
+

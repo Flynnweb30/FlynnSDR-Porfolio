@@ -12,7 +12,7 @@ export const personalInfo = {
   location: 'Toledo, Cebu, Philippines (Remote: US, UK, AU, SG, CA)',
   linkedin: 'https://linkedin.com/in/fjpontino',
   linkedinHandle: 'linkedin.com/in/fjpontino',
-  portfolioUrl: 'https://flynn-james-sdr-portfolio.onrender.com',
+  portfolioUrl: 'https://flynnjames.onrender.com',
   availability: 'Available — Remote Outbound Roles · Immediate Start',
   yearsExperience: '11+ years',
   pipelineSourced: '$1.8M+',
@@ -319,4 +319,5 @@ export const callRecordings: CallRecording[] = [
     ],
   },
 ];
+
 

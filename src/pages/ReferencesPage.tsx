@@ -108,7 +108,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_190px] gap-8 lg:gap-10 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_220px] gap-8 lg:gap-10 items-center">
                 <article className="relative bg-white/95 border border-zinc-200 rounded-xl p-6 sm:p-8 shadow-sm text-left">
                   <div className="flex items-start justify-between gap-4 border-b border-zinc-100 pb-5 mb-6">
                     <div>
@@ -144,8 +144,8 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                     </p>
                   </div>
 
-                  {/* Authentic Handwritten Signature & Leadership Credentials */}
-                  <div className="mt-4 pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  {/* Naturally Enhanced Brendon Signature & Leadership Credentials */}
+                  <div className="mt-5 pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
                       <div className="text-sm font-black text-[#0d0e0c] font-display uppercase tracking-tight">Brendon Gocaj</div>
                       <div className="text-xs text-[#0077b6] font-bold">Owner & Director · Regen Digital</div>
@@ -154,25 +154,30 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
 
                     <div className="relative pt-1 sm:pt-0">
                       <img
-                        src="/assets/brendon-signature.png"
+                        src="https://audiolink-oskn.onrender.com/media/brendon_signature_media_1791396879400_5pk4r.png"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/assets/brendon-signature.svg';
+                          (e.target as HTMLImageElement).src = '/assets/brendon-signature.png';
                         }}
                         alt="Brendon Gocaj Handwritten Signature"
-                        className="h-14 sm:h-16 w-auto max-w-[200px] object-contain object-left mix-blend-multiply select-none"
+                        loading="lazy"
+                        className="h-12 sm:h-14 w-auto max-w-[210px] object-contain object-left mix-blend-multiply filter contrast-125 select-none"
                         draggable={false}
                       />
                     </div>
                   </div>
                 </article>
 
+                {/* Flynn in Office Media */}
                 <div className="relative flex justify-center lg:self-end lg:-mb-5">
-                  <div className="absolute bottom-0 w-36 h-8 rounded-full bg-sky-900/10 blur-md" />
+                  <div className="absolute bottom-0 w-40 h-8 rounded-full bg-sky-900/10 blur-md" />
                   <img
-                    src="https://user29984.na.imgto.link/public/20261005/flynn-office.avif"
-                    alt="Flynn in his office"
+                    src="https://audiolink-oskn.onrender.com/media/flynn_in_office__1__media_1791399641280_i2l2j.png"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://user29984.na.imgto.link/public/20261005/flynn-office.avif';
+                    }}
+                    alt="Flynn in the sales office"
                     loading="lazy"
-                    className="relative w-40 sm:w-48 lg:w-52 max-h-72 object-contain object-bottom drop-shadow-[0_16px_24px_rgba(0,0,0,0.16)]"
+                    className="relative w-44 sm:w-52 lg:w-56 max-h-80 object-contain object-bottom drop-shadow-[0_16px_24px_rgba(0,0,0,0.16)]"
                   />
                 </div>
               </div>

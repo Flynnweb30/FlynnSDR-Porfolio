@@ -686,7 +686,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
                   </div>
                   <img
-                    src="/assets/brendon-signature.png"
+                    src="https://audiolink-oskn.onrender.com/media/brendon_signature_media_1791396879400_5pk4r.png"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = '/assets/brendon-signature.svg';
                     }}
@@ -909,5 +909,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     </div>
   );
 }
+
 
 
