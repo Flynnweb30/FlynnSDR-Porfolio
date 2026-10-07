@@ -43,7 +43,7 @@ export const coreSkills = [
   'Objection De-Escalation',
   'Consultative Discovery',
   'Multi-Touch Outbound Cadences',
-  'Gatekeeper Navigation',
+  'Gatekeeper & AI Screener Navigation',
   'CRM Pipeline Hygiene',
   'AE Warm Handoff Protocols',
   'Junior SDR Coaching & Shadowing',
@@ -195,38 +195,47 @@ export const whyInterviewFlynn = [
   },
 ];
 
-// Exact 4-call lineup matching user requirements:
-// 1. Objections Mastered · Reschedule Recovery (Top Glaze Roofing · Roofing & Exterior Remodeling · 01:17)
-// 2. Show-Up Rate Safeguard · Frictionless Pivot (Region Digital · Digital Growth Agency · 00:56)
-// 3. Commercial Contractor Discovery & Appointment Setting (CIG Builders · General Construction & Remodeling · 02:39)
-// 4. Handling a Skeptical Objection & Booking a Zoom Demo (Aldis Clean · Commercial Cleaning Services · 06:54)
+// Production Call Lineup:
+// 1. AI Screener Disarmed · Jeep Customization Discovery (Jeeps Only Shop · Mark P. · 03:20)
+// 2. Reschedule Recovery in 56 Seconds (Region Digital · Andy · 00:56)
+// 3. Commercial Contractor Discovery & Appointment Setting (CIG Builders · Moises · 02:39)
+// 4. Handling a Skeptical Objection & Booking a Zoom Demo (Aldis Clean · Hussein · 06:54)
 export const callRecordings: CallRecording[] = [
   {
     id: 'call-1',
-    title: 'Objections Mastered · Reschedule Recovery',
-    prospect: 'Andy',
-    company: 'Top Glaze Roofing',
-    industry: 'Roofing & Exterior Remodeling',
-    duration: '01:17',
-    durationSeconds: 77,
-    outcome: 'Monday 9:30 AM Discovery Session Confirmed',
+    title: 'AI Screener Disarmed · Jeep Customization Discovery',
+    prospect: 'Mark (Mark P.)',
+    company: 'Jeeps Only Shop',
+    industry: 'Automotive / Specialized Jeep Services',
+    duration: '03:20',
+    durationSeconds: 200,
+    outcome: 'Monday 12:00 PM Discovery Session Confirmed',
     date: 'Actual Outbound Dial',
-    skillTag: 'Objections Mastered · Reschedule Recovery',
-    dealSize: 'Commercial / Residential Roofing Scope',
-    challenge: 'Prospect stated he was completely swamped and unavailable for the rest of the week.',
-    tacticalWin: 'Flynn did not force the current week; he smoothly pivoted to early next week, respected prospect time, and locked down a confirmed Monday 9:30 AM appointment in 77 seconds.',
-    keyMetric: '77 Seconds: Cold Objection to Booked Meeting',
+    skillTag: 'AI Screener Disarmed · Value-First Hook',
+    dealSize: 'Custom Web Architecture & SEO Scope',
+    challenge: 'Automated call assistant screened incoming dial; prospect admitted: "Normally I would say no, but you got me interested, so good job."',
+    tacticalWin: 'Flynn cleared the automated AI call screener calmly, delivered a value-first custom preview hook, converted initial skepticism into engagement, uncovered SEO priorities, captured the decision-maker email, and locked in Monday 12:00 PM.',
+    keyMetric: 'AI Screener Cleared & Meeting Booked in 03:20',
     transcript: [
-      { time: '00:03', speaker: 'Flynn', text: 'Hey Andy, can you hear me now?' },
-      { time: '00:06', speaker: 'Prospect', text: 'Yes!' },
-      { time: '00:09', speaker: 'Flynn', text: 'Well, Flynn here Andy! I believe we spoke a while back about the free website preview we were offering with no obligation. Wondering if you are available tomorrow?', technique: 'Permission-Based Recall Hook' },
-      { time: '00:25', speaker: 'Prospect', text: 'No, tomorrow I am busy the rest of this week.' },
-      { time: '00:30', speaker: 'Flynn', text: 'What about next week, early next week though?', technique: 'Non-Threatening Forward Pivot' },
-      { time: '00:44', speaker: 'Flynn', text: 'Can I suggest next week maybe the same timing, and you can confirm if it is good or any reschedule you can do let me know?' },
-      { time: '00:54', speaker: 'Prospect', text: 'Okay, you can put it down for Monday. Do you have like 10:00 o\'clock?' },
-      { time: '01:00', speaker: 'Flynn', text: '10:00? Of course! We have 10:00... 10:30?' },
-      { time: '01:06', speaker: 'Prospect', text: 'Yeah, 9:30 is fine.' },
-      { time: '01:09', speaker: 'Flynn', text: 'Sure, I will send you the reschedule invite and kindly acknowledge it okay? Thank you so much Andy!', technique: 'Calendar Commitment Lock' },
+      { time: '00:01', speaker: 'Prospect', text: "Hi, I'm a call assistant recording this call for the person you're trying to reach. Please state who you are and why you're calling.", technique: 'Automated AI Call Screening Gatekeeper' },
+      { time: '00:09', speaker: 'Flynn', text: 'Hey, this is Flynn. Is this Blackstone Gypsum?', technique: 'Calm Identity Disclosure' },
+      { time: '00:17', speaker: 'Prospect', text: 'Thank you. Please hold while I connect you.', technique: 'AI Screener Cleared' },
+      { time: '00:30', speaker: 'Prospect', text: 'Jeeps Only, this is Mark. How can I help you?' },
+      { time: '00:33', speaker: 'Flynn', text: 'Yeah hi Mark! I found you guys online and wanted to share that my team created a custom website preview for your business, and it is already done. Was wondering if you have a few moments early next week to quickly look at it and share your thoughts perhaps?', technique: 'Permission-Based Custom Preview Hook' },
+      { time: '00:55', speaker: 'Prospect', text: 'Um, yeah. Normally I would say no, but you got me interested, so good job. Next week, yeah, what day works for you?', technique: 'Skepticism Converted to Immediate Interest' },
+      { time: '01:07', speaker: 'Flynn', text: 'Yeah, I got here probably Monday. Would you prefer in the morning or afternoon?', technique: 'Binary Timing Choice' },
+      { time: '01:13', speaker: 'Prospect', text: 'Around 11 o\'clock is usually pretty good.' },
+      { time: '01:17', speaker: 'Flynn', text: '11? Can we do it like 12:00 PM or 1 perhaps?', technique: 'Calendar Precision Calibration' },
+      { time: '01:21', speaker: 'Prospect', text: 'Yeah, 12 is fine.' },
+      { time: '01:24', speaker: 'Flynn', text: 'Perfect. And Mark, can I have the best email so we can send out the meeting invites?' },
+      { time: '01:29', speaker: 'Prospect', text: 'Yeah, it\'s mark.p@jeepsonlyshop.com.' },
+      { time: '01:49', speaker: 'Flynn', text: 'Gotcha. Before I go Mark, do you have a website already?', technique: 'Current State Discovery' },
+      { time: '01:57', speaker: 'Prospect', text: 'Yeah, we\'ve got a website. If you go to jeepsonlyshop.com you\'ll see the website.' },
+      { time: '02:04', speaker: 'Flynn', text: 'Perfect. And is there anything you need to improve to the website since you\'re considering this? Are you looking for more leads, credibility, or something else?', technique: 'Pain Point Probing (SEO/Leads)' },
+      { time: '02:15', speaker: 'Prospect', text: 'Yeah, so SEO is always top of mind. We have an AI video on it that we\'re going to replace with our content, but other than that it\'s okay.' },
+      { time: '02:37', speaker: 'Flynn', text: 'Okay perfect! Again, I will see you next week Monday around 12:00 PM. I\'ll send the invite to your email and SMS. My name is Flynn and Caelan will present it to you for 5 to 10 minutes.', technique: 'Warm Handoff Expectations Lock' },
+      { time: '03:14', speaker: 'Prospect', text: 'Got it, perfect.' },
+      { time: '03:16', speaker: 'Flynn', text: 'You do have a great weekend Mark, see ya!' },
     ],
   },
   {
@@ -319,5 +328,3 @@ export const callRecordings: CallRecording[] = [
     ],
   },
 ];
-
-

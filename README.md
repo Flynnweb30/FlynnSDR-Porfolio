@@ -71,3 +71,14 @@ Body:
 
 For Template B, set the EmailJS recipient/to-email field to `{{email}}`.
 
+
+## Custom Intro Video Configuration
+To display your own custom video in the **"GET TO KNOW YOUR NEXT SENIOR SDR"** section:
+Set the environment variable in your Render Static Site settings:
+- **Variable Name:** VITE_INTRO_VIDEO_URL
+- **Supported Formats:**
+  - Direct video file link (.mp4, .webm)
+  - YouTube URL (https://www.youtube.com/watch?v=... or https://youtu.be/...)
+  - Loom URL (https://www.loom.com/share/...)
+  - Vimeo URL (https://vimeo.com/...)
+- **Fallback:** If VITE_INTRO_VIDEO_URL is omitted, the section gracefully falls back to the high-resolution team photo and leadership badge.

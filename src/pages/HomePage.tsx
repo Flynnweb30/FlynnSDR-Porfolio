@@ -3,6 +3,7 @@ import { PageRoute } from '../types';
 import { personalInfo } from '../data/flynnData';
 import BanknoteNav from '../components/BanknoteNav';
 import DiscordButton from '../components/DiscordButton';
+import IntroVideoPlayer from '../components/IntroVideoPlayer';
 import {
   Calendar,
   Check,
@@ -57,7 +58,10 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-4 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
-          style={{ backgroundImage: `url('/assets/flynn-sky.jpg')` }}
+          style={{
+            backgroundImage: "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('/assets/flynn-sky.jpg')",
+          }}
+          aria-hidden="true"
         />
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -319,7 +323,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
           </h2>
 
           <div className="space-y-8">
-            {/* Spotlight 01: Top Glaze Roofing (Andy, 01:17) */}
+            {/* Spotlight 01: Jeeps Only Shop (Mark P., 03:20) */}
             <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8">
               <div
                 className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
@@ -331,7 +335,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 opacity-90" />
                 <div className="absolute top-3 left-3 text-[11px] font-sans text-white/90 font-semibold flex items-center gap-1.5 z-10">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Top Glaze Roofing · Overcoming Timing Resistance</span>
+                  <span>Jeeps Only Shop · AI Screener Disarmed into Discovery Booking</span>
                 </div>
 
                 <div className="relative z-10 w-14 h-14 bg-[#0077b6] group-hover:bg-[#0284c7] rounded-full flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110">
@@ -360,7 +364,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   className="absolute opacity-0 pointer-events-none"
                 />
                 <div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
-                  01:17 · Actual Outbound Recording
+                  03:20 · Actual Outbound Recording
                 </div>
               </div>
 
@@ -369,22 +373,22 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   01 Skill spotlight
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
-                  OBJECTIONS MASTERED
+                  AI SCREENER DISARMED & QUALIFIED
                 </h3>
 
                 <div className="grid grid-cols-2 gap-4 py-1 text-xs">
                   <div>
                     <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Call result</span>
-                    <strong className="text-2xl font-black font-display text-[#0077b6]">77 sec</strong>
+                    <strong className="text-2xl font-black font-display text-[#0077b6]">03:20</strong>
                   </div>
                   <div>
                     <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Appointment result</span>
-                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Monday 9:30 AM</strong>
+                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Monday 12:00 PM</strong>
                   </div>
                 </div>
 
                 <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Handled a busy roofing contractor without pushing his immediate schedule, seamlessly pivoted to early next week, and confirmed a Monday 9:30 AM discovery session in 77 seconds.
+                  Navigated an automated AI call screening assistant, disarmed prospect resistance upfront (&ldquo;Normally I would say no, but you got me interested, so good job&rdquo;), probed SEO priorities, captured verified email, and booked a Monday 12:00 PM discovery appointment.
                 </p>
 
                 <div className="pt-2 flex items-center gap-3">
@@ -407,10 +411,13 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
                 {expandedTranscriptId === 'call-1' && (
                   <div className="p-3 bg-zinc-50 rounded-xl text-xs font-sans max-h-40 overflow-y-auto space-y-1.5 border border-zinc-200">
-                    <p><strong>Flynn:</strong> Well, Flynn here Andy! Wondering if you are available tomorrow?</p>
-                    <p><strong>Prospect:</strong> No, tomorrow I am busy the rest of this week.</p>
-                    <p><strong>Flynn:</strong> What about next week, early next week though?</p>
-                    <p><strong>Prospect:</strong> Okay, you can put it down for Monday. 9:30 is fine.</p>
+                    <p><strong>Prospect:</strong> Hi, I&apos;m a call assistant recording this call... Please state who you are.</p>
+                    <p><strong>Flynn:</strong> Hey, this is Flynn. Is this Blackstone Gypsum?</p>
+                    <p><strong>Mark:</strong> Jeeps Only, this is Mark. How can I help you?</p>
+                    <p><strong>Flynn:</strong> I found you guys online and my team created a custom website preview for your business, and it&apos;s already done...</p>
+                    <p><strong>Mark:</strong> Normally I would say no, but you got me interested, so good job. What day works for you?</p>
+                    <p><strong>Flynn:</strong> What about Monday? 12:00 PM?</p>
+                    <p><strong>Mark:</strong> 12 is fine. mark.p@jeepsonlyshop.com.</p>
                   </div>
                 )}
               </div>
@@ -603,7 +610,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   <div className="p-3 bg-zinc-50 rounded-xl text-xs font-sans max-h-40 overflow-y-auto space-y-1.5 border border-zinc-200">
                     <p><strong>Prospect:</strong> You built a website for me without my permission?!</p>
                     <p><strong>Flynn:</strong> We do this for 100 businesses every day. If you love it, you can keep it. If not, no hard feelings!</p>
-                    <p><strong>Prospect:</strong> No commitments, it's for free? Then you can call me tomorrow then!</p>
+                    <p><strong>Prospect:</strong> No commitments, it&apos;s for free? Then you can call me tomorrow then!</p>
                   </div>
                 )}
               </div>
@@ -612,7 +619,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* LEADERSHIP SPRINT VIDEO SECTION */}
+      {/* LEADERSHIP SPRINT VIDEO SECTION WITH CONFIGURABLE INTRO VIDEO PLAYER */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#dededb] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 text-center">
@@ -620,31 +627,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               GET TO KNOW YOUR NEXT SENIOR SDR
             </h2>
 
-            <div className="relative aspect-video max-w-3xl mx-auto rounded-2xl overflow-hidden border border-zinc-200 shadow-xl group">
-              <img
-                src={personalInfo.teamImage}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = personalInfo.teamImageFallback;
-                }}
-                alt="Flynn on the sales floor"
-                className="w-full h-full object-cover object-center filter saturate-[1.05]"
-              />
-              <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors flex items-center justify-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#0077b6] rounded-full flex items-center justify-center text-white shadow-2xl transition-transform group-hover:scale-110">
-                  <Play className="w-8 h-8 fill-current ml-1" />
-                </div>
-              </div>
-
-              <div className="absolute bottom-4 left-4 right-4 bg-black/75 backdrop-blur-xs p-3 rounded-xl text-left text-white flex items-center justify-between text-xs font-sans">
-                <div>
-                  <div className="font-bold font-display uppercase tracking-wide">Flynn Leading Outbound Sales Sprints & Rep Coaching</div>
-                  <div className="text-zinc-300 text-[11px]">Junior Sales Team Lead · Regen Digital</div>
-                </div>
-                <span className="text-emerald-400 font-bold uppercase text-[10px] bg-emerald-500/20 px-2 py-0.5 rounded font-display tracking-wider">
-                  +15% Monthly KPI Lift
-                </span>
-              </div>
-            </div>
+            {/* Configurable Video Component (Environment Variable VITE_INTRO_VIDEO_URL) */}
+            <IntroVideoPlayer />
 
             <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl mx-auto font-sans leading-relaxed">
               Flynn combines 11+ years of relentless cold calling stamina with consultative discovery, coaching newer reps on the sales floor, and converting outbound friction into high-intent discovery calls.
@@ -678,14 +662,14 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
               <div className="space-y-4 text-left">
                 <blockquote className="text-xl sm:text-2xl font-bold font-display text-[#0d0e0c] leading-snug">
-                  “When Flynn joined our outbound campaign at Regen Digital, he ramped to our top Level 4 tier in under 3 weeks. Sourced over $1.8M in career pipeline with 120–150% quota performance, 150+ daily dials, and 30+ qualified discovery meetings per month.”
+                  &ldquo;When Flynn joined our outbound campaign at Regen Digital, he ramped to our top Level 4 tier in under 3 weeks. Sourced over $1.8M in career pipeline with 120–150% quota performance, 150+ daily dials, and 30+ qualified discovery meetings per month.&rdquo;
                 </blockquote>
 
                 <div className="flex items-center justify-between gap-4 pt-1">
                   <div className="text-xs font-sans text-zinc-500">
                     — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
                   </div>
-                                                      <img
+                  <img
                     src="/assets/brendon_signature_media_1791396879400_5pk4r.png"
                     onError={(e) => {
                       const target = e.currentTarget;
@@ -725,7 +709,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       <div className="text-[10px] font-sans text-zinc-400">{item.role} · {item.company}</div>
                     </div>
                   </div>
-                  <p className="text-xs text-zinc-600 font-sans leading-relaxed italic">“{item.quote}”</p>
+                  <p className="text-xs text-zinc-600 font-sans leading-relaxed italic">&ldquo;{item.quote}&rdquo;</p>
                 </div>
               ))}
             </div>
@@ -911,8 +895,3 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     </div>
   );
 }
-
-
-
-
-
