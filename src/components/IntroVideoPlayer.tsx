@@ -9,7 +9,7 @@ interface IntroVideoPlayerProps {
 }
 
 export default function IntroVideoPlayer({
-  customVideoUrl = import.meta.env.VITE_INTRO_VIDEO_URL || '/media/flynn___s_introduction_media_1791405322996_0a14q.mp4',
+  customVideoUrl = import.meta.env.VITE_INTRO_VIDEO_URL || import.meta.env.VITE_PROFILE_VIDEO_URL,
   posterImage = personalInfo.teamImage,
   fallbackImage = personalInfo.teamImageFallback,
 }: IntroVideoPlayerProps) {
@@ -21,6 +21,7 @@ export default function IntroVideoPlayer({
     const trimmed = customVideoUrl.trim();
     if (!trimmed) return null;
 
+    // YouTube Parser
     const ytMatch = trimmed.match(
       /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i
     );
@@ -28,11 +29,13 @@ export default function IntroVideoPlayer({
       return { type: 'iframe', src: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&rel=0` };
     }
 
+    // Loom Parser
     const loomMatch = trimmed.match(/loom\.com\/(?:share|embed)\/([a-zA-Z0-9]+)/i);
     if (loomMatch) {
       return { type: 'iframe', src: `https://www.loom.com/embed/${loomMatch[1]}?autoplay=1` };
     }
 
+    // Vimeo Parser
     const vimeoMatch = trimmed.match(
       /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)/i
     );
@@ -40,12 +43,14 @@ export default function IntroVideoPlayer({
       return { type: 'iframe', src: `https://player.vimeo.com/video/${vimeoMatch[3]}?autoplay=1` };
     }
 
+    // Direct Video File (.mp4, .webm, or direct hosted URL)
     return { type: 'video', src: trimmed };
   }, [customVideoUrl]);
 
   const handlePlayClick = () => {
-    if (parsedVideo && !hasError) {
+    if (parsedVideo) {
       setIsPlaying(true);
+      setHasError(false);
     }
   };
 
@@ -68,10 +73,7 @@ export default function IntroVideoPlayer({
               autoPlay
               playsInline
               preload="metadata"
-              onError={() => {
-                setHasError(true);
-                setIsPlaying(false);
-              }}
+              onError={() => setHasError(true)}
               className="w-full h-full object-contain bg-black"
             >
               Your browser does not support HTML5 video playback.
@@ -90,14 +92,14 @@ export default function IntroVideoPlayer({
         </div>
       ) : (
         <div
-          className="relative w-full h-full cursor-pointer select-none"
+          className={`relative w-full h-full ${parsedVideo ? 'cursor-pointer' : ''} select-none`}
           onClick={handlePlayClick}
-          role="button"
-          tabIndex={0}
+          role={parsedVideo ? 'button' : undefined}
+          tabIndex={parsedVideo ? 0 : undefined}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') handlePlayClick();
+            if (parsedVideo && (e.key === 'Enter' || e.key === ' ')) handlePlayClick();
           }}
-          aria-label="Play introduction video"
+          aria-label={parsedVideo ? 'Play introduction video' : 'Flynn leading outbound sales sprints'}
         >
           <img
             src={posterImage}
