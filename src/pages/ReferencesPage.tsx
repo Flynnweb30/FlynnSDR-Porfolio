@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { personalInfo } from '../data/flynnData';
 import {
@@ -18,6 +18,13 @@ interface ReferencesPageProps {
 }
 
 export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume }: ReferencesPageProps) {
+  const [sigSrc, setSigSrc] = useState(
+    'https://audiolink-oskn.onrender.com/media/brendon_signature_media_1791396879400_5pk4r.png'
+  );
+  const [flynnImgSrc, setFlynnImgSrc] = useState(
+    'https://audiolink-oskn.onrender.com/media/flynn_in_office__1__media_1791399641280_i2l2j.png'
+  );
+
   const testimonials = [
     {
       name: 'TL Dee',
@@ -53,7 +60,6 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
 
   return (
     <div className="pt-20 sm:pt-24 pb-20 bg-[#fafaf8] text-[#0d0e0c]">
-      {/* Header Banner */}
       <section className="py-12 border-b border-[#dededb] bg-[#f7f7f6]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="space-y-3 text-left">
@@ -91,7 +97,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
         </div>
       </section>
 
-      {/* Featured Primary Character Reference: Genuine Personal Recommendation Letter from Brendon */}
+      {/* Featured Primary Character Reference */}
       <section className="py-14 sm:py-16 bg-[#fafaf8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="relative overflow-hidden rounded-2xl border-2 border-[#dededb] bg-white shadow-xs">
@@ -144,7 +150,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                     </p>
                   </div>
 
-                  {/* Naturally Enhanced Brendon Signature & Leadership Credentials */}
+                  {/* Naturally Integrated Signature with Fail-Safe Offline Fallback */}
                   <div className="mt-5 pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
                       <div className="text-sm font-black text-[#0d0e0c] font-display uppercase tracking-tight">Brendon Gocaj</div>
@@ -154,12 +160,16 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
 
                     <div className="relative pt-1 sm:pt-0">
                       <img
-                        src="https://audiolink-oskn.onrender.com/media/brendon_signature_media_1791396879400_5pk4r.png"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/assets/brendon-signature.png';
+                        src={sigSrc}
+                        onError={() => {
+                          if (sigSrc !== '/assets/brendon_signature_media_1791396879400_5pk4r.png') {
+                            setSigSrc('/assets/brendon_signature_media_1791396879400_5pk4r.png');
+                          } else {
+                            setSigSrc('/assets/brendon-signature.png');
+                          }
                         }}
                         alt="Brendon Gocaj Handwritten Signature"
-                        loading="lazy"
+                        loading="eager"
                         className="h-12 sm:h-14 w-auto max-w-[210px] object-contain object-left mix-blend-multiply filter contrast-125 select-none"
                         draggable={false}
                       />
@@ -167,13 +177,12 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                   </div>
                 </article>
 
-                {/* Flynn in Office Media */}
                 <div className="relative flex justify-center lg:self-end lg:-mb-5">
                   <div className="absolute bottom-0 w-40 h-8 rounded-full bg-sky-900/10 blur-md" />
                   <img
-                    src="https://audiolink-oskn.onrender.com/media/flynn_in_office__1__media_1791399641280_i2l2j.png"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://user29984.na.imgto.link/public/20261005/flynn-office.avif';
+                    src={flynnImgSrc}
+                    onError={() => {
+                      setFlynnImgSrc('https://user29984.na.imgto.link/public/20261005/flynn-office.avif');
                     }}
                     alt="Flynn in the sales office"
                     loading="lazy"
