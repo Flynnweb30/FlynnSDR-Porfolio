@@ -678,7 +678,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
               <div className="space-y-4 text-left">
                 <blockquote className="text-xl sm:text-2xl font-bold font-display text-[#0d0e0c] leading-snug">
-                  “Hi Flynn, I wanted to put this in writing because your work with our outbound team deserves to be recognized. You came into a demanding B2B cold-calling environment, learned the campaign quickly, and built a reputation for being consistent, coachable, and highly disciplined on the phone.”
+                  “Flynn proved to be one of the most disciplined outbound B2B SDRs on our floor. He ramped to our top Level 4 tier in under 3 weeks, maintained 120–150% quota attainment across 150+ daily dials, and sourced over $200K in qualified pipeline with an 85% qualification standard.”
                 </blockquote>
 
                 <div className="text-xs font-sans text-zinc-500">
@@ -898,3 +898,4 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     </div>
   );
 }
+

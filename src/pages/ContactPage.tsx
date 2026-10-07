@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+﻿import React, { useMemo, useState } from 'react';
 import { personalInfo } from '../data/flynnData';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Linkedin, 
-  Calendar, 
-  ArrowUpRight, 
-  CheckCircle2, 
-  FileText, 
-  ShieldCheck, 
+import { sendInquiryEmails, InquiryPayload } from '../lib_email';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Calendar,
+  ArrowUpRight,
+  CheckCircle2,
+  FileText,
+  ShieldCheck,
   Send,
-  Clock,
-  Globe,
-  MessageCircle
+  MessageCircle,
 } from 'lucide-react';
 import { PageRoute } from '../types';
 
@@ -22,24 +21,39 @@ interface ContactPageProps {
   onOpenResume: () => void;
 }
 
+function nextBusinessDays(count = 5) {
+  const days: { label: string; date: string; fullDate: string; iso: string }[] = [];
+  const cursor = new Date();
+  cursor.setHours(12, 0, 0, 0);
+  while (days.length < count) {
+    cursor.setDate(cursor.getDate() + 1);
+    const day = cursor.getDay();
+    if (day === 0 || day === 6) continue;
+    days.push({
+      label: cursor.toLocaleDateString('en-US', { weekday: 'short' }),
+      date: cursor.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+      fullDate: cursor.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      iso: cursor.toISOString().slice(0, 10),
+    });
+  }
+  return days;
+}
+
 export default function ContactPage({ onNavigate, onOpenResume }: ContactPageProps) {
-  const [selectedDay, setSelectedDay] = useState<string>('Tomorrow');
+  const days = useMemo(() => nextBusinessDays(), []);
+  const [selectedDayIso, setSelectedDayIso] = useState<string>(days[0]?.iso || '');
   const [selectedTime, setSelectedTime] = useState<string>('10:00 AM EST');
-  const [name, setName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
-  const [roleType, setRoleType] = useState('Full-Time Senior SDR / Lead Rep');
+  const [role, setRole] = useState('');
+  const [inquiryType, setInquiryType] = useState<'Interview' | 'SDR Inquiry' | 'Partnership' | 'Other'>('Interview');
+  const [employmentPreference, setEmploymentPreference] = useState<'Full-Time' | 'Part-Time'>('Full-Time');
   const [notes, setNotes] = useState('');
+  const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const days = [
-    { label: 'Tomorrow', date: 'Oct 6, 2026' },
-    { label: 'Wednesday', date: 'Oct 7, 2026' },
-    { label: 'Thursday', date: 'Oct 8, 2026' },
-    { label: 'Friday', date: 'Oct 9, 2026' },
-    { label: 'Next Monday', date: 'Oct 12, 2026' },
-  ];
+  const [error, setError] = useState('');
 
   const timeSlots = [
     '9:30 AM EST',
@@ -51,26 +65,53 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
     '4:45 PM EST',
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const selectedDayObj = days.find((d) => d.iso === selectedDayIso) || days[0];
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consent) {
+      setError('Please acknowledge consent to receive your calendar invitation and direct response.');
+      return;
+    }
     setLoading(true);
-    setTimeout(() => {
+    setError('');
+
+    const payload: InquiryPayload = {
+      fullName,
+      email,
+      company,
+      role: role || 'Hiring Decision Maker',
+      inquiryType,
+      employmentPreference,
+      selectedDate: selectedDayObj?.fullDate || selectedDayIso,
+      selectedTime,
+      message: notes,
+      consent,
+      timestamp: new Date().toISOString(),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      source: `${window.location.origin}/hire-me`,
+    };
+
+    try {
+      await sendInquiryEmails(payload);
       setLoading(false);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 600);
+    } catch (err) {
+      setLoading(false);
+      setError(err instanceof Error ? err.message : 'Unable to complete submission. Please try again.');
+    }
   };
 
   return (
     <div className="pt-20 sm:pt-24 pb-20 bg-[#fafaf8] text-[#0d0e0c]">
-      
       {/* Header Banner */}
       <section className="py-12 border-b border-[#dededb] bg-[#f7f7f6]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="space-y-3 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#dededb] rounded-full text-[11px] font-mono uppercase tracking-widest text-[#0077b6] font-bold shadow-2xs">
               <Mail className="w-3.5 h-3.5" />
-              <span>Direct Communication</span>
+              <span>Direct Outbound Hiring</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight">
@@ -78,7 +119,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
             </h1>
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-2xl">
-              Available immediately for Senior SDR, Lead BDR, and Outbound Specialist roles. Reach out via email, phone, WhatsApp, or pick a direct time slot below.
+              Available immediately for Senior SDR, Lead Prospector, and B2B Outbound Specialist roles. Reach out via email, phone, WhatsApp, or reserve your 15-minute introductory sync below.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 pt-1">
@@ -93,33 +134,42 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
         </div>
       </section>
 
-      {/* Availability & Compensation */}
-      <section className="pb-2">
+      {/* Availability & Compensation Overview */}
+      <section className="py-8 border-b border-[#dededb] bg-[#fafaf8]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs">
-              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">Full-Time</div>
-              <div className="mt-1 text-2xl font-black font-display">Starting at $1,050/month</div>
-              <p className="mt-2 text-xs leading-relaxed text-zinc-600">Full-time outbound SDR support covering prospect research, cold calling, qualification, appointment setting, CRM updates, follow-up, and consistent campaign execution during agreed market hours.</p>
+            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs text-left space-y-2">
+              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
+                Full-Time Senior SDR
+              </div>
+              <div className="text-2xl font-black font-display text-zinc-950">Starting at $1,050/month</div>
+              <p className="text-xs leading-relaxed text-zinc-600 font-sans">
+                Full-time dedicated outbound execution covering prospect list building, multi-channel cadences, 150+ daily dials, BANT qualification, and 30+ qualified discovery meetings per month during US/UK business hours.
+              </p>
             </div>
-            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs">
-              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">Part-Time</div>
-              <div className="mt-1 text-2xl font-black font-display">Typically $600–$900/month</div>
-              <p className="mt-2 text-xs leading-relaxed text-zinc-600">Designed for roughly 20–25 hours/week, with outbound calling, prospect qualification, appointment setting, CRM follow-up, and reporting. Performance incentives or commission can be added when appropriate.</p>
+            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs text-left space-y-2">
+              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
+                Part-Time Senior SDR
+              </div>
+              <div className="text-2xl font-black font-display text-zinc-950">Typically $600–$900/month</div>
+              <p className="text-xs leading-relaxed text-zinc-600 font-sans">
+                Tailored for roughly 20–25 hours/week, focused on high-impact dial sprints, prospect qualification, appointment setting, and CRM data hygiene. Performance incentives can be paired when appropriate.
+              </p>
             </div>
           </div>
-          <p className="text-[11px] text-zinc-500 text-center mt-3">Compensation is negotiable based on scope, hours, market, campaign complexity, and performance expectations.</p>
+          <p className="text-[11px] text-zinc-500 text-center mt-3 font-sans">
+            Compensation is negotiable based on campaign scope, working market, dial volume requirements, and quota structure.
+          </p>
         </div>
       </section>
 
-      {/* Main Grid */}
-      <section className="py-14">
+      {/* Main Grid: Coordinates & Direct Scheduling */}
+      <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
             {/* Left Coordinates & Profile (Span 5) */}
-            <div className="lg:col-span-5 space-y-6">
-              
+            <div className="lg:col-span-5 space-y-6 text-left">
               <div className="p-6 bg-white border border-[#dededb] rounded-2xl space-y-5 shadow-xs">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
                   <span className="text-xs font-display font-extrabold uppercase text-[#0077b6]">
@@ -140,7 +190,9 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">Direct Work Email</div>
+                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">
+                      Direct Work Email
+                    </div>
                     <a
                       href={`mailto:${personalInfo.email}`}
                       className="text-sm font-bold text-zinc-900 hover:text-[#0077b6] transition-colors break-all font-sans"
@@ -150,13 +202,15 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                   </div>
                 </div>
 
-                {/* Phone */}
+                {/* Phone / WhatsApp */}
                 <div className="flex items-start gap-3.5">
                   <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">Direct Call / WhatsApp</div>
+                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">
+                      Direct Phone / WhatsApp
+                    </div>
                     <a
                       href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
                       className="text-sm font-bold text-zinc-900 hover:text-[#0077b6] transition-colors font-sans"
@@ -172,7 +226,9 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     <Linkedin className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">LinkedIn Profile</div>
+                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">
+                      LinkedIn Profile
+                    </div>
                     <a
                       href={personalInfo.linkedin}
                       target="_blank"
@@ -191,35 +247,35 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">Location & Remote Setup</div>
+                    <div className="text-[10px] font-display uppercase text-zinc-400 font-extrabold tracking-wider">
+                      Location & Workspace
+                    </div>
                     <div className="text-xs font-bold text-zinc-900">{personalInfo.location}</div>
                     <div className="text-[11px] text-zinc-500 font-sans mt-0.5">
-                      High-speed fiber connection & backup workstation ready
+                      Dual fiber connection & UPS power backup ready
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Inbound Lead Trigger: Facebook Community & Direct Inbound CTA */}
+              {/* Inbound Lead Trigger: Facebook Community */}
               <div className="p-6 bg-gradient-to-br from-blue-50/80 via-white to-white border-2 border-blue-200 rounded-2xl space-y-4 shadow-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-xs font-display font-bold text-[#1877F2] uppercase">
-                    <svg className="w-4 h-4 fill-[#1877F2]" viewBox="0 0 24 24">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                    <span>Connect on Facebook</span>
+                    <MessageCircle className="w-4 h-4 fill-[#1877F2]" />
+                    <span>Connect via Facebook</span>
                   </div>
                   <span className="text-[10px] font-mono bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">
-                    Inbound Hub
+                    Messenger
                   </span>
                 </div>
 
                 <div className="space-y-1">
                   <h4 className="text-sm font-bold font-display uppercase text-zinc-900 tracking-tight">
-                    Please Visit & Like Our Facebook Page
+                    Prefer Instant Social Messaging?
                   </h4>
                   <p className="text-xs text-zinc-600 leading-relaxed font-sans">
-                    Prefer social messaging? Like our official page to join our sales community, get daily SDR prospecting tips, and send an instant inbound lead inquiry via Messenger.
+                    Reach out directly on Facebook Messenger for quick questions, dial requirements, or immediate pipeline inquiries.
                   </p>
                 </div>
 
@@ -229,17 +285,13 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                   rel="noopener noreferrer"
                   className="w-full py-2.5 bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs uppercase font-display tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
                 >
-                  <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                  <span>Visit & Like Facebook Page</span>
+                  <span>Chat on Facebook Messenger</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>
-
             </div>
 
-            {/* Right: Integrated Booking & Inquiry Deck (Span 7) */}
+            {/* Right: Direct Scheduling & Inquiry (Span 7) */}
             <div className="lg:col-span-7 bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs">
               {submitted ? (
                 <div className="text-center py-10 space-y-6">
@@ -249,10 +301,10 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
 
                   <div className="space-y-2">
                     <h3 className="text-2xl font-black uppercase font-display text-zinc-950">
-                      Intro Scheduled & Message Received!
+                      Intro Scheduled & Inquiry Dispatched!
                     </h3>
                     <p className="text-sm text-zinc-600 max-w-md mx-auto leading-relaxed font-sans">
-                      Thank you, <strong className="text-zinc-900">{name}</strong>. I’ve reserved your preferred intro window ({selectedDay} at {selectedTime}) and will send the calendar invitation and Zoom link to <strong className="text-[#0077b6]">{email}</strong>.
+                      Thank you, <strong className="text-zinc-900">{fullName}</strong>. Your request for <strong className="text-[#0077b6]">{inquiryType}</strong> ({employmentPreference}) has been logged for <strong className="text-zinc-900">{selectedDayObj.fullDate} at {selectedTime}</strong>. A calendar invite and prep briefing will be sent to <strong className="text-[#0077b6]">{email}</strong>.
                     </p>
                   </div>
 
@@ -272,7 +324,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                       Direct Scheduling & Inquiry
                     </h3>
                     <p className="text-xs text-zinc-500 font-sans">
-                      Pick your preferred discussion time and share your outbound needs below.
+                      Select your preferred intro window and tell Flynn about your outbound goals.
                     </p>
                   </div>
 
@@ -284,17 +336,17 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                       {days.map((d) => (
                         <button
-                          key={d.label}
+                          key={d.iso}
                           type="button"
-                          onClick={() => setSelectedDay(d.label)}
-                          className={`p-2 rounded-xl border text-center transition-all cursor-pointer ${
-                            selectedDay === d.label
+                          onClick={() => setSelectedDayIso(d.iso)}
+                          className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                            selectedDayIso === d.iso
                               ? 'bg-[#0077b6] text-white border-[#0077b6] font-bold shadow-xs'
                               : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-white'
                           }`}
                         >
                           <div className="text-xs font-bold leading-tight font-display uppercase">{d.label}</div>
-                          <div className={`text-[10px] font-sans ${selectedDay === d.label ? 'text-white/80' : 'text-zinc-400'}`}>
+                          <div className={`text-[10px] font-sans ${selectedDayIso === d.iso ? 'text-white/80' : 'text-zinc-400'}`}>
                             {d.date}
                           </div>
                         </button>
@@ -325,19 +377,23 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     </div>
                   </div>
 
-                  {/* Contact Fields */}
+                  {/* Centralized Form Fields */}
                   <div className="space-y-4 pt-2 border-t border-zinc-100">
+                    <label className="text-[11px] font-display uppercase tracking-wider text-zinc-700 font-extrabold block">
+                      3. Contact & Opportunity Details
+                    </label>
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 block mb-1 font-bold">
-                          Your Full Name *
+                          Full Name *
                         </label>
                         <input
                           type="text"
                           required
                           placeholder="e.g. Rachel Adams"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
                           className="w-full bg-zinc-50 border border-zinc-200 focus:border-[#0077b6] rounded-xl px-4 py-2.5 text-xs text-zinc-900 placeholder-zinc-400 focus:outline-none focus:bg-white"
                         />
                       </div>
@@ -374,42 +430,91 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
 
                       <div>
                         <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 block mb-1 font-bold">
-                          Opportunity Type
+                          Your Role / Title
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="VP of Sales / Founder"
+                          value={role}
+                          onChange={(e) => setRole(e.target.value)}
+                          className="w-full bg-zinc-50 border border-zinc-200 focus:border-[#0077b6] rounded-xl px-4 py-2.5 text-xs text-zinc-900 placeholder-zinc-400 focus:outline-none focus:bg-white"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 block mb-1 font-bold">
+                          Reason for Contact *
                         </label>
                         <select
-                          value={roleType}
-                          onChange={(e) => setRoleType(e.target.value)}
+                          required
+                          value={inquiryType}
+                          onChange={(e) => setInquiryType(e.target.value as any)}
                           className="w-full bg-zinc-50 border border-zinc-200 focus:border-[#0077b6] rounded-xl px-4 py-2.5 text-xs text-zinc-900 focus:outline-none focus:bg-white"
                         >
-                          <option value="Full-Time Senior SDR / Lead Rep">Full-Time Senior SDR / Lead Rep</option>
-                          <option value="Outbound Team Lead / Coach">Outbound Team Lead / Coach</option>
-                          <option value="Contract / Sprint Pipeline Project">Contract / Sprint Pipeline Project</option>
-                          <option value="Introductory Networking Chat">Introductory Networking Chat</option>
+                          <option value="Interview">Interview</option>
+                          <option value="SDR Inquiry">SDR Inquiry</option>
+                          <option value="Partnership">Partnership</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 block mb-1 font-bold">
+                          Employment Preference *
+                        </label>
+                        <select
+                          value={employmentPreference}
+                          onChange={(e) => setEmploymentPreference(e.target.value as 'Full-Time' | 'Part-Time')}
+                          className="w-full bg-zinc-50 border border-zinc-200 focus:border-[#0077b6] rounded-xl px-4 py-2.5 text-xs text-zinc-900 focus:outline-none focus:bg-white"
+                        >
+                          <option value="Full-Time">Full-Time Senior SDR</option>
+                          <option value="Part-Time">Part-Time Senior SDR</option>
                         </select>
                       </div>
                     </div>
 
                     <div>
                       <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 block mb-1 font-bold">
-                        Notes / Current Outbound Targets (Optional)
+                        Outbound Goals / Campaign Notes
                       </label>
                       <textarea
                         rows={3}
-                        placeholder="Tell me about your product, your ICP, or your monthly meeting targets..."
+                        placeholder="Tell Flynn about your target ICP, monthly booked meeting targets, or outbound tech stack..."
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
                         className="w-full bg-zinc-50 border border-zinc-200 focus:border-[#0077b6] rounded-xl px-4 py-2.5 text-xs text-zinc-900 placeholder-zinc-400 focus:outline-none focus:bg-white resize-none"
                       />
                     </div>
+
+                    <label className="flex items-start gap-2.5 text-xs text-zinc-600 cursor-pointer font-sans pt-1">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={consent}
+                        onChange={(e) => setConsent(e.target.checked)}
+                        className="mt-0.5 accent-[#0077b6]"
+                      />
+                      <span>
+                        I consent to receive a calendar invitation and direct email response from Flynn regarding this inquiry. No marketing spam, ever. *
+                      </span>
+                    </label>
                   </div>
+
+                  {error && (
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-sans">
+                      {error}
+                    </div>
+                  )}
 
                   <button
                     type="submit"
-                    disabled={loading}
-                    className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white font-bold text-xs uppercase font-display tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-50"
+                    disabled={loading || !consent}
+                    className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-98 text-white font-bold text-xs uppercase font-display tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-50"
                   >
                     {loading ? (
-                      <span>Reserving Slot & Sending...</span>
+                      <span>Submitting & Dispatching Invitation...</span>
                     ) : (
                       <>
                         <span>Confirm 15-Minute Sync with Flynn</span>
@@ -420,7 +525,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
 
                   <div className="flex items-center justify-center gap-2 text-[10px] font-sans text-zinc-400">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Confidential · Calendar invite dispatched directly to your inbox</span>
+                    <span>Confidential · Direct calendar invitation dispatched to your inbox</span>
                   </div>
                 </form>
               )}
@@ -429,7 +534,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
           </div>
         </div>
       </section>
-
     </div>
   );
 }
