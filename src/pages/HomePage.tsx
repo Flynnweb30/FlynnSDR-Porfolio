@@ -28,7 +28,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
   const audioSources: Record<string, string> = {
-    'call-1': import.meta.env.VITE_AUDIO_CALL_1_URL || 'https://audiolink-oskn.onrender.com/audio/aud_1791236690865_eeeu4r.opus',
+    'call-1': import.meta.env.VITE_AUDIO_CALL_1_URL || '/media/my_intro_media_1791404813632_39huk.mp3',
     'call-2': import.meta.env.VITE_AUDIO_CALL_2_URL || 'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
     'call-3': import.meta.env.VITE_AUDIO_CALL_3_URL || 'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
     'call-4': import.meta.env.VITE_AUDIO_CALL_4_URL || 'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
@@ -669,8 +669,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   <div className="text-xs font-sans text-zinc-500">
                     — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
                   </div>
-                  <img
-                    src="/assets/brendon_signature_media_1791396879400_5pk4r.png"
+                                    <img
+                    src="/media/brendon_signature_media_1791396879400_5pk4r.png"
                     onError={(e) => {
                       const target = e.currentTarget;
                       target.onerror = null;
@@ -895,3 +895,4 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     </div>
   );
 }
+

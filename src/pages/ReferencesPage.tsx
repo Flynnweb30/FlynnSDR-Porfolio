@@ -143,7 +143,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                     </p>
                   </div>
 
-                  {/* Naturally Integrated Signature - Protected against Infinite Loops */}
+                  {/* Guaranteed Persistent Signature Loading */}
                   <div className="mt-5 pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
                       <div className="text-sm font-black text-[#0d0e0c] font-display uppercase tracking-tight">Brendon Gocaj</div>
@@ -153,7 +153,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
 
                     <div className="relative pt-1 sm:pt-0">
                       <img
-                        src="/assets/brendon_signature_media_1791396879400_5pk4r.png"
+                        src="/media/brendon_signature_media_1791396879400_5pk4r.png"
                         onError={(e) => {
                           const target = e.currentTarget;
                           target.onerror = null;
@@ -171,7 +171,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                 <div className="relative flex justify-center lg:self-end lg:-mb-5">
                   <div className="absolute bottom-0 w-40 h-8 rounded-full bg-sky-900/10 blur-md" />
                   <img
-                    src="https://audiolink-oskn.onrender.com/media/flynn_in_office__1__media_1791399641280_i2l2j.png"
+                    src="/media/flynn_in_office__1__media_1791399641280_i2l2j.png"
                     onError={(e) => {
                       const target = e.currentTarget;
                       target.onerror = null;
