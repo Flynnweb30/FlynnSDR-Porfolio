@@ -678,11 +678,22 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
               <div className="space-y-4 text-left">
                 <blockquote className="text-xl sm:text-2xl font-bold font-display text-[#0d0e0c] leading-snug">
-                  “Flynn proved to be one of the most disciplined outbound B2B SDRs on our floor. He ramped to our top Level 4 tier in under 3 weeks, maintained 120–150% quota attainment across 150+ daily dials, and sourced over $200K in qualified pipeline with an 85% qualification standard.”
+                  “When Flynn joined our outbound campaign at Regen Digital, he ramped to our top Level 4 tier in under 3 weeks. Sourced over $1.8M in career pipeline with 120–150% quota performance, 150+ daily dials, and 30+ qualified discovery meetings per month.”
                 </blockquote>
 
-                <div className="text-xs font-sans text-zinc-500">
-                  — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
+                <div className="flex items-center justify-between gap-4 pt-1">
+                  <div className="text-xs font-sans text-zinc-500">
+                    — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
+                  </div>
+                  <img
+                    src="/assets/brendon-signature.png"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/assets/brendon-signature.svg';
+                    }}
+                    alt="Brendon Gocaj Signature"
+                    className="h-10 w-auto max-w-[140px] object-contain mix-blend-multiply select-none"
+                    draggable={false}
+                  />
                 </div>
 
                 <div>
@@ -898,4 +909,5 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     </div>
   );
 }
+
 

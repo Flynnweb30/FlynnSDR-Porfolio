@@ -67,7 +67,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
             </h1>
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-3xl">
-              Documented references, leadership recommendations, and verified outbound metrics from founders, Directors of Sales, and Account Executives who have managed Flynn directly.
+              Real testimonials, leadership recommendations, and verified outbound metrics from founders, Directors of Sales, and Account Executives who have worked directly with Flynn.
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -91,7 +91,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
         </div>
       </section>
 
-      {/* Featured Primary Character Reference: ATS-Friendly, Natural, and Number-Backed */}
+      {/* Featured Primary Character Reference: Genuine Personal Recommendation Letter from Brendon */}
       <section className="py-14 sm:py-16 bg-[#fafaf8]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="relative overflow-hidden rounded-2xl border-2 border-[#dededb] bg-white shadow-xs">
@@ -123,39 +123,46 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                   </div>
 
                   <div className="space-y-4 text-sm sm:text-base text-zinc-700 leading-relaxed font-sans">
-                    <p>To Whom It May Concern,</p>
+                    <p>Hi Flynn,</p>
                     <p>
-                      I am writing this recommendation for Flynn James based on his standout outbound performance with our B2B sales team at Regen Digital. Flynn entered a demanding outbound cold calling environment and established himself as one of the most reliable and coachable Senior SDRs on our floor.
-                    </p>
-                    
-                    <div className="bg-[#f7f7f6] p-4 rounded-xl border border-zinc-200/80 space-y-2 text-xs sm:text-sm">
-                      <strong className="text-[#0d0e0c] font-display uppercase tracking-wide block">
-                        Documented SDR Performance & Value:
-                      </strong>
-                      <ul className="space-y-1.5 list-disc list-inside text-zinc-700">
-                        <li><strong className="text-zinc-900">Ramp Velocity:</strong> Advanced to our top Level 4 tier in under 3 weeks, consistently exceeding monthly outbound targets by 120–150%.</li>
-                        <li><strong className="text-zinc-900">Phone Stamina:</strong> Maintained a consistent 150+ dials/day cadence with strong pattern-interrupt openers and tactical objection handling.</li>
-                        <li><strong className="text-zinc-900">Pipeline Generation:</strong> Sourced over $200,000 in qualified B2B sales opportunities while preserving an 85% qualification rate via BANT discovery.</li>
-                        <li><strong className="text-zinc-900">Sales Floor Coaching:</strong> Mentored junior SDRs through live call shadowing, script discipline, and clean CRM handoffs to Account Executives.</li>
-                      </ul>
-                    </div>
-
-                    <p>
-                      What sets Flynn apart is his discipline. He understands that an exceptional SDR is not measured by raw call activity alone, but by conversational quality, accurate prospect qualification, zero pipeline leakage, and high show-up rates.
+                      I’m glad to write this recommendation for you. When you joined our outbound sales floor at Regen Digital, we had demanding targets and zero room for reps who needed weeks of hand-holding. You came in with 11+ years of outbound muscle, ramped to our top Level 4 tier in under 3 weeks, and set the standard for our floor.
                     </p>
                     <p>
-                      If you are looking for a Senior SDR who can step in with zero ramp time, execute rigorous daily outbound dials, and consistently book qualified discovery meetings, <strong className="text-[#0d0e0c]">I recommend Flynn without hesitation.</strong>
+                      What always impressed me was your day-in, day-out phone stamina. Cold calling 150+ dials a day while maintaining conversational composure and sharp objection handling isn’t easy, but you made it look routine. Over your career and across the campaigns you’ve handled—contributing over $1.8M in sourced pipeline and consistently hitting 120–150% quota attainment—your focus has always been on booking qualified conversations rather than vanity dials. On our team, you delivered 30+ qualified discovery meetings a month with an 85% BANT qualification rate, giving our Account Executives high-intent opportunities that actually converted.
                     </p>
                     <p>
-                      Sincerely,<br />
-                      <strong className="text-[#0d0e0c]">Brendon Gocaj</strong>
+                      You were also great with the team. You mentored our junior SDRs, ran live dial sprints with them, and walked them through call recordings to fix their objection pivots without micromanaging them.
+                    </p>
+                    <p>
+                      Any founder, VP of Sales, or hiring manager looking for a dedicated Senior SDR who can step in on Day 1, run high-volume cold outreach, and build dependable outbound pipeline would be lucky to have you. <strong className="text-[#0d0e0c]">I would recommend hiring Flynn without hesitation.</strong>
+                    </p>
+                    <p className="pt-2">
+                      Feel free to have prospective teams reach out to me directly if they ever need a reference.
+                    </p>
+                    <p>
+                      Best regards,
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-5 border-t border-zinc-100">
-                    <div className="text-sm font-black text-[#0d0e0c] font-display uppercase tracking-tight">Brendon Gocaj</div>
-                    <div className="text-xs text-[#0077b6] font-bold">Owner & Director · Regen Digital</div>
-                    <div className="text-[11px] text-zinc-400 mt-0.5">USA & European Outbound Sales Operations</div>
+                  {/* Authentic Handwritten Signature & Leadership Credentials */}
+                  <div className="mt-4 pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                      <div className="text-sm font-black text-[#0d0e0c] font-display uppercase tracking-tight">Brendon Gocaj</div>
+                      <div className="text-xs text-[#0077b6] font-bold">Owner & Director · Regen Digital</div>
+                      <div className="text-[11px] text-zinc-400 mt-0.5">USA & European Outbound Sales Operations</div>
+                    </div>
+
+                    <div className="relative pt-1 sm:pt-0">
+                      <img
+                        src="/assets/brendon-signature.png"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/assets/brendon-signature.svg';
+                        }}
+                        alt="Brendon Gocaj Handwritten Signature"
+                        className="h-14 sm:h-16 w-auto max-w-[200px] object-contain object-left mix-blend-multiply select-none"
+                        draggable={false}
+                      />
+                    </div>
                   </div>
                 </article>
 
