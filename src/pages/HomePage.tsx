@@ -1,9 +1,10 @@
-﻿import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { PageRoute } from '../types';
-import { personalInfo } from '../data/flynnData';
+import { personalInfo, callRecordings } from '../data/flynnData';
 import BanknoteNav from '../components/BanknoteNav';
 import DiscordButton from '../components/DiscordButton';
 import IntroVideoPlayer from '../components/IntroVideoPlayer';
+import PodcastVisualizer from '../components/PodcastVisualizer';
 import {
   Calendar,
   Check,
@@ -13,6 +14,7 @@ import {
   Play,
   Pause,
   MessageCircle,
+  Volume2,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -24,33 +26,78 @@ interface HomePageProps {
 export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: HomePageProps) {
   const [activeCallId, setActiveCallId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [expandedTranscriptId, setExpandedTranscriptId] = useState<string | null>(null);
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
   const audioSources: Record<string, string> = {
-    'call-1': import.meta.env.VITE_AUDIO_CALL_1_URL || 'https://audiolink-oskn.onrender.com/audio/aud_1791236690865_eeeu4r.opus',
-    'call-2': import.meta.env.VITE_AUDIO_CALL_2_URL || 'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
-    'call-3': import.meta.env.VITE_AUDIO_CALL_3_URL || 'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
-    'call-4': import.meta.env.VITE_AUDIO_CALL_4_URL || 'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
+    'call-1':
+      import.meta.env.VITE_AUDIO_CALL_1_URL ||
+      '/media/my_intro_media_1791404813632_39huk.mp3',
+    'call-2':
+      import.meta.env.VITE_AUDIO_CALL_2_URL ||
+      'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
+    'call-3':
+      import.meta.env.VITE_AUDIO_CALL_3_URL ||
+      'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
+    'call-4':
+      import.meta.env.VITE_AUDIO_CALL_4_URL ||
+      'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
   };
 
-  const handleTogglePlay = async (callId: string) => {
+  const handleTogglePlay = (callId: string) => {
     const audio = audioRefs.current[callId];
-    if (!audio || !audioSources[callId]) return;
+    if (!audio) return;
+
     if (activeCallId === callId && isPlaying) {
       audio.pause();
       return;
     }
+
+    // Stop any other active call
     Object.keys(audioRefs.current).forEach((id) => {
-      if (id !== callId) audioRefs.current[id]?.pause();
+      if (id !== callId) {
+        audioRefs.current[id]?.pause();
+      }
     });
+
     setActiveCallId(callId);
-    try {
-      await audio.play();
-    } catch {
+    audio.play().catch(() => {
       setIsPlaying(false);
-    }
+    });
   };
+
+  // 3 Primary Spotlights rendered with Landscape Podcast Visualizer
+  const spotlights = [
+    {
+      callId: 'call-1',
+      recording: callRecordings[0],
+      spotlightNum: '01',
+      headline: 'AI SCREENER DISARMED & QUALIFIED',
+      callResult: callRecordings[0].duration,
+      apptResult: 'Monday 12:00 PM',
+      summary:
+        'Navigated an automated AI call screening assistant, disarmed prospect resistance upfront ("Normally I would say no, but you got me interested, so good job"), uncovered SEO priorities, captured verified decision-maker email, and booked a Monday 12:00 PM discovery appointment.',
+    },
+    {
+      callId: 'call-3',
+      recording: callRecordings[2],
+      spotlightNum: '02',
+      headline: 'COMMERCIAL CONTRACTOR DISCOVERY',
+      callResult: callRecordings[2].duration,
+      apptResult: 'Monday 4:45 PM',
+      summary:
+        'Used a low-friction value opener with a busy commercial contractor on the jobsite, probed full project scope (ground-up construction to remodeling), captured verified direct email, and scheduled a Monday 4:45 PM consultation.',
+    },
+    {
+      callId: 'call-4',
+      recording: callRecordings[3],
+      spotlightNum: '03',
+      headline: 'HANDLING SKEPTICAL OBJECTIONS',
+      callResult: callRecordings[3].duration,
+      apptResult: 'Thursday 11:00 AM Zoom',
+      summary:
+        'Handled an initially suspicious prospect with calm transparency, validated his concerns, clarified his primary growth goal, and locked down a confirmed Thursday 11:00 AM Zoom demo.',
+    },
+  ];
 
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
@@ -59,7 +106,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         <div
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
           style={{
-            backgroundImage: "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('/assets/flynn-sky.jpg')",
+            backgroundImage:
+              "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('/assets/flynn-sky.jpg')",
           }}
           aria-hidden="true"
         />
@@ -91,25 +139,37 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               <div className="grid grid-cols-3 gap-2 pt-2">
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
                   <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">💵</div>
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">$1.8M+</div>
+                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
+                    $1.8M+
+                  </div>
                   <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
-                    PIPELINE<br />SOURCED
+                    PIPELINE
+                    <br />
+                    SOURCED
                   </div>
                 </div>
 
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
                   <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">⏳</div>
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">11+ YEARS</div>
+                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
+                    11+ YEARS
+                  </div>
                   <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
-                    OUTBOUND<br />EXPERIENCE
+                    OUTBOUND
+                    <br />
+                    EXPERIENCE
                   </div>
                 </div>
 
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
                   <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">📞</div>
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">45,000+</div>
+                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
+                    45,000+
+                  </div>
                   <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
-                    SALES CALLS<br />COMPLETED
+                    SALES CALLS
+                    <br />
+                    COMPLETED
                   </div>
                 </div>
               </div>
@@ -118,7 +178,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
                   <span className="text-xl">🔥</span>
                   <div>
-                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">120–150%</div>
+                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
+                      120–150%
+                    </div>
                     <div className="text-[9px] font-display font-bold uppercase text-zinc-500 leading-tight mt-0.5">
                       QUOTA ATTAINMENT ON OUTBOUND
                     </div>
@@ -128,7 +190,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
                   <span className="text-xl">❄️</span>
                   <div>
-                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">150+</div>
+                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
+                      150+
+                    </div>
                     <div className="text-[9px] font-display font-bold uppercase text-zinc-500 leading-tight mt-0.5">
                       DAILY OUTBOUND DIALS
                     </div>
@@ -140,16 +204,24 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <div className="px-3 py-2 bg-white/90 border border-zinc-200/80 rounded-xl flex items-center gap-2 shadow-2xs">
                   <span className="text-base">🇵🇭</span>
                   <div>
-                    <div className="text-[9px] font-display font-extrabold text-zinc-500 uppercase tracking-wider">Role</div>
-                    <div className="text-xs font-bold text-[#0d0e0c] font-display uppercase">Senior SDR & Team Lead</div>
+                    <div className="text-[9px] font-display font-extrabold text-zinc-500 uppercase tracking-wider">
+                      Role
+                    </div>
+                    <div className="text-xs font-bold text-[#0d0e0c] font-display uppercase">
+                      Senior SDR & Team Lead
+                    </div>
                   </div>
                 </div>
 
                 <div className="px-3 py-2 bg-white/90 border border-zinc-200/80 rounded-xl flex items-center gap-2 shadow-2xs">
                   <span className="text-base">🌐</span>
                   <div>
-                    <div className="text-[9px] font-display font-extrabold text-zinc-500 uppercase tracking-wider">Coverage</div>
-                    <div className="text-xs font-bold text-[#0d0e0c] font-display uppercase">US · UK · AU · SG Markets</div>
+                    <div className="text-[9px] font-display font-extrabold text-zinc-500 uppercase tracking-wider">
+                      Coverage
+                    </div>
+                    <div className="text-xs font-bold text-[#0d0e0c] font-display uppercase">
+                      US · UK · AU · SG Markets
+                    </div>
                   </div>
                 </div>
               </div>
@@ -157,13 +229,24 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs font-display">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold uppercase text-zinc-600">Find me</span>
-                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]">
+                  <a
+                    href={personalInfo.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                  >
                     <Linkedin className="w-3.5 h-3.5" />
                   </a>
-                  <a href={`mailto:${personalInfo.email}`} className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]">
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                  >
                     <Mail className="w-3.5 h-3.5" />
                   </a>
-                  <a href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]">
+                  <a
+                    href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                  >
                     <Phone className="w-3.5 h-3.5" />
                   </a>
                   <DiscordButton />
@@ -187,7 +270,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
             <div className="lg:col-span-3 space-y-4">
               <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4">
                 <h2 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight text-left">
-                  HIRE OR<br />INTERVIEW ME
+                  HIRE OR
+                  <br />
+                  INTERVIEW ME
                 </h2>
 
                 <div className="space-y-2.5">
@@ -203,7 +288,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       </div>
                       <span>WhatsApp</span>
                     </div>
-                    <span className="text-zinc-400 group-hover:text-emerald-600 transition-colors font-bold">→</span>
+                    <span className="text-zinc-400 group-hover:text-emerald-600 transition-colors font-bold">
+                      →
+                    </span>
                   </a>
 
                   <a
@@ -218,7 +305,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       </div>
                       <span>LinkedIn</span>
                     </div>
-                    <span className="text-zinc-400 group-hover:text-indigo-600 transition-colors font-bold">→</span>
+                    <span className="text-zinc-400 group-hover:text-indigo-600 transition-colors font-bold">
+                      →
+                    </span>
                   </a>
 
                   <a
@@ -231,7 +320,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       </div>
                       <span>Email</span>
                     </div>
-                    <span className="text-zinc-400 group-hover:text-[#0077b6] transition-colors font-bold">→</span>
+                    <span className="text-zinc-400 group-hover:text-[#0077b6] transition-colors font-bold">
+                      →
+                    </span>
                   </a>
                 </div>
 
@@ -244,7 +335,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     <strong className="text-emerald-600 font-display uppercase tracking-tight block text-sm">
                       IMMEDIATE start
                     </strong>
-                    <span className="text-zinc-500 text-[10px] block font-sans">during US daytime full time</span>
+                    <span className="text-zinc-500 text-[10px] block font-sans">
+                      during US daytime full time
+                    </span>
                   </div>
                 </div>
               </div>
@@ -263,16 +356,28 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
-                <img src="https://user29984.na.imgto.link/public/20261005/regen-digital.avif" alt="Regen Digital" loading="lazy" className="w-full h-full object-contain" />
+                <img
+                  src="https://user29984.na.imgto.link/public/20261005/regen-digital.avif"
+                  alt="Regen Digital"
+                  loading="lazy"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="space-y-1 text-left">
-                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">REGEN DIGITAL</div>
-                <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / NORWEGIAN</div>
+                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
+                  REGEN DIGITAL
+                </div>
+                <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">
+                  USA / NORWEGIAN
+                </div>
                 <div className="text-base font-black font-display text-[#0077b6]">$200,000+</div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
-                  85% Qualified Opportunities<br />
-                  120–150% Quota Attainment<br />
-                  Level 4 Tier in 3 Weeks<br />
+                  85% Qualified Opportunities
+                  <br />
+                  120–150% Quota Attainment
+                  <br />
+                  Level 4 Tier in 3 Weeks
+                  <br />
                   <strong className="text-zinc-900">$960 Incentives</strong>
                 </div>
               </div>
@@ -280,16 +385,28 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
             <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
-                <img src="https://user29984.na.imgto.link/public/20261005/seek-marketing.avif" alt="Seek Marketing" loading="lazy" className="w-full h-full object-contain" />
+                <img
+                  src="https://user29984.na.imgto.link/public/20261005/seek-marketing.avif"
+                  alt="Seek Marketing"
+                  loading="lazy"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="space-y-1 text-left">
-                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">SEEK MARKETING / IHTE</div>
-                <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">USA / CANADIAN / UK</div>
+                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
+                  SEEK MARKETING / IHTE
+                </div>
+                <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">
+                  USA / CANADIAN / UK
+                </div>
                 <div className="text-base font-black font-display text-[#0077b6]">$1.8M+</div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
-                  150+ Daily Outbound Dials<br />
-                  120% Quota Attainment<br />
-                  +18% Response Rate<br />
+                  150+ Daily Outbound Dials
+                  <br />
+                  120% Quota Attainment
+                  <br />
+                  +18% Response Rate
+                  <br />
                   <strong className="text-zinc-900">Qualified Pipeline</strong>
                 </div>
               </div>
@@ -297,16 +414,28 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
             <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
-                <img src="https://user29984.na.imgto.link/public/20261005/averps-pte-ltd.avif" alt="Averps Pte Ltd" loading="lazy" className="w-full h-full object-contain" />
+                <img
+                  src="https://user29984.na.imgto.link/public/20261005/averps-pte-ltd.avif"
+                  alt="Averps Pte Ltd"
+                  loading="lazy"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="space-y-1 text-left">
-                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">AVERPS / FOUND INC.</div>
-                <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">UK / SINGAPORE</div>
+                <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
+                  AVERPS / FOUND INC.
+                </div>
+                <div className="text-[10px] font-display uppercase tracking-wider text-zinc-500 font-extrabold">
+                  UK / SINGAPORE
+                </div>
                 <div className="text-base font-black font-display text-[#0077b6]">$1.2M+</div>
                 <div className="text-[11px] font-sans text-zinc-600 leading-tight">
-                  100% SQL Target Met<br />
-                  22% Demo Conversion<br />
-                  +15% Qualification Lift<br />
+                  100% SQL Target Met
+                  <br />
+                  22% Demo Conversion
+                  <br />
+                  +15% Qualification Lift
+                  <br />
                   <strong className="text-zinc-900">Qualified Pipeline</strong>
                 </div>
               </div>
@@ -315,7 +444,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* PROOF I CAN QUALIFY & BOOK (SPOTLIGHTS) */}
+      {/* PROOF I CAN QUALIFY & BOOK (LANDSCAPE PODCAST VISUALIZERS - NO TRANSCRIPTS) */}
       <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-12 tracking-tight">
@@ -323,298 +452,105 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
           </h2>
 
           <div className="space-y-8">
-            {/* Spotlight 01: Jeeps Only Shop (Mark P., 03:20) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-              <div
-                className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  void handleTogglePlay('call-1');
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 opacity-90" />
-                <div className="absolute top-3 left-3 text-[11px] font-sans text-white/90 font-semibold flex items-center gap-1.5 z-10">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Jeeps Only Shop · AI Screener Disarmed into Discovery Booking</span>
-                </div>
-
-                <div className="relative z-10 w-14 h-14 bg-[#0077b6] group-hover:bg-[#0284c7] rounded-full flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110">
-                  {activeCallId === 'call-1' && isPlaying ? (
-                    <Pause className="w-6 h-6 fill-current" />
-                  ) : (
-                    <Play className="w-6 h-6 fill-current ml-1" />
-                  )}
-                </div>
-
-                <audio
-                  ref={(el) => {
-                    audioRefs.current['call-1'] = el;
-                  }}
-                  src={audioSources['call-1']}
-                  preload="none"
-                  onPlay={() => {
-                    setActiveCallId('call-1');
-                    setIsPlaying(true);
-                  }}
-                  onPause={() => {
-                    if (activeCallId === 'call-1') setIsPlaying(false);
-                  }}
-                  onEnded={() => setIsPlaying(false)}
-                  onError={() => setIsPlaying(false)}
-                  className="absolute opacity-0 pointer-events-none"
-                />
-                <div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
-                  03:20 · Actual Outbound Recording
-                </div>
-              </div>
-
-              <div className="w-full md:w-1/2 space-y-3 text-left">
-                <div className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
-                  01 Skill spotlight
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
-                  AI SCREENER DISARMED & QUALIFIED
-                </h3>
-
-                <div className="grid grid-cols-2 gap-4 py-1 text-xs">
-                  <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Call result</span>
-                    <strong className="text-2xl font-black font-display text-[#0077b6]">03:20</strong>
+            {spotlights.map((item) => {
+              const isItemPlaying = activeCallId === item.callId && isPlaying;
+              return (
+                <div
+                  key={item.callId}
+                  className="bg-white border border-[#dededb] rounded-2xl p-5 sm:p-7 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8"
+                >
+                  {/* Left Column: Landscape Podcast Visualizer */}
+                  <div className="w-full md:w-1/2">
+                    <PodcastVisualizer
+                      duration={item.recording.duration}
+                      company={item.recording.company}
+                      headline={item.headline}
+                      isPlaying={isItemPlaying}
+                      onTogglePlay={() => handleTogglePlay(item.callId)}
+                      audioRefCallback={(el) => {
+                        audioRefs.current[item.callId] = el;
+                      }}
+                      audioSrc={audioSources[item.callId]}
+                      onPlay={() => {
+                        setActiveCallId(item.callId);
+                        setIsPlaying(true);
+                      }}
+                      onPause={() => {
+                        if (activeCallId === item.callId) setIsPlaying(false);
+                      }}
+                      onEnded={() => setIsPlaying(false)}
+                    />
                   </div>
-                  <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Appointment result</span>
-                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Monday 12:00 PM</strong>
-                  </div>
-                </div>
 
-                <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Navigated an automated AI call screening assistant, disarmed prospect resistance upfront (&ldquo;Normally I would say no, but you got me interested, so good job&rdquo;), probed SEO priorities, captured verified email, and booked a Monday 12:00 PM discovery appointment.
-                </p>
+                  {/* Right Column: Dynamic Metadata Card (Zero Transcripts) */}
+                  <div className="w-full md:w-1/2 space-y-3 text-left">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
+                        {item.spotlightNum} Skill spotlight
+                      </span>
+                      <span className="text-[10px] font-display uppercase font-bold text-[#0077b6] bg-sky-50 px-2 py-0.5 rounded border border-sky-100">
+                        {item.recording.company}
+                      </span>
+                    </div>
 
-                <div className="pt-2 flex items-center gap-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      void handleTogglePlay('call-1');
-                    }}
-                    className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs"
-                  >
-                    {activeCallId === 'call-1' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
-                  </button>
-                  <button
-                    onClick={() => setExpandedTranscriptId(expandedTranscriptId === 'call-1' ? null : 'call-1')}
-                    className="text-xs font-sans text-zinc-500 hover:text-black underline cursor-pointer"
-                  >
-                    {expandedTranscriptId === 'call-1' ? 'Hide Transcript' : 'Read Transcript'}
-                  </button>
-                </div>
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
+                      {item.headline}
+                    </h3>
 
-                {expandedTranscriptId === 'call-1' && (
-                  <div className="p-3 bg-zinc-50 rounded-xl text-xs font-sans max-h-40 overflow-y-auto space-y-1.5 border border-zinc-200">
-                    <p><strong>Prospect:</strong> Hi, I&apos;m a call assistant recording this call... Please state who you are.</p>
-                    <p><strong>Flynn:</strong> Hey, this is Flynn. Is this Blackstone Gypsum?</p>
-                    <p><strong>Mark:</strong> Jeeps Only, this is Mark. How can I help you?</p>
-                    <p><strong>Flynn:</strong> I found you guys online and my team created a custom website preview for your business, and it&apos;s already done...</p>
-                    <p><strong>Mark:</strong> Normally I would say no, but you got me interested, so good job. What day works for you?</p>
-                    <p><strong>Flynn:</strong> What about Monday? 12:00 PM?</p>
-                    <p><strong>Mark:</strong> 12 is fine. mark.p@jeepsonlyshop.com.</p>
-                  </div>
-                )}
-              </div>
-            </div>
+                    <div className="grid grid-cols-2 gap-4 py-1 text-xs">
+                      <div>
+                        <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">
+                          Call result
+                        </span>
+                        <strong className="text-2xl font-black font-display text-[#0077b6]">
+                          {item.callResult}
+                        </strong>
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">
+                          Appointment result
+                        </span>
+                        <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">
+                          {item.apptResult}
+                        </strong>
+                      </div>
+                    </div>
 
-            {/* Spotlight 02: CIG Builders (Moises, 02:39) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-              <div
-                className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  void handleTogglePlay('call-3');
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 opacity-90" />
-                <div className="absolute top-3 left-3 text-[11px] font-sans text-white/90 font-semibold flex items-center gap-1.5 z-10">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>CIG Builders · Qualifying Commercial Contractor Scope</span>
-                </div>
+                    <p className="text-xs text-zinc-600 font-sans leading-relaxed">
+                      {item.summary}
+                    </p>
 
-                <div className="relative z-10 w-14 h-14 bg-[#0077b6] group-hover:bg-[#0284c7] rounded-full flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110">
-                  {activeCallId === 'call-3' && isPlaying ? (
-                    <Pause className="w-6 h-6 fill-current" />
-                  ) : (
-                    <Play className="w-6 h-6 fill-current ml-1" />
-                  )}
-                </div>
+                    <div className="pt-2 flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTogglePlay(item.callId);
+                        }}
+                        className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs transition-all flex items-center gap-1.5"
+                      >
+                        {isItemPlaying ? (
+                          <>
+                            <Pause className="w-3.5 h-3.5 fill-white" />
+                            <span>Pause Audio</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-3.5 h-3.5 fill-white ml-0.5" />
+                            <span>Play Full Audio</span>
+                          </>
+                        )}
+                      </button>
 
-                <audio
-                  ref={(el) => {
-                    audioRefs.current['call-3'] = el;
-                  }}
-                  src={audioSources['call-3']}
-                  preload="none"
-                  onPlay={() => {
-                    setActiveCallId('call-3');
-                    setIsPlaying(true);
-                  }}
-                  onPause={() => {
-                    if (activeCallId === 'call-3') setIsPlaying(false);
-                  }}
-                  onEnded={() => setIsPlaying(false)}
-                  onError={() => setIsPlaying(false)}
-                  className="absolute opacity-0 pointer-events-none"
-                />
-                <div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
-                  02:39 · Actual Outbound Recording
-                </div>
-              </div>
-
-              <div className="w-full md:w-1/2 space-y-3 text-left">
-                <div className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
-                  02 Skill spotlight
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
-                  COMMERCIAL CONTRACTOR DISCOVERY
-                </h3>
-
-                <div className="grid grid-cols-2 gap-4 py-1 text-xs">
-                  <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Call result</span>
-                    <strong className="text-2xl font-black font-display text-[#0077b6]">02:39</strong>
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Appointment result</span>
-                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Monday 4:45 PM</strong>
+                      <div className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-500">
+                        <Volume2 className="w-3.5 h-3.5 text-[#0077b6]" />
+                        <span>Live Reactive Stream</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Used a low-friction value opener with a busy commercial contractor, confirmed project scope, captured direct email, and scheduled a Monday 4:45 PM appointment.
-                </p>
-
-                <div className="pt-2 flex items-center gap-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      void handleTogglePlay('call-3');
-                    }}
-                    className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs"
-                  >
-                    {activeCallId === 'call-3' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
-                  </button>
-                  <button
-                    onClick={() => setExpandedTranscriptId(expandedTranscriptId === 'call-3' ? null : 'call-3')}
-                    className="text-xs font-sans text-zinc-500 hover:text-black underline cursor-pointer"
-                  >
-                    {expandedTranscriptId === 'call-3' ? 'Hide Transcript' : 'Read Transcript'}
-                  </button>
-                </div>
-
-                {expandedTranscriptId === 'call-3' && (
-                  <div className="p-3 bg-zinc-50 rounded-xl text-xs font-sans max-h-40 overflow-y-auto space-y-1.5 border border-zinc-200">
-                    <p><strong>Flynn:</strong> My name is Flynn. Just wanted to see if you had a few moments early next week to look at it?</p>
-                    <p><strong>Prospect:</strong> Sure, no problem.</p>
-                    <p><strong>Flynn:</strong> I have around Monday 4:45 PM, is that good?</p>
-                    <p><strong>Prospect:</strong> 4:45 is good. Moises, mkaba03@gmail.com.</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Spotlight 03: Aldis Clean (Hussein, 06:54) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-              <div
-                className="w-full md:w-1/2 relative aspect-video bg-zinc-950 rounded-xl overflow-hidden shadow-md flex items-center justify-center group cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  void handleTogglePlay('call-4');
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-tr from-zinc-900 via-zinc-800 to-zinc-900 opacity-90" />
-                <div className="absolute top-3 left-3 text-[11px] font-sans text-white/90 font-semibold flex items-center gap-1.5 z-10">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Aldis Clean · Overcoming Suspicion into a Zoom Demo</span>
-                </div>
-
-                <div className="relative z-10 w-14 h-14 bg-[#0077b6] group-hover:bg-[#0284c7] rounded-full flex items-center justify-center text-white shadow-xl transition-transform group-hover:scale-110">
-                  {activeCallId === 'call-4' && isPlaying ? (
-                    <Pause className="w-6 h-6 fill-current" />
-                  ) : (
-                    <Play className="w-6 h-6 fill-current ml-1" />
-                  )}
-                </div>
-
-                <audio
-                  ref={(el) => {
-                    audioRefs.current['call-4'] = el;
-                  }}
-                  src={audioSources['call-4']}
-                  preload="none"
-                  onPlay={() => {
-                    setActiveCallId('call-4');
-                    setIsPlaying(true);
-                  }}
-                  onPause={() => {
-                    if (activeCallId === 'call-4') setIsPlaying(false);
-                  }}
-                  onEnded={() => setIsPlaying(false)}
-                  onError={() => setIsPlaying(false)}
-                  className="absolute opacity-0 pointer-events-none"
-                />
-                <div className="absolute bottom-3 right-3 text-[10px] font-sans text-white/90 bg-black/60 px-2 py-0.5 rounded z-10">
-                  06:54 · Actual Outbound Recording
-                </div>
-              </div>
-
-              <div className="w-full md:w-1/2 space-y-3 text-left">
-                <div className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
-                  03 Skill spotlight
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
-                  HANDLING SKEPTICAL OBJECTIONS
-                </h3>
-
-                <div className="grid grid-cols-2 gap-4 py-1 text-xs">
-                  <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Call result</span>
-                    <strong className="text-2xl font-black font-display text-[#0077b6]">06:54</strong>
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 block font-bold">Appointment result</span>
-                    <strong className="text-sm font-bold text-zinc-900 font-display uppercase block mt-1">Thursday 11:00 AM Zoom</strong>
-                  </div>
-                </div>
-
-                <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                  Handled an initially suspicious prospect with calm transparency, validated his concerns, clarified his primary growth goal, and locked down a Thursday 11:00 AM Zoom demo.
-                </p>
-
-                <div className="pt-2 flex items-center gap-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      void handleTogglePlay('call-4');
-                    }}
-                    className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs"
-                  >
-                    {activeCallId === 'call-4' && isPlaying ? 'Pause Audio' : 'Play Full Audio'}
-                  </button>
-                  <button
-                    onClick={() => setExpandedTranscriptId(expandedTranscriptId === 'call-4' ? null : 'call-4')}
-                    className="text-xs font-sans text-zinc-500 hover:text-black underline cursor-pointer"
-                  >
-                    {expandedTranscriptId === 'call-4' ? 'Hide Transcript' : 'Read Transcript'}
-                  </button>
-                </div>
-
-                {expandedTranscriptId === 'call-4' && (
-                  <div className="p-3 bg-zinc-50 rounded-xl text-xs font-sans max-h-40 overflow-y-auto space-y-1.5 border border-zinc-200">
-                    <p><strong>Prospect:</strong> You built a website for me without my permission?!</p>
-                    <p><strong>Flynn:</strong> We do this for 100 businesses every day. If you love it, you can keep it. If not, no hard feelings!</p>
-                    <p><strong>Prospect:</strong> No commitments, it&apos;s for free? Then you can call me tomorrow then!</p>
-                  </div>
-                )}
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -670,7 +606,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
                   </div>
                   <img
-                    src="/assets/brendon_signature_media_1791396879400_5pk4r.png"
+                    src="/media/brendon_signature_media_1791396879400_5pk4r.png"
                     onError={(e) => {
                       const target = e.currentTarget;
                       target.onerror = null;
