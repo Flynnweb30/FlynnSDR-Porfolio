@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { PageRoute } from '../types';
 import { personalInfo, callRecordings } from '../data/flynnData';
 import BanknoteNav from '../components/BanknoteNav';
@@ -12,7 +12,6 @@ import {
   Phone,
   Linkedin,
   Play,
-  Pause,
   MessageCircle,
   Volume2,
 } from 'lucide-react';
@@ -26,6 +25,7 @@ interface HomePageProps {
 export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: HomePageProps) {
   const [activeCallId, setActiveCallId] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const audioRefs = useRef<Record<string, HTMLAudioElement | null>>({});
 
   const audioSources: Record<string, string> = {
@@ -43,16 +43,34 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
   };
 
+  // Stop all audio playback
+  const stopAllAudio = () => {
+    Object.keys(audioRefs.current).forEach((id) => {
+      audioRefs.current[id]?.pause();
+    });
+    setActiveCallId(null);
+    setIsPlaying(false);
+  };
+
+  // Mutual Exclusivity: Only 1 audio/video playback active at any time
   const handleTogglePlay = (callId: string) => {
     const audio = audioRefs.current[callId];
     if (!audio) return;
 
+    // If video is currently playing, stop it immediately
+    if (isVideoPlaying) {
+      setIsVideoPlaying(false);
+    }
+
+    // Toggle current audio or switch to new audio
     if (activeCallId === callId && isPlaying) {
       audio.pause();
+      setActiveCallId(null);
+      setIsPlaying(false);
       return;
     }
 
-    // Stop any other active call
+    // Pause all other audio tracks
     Object.keys(audioRefs.current).forEach((id) => {
       if (id !== callId) {
         audioRefs.current[id]?.pause();
@@ -62,10 +80,22 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     setActiveCallId(callId);
     audio.play().catch(() => {
       setIsPlaying(false);
+      setActiveCallId(null);
     });
   };
 
-  // 3 Primary Spotlights rendered with Landscape Podcast Visualizer
+  // Listen to global media events to guarantee single-source playback
+  useEffect(() => {
+    const handleGlobalMedia = (e: Event) => {
+      const custom = e as CustomEvent;
+      if (custom.detail?.type === 'audio') {
+        setIsVideoPlaying(false);
+      }
+    };
+    window.addEventListener('flynn:mediaPlay', handleGlobalMedia);
+    return () => window.removeEventListener('flynn:mediaPlay', handleGlobalMedia);
+  }, []);
+
   const spotlights = [
     {
       callId: 'call-1',
@@ -75,7 +105,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       callResult: callRecordings[0].duration,
       apptResult: 'Monday 12:00 PM',
       summary:
-        'Navigated an automated AI call screening assistant, disarmed prospect resistance upfront ("Normally I would say no, but you got me interested, so good job"), uncovered SEO priorities, captured verified decision-maker email, and booked a Monday 12:00 PM discovery appointment.',
+        'Navigated an automated AI call screening assistant, disarmed prospect resistance upfront ("Normally I would say no, but you got me interested, so good job"), uncovered SEO priorities, captured verified decision-maker contact, and booked a Monday 12:00 PM discovery appointment.',
     },
     {
       callId: 'call-3',
@@ -85,7 +115,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       callResult: callRecordings[2].duration,
       apptResult: 'Monday 4:45 PM',
       summary:
-        'Used a low-friction value opener with a busy commercial contractor on the jobsite, probed full project scope (ground-up construction to remodeling), captured verified direct email, and scheduled a Monday 4:45 PM consultation.',
+        'Used a low-friction value opener with a busy commercial contractor on the jobsite, probed full project scope (ground-up construction to remodeling), captured verified direct contact, and scheduled a Monday 4:45 PM consultation.',
     },
     {
       callId: 'call-4',
@@ -259,7 +289,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <img
                   src={personalInfo.heroImage}
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = personalInfo.heroImageFallback;
+                    const target = e.currentTarget;
+                    target.onerror = null;
+                    target.src = personalInfo.heroImageFallback;
                   }}
                   alt="Flynn - Senior SDR"
                   className="w-full h-auto object-cover object-top drop-shadow-[0_15px_30px_rgba(0,0,0,0.22)] select-none pointer-events-none rounded-xl"
@@ -444,7 +476,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* PROOF I CAN QUALIFY & BOOK (LANDSCAPE PODCAST VISUALIZERS - NO TRANSCRIPTS) */}
+      {/* PROOF I CAN QUALIFY & BOOK (GREEN REACTIVE WAVEFORM, IMMEDIATE BUTTON HIDE) */}
       <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-12 tracking-tight">
@@ -459,7 +491,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   key={item.callId}
                   className="bg-white border border-[#dededb] rounded-2xl p-5 sm:p-7 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8"
                 >
-                  {/* Left Column: Landscape Podcast Visualizer */}
+                  {/* Left Column: Landscape Podcast Visualizer with Green Reactive Waveform */}
                   <div className="w-full md:w-1/2">
                     <PodcastVisualizer
                       duration={item.recording.duration}
@@ -476,13 +508,19 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                         setIsPlaying(true);
                       }}
                       onPause={() => {
-                        if (activeCallId === item.callId) setIsPlaying(false);
+                        if (activeCallId === item.callId) {
+                          setIsPlaying(false);
+                          setActiveCallId(null);
+                        }
                       }}
-                      onEnded={() => setIsPlaying(false)}
+                      onEnded={() => {
+                        setIsPlaying(false);
+                        setActiveCallId(null);
+                      }}
                     />
                   </div>
 
-                  {/* Right Column: Dynamic Metadata Card (Zero Transcripts) */}
+                  {/* Right Column: Dynamic Metadata Card with Auto-Hiding Play/Pause Button */}
                   <div className="w-full md:w-1/2 space-y-3 text-left">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
@@ -521,29 +559,28 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     </p>
 
                     <div className="pt-2 flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleTogglePlay(item.callId);
-                        }}
-                        className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs transition-all flex items-center gap-1.5"
-                      >
-                        {isItemPlaying ? (
-                          <>
-                            <Pause className="w-3.5 h-3.5 fill-white" />
-                            <span>Pause Audio</span>
-                          </>
-                        ) : (
-                          <>
-                            <Play className="w-3.5 h-3.5 fill-white ml-0.5" />
-                            <span>Play Full Audio</span>
-                          </>
-                        )}
-                      </button>
+                      {/* Play Button: HIDES IMMEDIATELY WHEN PLAYING, reappears when playback triggers pause */}
+                      {!isItemPlaying ? (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleTogglePlay(item.callId);
+                          }}
+                          className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white text-xs font-display font-extrabold uppercase rounded-xl cursor-pointer shadow-xs transition-all flex items-center gap-1.5"
+                        >
+                          <Play className="w-3.5 h-3.5 fill-white ml-0.5" />
+                          <span>Play Full Audio</span>
+                        </button>
+                      ) : (
+                        <div className="flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl text-xs font-display font-bold uppercase">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                          <span>Playing Outbound Recording</span>
+                        </div>
+                      )}
 
                       <div className="flex items-center gap-1.5 text-[11px] font-mono text-zinc-500">
-                        <Volume2 className="w-3.5 h-3.5 text-[#0077b6]" />
+                        <Volume2 className="w-3.5 h-3.5 text-emerald-600" />
                         <span>Live Reactive Stream</span>
                       </div>
                     </div>
@@ -555,7 +592,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* LEADERSHIP SPRINT VIDEO SECTION WITH CONFIGURABLE INTRO VIDEO PLAYER */}
+      {/* LEADERSHIP SPRINT VIDEO SECTION WITH EXCLUSIVE PLAYBACK CONTROL */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#dededb] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 text-center">
@@ -563,8 +600,17 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               GET TO KNOW YOUR NEXT SENIOR SDR
             </h2>
 
-            {/* Configurable Video Component (Environment Variable VITE_INTRO_VIDEO_URL) */}
-            <IntroVideoPlayer />
+            {/* Mutually Exclusive Video: stops all audios when video starts */}
+            <IntroVideoPlayer
+              isPlaying={isVideoPlaying}
+              onPlayStarted={() => {
+                stopAllAudio();
+                setIsVideoPlaying(true);
+              }}
+              onPlayStopped={() => {
+                setIsVideoPlaying(false);
+              }}
+            />
 
             <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl mx-auto font-sans leading-relaxed">
               Flynn combines 11+ years of relentless cold calling stamina with consultative discovery, coaching newer reps on the sales floor, and converting outbound friction into high-intent discovery calls.
@@ -606,7 +652,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     — <strong className="text-zinc-900 font-display uppercase tracking-wider">Brendon Gocaj</strong>, Owner & Director, Regen Digital
                   </div>
                   <img
-                    src="/media/brendon_signature_media_1791396879400_5pk4r.png"
+                    src={personalInfo.brendonSignature}
                     onError={(e) => {
                       const target = e.currentTarget;
                       target.onerror = null;

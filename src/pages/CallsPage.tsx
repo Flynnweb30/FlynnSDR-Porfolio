@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import ColdCallVault from '../components/ColdCallVault';
 import { Headphones, CheckCircle2 } from 'lucide-react';
 import { PageRoute } from '../types';
@@ -33,9 +33,9 @@ export default function CallsPage({ onNavigate, onOpenBooking }: CallsPageProps)
                 <span>4 Real Outbound Audio Recordings</span>
               </span>
               <span>·</span>
-              <span>Synchronized Verbatim Transcripts</span>
-              <span>·</span>
               <span>Tactical SDR Breakdowns</span>
+              <span>·</span>
+              <span>Contact Information Protected</span>
             </div>
           </div>
         </div>

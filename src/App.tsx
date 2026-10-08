@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -38,6 +38,21 @@ export default function App() {
 
     return 'home';
   };
+
+    // Single Audio/Video Playback Coordinator: Pauses any other playing media
+  useEffect(() => {
+    const handleGlobalMediaPlay = (e: Event) => {
+      const activeEl = e.target as HTMLMediaElement;
+      if (!activeEl || !(activeEl instanceof HTMLMediaElement)) return;
+      document.querySelectorAll('audio, video').forEach((media) => {
+        if (media !== activeEl && !media.paused) {
+          media.pause();
+        }
+      });
+    };
+    window.addEventListener('play', handleGlobalMediaPlay, true);
+    return () => window.removeEventListener('play', handleGlobalMediaPlay, true);
+  }, []);
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -183,4 +198,3 @@ export default function App() {
     </div>
   );
 }
-

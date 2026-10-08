@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { personalInfo } from '../data/flynnData';
 import {
@@ -18,6 +18,11 @@ interface ReferencesPageProps {
 }
 
 export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume }: ReferencesPageProps) {
+  const [sigSrc, setSigSrc] = useState(personalInfo.brendonSignature);
+  const [flynnImgSrc, setFlynnImgSrc] = useState(
+    'https://audiolink-oskn.onrender.com/media/flynn_in_office__1__media_1791399641280_i2l2j.png'
+  );
+
   const testimonials = [
     {
       name: 'TL Dee',
@@ -143,7 +148,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                     </p>
                   </div>
 
-                  {/* Guaranteed Persistent Signature Loading */}
+                  {/* Naturally Integrated Signature with production CDN link */}
                   <div className="mt-5 pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
                       <div className="text-sm font-black text-[#0d0e0c] font-display uppercase tracking-tight">Brendon Gocaj</div>
@@ -153,7 +158,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
 
                     <div className="relative pt-1 sm:pt-0">
                       <img
-                        src="/media/brendon_signature_media_1791396879400_5pk4r.png"
+                        src={sigSrc}
                         onError={(e) => {
                           const target = e.currentTarget;
                           target.onerror = null;
@@ -171,11 +176,11 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                 <div className="relative flex justify-center lg:self-end lg:-mb-5">
                   <div className="absolute bottom-0 w-40 h-8 rounded-full bg-sky-900/10 blur-md" />
                   <img
-                    src="/media/flynn_in_office__1__media_1791399641280_i2l2j.png"
+                    src={flynnImgSrc}
                     onError={(e) => {
                       const target = e.currentTarget;
                       target.onerror = null;
-                      target.src = 'https://user29984.na.imgto.link/public/20261005/flynn-office.avif';
+                      target.src = personalInfo.heroImage;
                     }}
                     alt="Flynn in the sales office"
                     loading="lazy"

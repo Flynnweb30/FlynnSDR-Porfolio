@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Play, X, Award } from 'lucide-react';
 import { personalInfo } from '../data/flynnData';
 
@@ -6,22 +6,38 @@ interface IntroVideoPlayerProps {
   customVideoUrl?: string;
   posterImage?: string;
   fallbackImage?: string;
+  isPlaying?: boolean;
+  onPlayStarted?: () => void;
+  onPlayStopped?: () => void;
 }
 
 export default function IntroVideoPlayer({
-  customVideoUrl = import.meta.env.VITE_INTRO_VIDEO_URL || import.meta.env.VITE_PROFILE_VIDEO_URL,
+  customVideoUrl = import.meta.env.VITE_INTRO_VIDEO_URL || '/media/flynn___s_introduction_media_1791405322996_0a14q.mp4',
   posterImage = personalInfo.teamImage,
   fallbackImage = personalInfo.teamImageFallback,
+  isPlaying = false,
+  onPlayStarted,
+  onPlayStopped,
 }: IntroVideoPlayerProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [internalPlaying, setInternalPlaying] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Sync external exclusivity state: pause video if another media takes over
+  useEffect(() => {
+    if (!isPlaying && internalPlaying) {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      setInternalPlaying(false);
+    }
+  }, [isPlaying, internalPlaying]);
 
   const parsedVideo = useMemo(() => {
     if (!customVideoUrl) return null;
     const trimmed = customVideoUrl.trim();
     if (!trimmed) return null;
 
-    // YouTube Parser
     const ytMatch = trimmed.match(
       /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i
     );
@@ -29,13 +45,11 @@ export default function IntroVideoPlayer({
       return { type: 'iframe', src: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&rel=0` };
     }
 
-    // Loom Parser
     const loomMatch = trimmed.match(/loom\.com\/(?:share|embed)\/([a-zA-Z0-9]+)/i);
     if (loomMatch) {
       return { type: 'iframe', src: `https://www.loom.com/embed/${loomMatch[1]}?autoplay=1` };
     }
 
-    // Vimeo Parser
     const vimeoMatch = trimmed.match(
       /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)/i
     );
@@ -43,20 +57,33 @@ export default function IntroVideoPlayer({
       return { type: 'iframe', src: `https://player.vimeo.com/video/${vimeoMatch[3]}?autoplay=1` };
     }
 
-    // Direct Video File (.mp4, .webm, or direct hosted URL)
     return { type: 'video', src: trimmed };
   }, [customVideoUrl]);
 
   const handlePlayClick = () => {
-    if (parsedVideo) {
-      setIsPlaying(true);
-      setHasError(false);
+    if (parsedVideo && !hasError) {
+      setInternalPlaying(true);
+      if (onPlayStarted) {
+        onPlayStarted();
+      }
     }
   };
 
+  const handleStopClick = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    setInternalPlaying(false);
+    if (onPlayStopped) {
+      onPlayStopped();
+    }
+  };
+
+  const activePlayState = isPlaying || internalPlaying;
+
   return (
     <div className="relative aspect-video max-w-3xl mx-auto rounded-2xl overflow-hidden border border-zinc-200 shadow-xl bg-zinc-950 group">
-      {isPlaying && parsedVideo && !hasError ? (
+      {activePlayState && parsedVideo && !hasError ? (
         <div className="relative w-full h-full bg-black">
           {parsedVideo.type === 'iframe' ? (
             <iframe
@@ -68,21 +95,39 @@ export default function IntroVideoPlayer({
             />
           ) : (
             <video
+              ref={videoRef}
               src={parsedVideo.src}
               controls
               autoPlay
               playsInline
               preload="metadata"
-              onError={() => setHasError(true)}
+              onPlay={() => {
+                setInternalPlaying(true);
+                if (onPlayStarted) onPlayStarted();
+              }}
+              onPause={() => {
+                setInternalPlaying(false);
+                if (onPlayStopped) onPlayStopped();
+              }}
+              onEnded={() => {
+                setInternalPlaying(false);
+                if (onPlayStopped) onPlayStopped();
+              }}
+              onError={() => {
+                setHasError(true);
+                setInternalPlaying(false);
+                if (onPlayStopped) onPlayStopped();
+              }}
               className="w-full h-full object-contain bg-black"
             >
               Your browser does not support HTML5 video playback.
             </video>
           )}
 
+          {/* Close video and restore poster */}
           <button
             type="button"
-            onClick={() => setIsPlaying(false)}
+            onClick={handleStopClick}
             className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/70 hover:bg-black text-white/90 hover:text-white transition-colors cursor-pointer shadow-md"
             title="Close video"
             aria-label="Close video"
@@ -92,14 +137,14 @@ export default function IntroVideoPlayer({
         </div>
       ) : (
         <div
-          className={`relative w-full h-full ${parsedVideo ? 'cursor-pointer' : ''} select-none`}
+          className="relative w-full h-full cursor-pointer select-none"
           onClick={handlePlayClick}
-          role={parsedVideo ? 'button' : undefined}
-          tabIndex={parsedVideo ? 0 : undefined}
+          role="button"
+          tabIndex={0}
           onKeyDown={(e) => {
-            if (parsedVideo && (e.key === 'Enter' || e.key === ' ')) handlePlayClick();
+            if (e.key === 'Enter' || e.key === ' ') handlePlayClick();
           }}
-          aria-label={parsedVideo ? 'Play introduction video' : 'Flynn leading outbound sales sprints'}
+          aria-label="Play introduction video"
         >
           <img
             src={posterImage}
@@ -112,11 +157,14 @@ export default function IntroVideoPlayer({
             className="w-full h-full object-cover object-center filter saturate-[1.05] transition-transform duration-500 group-hover:scale-102"
           />
 
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#0077b6] group-hover:bg-[#0284c7] rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-300 group-hover:scale-110 active:scale-95">
-              <Play className="w-8 h-8 fill-current ml-1" />
+          {/* Button HIDES immediately when activePlayState is true */}
+          {!activePlayState && (
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#0077b6] group-hover:bg-[#0284c7] rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-300 group-hover:scale-110 active:scale-95">
+                <Play className="w-8 h-8 fill-current ml-1" />
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 bg-black/80 backdrop-blur-md p-3 rounded-xl text-left text-white flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-sans border border-white/10">
             <div>

@@ -1,4 +1,4 @@
-﻿import { WorkExperience, CallRecording } from '../types';
+import { WorkExperience, CallRecording } from '../types';
 
 export const personalInfo = {
   fullName: 'Flynn James Q. Pontino',
@@ -20,10 +20,11 @@ export const personalInfo = {
   meetingsPerMonth: '30+',
   callsPerDay: '150+',
   quotaAttainment: '120–150%',
-  heroImage: '/assets/flynn-in-office-2.avif',
+  heroImage: 'https://user29984.na.imgto.link/public/20261008/5e3a649c37291e96b2b8aabf-flynn-profile.avif',
+  heroImageFallback: 'https://user29984.na.imgto.link/public/20261008/5e3a649c37291e96b2b8aabf-flynn-profile.avif',
   teamImage: '/assets/team-flynn-1.avif',
-  heroImageFallback: 'https://user29984.na.imgto.link/public/20261005/flynn-in-office-2.avif',
   teamImageFallback: 'https://user29984.na.imgto.link/public/20261005/team-flynn-1.avif',
+  brendonSignature: 'https://user29984.na.imgto.link/public/20261008/1cd774364d2bf91c9ccc4e4a-brendon-signature.avif',
 };
 
 export const keyAchievements = [
@@ -195,16 +196,12 @@ export const whyInterviewFlynn = [
   },
 ];
 
-// Production Call Lineup:
-// 1. AI Screener Disarmed · Jeep Customization Discovery (Jeeps Only Shop · Mark P. · 03:20)
-// 2. Reschedule Recovery in 56 Seconds (Region Digital · Andy · 00:56)
-// 3. Commercial Contractor Discovery & Appointment Setting (CIG Builders · Moises · 02:39)
-// 4. Handling a Skeptical Objection & Booking a Zoom Demo (Aldis Clean · Hussein · 06:54)
+// Production Call Lineup with PII Protected
 export const callRecordings: CallRecording[] = [
   {
     id: 'call-1',
     title: 'AI Screener Disarmed · Jeep Customization Discovery',
-    prospect: 'Mark (Mark P.)',
+    prospect: 'Mark P.',
     company: 'Jeeps Only Shop',
     industry: 'Automotive / Specialized Jeep Services',
     duration: '03:20',
@@ -214,29 +211,9 @@ export const callRecordings: CallRecording[] = [
     skillTag: 'AI Screener Disarmed · Value-First Hook',
     dealSize: 'Custom Web Architecture & SEO Scope',
     challenge: 'Automated call assistant screened incoming dial; prospect admitted: "Normally I would say no, but you got me interested, so good job."',
-    tacticalWin: 'Flynn cleared the automated AI call screener calmly, delivered a value-first custom preview hook, converted initial skepticism into engagement, uncovered SEO priorities, captured the decision-maker email, and locked in Monday 12:00 PM.',
+    tacticalWin: 'Flynn cleared the automated AI call screener calmly, delivered a value-first custom preview hook, converted initial skepticism into engagement, uncovered SEO priorities, captured the decision-maker contact, and locked in Monday 12:00 PM.',
     keyMetric: 'AI Screener Cleared & Meeting Booked in 03:20',
-    transcript: [
-      { time: '00:01', speaker: 'Prospect', text: "Hi, I'm a call assistant recording this call for the person you're trying to reach. Please state who you are and why you're calling.", technique: 'Automated AI Call Screening Gatekeeper' },
-      { time: '00:09', speaker: 'Flynn', text: 'Hey, this is Flynn. Is this Blackstone Gypsum?', technique: 'Calm Identity Disclosure' },
-      { time: '00:17', speaker: 'Prospect', text: 'Thank you. Please hold while I connect you.', technique: 'AI Screener Cleared' },
-      { time: '00:30', speaker: 'Prospect', text: 'Jeeps Only, this is Mark. How can I help you?' },
-      { time: '00:33', speaker: 'Flynn', text: 'Yeah hi Mark! I found you guys online and wanted to share that my team created a custom website preview for your business, and it is already done. Was wondering if you have a few moments early next week to quickly look at it and share your thoughts perhaps?', technique: 'Permission-Based Custom Preview Hook' },
-      { time: '00:55', speaker: 'Prospect', text: 'Um, yeah. Normally I would say no, but you got me interested, so good job. Next week, yeah, what day works for you?', technique: 'Skepticism Converted to Immediate Interest' },
-      { time: '01:07', speaker: 'Flynn', text: 'Yeah, I got here probably Monday. Would you prefer in the morning or afternoon?', technique: 'Binary Timing Choice' },
-      { time: '01:13', speaker: 'Prospect', text: 'Around 11 o\'clock is usually pretty good.' },
-      { time: '01:17', speaker: 'Flynn', text: '11? Can we do it like 12:00 PM or 1 perhaps?', technique: 'Calendar Precision Calibration' },
-      { time: '01:21', speaker: 'Prospect', text: 'Yeah, 12 is fine.' },
-      { time: '01:24', speaker: 'Flynn', text: 'Perfect. And Mark, can I have the best email so we can send out the meeting invites?' },
-      { time: '01:29', speaker: 'Prospect', text: 'Yeah, it\'s mark.p@jeepsonlyshop.com.' },
-      { time: '01:49', speaker: 'Flynn', text: 'Gotcha. Before I go Mark, do you have a website already?', technique: 'Current State Discovery' },
-      { time: '01:57', speaker: 'Prospect', text: 'Yeah, we\'ve got a website. If you go to jeepsonlyshop.com you\'ll see the website.' },
-      { time: '02:04', speaker: 'Flynn', text: 'Perfect. And is there anything you need to improve to the website since you\'re considering this? Are you looking for more leads, credibility, or something else?', technique: 'Pain Point Probing (SEO/Leads)' },
-      { time: '02:15', speaker: 'Prospect', text: 'Yeah, so SEO is always top of mind. We have an AI video on it that we\'re going to replace with our content, but other than that it\'s okay.' },
-      { time: '02:37', speaker: 'Flynn', text: 'Okay perfect! Again, I will see you next week Monday around 12:00 PM. I\'ll send the invite to your email and SMS. My name is Flynn and Caelan will present it to you for 5 to 10 minutes.', technique: 'Warm Handoff Expectations Lock' },
-      { time: '03:14', speaker: 'Prospect', text: 'Got it, perfect.' },
-      { time: '03:16', speaker: 'Flynn', text: 'You do have a great weekend Mark, see ya!' },
-    ],
+    transcript: [],
   },
   {
     id: 'call-2',
@@ -250,22 +227,15 @@ export const callRecordings: CallRecording[] = [
     date: 'Actual Outbound Dial',
     skillTag: 'Show-Up Rate Safeguard · Frictionless Pivot',
     dealSize: 'Outbound Appointment Safeguard',
-    challenge: 'Prospect was on the road heading to work and needed to cancel today\'s scheduled session.',
-    tacticalWin: 'Flynn maintained total composure, matched prospect urgency, and secured tomorrow at 10:00 AM with zero friction.',
+    challenge: 'Prospect was on the road heading to work and needed to cancel scheduled session.',
+    tacticalWin: 'Flynn maintained total composure, matched prospect urgency, and secured next day at 10:00 AM with zero friction.',
     keyMetric: 'Zero Pipeline Lost: Immediate Reschedule',
-    transcript: [
-      { time: '00:02', speaker: 'Flynn', text: 'Hey Andy!' },
-      { time: '00:07', speaker: 'Flynn', text: 'Flynn here from Region Digital! Gentle reminder that your free website preview is scheduled for today at 10:30. And your custom website is looking great right now! Does that time still work for you?', technique: 'Pre-Meeting Enthusiasm' },
-      { time: '00:21', speaker: 'Prospect', text: 'I\'m trying to get ready for work, I\'m going to have to cancel today at 10:30. I\'m going to be on the road, I\'m not going to be able to do the thing. Move it to any day this week I\'m off.' },
-      { time: '00:33', speaker: 'Flynn', text: 'Sure, not a problem! We can do it like tomorrow at 10:00?', technique: 'Instant Alternative Solution' },
-      { time: '00:40', speaker: 'Prospect', text: 'That will be fine! Do that for me, I\'m in the middle of getting ready to head out.' },
-      { time: '00:52', speaker: 'Flynn', text: 'Sure, not a problem! See you then Andy, cheers!' },
-    ],
+    transcript: [],
   },
   {
     id: 'call-3',
     title: 'Commercial Contractor Discovery & Appointment Setting',
-    prospect: 'Moises',
+    prospect: 'Moises K.',
     company: 'CIG Builders',
     industry: 'General Construction & Remodeling',
     duration: '02:39',
@@ -275,30 +245,14 @@ export const callRecordings: CallRecording[] = [
     skillTag: 'Commercial Contractor Discovery & Appointment Setting',
     dealSize: 'Commercial Contractor Pipeline',
     challenge: 'Gatekeeper and busy general contractor fielding incoming calls while active on the jobsite.',
-    tacticalWin: 'Quickly established service value, probed commercial scope (ground-up to remodeling), captured verified email, and scheduled a Monday 4:45 PM appointment.',
+    tacticalWin: 'Quickly established service value, probed commercial scope (ground-up to remodeling), captured verified contact, and scheduled a Monday 4:45 PM appointment.',
     keyMetric: 'Under 3 Minutes: Cold to Booked Meeting',
-    transcript: [
-      { time: '00:04', speaker: 'Flynn', text: 'Hey, is this CIG Builders?' },
-      { time: '00:07', speaker: 'Prospect', text: 'Yes, it is.' },
-      { time: '00:11', speaker: 'Flynn', text: 'My name is Flynn. I found you online and wanted to let you know my team created a free custom website preview for your business. It is already done. Just wanted to see if you had a few moments early next week to look at it?', technique: 'Low-Friction Hook' },
-      { time: '00:36', speaker: 'Prospect', text: 'Sure, no problem.' },
-      { time: '00:40', speaker: 'Flynn', text: 'Fantastic! Would you prefer a morning session or afternoon?', technique: 'Binary Choice Booking' },
-      { time: '00:47', speaker: 'Prospect', text: 'Afternoon.' },
-      { time: '00:50', speaker: 'Flynn', text: 'I have around Monday 4:45 PM, is that good, or earlier?' },
-      { time: '01:00', speaker: 'Prospect', text: '4:45 is good.' },
-      { time: '01:04', speaker: 'Flynn', text: 'Great, and what is your name again, sorry?' },
-      { time: '01:08', speaker: 'Prospect', text: 'Moises.' },
-      { time: '01:13', speaker: 'Flynn', text: 'Can I have the best email so we can send the invite?' },
-      { time: '01:18', speaker: 'Prospect', text: 'mkaba03@gmail.com' },
-      { time: '01:45', speaker: 'Flynn', text: 'And what is your main goal for the website? More customers, showcasing work, or making it easier to contact you?', technique: 'Pain Point Probing' },
-      { time: '01:56', speaker: 'Prospect', text: 'All of the above! Ground up construction to rehab, residential and commercial.' },
-      { time: '02:37', speaker: 'Flynn', text: 'See you then on Monday at 4:45 PM Moises!' },
-    ],
+    transcript: [],
   },
   {
     id: 'call-4',
     title: 'Handling a Skeptical Objection & Booking a Zoom Demo',
-    prospect: 'Hussein / Aldis',
+    prospect: 'Hussein A.',
     company: 'Aldis Clean',
     industry: 'Commercial Cleaning Services',
     duration: '06:54',
@@ -307,24 +261,9 @@ export const callRecordings: CallRecording[] = [
     date: 'Actual Outbound Dial',
     skillTag: 'Handling a Skeptical Objection & Booking a Zoom Demo',
     dealSize: '$18,000 Target Commercial Contract',
-    challenge: 'Prospect was immediately defensive and agitated: "You built a website for me without my consent?!"',
-    tacticalWin: 'Used calm, transparent context to disarm hostility, validated prospect concerns, collected direct email, and confirmed a Thursday 11:00 AM Zoom meeting.',
+    challenge: 'Prospect was immediately defensive: "You built a website for me without my permission?!"',
+    tacticalWin: 'Used calm, transparent context to disarm hostility, validated prospect concerns, collected verified contact, and confirmed a Thursday 11:00 AM Zoom meeting.',
     keyMetric: 'Hostile Defense Overturned to Confirmed Demo',
-    transcript: [
-      { time: '00:07', speaker: 'Prospect', text: 'Aldis Clean, how may I help you?' },
-      { time: '00:15', speaker: 'Flynn', text: 'Flynn here! I found you guys online and wanted to share that my team created a custom website preview for your business. It is already done—I was wondering if you had a few moments tomorrow or Friday to look at it and share your thoughts?', technique: 'Value-First Custom Hook' },
-      { time: '00:42', speaker: 'Prospect', text: 'You built a website for me without my permission? Without my consent?!', technique: 'Hostile Defense Objection' },
-      { time: '00:57', speaker: 'Flynn', text: 'Basically we do this for 100 local businesses every day, and since you were on our list, we created one for you. If you love it, you can keep it. If not, no hard feelings!', technique: 'Disarming Tension & Normalizing' },
-      { time: '01:34', speaker: 'Prospect', text: 'Is it that nice someone actually created a website for you? And it\'s for free, as I said. No commitments, it\'s for free? Then you can call me tomorrow then!', technique: 'Objection Overturned to Curiosity' },
-      { time: '01:55', speaker: 'Flynn', text: 'Sure! Do you prefer morning callbacks or afternoon?', technique: 'Assumptive Timing Choice' },
-      { time: '02:01', speaker: 'Prospect', text: 'In the morning, like 11:00 AM.' },
-      { time: '02:09', speaker: 'Flynn', text: 'Perfect, I got 11:00 AM here. My name is Flynn by the way—what was your name?', technique: 'Rapport Lock' },
-      { time: '02:24', speaker: 'Prospect', text: 'My nickname is Aldis, my real name is Hussein.' },
-      { time: '02:33', speaker: 'Flynn', text: 'Hussein! Do you have a best email so we can send you the invite for the meeting? We will screenshare the website via Zoom.', technique: 'Expectation Setting' },
-      { time: '03:25', speaker: 'Prospect', text: 'hussainssay@gmail.com' },
-      { time: '04:10', speaker: 'Flynn', text: 'Wonderful! What is your main goal for the website—more leads, credibility, or something else?', technique: 'BANT Discovery' },
-      { time: '04:40', speaker: 'Prospect', text: 'More leads and to have a platform to engage with my customers.' },
-      { time: '05:58', speaker: 'Flynn', text: 'So we will see you on Thursday at 11:00 AM. I will send the invite right after this call to your email and SMS. Cheers!' },
-    ],
+    transcript: [],
   },
 ];
