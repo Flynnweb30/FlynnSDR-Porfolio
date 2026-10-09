@@ -27,7 +27,6 @@ export default function PodcastVisualizer({
   onPause,
   onEnded,
 }: PodcastVisualizerProps) {
-  // Natural speech pattern distribution for green bars
   const leftWaveHeights = useMemo(
     () => [24, 38, 55, 32, 70, 88, 52, 44, 78, 96, 62, 48, 82, 36, 28, 18],
     []
@@ -52,19 +51,16 @@ export default function PodcastVisualizer({
       aria-label={`${headline} - ${isPlaying ? 'Pause audio' : 'Play audio'}`}
       className="w-full relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg border border-[#0077b6]/30 select-none group cursor-pointer transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] flex flex-col justify-between"
     >
-      {/* Blueprint Blue Grid Texture Backdrop */}
       <div
         className="absolute inset-0 bg-[#0077b6] [background-image:linear-gradient(rgba(0,0,0,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.18)_1px,transparent_1px)] [background-size:20px_20px]"
         aria-hidden="true"
       />
 
-      {/* Atmospheric depth overlay */}
       <div
         className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-[#00527f]/85 pointer-events-none"
         aria-hidden="true"
       />
 
-      {/* Hidden Native Audio Element with automatic PII mute protection */}
       <audio
         ref={audioRefCallback}
         src={audioSrc}
@@ -76,7 +72,6 @@ export default function PodcastVisualizer({
         className="absolute opacity-0 pointer-events-none"
       />
 
-      {/* Top Meta Bar */}
       <div className="relative z-10 flex items-center justify-between px-3.5 sm:px-5 pt-3 sm:pt-4">
         <div className="font-display font-black text-[10px] sm:text-xs text-white uppercase tracking-wider flex items-center gap-1.5 drop-shadow-xs">
           <span
@@ -92,7 +87,6 @@ export default function PodcastVisualizer({
         </div>
       </div>
 
-      {/* Center Dynamic Headline */}
       <div className="relative z-10 px-3 sm:px-6 my-auto text-center py-0.5 sm:py-1">
         <h3 className="text-xl sm:text-2xl md:text-[28px] lg:text-[32px] font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-none drop-shadow-xs">
           {headline}
@@ -109,9 +103,7 @@ export default function PodcastVisualizer({
         </div>
       </div>
 
-      {/* Bottom Section: Vibrant Green Waveform Flanking Central Rotating Avatar */}
       <div className="relative z-10 w-full px-2 sm:px-4 pb-2.5 sm:pb-3.5 flex items-center justify-center">
-        {/* Left Green Waveform Bars */}
         <div className="flex-1 flex items-center justify-end gap-[2.5px] sm:gap-[3.5px] h-10 sm:h-12 overflow-hidden pr-1.5 sm:pr-2.5">
           {leftWaveHeights.map((h, i) => {
             const delaySec = (i % 6) * 0.11;
@@ -133,7 +125,6 @@ export default function PodcastVisualizer({
           })}
         </div>
 
-        {/* Central Avatar Ring - Rotates Clockwise while Playing */}
         <div className="relative shrink-0 mx-1 sm:mx-2">
           <div
             className="w-13 h-13 sm:w-16 sm:h-16 md:w-17 md:h-17 rounded-full border-[3px] sm:border-4 border-white shadow-xl overflow-hidden bg-zinc-950 transition-transform"
@@ -154,7 +145,6 @@ export default function PodcastVisualizer({
             />
           </div>
 
-          {/* Center Play Icon: HIDES IMMEDIATELY WHEN PLAYING, reappears on pause */}
           {!isPlaying && (
             <div className="absolute inset-0 m-auto w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/75 text-white flex items-center justify-center shadow-md backdrop-blur-xs border border-white/25 pointer-events-none transition-all">
               <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-white text-white ml-0.5" />
@@ -162,7 +152,6 @@ export default function PodcastVisualizer({
           )}
         </div>
 
-        {/* Right Green Waveform Bars */}
         <div className="flex-1 flex items-center justify-start gap-[2.5px] sm:gap-[3.5px] h-10 sm:h-12 overflow-hidden pl-1.5 sm:pl-2.5">
           {rightWaveHeights.map((h, i) => {
             const delaySec = ((i + 2) % 6) * 0.11;

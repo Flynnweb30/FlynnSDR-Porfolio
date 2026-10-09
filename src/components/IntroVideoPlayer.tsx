@@ -23,7 +23,6 @@ export default function IntroVideoPlayer({
   const [hasError, setHasError] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // Sync external exclusivity state: pause video if another media takes over
   useEffect(() => {
     if (!isPlaying && internalPlaying) {
       if (videoRef.current) {
@@ -124,7 +123,6 @@ export default function IntroVideoPlayer({
             </video>
           )}
 
-          {/* Close video and restore poster */}
           <button
             type="button"
             onClick={handleStopClick}
@@ -157,7 +155,6 @@ export default function IntroVideoPlayer({
             className="w-full h-full object-cover object-center filter saturate-[1.05] transition-transform duration-500 group-hover:scale-102"
           />
 
-          {/* Button HIDES immediately when activePlayState is true */}
           {!activePlayState && (
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#0077b6] group-hover:bg-[#0284c7] rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-300 group-hover:scale-110 active:scale-95">

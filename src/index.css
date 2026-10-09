@@ -56,7 +56,6 @@
   background: #0077b6;
 }
 
-/* Alarm Beacon */
 @keyframes alarmSiren {
   0%, 100% {
     filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.4));
@@ -72,7 +71,6 @@
   animation: alarmSiren 1.8s infinite ease-in-out;
 }
 
-/* Slow Clockwise Rotation for Central Avatar */
 @keyframes slowSpin {
   from {
     transform: rotate(0deg);
@@ -82,7 +80,6 @@
   }
 }
 
-/* Vibrant Green Reactive Waveform Bar Pulse */
 @keyframes waveformGreenPulse {
   0% {
     transform: scaleY(0.28);

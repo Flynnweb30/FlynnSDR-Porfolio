@@ -24,16 +24,16 @@ export default function CallsPage({ onNavigate, onOpenBooking }: CallsPageProps)
             </h1>
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-3xl">
-              No hypothetical roleplays or scripted videos. Below are 4 unedited outbound call recordings of Flynn dialing B2B prospects, disarming skepticism on the fly, recovering lost pipeline, qualifying business scope, and securing confirmed appointments.
+              No hypothetical roleplays or scripted videos. Below are 7 unedited outbound call recordings of Flynn dialing B2B prospects, disarming skepticism on the fly, recovering lost pipeline, qualifying business scope, and securing confirmed appointments.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 pt-1">
               <span className="flex items-center gap-1.5 text-emerald-600 font-bold">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>4 Real Outbound Audio Recordings</span>
+                <span>7 Real Outbound Audio Recordings</span>
               </span>
               <span>·</span>
-              <span>Tactical SDR Breakdowns</span>
+              <span>Categorized by Tactical SDR Execution</span>
               <span>·</span>
               <span>Contact Information Protected</span>
             </div>

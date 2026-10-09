@@ -14,12 +14,10 @@ import {
   Play,
   MessageCircle,
   Volume2,
-  CheckCircle2,
   Award,
-  ArrowRight,
-  ShieldCheck,
-  Flame,
   TrendingUp,
+  ShieldCheck,
+  ArrowRight,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -37,13 +35,25 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   const audioSources: Record<string, string> = {
     'call-1':
       import.meta.env.VITE_AUDIO_CALL_1_URL ||
-      '/media/call-1-moses-cig-builders.mp3',
+      '/media/my_intro_media_1791404813632_39huk.mp3',
     'call-2':
       import.meta.env.VITE_AUDIO_CALL_2_URL ||
-      '/media/call-2-reconfirmation-showup.mp3',
+      'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
     'call-3':
       import.meta.env.VITE_AUDIO_CALL_3_URL ||
-      '/media/call-3-precall-courtesy-lock.mp3',
+      'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
+    'call-4':
+      import.meta.env.VITE_AUDIO_CALL_4_URL ||
+      'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
+    'call-5':
+      import.meta.env.VITE_AUDIO_CALL_5_URL ||
+      '/media/call-5-reschedule-cig-builders.mp3',
+    'call-6':
+      import.meta.env.VITE_AUDIO_CALL_6_URL ||
+      '/media/call-6-reconfirmation-mark.mp3',
+    'call-7':
+      import.meta.env.VITE_AUDIO_CALL_7_URL ||
+      '/media/call-7-reminder-chris.mp3',
   };
 
   const stopAllAudio = () => {
@@ -54,7 +64,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     setIsPlaying(false);
   };
 
-  // Mutual Exclusivity: Only 1 audio/video playback active at any time
   const handleTogglePlay = (callId: string) => {
     const audio = audioRefs.current[callId];
     if (!audio) return;
@@ -94,43 +103,41 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     return () => window.removeEventListener('flynn:mediaPlay', handleGlobalMedia);
   }, []);
 
-  // 3 Primary Spotlights rendered with Landscape Podcast Visualizer
   const spotlights = [
     {
       callId: 'call-1',
       recording: callRecordings[0],
       spotlightNum: '01',
-      headline: 'CONTRACTOR RESCHEDULE & RECOVERY',
+      headline: 'AI SCREENER DISARMED & QUALIFIED',
       callResult: callRecordings[0].duration,
-      apptResult: 'Monday 5:00 PM',
+      apptResult: 'Monday 12:00 PM',
       summary:
-        'Recapped CIG Builders specific capabilities (ground-up, remodeling, commercial and residential), navigated away from a fully booked weekend, shifted to Monday 5:00 PM, verified invite delivery live on the phone, and locked down firm attendance.',
-    },
-    {
-      callId: 'call-2',
-      recording: callRecordings[1],
-      spotlightNum: '02',
-      headline: 'SHOW-UP RATE SAFEGUARD & VERIFICATION',
-      callResult: callRecordings[1].duration,
-      apptResult: 'Today 3:00 PM Confirmed',
-      summary:
-        'Pre-meeting courtesy touchpoint verifying Zoom link delivery in prospect inbox, securing explicit attendance commitment, and setting expectations for a 15-20 min zero-prep session to eliminate drop-offs.',
+        'Navigated an automated AI call screening assistant, disarmed prospect resistance upfront ("Normally I would say no, but you got me interested, so good job"), uncovered SEO priorities, captured verified decision-maker contact, and booked a Monday 12:00 PM discovery appointment.',
     },
     {
       callId: 'call-3',
       recording: callRecordings[2],
-      spotlightNum: '03',
-      headline: 'HIGH-VELOCITY ATTENDANCE LOCK',
+      spotlightNum: '02',
+      headline: 'COMMERCIAL CONTRACTOR DISCOVERY',
       callResult: callRecordings[2].duration,
-      apptResult: 'Today 11:15 AM Locked',
+      apptResult: 'Monday 4:45 PM',
       summary:
-        'Rapid 39-second courtesy check recalling prior day agreement, confirmed email details receipt, zero conversational drag, locking in 11:15 AM attendance with zero friction.',
+        'Used a low-friction value opener with a busy commercial contractor on the jobsite, probed full project scope (ground-up construction to remodeling), captured verified direct contact, and scheduled a Monday 4:45 PM consultation.',
+    },
+    {
+      callId: 'call-4',
+      recording: callRecordings[3],
+      spotlightNum: '03',
+      headline: 'HANDLING SKEPTICAL OBJECTIONS',
+      callResult: callRecordings[3].duration,
+      apptResult: 'Thursday 11:00 AM Zoom',
+      summary:
+        'Handled an initially suspicious prospect with calm transparency, validated his concerns, clarified his primary growth goal, and locked down a confirmed Thursday 11:00 AM Zoom demo.',
     },
   ];
 
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
-      {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-4 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
@@ -142,7 +149,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         />
 
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 sm:pb-10">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 sm:pb-8">
             <div onClick={() => onNavigate('home')} className="cursor-pointer">
               <span className="font-script text-6xl sm:text-7xl font-bold tracking-tight text-[#0d0e0c] block transform -rotate-3 hover:scale-105 transition-transform">
                 Flynn
@@ -151,40 +158,45 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
             <BanknoteNav onNavigate={onNavigate} size="md" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end">
-            {/* Left Column: Client-Focused Value Prop & Metrics (Span 5) */}
-            <div className="lg:col-span-5 space-y-4 text-left pb-2">
-              {/* Strategic Badges Row */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-sky-300/80 rounded-full text-[11px] font-display uppercase tracking-wider text-[#0077b6] font-extrabold shadow-2xs">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#0077b6]" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-5 space-y-4 text-left">
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-[#0077b6] font-extrabold shadow-2xs">
+                  <span className="w-2 h-2 rounded-full bg-[#0077b6] animate-pulse" />
                   <span>B2B Sales Specialist</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-amber-300/80 rounded-full text-[11px] font-display uppercase tracking-wider text-zinc-800 font-extrabold shadow-2xs">
+
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-zinc-700 font-bold shadow-2xs">
                   <Award className="w-3.5 h-3.5 text-amber-500" />
                   <span>11+ Years of Experience</span>
                 </span>
+
+                <button
+                  type="button"
+                  onClick={() => onOpenBooking()}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#0077b6] hover:bg-[#0284c7] text-white rounded-full text-[11px] font-display uppercase tracking-wider font-extrabold shadow-xs transition-all cursor-pointer"
+                >
+                  <span>Work With Me</span>
+                  <ArrowRight className="w-3 h-3" />
+                </button>
               </div>
 
-              {/* High-Impact Headline */}
               <div className="space-y-0 leading-none">
-                <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
                   HEAVY WEIGHT
                 </h1>
-                <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
                   SENIOR SDR
                 </h1>
-                <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-black uppercase font-display tracking-tight text-[#0077b6] block">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0077b6] block">
                   PIPELINE SPECIALIST.
                 </h1>
               </div>
 
-              {/* Conversion-Focused Copy Balancing Skill & Client Outcomes */}
-              <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed max-w-lg">
-                Turning cold outbound into predictable pipeline. Flynn executes 150+ dials daily with disciplined BANT qualification, booking 30+ qualified discovery meetings per month so your Account Executives can focus exclusively on closing.
+              <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
+                Accelerating B2B revenue through high-stamina outbound prospecting, rigorous BANT qualification, and dense discovery calendars. Sourced over <strong className="text-zinc-950 font-bold">$1.8M in pipeline</strong> with consistent <strong className="text-zinc-950 font-bold">120–150% quota attainment</strong>.
               </p>
 
-              {/* Metric Row 1: Pipeline, Experience, Calls */}
               <div className="grid grid-cols-3 gap-2 pt-1">
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
                   <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">💵</div>
@@ -206,7 +218,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
                     OUTBOUND
                     <br />
-                    STAMINA
+                    EXPERIENCE
                   </div>
                 </div>
 
@@ -223,7 +235,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
               </div>
 
-              {/* Metric Row 2: Quota & Daily Dials */}
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
                   <span className="text-xl">🔥</span>
@@ -250,34 +261,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
               </div>
 
-              {/* Coverage & Availability Row */}
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="px-3 py-2 bg-white/90 border border-zinc-200/80 rounded-xl flex items-center gap-2 shadow-2xs">
-                  <span className="text-base">🇵🇭</span>
-                  <div>
-                    <div className="text-[9px] font-display font-extrabold text-zinc-500 uppercase tracking-wider">
-                      Role
-                    </div>
-                    <div className="text-xs font-bold text-[#0d0e0c] font-display uppercase">
-                      Senior SDR & Pod Lead
-                    </div>
-                  </div>
-                </div>
-
-                <div className="px-3 py-2 bg-white/90 border border-zinc-200/80 rounded-xl flex items-center gap-2 shadow-2xs">
-                  <span className="text-base">🌐</span>
-                  <div>
-                    <div className="text-[9px] font-display font-extrabold text-zinc-500 uppercase tracking-wider">
-                      Coverage
-                    </div>
-                    <div className="text-xs font-bold text-[#0d0e0c] font-display uppercase">
-                      US · UK · AU · SG Markets
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Channels Row */}
               <div className="pt-1 flex flex-wrap items-center justify-between gap-3 text-xs font-display">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold uppercase text-zinc-600">Find me</span>
@@ -285,19 +268,22 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     href={personalInfo.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                    title="LinkedIn"
                   >
                     <Linkedin className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`mailto:${personalInfo.email}`}
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                    title="Email"
                   >
                     <Mail className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                    title="Phone"
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </a>
@@ -306,20 +292,10 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Center Column: Prominently Proportioned Profile with Subtle Blurred Background Blend (Span 4) */}
             <div className="lg:col-span-4 flex justify-center items-end relative min-h-[460px] sm:min-h-[520px] lg:min-h-[560px]">
-              {/* Subtle blurred background glow blending into the hero without blurring Flynn */}
-              <div
-                className="absolute inset-x-6 bottom-0 top-10 bg-gradient-to-t from-sky-300/35 via-sky-200/30 to-blue-300/20 blur-3xl rounded-full pointer-events-none -z-10"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute inset-x-12 bottom-6 top-20 bg-[#78baff]/40 blur-2xl rounded-full pointer-events-none -z-10"
-                aria-hidden="true"
-              />
+              <div className="absolute inset-x-4 bottom-8 h-72 bg-gradient-to-t from-sky-400/25 via-white/20 to-transparent blur-2xl rounded-full pointer-events-none" />
 
-              <div className="relative w-full max-w-[340px] sm:max-w-[390px] lg:max-w-[430px] xl:max-w-[460px] flex justify-center items-end">
-                {/* Main Foreground Portrait: Crisp, unblurred, professionally proportioned */}
+              <div className="relative w-80 sm:w-96 md:w-[420px] lg:w-[460px] max-w-full z-10 flex justify-center items-end">
                 <img
                   src={personalInfo.heroImage}
                   onError={(e) => {
@@ -327,42 +303,23 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     target.onerror = null;
                     target.src = personalInfo.heroImageFallback;
                   }}
-                  alt="Flynn James - Senior SDR & Outbound Specialist"
-                  className="w-full h-auto max-h-[580px] sm:max-h-[640px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.22)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_86%,transparent_100%)] transition-transform duration-500"
+                  alt="Flynn James - Senior SDR & B2B Pipeline Specialist"
+                  className="w-full h-auto max-h-[580px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.25)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
                 />
-
-                {/* Floating Action Badge: "Work With Me" */}
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking()}
-                  className="absolute bottom-12 right-0 sm:-right-3 z-20 bg-[#0077b6] hover:bg-[#0284c7] text-white px-3.5 py-1.5 rounded-full shadow-lg border border-white/30 flex items-center gap-1.5 text-[11px] font-display font-black uppercase tracking-wider transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                  title="Schedule intro with Flynn"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>Work With Me</span>
-                  <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                </button>
-
-                {/* Floating Credential Badge: 11+ Years of Experience */}
-                <div className="absolute bottom-4 left-0 sm:-left-3 z-20 bg-white/95 backdrop-blur-md border border-[#dededb] px-3 py-1 rounded-full shadow-md flex items-center gap-1.5 text-[10px] font-display font-extrabold uppercase text-[#0d0e0c]">
-                  <Award className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                  <span>11+ Years Experience</span>
-                </div>
               </div>
             </div>
 
-            {/* Right Column: HIRE OR INTERVIEW ME Card (Span 3) */}
-            <div className="lg:col-span-3 space-y-4 pb-2">
+            <div className="lg:col-span-3 space-y-4">
               <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4">
-                <div className="space-y-0.5 text-left">
-                  <span className="text-[10px] font-display font-extrabold uppercase tracking-wider text-[#0077b6] block">
-                    Immediate Availability
-                  </span>
-                  <h2 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight">
+                <div className="flex items-center justify-between border-b border-zinc-100 pb-2">
+                  <h2 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight text-left">
                     HIRE OR
                     <br />
                     INTERVIEW ME
                   </h2>
+                  <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-display uppercase font-bold rounded-md border border-emerald-200">
+                    Immediate
+                  </span>
                 </div>
 
                 <div className="space-y-2.5">
@@ -426,18 +383,10 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       IMMEDIATE start
                     </strong>
                     <span className="text-zinc-500 text-[10px] block font-sans">
-                      US / UK / APAC daytime remote
+                      during US/UK daytime full time
                     </span>
                   </div>
                 </div>
-
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking()}
-                  className="w-full py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-black uppercase tracking-wider rounded-xl transition-all shadow-xs cursor-pointer"
-                >
-                  Schedule 15-Min Intro
-                </button>
               </div>
             </div>
           </div>
@@ -447,20 +396,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       {/* TRACK RECORD SECTION */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-1.5">
-            <span className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-              Documented Client Outcomes
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-[#0d0e0c] tracking-tight">
-              A Track Record Built for Results.
-            </h2>
-            <p className="text-xs sm:text-sm text-zinc-600 font-sans">
-              Consistent quota over-achievement and verified pipeline generated across campaigns in North America, Europe, and Asia-Pacific.
-            </p>
-          </div>
+          <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-center text-[#0d0e0c] mb-10 tracking-tight">
+            A TRACK RECORD BUILT FOR RESULTS.
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
                 <img
                   src="https://user29984.na.imgto.link/public/20261005/regen-digital.avif"
@@ -469,7 +410,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 text-left">
                 <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
                   REGEN DIGITAL
                 </div>
@@ -489,7 +430,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
                 <img
                   src="https://user29984.na.imgto.link/public/20261005/seek-marketing.avif"
@@ -498,7 +439,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 text-left">
                 <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
                   SEEK MARKETING / IHTE
                 </div>
@@ -518,7 +459,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4 text-left">
+            <div className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs flex items-start gap-4">
               <div className="w-16 h-12 rounded overflow-hidden shrink-0 border border-zinc-200 bg-zinc-100">
                 <img
                   src="https://user29984.na.imgto.link/public/20261005/averps-pte-ltd.avif"
@@ -527,7 +468,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="space-y-1">
+              <div className="space-y-1 text-left">
                 <div className="text-sm font-extrabold uppercase font-display text-[#0d0e0c]">
                   AVERPS / FOUND INC.
                 </div>
@@ -550,18 +491,15 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* PROOF I CAN QUALIFY & BOOK (LANDSCAPE PODCAST VISUALIZERS - GREEN WAVEFORM, NO TRANSCRIPTS) */}
+      {/* PROOF I CAN QUALIFY & BOOK (LANDSCAPE PODCAST VISUALIZERS - NO TRANSCRIPTS) */}
       <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-1.5">
-            <span className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-              Live Dial Execution
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-[#0d0e0c] tracking-tight">
-              Proof I Can Qualify & Book
+          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+            <h2 className="text-3xl sm:text-4xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
+              PROOF I CAN QUALIFY & BOOK
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 font-sans">
-              Listen to real, unscripted outbound calls navigating gatekeepers, reconfirming appointments, and locking in attendance.
+              Authentic outbound audio recordings showing live objection handling, AI gatekeeper navigation, and locked discovery meetings.
             </p>
           </div>
 
@@ -573,7 +511,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   key={item.callId}
                   className="bg-white border border-[#dededb] rounded-2xl p-5 sm:p-7 shadow-xs flex flex-col md:flex-row items-center gap-6 sm:gap-8"
                 >
-                  {/* Left Column: Landscape Podcast Visualizer with Green Reactive Waveform */}
                   <div className="w-full md:w-1/2">
                     <PodcastVisualizer
                       duration={item.recording.duration}
@@ -602,7 +539,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     />
                   </div>
 
-                  {/* Right Column: Dynamic Metadata Card */}
                   <div className="w-full md:w-1/2 space-y-3 text-left">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-display uppercase text-zinc-500 font-extrabold tracking-wider">
@@ -673,7 +609,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* LEADERSHIP SPRINT VIDEO SECTION */}
+      {/* LEADERSHIP SPRINT VIDEO SECTION WITH EXCLUSIVE PLAYBACK CONTROL */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#dededb] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 text-center">
@@ -699,151 +635,137 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* PROFESSIONAL RECOMMENDATION & TESTIMONIALS */}
+      {/* PROFESSIONAL RECOMMENDATION SECTION: PLACED BESIDE FLYNN IN OFFICE PHOTO */}
       <section id="testimonials" className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-1.5">
-            <span className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-              Verifiable Leadership Proof
+          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-sky-50 border border-[#0077b6]/30 rounded-full text-xs font-display text-[#0077b6] font-extrabold uppercase tracking-wider">
+              <Award className="w-3.5 h-3.5" />
+              <span>Professional Recommendation</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase font-display text-[#0d0e0c] tracking-tight">
-              Executive Endorsements & References
+            <h2 className="text-3xl sm:text-4xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
+              EXECUTIVE ENDORSEMENT & PROOF
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-600 font-sans">
-              Feedback from the directors, sales leaders, and account executives who have managed Flynn’s outbound production.
-            </p>
           </div>
 
-          <div className="space-y-8">
-            {/* Featured Primary Recommendation Card with Office Media Placed Beside */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xs">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Left Column: Recommendation Quote & Signature (Span 7) */}
-                <div className="lg:col-span-7 space-y-4 text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-0.5 bg-sky-50 border border-sky-200 rounded-full text-[10px] font-display uppercase font-bold text-[#0077b6]">
-                      <Award className="w-3 h-3" />
-                      <span>Featured Leadership Reference</span>
-                    </span>
-                    <span className="text-zinc-400 text-xs">·</span>
-                    <span className="text-xs font-display uppercase font-bold text-zinc-500">
-                      Regen Digital
-                    </span>
-                  </div>
+          <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xs">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7 space-y-4 text-left">
+                <blockquote className="text-lg sm:text-xl font-bold font-display text-[#0d0e0c] leading-snug">
+                  &ldquo;When Flynn joined our outbound campaign at Regen Digital, he ramped to our top Level 4 tier in under 3 weeks. Sourced over $1.8M in career pipeline with 120–150% quota performance, 150+ daily dials, and 30+ qualified discovery meetings per month.&rdquo;
+                </blockquote>
 
-                  <blockquote className="text-lg sm:text-xl font-bold font-display text-[#0d0e0c] leading-snug">
-                    &ldquo;When Flynn joined our outbound campaign at Regen Digital, he ramped to our top Level 4 tier in under 3 weeks. Sourced over $1.8M in career pipeline with 120–150% quota performance, 150+ daily dials, and 30+ qualified discovery meetings per month.&rdquo;
-                  </blockquote>
+                <p className="text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed">
+                  Flynn demonstrated exceptional phone stamina, proactive objection handling, and strict BANT qualification standards. His contribution directly accelerated our Account Executive calendar density.
+                </p>
 
-                  {/* Outcome Badges */}
-                  <div className="flex flex-wrap gap-2 pt-1 text-[11px] font-sans">
-                    <span className="px-2.5 py-1 bg-[#f7f7f6] border border-[#dededb] rounded-lg text-emerald-700 font-bold">
-                      ✓ 85% BANT Qualified
-                    </span>
-                    <span className="px-2.5 py-1 bg-[#f7f7f6] border border-[#dededb] rounded-lg text-[#0077b6] font-bold">
-                      ✓ 120–150% Quota Attainment
-                    </span>
-                    <span className="px-2.5 py-1 bg-[#f7f7f6] border border-[#dededb] rounded-lg text-zinc-700 font-bold">
-                      ✓ Level 4 Tier in 3 Weeks
-                    </span>
-                  </div>
-
-                  {/* Signature & Author Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-zinc-100">
-                    <div>
-                      <div className="text-sm font-black font-display uppercase tracking-tight text-zinc-950">
-                        Brendon Gocaj
-                      </div>
-                      <div className="text-xs text-[#0077b6] font-bold">
-                        Owner & Director · Regen Digital
-                      </div>
-                      <div className="text-[11px] text-zinc-400 mt-0.5">
-                        USA & European Outbound Sales Operations
-                      </div>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-zinc-100">
+                  <div>
+                    <div className="text-sm font-black text-[#0d0e0c] font-display uppercase tracking-tight">
+                      Brendon Gocaj
                     </div>
-
-                    <img
-                      src={personalInfo.brendonSignature}
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.onerror = null;
-                        target.src = '/assets/brendon-signature.svg';
-                      }}
-                      alt="Brendon Gocaj Signature"
-                      className="h-10 sm:h-12 w-auto max-w-[150px] object-contain object-left mix-blend-multiply filter contrast-125 select-none"
-                      draggable={false}
-                    />
+                    <div className="text-xs text-[#0077b6] font-bold">
+                      Owner & Director · Regen Digital
+                    </div>
                   </div>
 
-                  <div className="pt-1">
-                    <button
-                      type="button"
-                      onClick={() => onNavigate('references')}
-                      className="px-4 py-2 bg-[#fafaf8] hover:bg-zinc-100 border border-zinc-300 text-xs font-display font-extrabold uppercase tracking-wider text-zinc-800 rounded-xl cursor-pointer transition-colors shadow-2xs inline-flex items-center gap-1.5"
-                    >
-                      <span>Read full letter & verify metrics</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                  <img
+                    src={personalInfo.brendonSignature}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.onerror = null;
+                      target.src = '/assets/brendon-signature.svg';
+                    }}
+                    alt="Brendon Gocaj Handwritten Signature"
+                    className="h-10 sm:h-12 w-auto max-w-[170px] object-contain mix-blend-multiply filter contrast-125 select-none"
+                    draggable={false}
+                  />
                 </div>
 
-                {/* Right Column: Office Photo Beside Professional Recommendation (Span 5) */}
-                <div className="lg:col-span-5 flex justify-center">
-                  <div className="relative w-full max-w-[360px] rounded-2xl overflow-hidden border border-[#dededb] shadow-sm bg-zinc-100 group">
-                    <img
-                      src={personalInfo.recommendationImage}
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        target.onerror = null;
-                        target.src = '/assets/flynn-in-office-2.avif';
-                      }}
-                      alt="Flynn in the office managing outbound pipeline"
-                      className="w-full h-auto aspect-[4/3] sm:aspect-[16/11] object-cover object-center filter saturate-[1.05] transition-transform duration-500 group-hover:scale-102"
-                      loading="lazy"
-                    />
+                <div className="pt-2">
+                  <button
+                    onClick={() => onNavigate('references')}
+                    className="px-4 py-2 bg-[#fafaf8] hover:bg-zinc-100 border border-zinc-300 text-xs font-display font-extrabold uppercase tracking-wider text-zinc-800 rounded-xl cursor-pointer transition-colors shadow-2xs inline-flex items-center gap-1.5"
+                  >
+                    <span>Read full recommendation letter</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
-
-                    <div className="absolute bottom-3 left-3 right-3 text-left text-white text-xs">
-                      <div className="font-display font-bold uppercase tracking-wide text-xs">
-                        Flynn on the Outbound Sales Floor
-                      </div>
-                      <div className="text-[11px] text-zinc-300">
-                        Regen Digital · Junior Sales Team Lead & Level 4 Rep
-                      </div>
-                    </div>
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative rounded-2xl overflow-hidden border border-zinc-200/90 shadow-md bg-zinc-100 max-w-sm w-full">
+                  <img
+                    src={personalInfo.recommendationImage}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.onerror = null;
+                      target.src = personalInfo.heroImage;
+                    }}
+                    alt="Flynn James in the sales office"
+                    className="w-full h-auto object-cover object-center max-h-80"
+                    loading="lazy"
+                  />
+                  <div className="absolute bottom-2 left-2 right-2 bg-black/75 backdrop-blur-xs p-2 rounded-lg text-left text-white text-[11px] font-sans flex items-center justify-between border border-white/10">
+                    <span className="font-bold font-display uppercase tracking-wider text-[#00a8e8]">
+                      Regen Digital Sales Floor
+                    </span>
+                    <span className="text-zinc-300 text-[10px]">Level 4 SDR</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Testimonial Cards from Other Sales Leaders */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { name: 'TL Dee', role: 'Sr. Operations Sales Lead', company: 'Regen Digital US', image: 'https://user29984.na.imgto.link/public/20261005/tl-dee.avif', quote: 'Flynn ramped to Level 4 top-tier in under 3 weeks. His cold call discipline, objection handling, and ability to mentor junior SDRs made him an invaluable asset to our sales floor.' },
-                { name: 'Toby Whitaker', role: 'Head of Sales', company: 'Seek Marketing Partners (UK)', image: 'https://user29984.na.imgto.link/public/20261005/toby-whitaker.avif', quote: 'Flynn generated over $1.8M in pipeline for our team while crushing his quota by 120%. His customized objection-handling scripts and LinkedIn touchpoints lifted response rates by 18%.' },
-                { name: 'Van Ng', role: 'Account Manager', company: 'Averps Pte Ltd (Singapore)', image: 'https://user29984.na.imgto.link/public/20261005/vanessa-ng.avif', quote: 'A top-performing SDR who blends relentless outbound execution with precision qualification. Flynn achieved a 22% demo conversion rate and delivered $1.2M in qualified pipeline for our AEs.' },
-              ].map((item) => (
-                <div key={item.name} className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs space-y-3 text-left flex flex-col justify-between">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full overflow-hidden border border-zinc-200 bg-zinc-100 shrink-0">
-                        <img src={item.image} alt={item.name} loading="lazy" className="w-full h-full object-cover" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-xs font-bold font-display uppercase text-zinc-900 truncate">{item.name}</div>
-                        <div className="text-[10px] font-sans text-zinc-400">{item.role} · {item.company}</div>
-                      </div>
-                    </div>
-                    <p className="text-xs text-zinc-600 font-sans leading-relaxed italic">&ldquo;{item.quote}&rdquo;</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            {[
+              {
+                name: 'TL Dee',
+                role: 'Sr. Operations Sales Lead',
+                company: 'Regen Digital US',
+                image: 'https://user29984.na.imgto.link/public/20261005/tl-dee.avif',
+                quote:
+                  'Flynn ramped to Level 4 top-tier in under 3 weeks. His cold call discipline, objection handling, and ability to mentor junior SDRs made him an invaluable asset to our sales floor.',
+              },
+              {
+                name: 'Toby Whitaker',
+                role: 'Head of Sales',
+                company: 'Seek Marketing Partners (UK)',
+                image: 'https://user29984.na.imgto.link/public/20261005/toby-whitaker.avif',
+                quote:
+                  'Flynn generated over $1.8M in pipeline for our team while crushing his quota by 120%. His customized objection-handling scripts and LinkedIn touchpoints lifted response rates by 18%.',
+              },
+              {
+                name: 'Van Ng',
+                role: 'Account Manager',
+                company: 'Averps Pte Ltd (Singapore)',
+                image: 'https://user29984.na.imgto.link/public/20261005/vanessa-ng.avif',
+                quote:
+                  'A top-performing SDR who blends relentless outbound execution with precision qualification. Flynn achieved a 22% demo conversion rate and delivered $1.2M in qualified pipeline for our AEs.',
+              },
+            ].map((item) => (
+              <div
+                key={item.name}
+                className="bg-white border border-[#dededb] rounded-xl p-5 shadow-xs space-y-3 text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-zinc-200 bg-zinc-100 shrink-0">
+                    <img src={item.image} alt={item.name} loading="lazy" className="w-full h-full object-cover" />
                   </div>
-                  <div className="pt-2 border-t border-zinc-100 flex items-center gap-1.5 text-[10px] font-display font-bold uppercase text-emerald-700">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                    <span>Verified Recommendation</span>
+                  <div className="min-w-0">
+                    <div className="text-xs font-bold font-display uppercase text-zinc-900 truncate">
+                      {item.name}
+                    </div>
+                    <div className="text-[10px] font-sans text-zinc-400">
+                      {item.role} · {item.company}
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
+                <p className="text-xs text-zinc-600 font-sans leading-relaxed italic">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -862,7 +784,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
             LOOKING FOR MY NEXT SENIOR SDR ROLE
           </h2>
           <p className="text-xs sm:text-sm font-sans text-zinc-500 mb-12">
-            Flexible remote collaboration tailored to your growth stage
+            Compare opportunities
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
