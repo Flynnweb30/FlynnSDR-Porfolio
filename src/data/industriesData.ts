@@ -12,6 +12,19 @@ export interface IndustryItem {
   personas: string[];
   challengesSolved: { challenge: string; solution: string }[];
   caseStudy: { company: string; market: string; result: string; quote: string };
+  featuredRecording?: {
+    id: string;
+    title: string;
+    category: string;
+    company: string;
+    prospect: string;
+    duration: string;
+    durationSeconds: number;
+    outcome: string;
+    audioSrc: string;
+    image: string;
+    tacticalNote: string;
+  };
 }
 
 export const industriesData: IndustryItem[] = [
@@ -197,6 +210,22 @@ export const industriesData: IndustryItem[] = [
       result: 'Consistently converted skeptical, busy jobsite contractors into confirmed Zoom consultations.',
       quote:
         'Quickly qualified commercial scope from ground-up construction to remodeling, captured decision-maker email, and booked confirmed appointments.',
+    },
+    featuredRecording: {
+      id: 'call-3',
+      title: 'Commercial Contractor Discovery & Appointment Setting',
+      category: 'Commercial Contractor Discovery & Appointment Setting',
+      company: 'CIG Builders',
+      prospect: 'Moises K.',
+      duration: '02:39',
+      durationSeconds: 159,
+      outcome: 'Monday 4:45 PM Consultation Booked',
+      audioSrc:
+        (typeof process !== 'undefined' && process.env?.VITE_AUDIO_CALL_3_URL) ||
+        'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
+      image: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?w=1000&auto=format&fit=crop&q=80',
+      tacticalNote:
+        'Flynn engages a busy general contractor live on the jobsite, navigates noise friction with calm tonality, probes commercial scope from ground-up construction to rehab, captures direct decision-maker email, and locks down a Monday 4:45 PM consultation in 2 minutes and 39 seconds.',
     },
   },
 ];

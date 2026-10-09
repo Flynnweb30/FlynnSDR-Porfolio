@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { PageRoute } from '../types';
 import { industriesData, IndustryItem } from '../data/industriesData';
 import {
@@ -12,6 +12,11 @@ import {
   Users,
   Target,
   Quote,
+  Play,
+  Pause,
+  Volume2,
+  ShieldCheck,
+  Clock,
 } from 'lucide-react';
 
 interface IndustriesPageProps {
@@ -23,8 +28,62 @@ interface IndustriesPageProps {
 export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking }: IndustriesPageProps) {
   const activeIndustry = industriesData.find((i) => i.slug === currentRoute);
 
+  // Dedicated Audio State for the Under-3-Min Live Discovery Call
+  const [isPlayingCall3, setIsPlayingCall3] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const call3AudioUrl =
+    (import.meta.env.VITE_AUDIO_CALL_3_URL as string | undefined) ||
+    'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus';
+
+  const handleToggleCall3 = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlayingCall3) {
+      audio.pause();
+      setIsPlayingCall3(false);
+    } else {
+      // Mutual exclusivity: pause any other global video/audio
+      window.dispatchEvent(
+        new CustomEvent('flynn:mediaPlay', {
+          detail: { type: 'audio', id: 'call-3-industry-page' },
+        })
+      );
+      audio.currentTime = 0;
+      audio.play().catch(() => setIsPlayingCall3(false));
+      setIsPlayingCall3(true);
+    }
+  };
+
+  useEffect(() => {
+    const handleGlobalMedia = (e: Event) => {
+      const custom = e as CustomEvent;
+      if (custom.detail?.id !== 'call-3-industry-page') {
+        if (audioRef.current && !audioRef.current.paused) {
+          audioRef.current.pause();
+        }
+        setIsPlayingCall3(false);
+      }
+    };
+    window.addEventListener('flynn:mediaPlay', handleGlobalMedia);
+    return () => window.removeEventListener('flynn:mediaPlay', handleGlobalMedia);
+  }, []);
+
   return (
     <div className="pt-20 sm:pt-24 pb-20 bg-[#fafaf8] text-[#0d0e0c]">
+      {/* Hidden Native Audio Element */}
+      <audio
+        ref={audioRef}
+        src={call3AudioUrl}
+        preload="none"
+        onPlay={() => setIsPlayingCall3(true)}
+        onPause={() => setIsPlayingCall3(false)}
+        onEnded={() => setIsPlayingCall3(false)}
+        onError={() => setIsPlayingCall3(false)}
+        className="hidden"
+      />
+
       {/* Header Banner */}
       <section className="py-12 border-b border-[#dededb] bg-[#f7f7f6]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -105,6 +164,134 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
               ))}
             </div>
 
+            {/* IMPROVED FEATURED RECORDING SECTION FOR UNDER-3-MIN DISCOVERY CALLS */}
+            {activeIndustry.featuredRecording && (
+              <div className="bg-white border-2 border-[#0077b6]/35 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-100 pb-4">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-full text-[11px] font-display uppercase tracking-wider font-extrabold mb-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>Live Discovery Call · Under 3 Min Booking</span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
+                      {activeIndustry.featuredRecording.title}
+                    </h3>
+                    <p className="text-xs text-zinc-500 font-sans mt-0.5">
+                      Category: {activeIndustry.featuredRecording.category} · {activeIndustry.featuredRecording.prospect} ({activeIndustry.featuredRecording.company})
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-2 self-start sm:self-auto">
+                    <span className="px-3 py-1 bg-sky-50 border border-sky-100 text-[#0077b6] text-xs font-mono font-bold rounded-lg flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span>{activeIndustry.featuredRecording.duration}</span>
+                    </span>
+                    <span className="px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-display uppercase font-bold rounded-lg">
+                      100% Under 3 Min
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  {/* Left: Matching Image with Interactive Play Overlay */}
+                  <div
+                    className="lg:col-span-5 relative aspect-[16/10] rounded-xl overflow-hidden shadow-md group cursor-pointer border border-[#dededb]"
+                    onClick={handleToggleCall3}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleToggleCall3();
+                      }
+                    }}
+                    aria-label={`Play ${activeIndustry.featuredRecording.title}`}
+                  >
+                    <img
+                      src={activeIndustry.featuredRecording.image}
+                      alt={activeIndustry.featuredRecording.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full bg-[#0077b6] group-hover:bg-[#0284c7] text-white shadow-xl flex items-center justify-center transition-all group-hover:scale-110 active:scale-95">
+                        {isPlayingCall3 ? (
+                          <Pause className="w-6 h-6 fill-white" />
+                        ) : (
+                          <Play className="w-6 h-6 fill-white ml-0.5" />
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="absolute bottom-3 left-3 right-3 text-white flex items-center justify-between text-[11px] font-sans">
+                      <span className="font-bold font-display uppercase tracking-wide">
+                        {activeIndustry.featuredRecording.company} · {activeIndustry.featuredRecording.prospect}
+                      </span>
+                      <span className="text-emerald-400 font-mono font-bold">
+                        {activeIndustry.featuredRecording.duration}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Right: Intelligence Breakdown & Working Play Controls */}
+                  <div className="lg:col-span-7 space-y-3.5 text-left">
+                    <div className="grid grid-cols-2 gap-3 text-xs font-sans">
+                      <div className="p-3 bg-[#f7f7f6] rounded-xl border border-zinc-200/80">
+                        <strong className="block text-[10px] uppercase font-display tracking-wider text-emerald-700 font-extrabold">
+                          Verified Outcome
+                        </strong>
+                        <span className="text-zinc-800 font-semibold">
+                          {activeIndustry.featuredRecording.outcome}
+                        </span>
+                      </div>
+                      <div className="p-3 bg-[#f7f7f6] rounded-xl border border-zinc-200/80">
+                        <strong className="block text-[10px] uppercase font-display tracking-wider text-[#0077b6] font-extrabold">
+                          Execution Speed
+                        </strong>
+                        <span className="text-zinc-800 font-semibold">
+                          Cold to Booked in {activeIndustry.featuredRecording.duration}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-zinc-600 font-sans leading-relaxed">
+                      {activeIndustry.featuredRecording.tacticalNote}
+                    </p>
+
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={handleToggleCall3}
+                        className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white font-extrabold text-xs uppercase font-display tracking-wider rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+                      >
+                        {isPlayingCall3 ? (
+                          <>
+                            <Pause className="w-4 h-4 fill-white" />
+                            <span>Pause Live Call</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-4 h-4 fill-white ml-0.5" />
+                            <span>Play Recording ({activeIndustry.featuredRecording.duration})</span>
+                          </>
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => onNavigate('calls')}
+                        className="px-4 py-2 bg-white hover:bg-zinc-50 border border-[#dededb] text-zinc-800 font-bold text-xs uppercase font-display tracking-wider rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
+                      >
+                        <Volume2 className="w-3.5 h-3.5 text-[#0077b6]" />
+                        <span>View All 7 Audio Proofs</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Target Personas & Blueprints */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Left Column: Target Decision-Maker Personas (Span 5) */}
@@ -121,7 +308,10 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
 
                 <div className="space-y-2">
                   {activeIndustry.personas.map((persona, p) => (
-                    <div key={p} className="p-2.5 bg-[#f7f7f6] rounded-xl text-xs font-sans font-medium text-zinc-800 flex items-center gap-2">
+                    <div
+                      key={p}
+                      className="p-2.5 bg-[#f7f7f6] rounded-xl text-xs font-sans font-medium text-zinc-800 flex items-center gap-2"
+                    >
                       <Target className="w-3.5 h-3.5 text-[#0077b6] shrink-0" />
                       <span>{persona}</span>
                     </div>
