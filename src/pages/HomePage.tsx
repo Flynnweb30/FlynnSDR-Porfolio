@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PageRoute } from '../types';
 import { personalInfo, callRecordings } from '../data/flynnData';
-import BanknoteNav from '../components/BanknoteNav';
 import DiscordButton from '../components/DiscordButton';
 import IntroVideoPlayer from '../components/IntroVideoPlayer';
 import PodcastVisualizer from '../components/PodcastVisualizer';
@@ -139,9 +138,10 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
       {/* =========================================================================
-          HERO SECTION: Fixed navbar clearance (pt-20 sm:pt-24) & Precise Badge Placements
+          HERO SECTION: Fixed Navbar Clearance (pt-24 sm:pt-28), No Duplicate Old Nav,
+          Diagonal Upper-Left Experience Badge, and Lower-Right "Work With Me" CTA
          ========================================================================= */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
           style={{
@@ -152,15 +152,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         />
 
         <div className="max-w-6xl mx-auto relative z-10">
-          {/* Hero Top Bar: Clean timezone status on left, Banknote Navigation on right */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 sm:pb-8">
-            <div className="flex items-center gap-2 text-xs font-mono text-zinc-700 bg-white/70 backdrop-blur-xs px-3 py-1.5 rounded-full border border-zinc-200/60 shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Manila/Cebu Base · Covering US, UK & APAC Markets</span>
-            </div>
-            <BanknoteNav onNavigate={onNavigate} size="md" />
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             {/* Left Column: Client-Focused Messaging & Title (Span 5) */}
             <div className="lg:col-span-5 space-y-4 text-left">
@@ -293,14 +284,14 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Center Column: Enlarged Profile Image with Badges at Upper-Left & Lower-Right (Span 4) */}
+            {/* Center Column: Profile Image with Diagonal Badge at Upper-Left & Button at Lower-Right (Span 4) */}
             <div className="lg:col-span-4 flex justify-center items-end relative min-h-[480px] sm:min-h-[540px] lg:min-h-[600px]">
               {/* Soft ambient backdrop lighting glow */}
               <div className="absolute inset-x-2 bottom-6 h-80 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
 
-              {/* BADGE 1: "11+ Years of Experience" Positioned above profile upper-left corner */}
-              <div className="absolute top-4 left-0 sm:-left-2 lg:-left-6 z-20 animate-fade-in pointer-events-auto">
-                <div className="px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#dededb] rounded-2xl shadow-lg flex items-center gap-2.5 hover:scale-105 transition-transform duration-200">
+              {/* DIAGONAL BADGE: "11+ Years of Experience" Positioned diagonally at upper-left corner */}
+              <div className="absolute top-2 sm:top-4 -left-2 sm:-left-4 lg:-left-8 z-20 transform -rotate-6 sm:-rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto">
+                <div className="px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#dededb] rounded-2xl shadow-xl flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
                     <Award className="w-4 h-4 stroke-[2.5]" />
                   </div>
@@ -329,8 +320,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 />
               </div>
 
-              {/* BADGE 2: "Work With Me" Positioned at profile lower-right corner */}
-              <div className="absolute bottom-6 right-0 sm:-right-2 lg:-right-6 z-20 animate-fade-in pointer-events-auto">
+              {/* LOWER-RIGHT BADGE: "Work With Me" Button */}
+              <div className="absolute bottom-6 -right-2 sm:-right-4 lg:-right-6 z-20 animate-fade-in pointer-events-auto">
                 <button
                   type="button"
                   onClick={() => onOpenBooking()}

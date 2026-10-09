@@ -49,7 +49,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#dededb] shadow-2xs py-2.5 sm:py-3 transition-all duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Flynn appears ONLY ONCE as the cursive logo on the left (Image 2) */}
+          {/* Flynn appears ONLY ONCE as the cursive script brand logo on the left */}
           <div
             onClick={() => handleLinkClick('home')}
             className="cursor-pointer focus:outline-none"
@@ -58,9 +58,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             <FlynnLogo size="sm" variant="dark" />
           </div>
 
-          {/* Desktop Multi-Page Nav - Starts cleanly without duplicate "Flynn" pill */}
+          {/* Desktop Navigation Menu (No duplicate Flynn button) */}
           <nav className="hidden lg:flex items-center gap-1 bg-[#f1f1ee] border border-[#dededb] rounded-full px-3 py-1 shadow-2xs">
-            {/* 1. Services Offered Dropdown */}
+            {/* Services Offered Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -120,7 +120,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* 2. Industries Dropdown */}
+            {/* Industries Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -180,7 +180,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* 3. Hear My Opener */}
+            {/* Hear My Opener */}
             <button
               type="button"
               onClick={() => handleLinkClick('calls')}
@@ -202,7 +202,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               </span>
             </button>
 
-            {/* 4. Hire Me */}
+            {/* Hire Me */}
             <button
               type="button"
               onClick={() => handleLinkClick('hire-me')}
@@ -215,7 +215,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               Hire Me
             </button>
 
-            {/* 5. References */}
+            {/* References */}
             <button
               type="button"
               onClick={() => handleLinkClick('references')}
@@ -228,7 +228,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               References
             </button>
 
-            {/* 6. Playbook */}
+            {/* Playbook */}
             <button
               type="button"
               onClick={() => handleLinkClick('academy')}
@@ -241,7 +241,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               Playbook
             </button>
 
-            {/* 7. Experience */}
+            {/* Experience */}
             <button
               type="button"
               onClick={() => handleLinkClick('experience')}
@@ -272,7 +272,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
           </div>
 
-          {/* Mobile Drawer Trigger */}
+          {/* Mobile Drawer Toggle */}
           <div className="flex lg:hidden items-center gap-2">
             <button
               type="button"

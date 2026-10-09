@@ -1,6 +1,5 @@
 import React from 'react';
 import FlynnLogo from './FlynnLogo';
-import BanknoteNav from './BanknoteNav';
 import { PageRoute } from '../types';
 import { personalInfo } from '../data/flynnData';
 import {
@@ -11,7 +10,7 @@ import {
   Calendar,
   FileText,
   ShieldCheck,
-  CheckCircle2,
+  Award,
 } from 'lucide-react';
 
 interface FooterProps {
@@ -27,20 +26,12 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
 
   return (
     <footer className="bg-[#f7f7f6] border-t border-[#dededb] pt-14 pb-12 text-[#0d0e0c] select-none">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Top Centered Banknotes Row */}
-        <div className="flex flex-col items-center justify-center space-y-2 pb-6 border-b border-zinc-200/80">
-          <span className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-            Interactive Section Passes
-          </span>
-          <BanknoteNav onNavigate={onNavigate} size="sm" />
-        </div>
-
-        {/* 4-Column Polished Executive Footer Grid */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        {/* Main 4-Column Structured Footer */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left">
-          {/* Column 1: Executive Identity & Brand (Span 4) */}
+          {/* Column 1: Brand & Executive Credibility (Span 4) */}
           <div className="lg:col-span-4 space-y-3.5">
-            <div onClick={() => onNavigate('home')} className="cursor-pointer inline-block">
+            <div onClick={() => onNavigate('home')} className="cursor-pointer inline-block" title="Flynn James">
               <FlynnLogo size="md" variant="dark" />
             </div>
 
@@ -217,7 +208,10 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
 
         {/* Bottom Legal & Back to Top Bar */}
         <div className="pt-8 border-t border-zinc-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-sans text-zinc-500">
-          <p>© 2026 Flynn James Q. Pontino. All rights reserved. Outbound Sales Development Specialist.</p>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>© 2026 Flynn James Q. Pontino. All rights reserved. Outbound Sales Development Specialist.</span>
+          </div>
 
           <button
             type="button"
