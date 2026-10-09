@@ -28,7 +28,6 @@ interface IndustriesPageProps {
 export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking }: IndustriesPageProps) {
   const activeIndustry = industriesData.find((i) => i.slug === currentRoute);
 
-  // Dedicated Audio State for the Under-3-Min Live Discovery Call
   const [isPlayingCall3, setIsPlayingCall3] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -44,7 +43,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
       audio.pause();
       setIsPlayingCall3(false);
     } else {
-      // Mutual exclusivity: pause any other global video/audio
       window.dispatchEvent(
         new CustomEvent('flynn:mediaPlay', {
           detail: { type: 'audio', id: 'call-3-industry-page' },
@@ -72,7 +70,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
 
   return (
     <div className="pt-20 sm:pt-24 pb-20 bg-[#fafaf8] text-[#0d0e0c]">
-      {/* Hidden Native Audio Element */}
       <audio
         ref={audioRef}
         src={call3AudioUrl}
@@ -105,6 +102,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
+                type="button"
                 onClick={() => onOpenBooking()}
                 className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-xs"
               >
@@ -113,6 +111,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
               </button>
 
               <button
+                type="button"
                 onClick={() => onNavigate('calls')}
                 className="px-5 py-2.5 bg-white hover:bg-zinc-50 border border-[#dededb] text-[#0d0e0c] text-xs font-display font-bold uppercase tracking-wider rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-2xs"
               >
@@ -126,15 +125,20 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
 
       {/* Main Content Area */}
       {activeIndustry ? (
-        /* DEDICATED DEEP-DIVE VIEW FOR SELECTED INDUSTRY */
+        /* DEDICATED DEEP-DIVE VIEW FOR SELECTED INDUSTRY (IMAGE 2) */
         <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12 text-left">
             {/* Visual Hero Banner */}
             <div className="relative rounded-2xl overflow-hidden border border-[#dededb] shadow-md aspect-[21/9] max-h-[360px] bg-zinc-900">
               <img
                 src={activeIndustry.image}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.onerror = null;
+                  target.src = '/assets/industry-contracting.jpg';
+                }}
                 alt={activeIndustry.title}
-                className="w-full h-full object-cover opacity-80"
+                className="w-full h-full object-cover opacity-85"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white">
@@ -164,7 +168,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
               ))}
             </div>
 
-            {/* IMPROVED FEATURED RECORDING SECTION FOR UNDER-3-MIN DISCOVERY CALLS */}
+            {/* FEATURED RECORDING SECTION: LIVE DISCOVERY CALL · UNDER 3 MIN BOOKING (IMAGE 2) */}
             {activeIndustry.featuredRecording && (
               <div className="bg-white border-2 border-[#0077b6]/35 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-100 pb-4">
@@ -193,9 +197,9 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                  {/* Left: Matching Image with Interactive Play Overlay */}
+                  {/* Left: Matching Image with Interactive Play Overlay (Image 2 Player Placeholder) */}
                   <div
-                    className="lg:col-span-5 relative aspect-[16/10] rounded-xl overflow-hidden shadow-md group cursor-pointer border border-[#dededb]"
+                    className="lg:col-span-5 relative aspect-[16/10] rounded-xl overflow-hidden shadow-md group cursor-pointer border border-[#dededb] bg-zinc-900"
                     onClick={handleToggleCall3}
                     role="button"
                     tabIndex={0}
@@ -209,12 +213,17 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                   >
                     <img
                       src={activeIndustry.featuredRecording.image}
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.onerror = null;
+                        target.src = '/assets/contractor-call-player.jpg';
+                      }}
                       alt={activeIndustry.featuredRecording.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
 
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                       <div className="w-14 h-14 rounded-full bg-[#0077b6] group-hover:bg-[#0284c7] text-white shadow-xl flex items-center justify-center transition-all group-hover:scale-110 active:scale-95">
                         {isPlayingCall3 ? (
                           <Pause className="w-6 h-6 fill-white" />
@@ -224,7 +233,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                       </div>
                     </div>
 
-                    <div className="absolute bottom-3 left-3 right-3 text-white flex items-center justify-between text-[11px] font-sans">
+                    <div className="absolute bottom-3 left-3 right-3 text-white flex items-center justify-between text-[11px] font-sans pointer-events-none">
                       <span className="font-bold font-display uppercase tracking-wide">
                         {activeIndustry.featuredRecording.company} · {activeIndustry.featuredRecording.prospect}
                       </span>
@@ -371,12 +380,14 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
 
               <div className="pt-2 flex flex-wrap gap-3">
                 <button
+                  type="button"
                   onClick={() => onOpenBooking()}
                   className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl transition-all shadow-xs cursor-pointer"
                 >
                   Schedule Outbound Discovery
                 </button>
                 <button
+                  type="button"
                   onClick={() => onNavigate('industries')}
                   className="px-4 py-2 bg-white border border-zinc-300 text-zinc-800 text-xs font-display font-bold uppercase rounded-xl cursor-pointer hover:bg-zinc-100"
                 >
@@ -387,7 +398,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
           </div>
         </section>
       ) : (
-        /* HUB OVERVIEW: ALL 4 INDUSTRIES */
+        /* HUB OVERVIEW: ALL 4 INDUSTRIES (IMAGE 1) */
         <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-10 text-left">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -396,17 +407,35 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                   key={industry.id}
                   className="bg-white border border-[#dededb] hover:border-[#0077b6]/60 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 group"
                 >
-                  <div className="relative aspect-[16/9] overflow-hidden bg-zinc-900">
+                  {/* Top Image Placeholder - Fully populated & clickable */}
+                  <div
+                    className="relative aspect-[16/9] overflow-hidden bg-zinc-900 cursor-pointer"
+                    onClick={() => onNavigate(industry.slug as PageRoute)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        onNavigate(industry.slug as PageRoute);
+                      }
+                    }}
+                    aria-label={`Open ${industry.title}`}
+                  >
                     <img
                       src={industry.image}
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.onerror = null;
+                        target.src = '/assets/industry-contracting.jpg';
+                      }}
                       alt={industry.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <span className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 backdrop-blur-xs text-white text-[10px] font-display uppercase font-bold rounded-md border border-white/10">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                    <span className="absolute top-3 right-3 px-2.5 py-1 bg-black/60 backdrop-blur-xs text-white text-[10px] font-display uppercase font-bold rounded-md border border-white/10 pointer-events-none">
                       {industry.badge}
                     </span>
-                    <div className="absolute bottom-3 left-4 right-4 text-white">
+                    <div className="absolute bottom-3 left-4 right-4 text-white pointer-events-none">
                       <span className="text-[10px] font-display uppercase text-[#00a8e8] font-bold">
                         {industry.shortTitle}
                       </span>
@@ -429,17 +458,20 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                     </div>
 
                     <div className="pt-2 flex items-center justify-between">
+                      {/* View Sector Persona Blueprint button - opens dedicated view (Image 2) */}
                       <button
+                        type="button"
                         onClick={() => onNavigate(industry.slug as PageRoute)}
-                        className="text-xs font-display font-extrabold uppercase text-[#0077b6] hover:text-[#0284c7] flex items-center gap-1 cursor-pointer"
+                        className="text-xs font-display font-extrabold uppercase text-[#0077b6] hover:text-[#0284c7] flex items-center gap-1 cursor-pointer transition-colors"
                       >
                         <span>View Sector Persona Blueprint</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </button>
 
                       <button
+                        type="button"
                         onClick={() => onOpenBooking()}
-                        className="px-3 py-1.5 bg-zinc-900 hover:bg-[#0077b6] text-white rounded-lg text-[10px] font-display uppercase font-bold transition-colors cursor-pointer"
+                        className="px-3.5 py-1.5 bg-zinc-900 hover:bg-[#0077b6] text-white rounded-lg text-[10px] font-display uppercase font-bold transition-colors cursor-pointer"
                       >
                         Book Discovery
                       </button>
@@ -460,6 +492,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                 </p>
               </div>
               <button
+                type="button"
                 onClick={() => onOpenBooking()}
                 className="px-6 py-3 bg-[#0077b6] hover:bg-[#0284c7] text-white font-extrabold text-xs uppercase font-display tracking-wider rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
               >

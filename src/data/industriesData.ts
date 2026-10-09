@@ -176,7 +176,7 @@ export const industriesData: IndustryItem[] = [
     badge: 'Live Discovery Calls · Under 3 Min Bookings',
     overview:
       'Commercial contractors are rarely sitting at desks—they are on active jobsites or driving between projects. Flynn excels in disarming busy contractors, navigating noisy phone backgrounds, and qualifying $10k–$50k+ commercial scopes in under 3 minutes.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?w=1000&auto=format&fit=crop&q=80',
+    image: '/assets/industry-contracting.jpg',
     metrics: [
       { label: 'Booking Speed', value: '< 3 Min' },
       { label: 'Contractor Connect Rate', value: '38%' },
@@ -223,7 +223,7 @@ export const industriesData: IndustryItem[] = [
       audioSrc:
         (typeof process !== 'undefined' && process.env?.VITE_AUDIO_CALL_3_URL) ||
         'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
-      image: 'https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?w=1000&auto=format&fit=crop&q=80',
+      image: '/assets/contractor-call-player.jpg',
       tacticalNote:
         'Flynn engages a busy general contractor live on the jobsite, navigates noise friction with calm tonality, probes commercial scope from ground-up construction to rehab, captures direct decision-maker email, and locks down a Monday 4:45 PM consultation in 2 minutes and 39 seconds.',
     },
