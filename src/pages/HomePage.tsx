@@ -18,6 +18,8 @@ import {
   TrendingUp,
   ShieldCheck,
   ArrowRight,
+  Briefcase,
+  Sparkles,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -138,6 +140,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
+      {/* =========================================================================
+          HERO SECTION: ENLARGED PROFILE, AMBIENT BLEND & TASTEFUL PROFESSIONAL BADGES
+         ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-4 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
@@ -149,6 +154,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         />
 
         <div className="max-w-6xl mx-auto relative z-10">
+          {/* Top Bar: Flynn Signature Script & Banknotes */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 sm:pb-8">
             <div onClick={() => onNavigate('home')} className="cursor-pointer">
               <span className="font-script text-6xl sm:text-7xl font-bold tracking-tight text-[#0d0e0c] block transform -rotate-3 hover:scale-105 transition-transform">
@@ -159,7 +165,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            {/* Left Column: Client-Value Messaging & Professional Badges (Span 5) */}
             <div className="lg:col-span-5 space-y-4 text-left">
+              {/* Tasteful Professional Badges Row */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-[#0077b6] font-extrabold shadow-2xs">
                   <span className="w-2 h-2 rounded-full bg-[#0077b6] animate-pulse" />
@@ -176,11 +184,13 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   onClick={() => onOpenBooking()}
                   className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#0077b6] hover:bg-[#0284c7] text-white rounded-full text-[11px] font-display uppercase tracking-wider font-extrabold shadow-xs transition-all cursor-pointer"
                 >
+                  <Sparkles className="w-3 h-3 text-sky-200" />
                   <span>Work With Me</span>
                   <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
 
+              {/* Bold Headline */}
               <div className="space-y-0 leading-none">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
                   HEAVY WEIGHT
@@ -193,10 +203,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </h1>
               </div>
 
+              {/* Client-Centric Conversion Copy */}
               <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
-                Accelerating B2B revenue through high-stamina outbound prospecting, rigorous BANT qualification, and dense discovery calendars. Sourced over <strong className="text-zinc-950 font-bold">$1.8M in pipeline</strong> with consistent <strong className="text-zinc-950 font-bold">120–150% quota attainment</strong>.
+                Filling Account Executive calendars with high-intent discovery calls. Flynn delivers reliable outbound phone stamina (150+ dials/day), rigorous BANT qualification, and zero ramp time—sourcing over <strong className="text-zinc-950 font-bold">$1.8M in pipeline</strong> with consistent <strong className="text-zinc-950 font-bold">120–150% quota attainment</strong>.
               </p>
 
+              {/* Verified Metrics Row 1 */}
               <div className="grid grid-cols-3 gap-2 pt-1">
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
                   <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">💵</div>
@@ -235,6 +247,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
               </div>
 
+              {/* Verified Metrics Row 2 */}
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
                   <span className="text-xl">🔥</span>
@@ -261,6 +274,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
               </div>
 
+              {/* Find Me & Direct Channels Row */}
               <div className="pt-1 flex flex-wrap items-center justify-between gap-3 text-xs font-display">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold uppercase text-zinc-600">Find me</span>
@@ -268,21 +282,21 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     href={personalInfo.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
                     title="LinkedIn"
                   >
                     <Linkedin className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`mailto:${personalInfo.email}`}
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
                     title="Email"
                   >
                     <Mail className="w-3.5 h-3.5" />
                   </a>
                   <a
                     href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6]"
+                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
                     title="Phone"
                   >
                     <Phone className="w-3.5 h-3.5" />
@@ -292,10 +306,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex justify-center items-end relative min-h-[460px] sm:min-h-[520px] lg:min-h-[560px]">
-              <div className="absolute inset-x-4 bottom-8 h-72 bg-gradient-to-t from-sky-400/25 via-white/20 to-transparent blur-2xl rounded-full pointer-events-none" />
+            {/* Center Column: Significantly Enlarged & Naturally Blended Flynn Profile (Span 4) */}
+            <div className="lg:col-span-4 flex justify-center items-end relative min-h-[480px] sm:min-h-[540px] lg:min-h-[590px]">
+              {/* Ambient radial lighting glow to soften and blend subject into hero sky */}
+              <div className="absolute inset-x-2 bottom-6 h-80 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
 
-              <div className="relative w-80 sm:w-96 md:w-[420px] lg:w-[460px] max-w-full z-10 flex justify-center items-end">
+              <div className="relative w-84 sm:w-[420px] md:w-[460px] lg:w-[490px] max-w-full z-10 flex justify-center items-end">
                 <img
                   src={personalInfo.heroImage}
                   onError={(e) => {
@@ -304,11 +320,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     target.src = personalInfo.heroImageFallback;
                   }}
                   alt="Flynn James - Senior SDR & B2B Pipeline Specialist"
-                  className="w-full h-auto max-h-[580px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.25)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
+                  className="w-full h-auto max-h-[610px] object-contain object-bottom drop-shadow-[0_24px_40px_rgba(0,119,182,0.28)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-all duration-300"
                 />
               </div>
             </div>
 
+            {/* Right Column: Hire Or Interview Me Deck (Span 3) */}
             <div className="lg:col-span-3 space-y-4">
               <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4">
                 <div className="flex items-center justify-between border-b border-zinc-100 pb-2">
