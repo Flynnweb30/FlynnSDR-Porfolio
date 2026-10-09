@@ -37,16 +37,13 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   const audioSources: Record<string, string> = {
     'call-1':
       import.meta.env.VITE_AUDIO_CALL_1_URL ||
-      '/media/my_intro_media_1791404813632_39huk.mp3',
+      '/media/call-1-moses-cig-builders.mp3',
     'call-2':
       import.meta.env.VITE_AUDIO_CALL_2_URL ||
-      'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
+      '/media/call-2-reconfirmation-showup.mp3',
     'call-3':
       import.meta.env.VITE_AUDIO_CALL_3_URL ||
-      'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
-    'call-4':
-      import.meta.env.VITE_AUDIO_CALL_4_URL ||
-      'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
+      '/media/call-3-precall-courtesy-lock.mp3',
   };
 
   const stopAllAudio = () => {
@@ -57,6 +54,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     setIsPlaying(false);
   };
 
+  // Mutual Exclusivity: Only 1 audio/video playback active at any time
   const handleTogglePlay = (callId: string) => {
     const audio = audioRefs.current[callId];
     if (!audio) return;
@@ -96,36 +94,37 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
     return () => window.removeEventListener('flynn:mediaPlay', handleGlobalMedia);
   }, []);
 
+  // 3 Primary Spotlights rendered with Landscape Podcast Visualizer
   const spotlights = [
     {
       callId: 'call-1',
       recording: callRecordings[0],
       spotlightNum: '01',
-      headline: 'AI SCREENER DISARMED & QUALIFIED',
+      headline: 'CONTRACTOR RESCHEDULE & RECOVERY',
       callResult: callRecordings[0].duration,
-      apptResult: 'Monday 12:00 PM',
+      apptResult: 'Monday 5:00 PM',
       summary:
-        'Navigated an automated AI call screening assistant, disarmed prospect resistance upfront ("Normally I would say no, but you got me interested, so good job"), uncovered SEO priorities, captured verified decision-maker contact, and booked a Monday 12:00 PM discovery appointment.',
+        'Recapped CIG Builders specific capabilities (ground-up, remodeling, commercial and residential), navigated away from a fully booked weekend, shifted to Monday 5:00 PM, verified invite delivery live on the phone, and locked down firm attendance.',
+    },
+    {
+      callId: 'call-2',
+      recording: callRecordings[1],
+      spotlightNum: '02',
+      headline: 'SHOW-UP RATE SAFEGUARD & VERIFICATION',
+      callResult: callRecordings[1].duration,
+      apptResult: 'Today 3:00 PM Confirmed',
+      summary:
+        'Pre-meeting courtesy touchpoint verifying Zoom link delivery in prospect inbox, securing explicit attendance commitment, and setting expectations for a 15-20 min zero-prep session to eliminate drop-offs.',
     },
     {
       callId: 'call-3',
       recording: callRecordings[2],
-      spotlightNum: '02',
-      headline: 'COMMERCIAL CONTRACTOR DISCOVERY',
-      callResult: callRecordings[2].duration,
-      apptResult: 'Monday 4:45 PM',
-      summary:
-        'Used a low-friction value opener with a busy commercial contractor on the jobsite, probed full project scope (ground-up construction to remodeling), captured verified direct contact, and scheduled a Monday 4:45 PM consultation.',
-    },
-    {
-      callId: 'call-4',
-      recording: callRecordings[3],
       spotlightNum: '03',
-      headline: 'HANDLING SKEPTICAL OBJECTIONS',
-      callResult: callRecordings[3].duration,
-      apptResult: 'Thursday 11:00 AM Zoom',
+      headline: 'HIGH-VELOCITY ATTENDANCE LOCK',
+      callResult: callRecordings[2].duration,
+      apptResult: 'Today 11:15 AM Locked',
       summary:
-        'Handled an initially suspicious prospect with calm transparency, validated his concerns, clarified his primary growth goal, and locked down a confirmed Thursday 11:00 AM Zoom demo.',
+        'Rapid 39-second courtesy check recalling prior day agreement, confirmed email details receipt, zero conversational drag, locking in 11:15 AM attendance with zero friction.',
     },
   ];
 
@@ -307,16 +306,20 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Center Column: Significantly Enlarged Profile with Natural Hero Blend & Floating Badges (Span 4) */}
+            {/* Center Column: Prominently Proportioned Profile with Subtle Blurred Background Blend (Span 4) */}
             <div className="lg:col-span-4 flex justify-center items-end relative min-h-[460px] sm:min-h-[520px] lg:min-h-[560px]">
-              {/* Soft Ambient Hero Glow */}
+              {/* Subtle blurred background glow blending into the hero without blurring Flynn */}
               <div
-                className="absolute inset-x-4 bottom-0 top-12 bg-gradient-to-t from-sky-400/20 via-sky-200/25 to-transparent blur-3xl rounded-full pointer-events-none -z-10"
+                className="absolute inset-x-6 bottom-0 top-10 bg-gradient-to-t from-sky-300/35 via-sky-200/30 to-blue-300/20 blur-3xl rounded-full pointer-events-none -z-10"
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-x-12 bottom-6 top-20 bg-[#78baff]/40 blur-2xl rounded-full pointer-events-none -z-10"
                 aria-hidden="true"
               />
 
               <div className="relative w-full max-w-[340px] sm:max-w-[390px] lg:max-w-[430px] xl:max-w-[460px] flex justify-center items-end">
-                {/* Main Portrait with Soft Bottom Fade for Natural Hero Blending */}
+                {/* Main Foreground Portrait: Crisp, unblurred, professionally proportioned */}
                 <img
                   src={personalInfo.heroImage}
                   onError={(e) => {
@@ -325,7 +328,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     target.src = personalInfo.heroImageFallback;
                   }}
                   alt="Flynn James - Senior SDR & Outbound Specialist"
-                  className="w-full h-auto max-h-[580px] sm:max-h-[640px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.22)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-transform duration-500"
+                  className="w-full h-auto max-h-[580px] sm:max-h-[640px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.22)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_86%,transparent_100%)] transition-transform duration-500"
                 />
 
                 {/* Floating Action Badge: "Work With Me" */}
@@ -547,7 +550,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* PROOF I CAN QUALIFY & BOOK (LANDSCAPE PODCAST VISUALIZERS) */}
+      {/* PROOF I CAN QUALIFY & BOOK (LANDSCAPE PODCAST VISUALIZERS - GREEN WAVEFORM, NO TRANSCRIPTS) */}
       <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-1.5">
@@ -558,7 +561,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               Proof I Can Qualify & Book
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 font-sans">
-              Listen to real, unscripted outbound calls navigating gatekeepers, disarming skepticism, and locking in confirmed appointments.
+              Listen to real, unscripted outbound calls navigating gatekeepers, reconfirming appointments, and locking in attendance.
             </p>
           </div>
 

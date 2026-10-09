@@ -24,7 +24,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
 
   const navItems: { label: string; route: PageRoute; badge?: string; icon: any }[] = [
     { label: 'Home', route: 'home', icon: Home },
-    { label: 'Hear My Opener', route: 'calls', badge: '4 Calls', icon: Headphones },
+    { label: 'Hear My Opener', route: 'calls', badge: '3 Calls', icon: Headphones },
     { label: 'Hire Me', route: 'hire-me', icon: Mail },
     { label: 'References', route: 'references', icon: FileText },
     { label: 'Playbook', route: 'academy', icon: Layers },
