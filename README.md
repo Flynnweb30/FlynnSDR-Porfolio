@@ -1,4 +1,4 @@
-# Flynn James Q. Pontino — Senior SDR Portfolio
+﻿# Flynn James Q. Pontino — Senior SDR Portfolio
 
 Production-ready Vite/React static portfolio for GitHub + Render. The existing visual system is preserved; content and functionality are focused on Senior SDR, B2B cold calling, appointment setting, lead generation, prospect qualification, objection handling, and SDR mentoring.
 
@@ -51,7 +51,7 @@ Included:
 
 ## Notes
 
-The intro animation displays “Flynn” for first-time visitors and stores a local flag so returning visitors are not forced through the animation again.
+The intro animation displays “Flynn” for approximately 1.5–2.3 seconds on every page refresh, including hard refreshes, while preserving the existing visual design.
 
 ### Template A — Flynn Notification
 
@@ -70,3 +70,15 @@ Body:
 `Hi {{fullName}},\n\nThanks for reaching out to Flynn. Your inquiry has been received.\n\nSelected date: {{selectedDate}}\nSelected time: {{selectedTime}}\nInquiry type: {{inquiryType}}\nPreference: {{employmentPreference}}\nCompany: {{company}}\nRole: {{role}}\n\nFlynn will review your request and follow up with the next steps.\n\nYou consented to receive email about this inquiry: {{consent}}.`
 
 For Template B, set the EmailJS recipient/to-email field to `{{email}}`.
+
+
+## Custom Intro Video Configuration
+To display your own custom video in the **"GET TO KNOW YOUR NEXT SENIOR SDR"** section:
+Set the environment variable in your Render Static Site settings:
+- **Variable Name:** VITE_INTRO_VIDEO_URL
+- **Supported Formats:**
+  - Direct video file link (.mp4, .webm)
+  - YouTube URL (https://www.youtube.com/watch?v=... or https://youtu.be/...)
+  - Loom URL (https://www.loom.com/share/...)
+  - Vimeo URL (https://vimeo.com/...)
+- **Fallback:** If VITE_INTRO_VIDEO_URL is omitted, the section gracefully falls back to the high-resolution team photo and leadership badge.

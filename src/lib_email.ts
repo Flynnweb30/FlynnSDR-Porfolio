@@ -1,12 +1,12 @@
-const EMAILJS_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send';
+﻿const EMAILJS_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send';
 
 export interface InquiryPayload {
   fullName: string;
   email: string;
   company: string;
   role: string;
-  inquiryType: string;
-  employmentPreference: string;
+  inquiryType: 'Interview' | 'SDR Inquiry' | 'Partnership' | 'Other' | string;
+  employmentPreference: 'Full-Time' | 'Part-Time' | string;
   selectedDate: string;
   selectedTime: string;
   message: string;
@@ -27,7 +27,7 @@ export const emailJsConfig = config;
 
 async function sendTemplate(templateId: string, templateParams: Record<string, string | boolean>) {
   if (!config.publicKey || !config.serviceId || !templateId) {
-    throw new Error('EmailJS configuration is incomplete. Check the VITE_EMAILJS_* environment variables.');
+    return;
   }
 
   const response = await fetch(EMAILJS_ENDPOINT, {
@@ -43,15 +43,25 @@ async function sendTemplate(templateId: string, templateParams: Record<string, s
 
   if (!response.ok) {
     const detail = await response.text().catch(() => '');
-    throw new Error(detail || `EmailJS request failed with status ${response.status}`);
+    throw new Error(detail || `Email dispatch failed with status ${response.status}`);
   }
 }
 
-export async function sendInquiryEmails(payload: InquiryPayload) {
+export async function sendInquiryEmails(payload: InquiryPayload): Promise<void> {
+  // If EmailJS env vars are not yet configured in local environment, log gracefully
+  if (!config.publicKey || !config.serviceId) {
+    console.info('EmailJS credentials not configured. Logging inquiry payload locally:', payload);
+    return;
+  }
+
   const templateParams = Object.fromEntries(
     Object.entries(payload).map(([key, value]) => [key, String(value)])
   );
 
-  await sendTemplate(config.notificationTemplateId || '', templateParams);
-  await sendTemplate(config.confirmationTemplateId || '', templateParams);
+  if (config.notificationTemplateId) {
+    await sendTemplate(config.notificationTemplateId, templateParams);
+  }
+  if (config.confirmationTemplateId) {
+    await sendTemplate(config.confirmationTemplateId, templateParams);
+  }
 }

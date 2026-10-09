@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://flynn-james-pontino-resume.onrender.com/sitemap.xml
+
+Sitemap: https://flynnjames.onrender.com/sitemap.xml

@@ -7,7 +7,17 @@ export type PageRoute =
   | 'calls' 
   | 'playbook' 
   | 'leadership' 
-  | 'contact';
+  | 'contact'
+  | 'services'
+  | 'service-cold-calling'
+  | 'service-appointment-setting'
+  | 'service-lead-qualification'
+  | 'service-sdr-coaching'
+  | 'industries'
+  | 'industry-saas-tech'
+  | 'industry-marketing-agencies'
+  | 'industry-b2b-events'
+  | 'industry-commercial-contracting';
 
 export interface WorkExperience {
   role: string;
