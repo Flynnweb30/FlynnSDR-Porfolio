@@ -20,10 +20,11 @@ export const personalInfo = {
   meetingsPerMonth: '30+',
   callsPerDay: '150+',
   quotaAttainment: '120–150%',
-  heroImage: 'https://user29984.na.imgto.link/public/20261008/5e3a649c37291e96b2b8aabf-flynn-profile.avif',
-  heroImageFallback: 'https://user29984.na.imgto.link/public/20261008/5e3a649c37291e96b2b8aabf-flynn-profile.avif',
+  heroImage: 'https://user42540.na.imgto.link/public/20261008/f3765d7c3893d785d8a53ae3-flynn-office.avif',
+  heroImageFallback: 'https://user42540.na.imgto.link/public/20261008/f3765d7c3893d785d8a53ae3-flynn-office.avif',
   teamImage: '/assets/team-flynn-1.avif',
   teamImageFallback: 'https://user29984.na.imgto.link/public/20261005/team-flynn-1.avif',
+  recommendationImage: 'https://user42540.na.imgto.link/public/20261008/435d8418a6cb62d1b91ec841-flynn-in-office-1.avif',
   brendonSignature: 'https://user29984.na.imgto.link/public/20261008/1cd774364d2bf91c9ccc4e4a-brendon-signature.avif',
 };
 
@@ -196,7 +197,6 @@ export const whyInterviewFlynn = [
   },
 ];
 
-// Production Call Lineup with PII Protected
 export const callRecordings: CallRecording[] = [
   {
     id: 'call-1',

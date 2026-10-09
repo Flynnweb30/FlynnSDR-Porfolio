@@ -20,7 +20,7 @@ interface ReferencesPageProps {
 export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume }: ReferencesPageProps) {
   const [sigSrc, setSigSrc] = useState(personalInfo.brendonSignature);
   const [flynnImgSrc, setFlynnImgSrc] = useState(
-    'https://audiolink-oskn.onrender.com/media/flynn_in_office__1__media_1791399641280_i2l2j.png'
+    'https://user42540.na.imgto.link/public/20261008/435d8418a6cb62d1b91ec841-flynn-in-office-1.avif'
   );
 
   const testimonials = [
