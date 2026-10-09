@@ -5,6 +5,7 @@ import BanknoteNav from '../components/BanknoteNav';
 import DiscordButton from '../components/DiscordButton';
 import IntroVideoPlayer from '../components/IntroVideoPlayer';
 import PodcastVisualizer from '../components/PodcastVisualizer';
+import Footer from '../components/Footer';
 import {
   Calendar,
   Check,
@@ -15,10 +16,7 @@ import {
   MessageCircle,
   Volume2,
   Award,
-  TrendingUp,
-  ShieldCheck,
   ArrowRight,
-  Briefcase,
   Sparkles,
 } from 'lucide-react';
 
@@ -141,9 +139,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
       {/* =========================================================================
-          HERO SECTION: ENLARGED PROFILE, AMBIENT BLEND & TASTEFUL PROFESSIONAL BADGES
+          HERO SECTION: Fixed navbar clearance (pt-20 sm:pt-24) & Precise Badge Placements
          ========================================================================= */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-4 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
           style={{
@@ -154,20 +152,19 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         />
 
         <div className="max-w-6xl mx-auto relative z-10">
-          {/* Top Bar: Flynn Signature Script & Banknotes */}
+          {/* Hero Top Bar: Clean timezone status on left, Banknote Navigation on right */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 sm:pb-8">
-            <div onClick={() => onNavigate('home')} className="cursor-pointer">
-              <span className="font-script text-6xl sm:text-7xl font-bold tracking-tight text-[#0d0e0c] block transform -rotate-3 hover:scale-105 transition-transform">
-                Flynn
-              </span>
+            <div className="flex items-center gap-2 text-xs font-mono text-zinc-700 bg-white/70 backdrop-blur-xs px-3 py-1.5 rounded-full border border-zinc-200/60 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Manila/Cebu Base · Covering US, UK & APAC Markets</span>
             </div>
             <BanknoteNav onNavigate={onNavigate} size="md" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            {/* Left Column: Client-Value Messaging & Professional Badges (Span 5) */}
+            {/* Left Column: Client-Focused Messaging & Title (Span 5) */}
             <div className="lg:col-span-5 space-y-4 text-left">
-              {/* Tasteful Professional Badges Row */}
+              {/* Strategic Badges Row */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-[#0077b6] font-extrabold shadow-2xs">
                   <span className="w-2 h-2 rounded-full bg-[#0077b6] animate-pulse" />
@@ -175,19 +172,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </span>
 
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-zinc-700 font-bold shadow-2xs">
-                  <Award className="w-3.5 h-3.5 text-amber-500" />
-                  <span>11+ Years of Experience</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
+                  <span>Pipeline Specialist</span>
                 </span>
-
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking()}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-[#0077b6] hover:bg-[#0284c7] text-white rounded-full text-[11px] font-display uppercase tracking-wider font-extrabold shadow-xs transition-all cursor-pointer"
-                >
-                  <Sparkles className="w-3 h-3 text-sky-200" />
-                  <span>Work With Me</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
               </div>
 
               {/* Bold Headline */}
@@ -274,7 +261,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
               </div>
 
-              {/* Find Me & Direct Channels Row */}
+              {/* Channels Row */}
               <div className="pt-1 flex flex-wrap items-center justify-between gap-3 text-xs font-display">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold uppercase text-zinc-600">Find me</span>
@@ -306,11 +293,29 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Center Column: Significantly Enlarged & Naturally Blended Flynn Profile (Span 4) */}
-            <div className="lg:col-span-4 flex justify-center items-end relative min-h-[480px] sm:min-h-[540px] lg:min-h-[590px]">
-              {/* Ambient radial lighting glow to soften and blend subject into hero sky */}
+            {/* Center Column: Enlarged Profile Image with Badges at Upper-Left & Lower-Right (Span 4) */}
+            <div className="lg:col-span-4 flex justify-center items-end relative min-h-[480px] sm:min-h-[540px] lg:min-h-[600px]">
+              {/* Soft ambient backdrop lighting glow */}
               <div className="absolute inset-x-2 bottom-6 h-80 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
 
+              {/* BADGE 1: "11+ Years of Experience" Positioned above profile upper-left corner */}
+              <div className="absolute top-4 left-0 sm:-left-2 lg:-left-6 z-20 animate-fade-in pointer-events-auto">
+                <div className="px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#dededb] rounded-2xl shadow-lg flex items-center gap-2.5 hover:scale-105 transition-transform duration-200">
+                  <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
+                    <Award className="w-4 h-4 stroke-[2.5]" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[11px] font-display uppercase tracking-wider font-extrabold text-[#0d0e0c] leading-tight">
+                      11+ Years of Experience
+                    </div>
+                    <div className="text-[9px] font-sans text-zinc-500 font-medium">
+                      45,000+ Outbound Calls
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Enlarged Profile Portrait */}
               <div className="relative w-84 sm:w-[420px] md:w-[460px] lg:w-[490px] max-w-full z-10 flex justify-center items-end">
                 <img
                   src={personalInfo.heroImage}
@@ -320,8 +325,30 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     target.src = personalInfo.heroImageFallback;
                   }}
                   alt="Flynn James - Senior SDR & B2B Pipeline Specialist"
-                  className="w-full h-auto max-h-[610px] object-contain object-bottom drop-shadow-[0_24px_40px_rgba(0,119,182,0.28)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-all duration-300"
+                  className="w-full h-auto max-h-[620px] object-contain object-bottom drop-shadow-[0_24px_45px_rgba(0,119,182,0.28)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-all duration-300"
                 />
+              </div>
+
+              {/* BADGE 2: "Work With Me" Positioned at profile lower-right corner */}
+              <div className="absolute bottom-6 right-0 sm:-right-2 lg:-right-6 z-20 animate-fade-in pointer-events-auto">
+                <button
+                  type="button"
+                  onClick={() => onOpenBooking()}
+                  className="px-4 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white rounded-2xl shadow-xl shadow-[#0077b6]/30 border border-white/30 flex items-center gap-2.5 transition-all duration-200 cursor-pointer group"
+                >
+                  <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-white">
+                    <Sparkles className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs font-display uppercase tracking-wider font-extrabold text-white leading-tight flex items-center gap-1">
+                      <span>Work With Me</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                    <div className="text-[9px] font-sans text-sky-100 font-medium">
+                      Schedule Discovery Intro
+                    </div>
+                  </div>
+                </button>
               </div>
             </div>
 
@@ -701,6 +728,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
                 <div className="pt-2">
                   <button
+                    type="button"
                     onClick={() => onNavigate('references')}
                     className="px-4 py-2 bg-[#fafaf8] hover:bg-zinc-100 border border-zinc-300 text-xs font-display font-extrabold uppercase tracking-wider text-zinc-800 rounded-xl cursor-pointer transition-colors shadow-2xs inline-flex items-center gap-1.5"
                   >
@@ -934,34 +962,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="py-16 bg-[#fafaf8] text-center space-y-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
-          <div className="flex justify-center">
-            <BanknoteNav onNavigate={onNavigate} size="sm" />
-          </div>
-
-          <div className="pt-2">
-            <span className="font-script text-7xl sm:text-8xl md:text-9xl font-bold tracking-tight text-[#0d0e0c] block transform -rotate-3 select-none">
-              Flynn
-            </span>
-          </div>
-
-          <p className="text-[11px] font-sans text-zinc-400 max-w-lg mx-auto">
-            This website does not assert claims. Copyright owned by Flynn James Q. Pontino.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-sans text-zinc-600">
-            <a href={`mailto:${personalInfo.email}`} className="hover:text-black font-bold">
-              {personalInfo.email}
-            </a>
-            <span>·</span>
-            <a href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} className="hover:text-black font-bold">
-              {personalInfo.phone}
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* Universal Polished Footer Component */}
+      <Footer
+        onNavigate={onNavigate}
+        onOpenBooking={onOpenBooking}
+        onOpenResume={onOpenResume}
+      />
     </div>
   );
 }

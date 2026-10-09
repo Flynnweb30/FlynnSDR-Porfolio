@@ -5,13 +5,7 @@ import {
   Menu,
   X,
   Calendar,
-  Headphones,
-  Briefcase,
-  Layers,
-  FileText,
   ChevronDown,
-  Building2,
-  Sparkles,
 } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { industriesData } from '../data/industriesData';
@@ -23,21 +17,12 @@ interface NavbarProps {
 }
 
 export default function Navbar({ currentPage, onNavigate, onOpenBooking }: NavbarProps) {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
 
   const servicesTimeout = useRef<number | null>(null);
   const industriesTimeout = useRef<number | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleLinkClick = (route: PageRoute) => {
     setMobileMenuOpen(false);
@@ -60,38 +45,22 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
     currentPage === 'industry-b2b-events' ||
     currentPage === 'industry-commercial-contracting';
 
-  const isVisible = currentPage !== 'home' || scrolled;
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isVisible
-          ? 'translate-y-0 opacity-100 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#dededb] shadow-xs py-2.5 sm:py-3'
-          : '-translate-y-full opacity-0 pointer-events-none py-2'
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#dededb] shadow-2xs py-2.5 sm:py-3 transition-all duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div onClick={() => handleLinkClick('home')}>
+          {/* Flynn appears ONLY ONCE as the cursive logo on the left (Image 2) */}
+          <div
+            onClick={() => handleLinkClick('home')}
+            className="cursor-pointer focus:outline-none"
+            title="Flynn James - Home"
+          >
             <FlynnLogo size="sm" variant="dark" />
           </div>
 
-          {/* Desktop Multi-Page Nav with Interactive Dropdowns */}
+          {/* Desktop Multi-Page Nav - Starts cleanly without duplicate "Flynn" pill */}
           <nav className="hidden lg:flex items-center gap-1 bg-[#f1f1ee] border border-[#dededb] rounded-full px-3 py-1 shadow-2xs">
-            {/* 1. "Flynn" (formerly "Home") */}
-            <button
-              onClick={() => handleLinkClick('home')}
-              className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
-                currentPage === 'home'
-                  ? 'bg-[#0077b6] text-white shadow-xs'
-                  : 'text-zinc-600 hover:text-black hover:bg-white/80'
-              }`}
-            >
-              Flynn
-            </button>
-
-            {/* 2. "Services Offered" Dropdown */}
+            {/* 1. Services Offered Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -103,6 +72,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               }}
             >
               <button
+                type="button"
                 onClick={() => handleLinkClick('services')}
                 className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer flex items-center gap-1 ${
                   isServicesActive
@@ -124,17 +94,19 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
                     Outbound Sales Capabilities
                   </div>
                   <button
+                    type="button"
                     onClick={() => handleLinkClick('services')}
-                    className="w-full px-3 py-2 text-xs font-display font-bold uppercase text-zinc-900 hover:bg-sky-50 hover:text-[#0077b6] rounded-xl text-left flex items-center justify-between"
+                    className="w-full px-3 py-2 text-xs font-display font-bold uppercase text-zinc-900 hover:bg-sky-50 hover:text-[#0077b6] rounded-xl text-left flex items-center justify-between cursor-pointer"
                   >
                     <span>All Services Overview</span>
                     <span className="text-[10px] text-zinc-400">Hub</span>
                   </button>
                   {servicesData.map((s) => (
                     <button
+                      type="button"
                       key={s.id}
                       onClick={() => handleLinkClick(s.slug as PageRoute)}
-                      className={`w-full px-3 py-2 text-xs font-display font-bold uppercase rounded-xl text-left flex items-center justify-between ${
+                      className={`w-full px-3 py-2 text-xs font-display font-bold uppercase rounded-xl text-left flex items-center justify-between cursor-pointer ${
                         currentPage === s.slug
                           ? 'bg-[#0077b6] text-white'
                           : 'text-zinc-700 hover:bg-sky-50 hover:text-[#0077b6]'
@@ -148,7 +120,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* 3. "Industries" Dropdown */}
+            {/* 2. Industries Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -160,6 +132,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               }}
             >
               <button
+                type="button"
                 onClick={() => handleLinkClick('industries')}
                 className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer flex items-center gap-1 ${
                   isIndustriesActive
@@ -181,17 +154,19 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
                     Sectors & Track Record
                   </div>
                   <button
+                    type="button"
                     onClick={() => handleLinkClick('industries')}
-                    className="w-full px-3 py-2 text-xs font-display font-bold uppercase text-zinc-900 hover:bg-sky-50 hover:text-[#0077b6] rounded-xl text-left flex items-center justify-between"
+                    className="w-full px-3 py-2 text-xs font-display font-bold uppercase text-zinc-900 hover:bg-sky-50 hover:text-[#0077b6] rounded-xl text-left flex items-center justify-between cursor-pointer"
                   >
                     <span>All Industries Overview</span>
                     <span className="text-[10px] text-zinc-400">Hub</span>
                   </button>
                   {industriesData.map((ind) => (
                     <button
+                      type="button"
                       key={ind.id}
                       onClick={() => handleLinkClick(ind.slug as PageRoute)}
-                      className={`w-full px-3 py-2 text-xs font-display font-bold uppercase rounded-xl text-left flex items-center justify-between ${
+                      className={`w-full px-3 py-2 text-xs font-display font-bold uppercase rounded-xl text-left flex items-center justify-between cursor-pointer ${
                         currentPage === ind.slug
                           ? 'bg-[#0077b6] text-white'
                           : 'text-zinc-700 hover:bg-sky-50 hover:text-[#0077b6]'
@@ -205,8 +180,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* 4. Hear My Opener */}
+            {/* 3. Hear My Opener */}
             <button
+              type="button"
               onClick={() => handleLinkClick('calls')}
               className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
                 currentPage === 'calls'
@@ -226,8 +202,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               </span>
             </button>
 
-            {/* 5. Hire Me */}
+            {/* 4. Hire Me */}
             <button
+              type="button"
               onClick={() => handleLinkClick('hire-me')}
               className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
                 currentPage === 'hire-me'
@@ -238,8 +215,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               Hire Me
             </button>
 
-            {/* 6. References */}
+            {/* 5. References */}
             <button
+              type="button"
               onClick={() => handleLinkClick('references')}
               className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
                 currentPage === 'references'
@@ -250,8 +228,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               References
             </button>
 
-            {/* 7. Playbook */}
+            {/* 6. Playbook */}
             <button
+              type="button"
               onClick={() => handleLinkClick('academy')}
               className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
                 currentPage === 'academy' || currentPage === 'playbook'
@@ -262,8 +241,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               Playbook
             </button>
 
-            {/* 8. Experience */}
+            {/* 7. Experience */}
             <button
+              type="button"
               onClick={() => handleLinkClick('experience')}
               className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
                 currentPage === 'experience'
@@ -283,6 +263,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </div>
 
             <button
+              type="button"
               onClick={() => onOpenBooking()}
               className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-lg flex items-center gap-2 transition-all shadow-xs cursor-pointer"
             >
@@ -291,15 +272,17 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Drawer Trigger */}
           <div className="flex lg:hidden items-center gap-2">
             <button
+              type="button"
               onClick={() => onOpenBooking()}
               className="px-3 py-1.5 bg-[#0077b6] text-white text-[11px] font-display font-extrabold uppercase rounded-lg shadow-xs"
             >
               Intro
             </button>
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-zinc-700 hover:text-black focus:outline-none cursor-pointer"
               aria-label="Toggle menu"
@@ -315,15 +298,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
         <div className="lg:hidden bg-[#fafaf8] border-b border-[#dededb] px-4 pt-2 pb-6 space-y-3 shadow-xl max-h-[85vh] overflow-y-auto">
           <div className="grid grid-cols-2 gap-2 pt-2">
             <button
-              onClick={() => handleLinkClick('home')}
-              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
-                currentPage === 'home' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
-              }`}
-            >
-              Flynn
-            </button>
-
-            <button
+              type="button"
               onClick={() => handleLinkClick('calls')}
               className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase flex items-center justify-between ${
                 currentPage === 'calls' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
@@ -334,6 +309,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
 
             <button
+              type="button"
               onClick={() => handleLinkClick('services')}
               className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
                 isServicesActive ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
@@ -343,6 +319,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
 
             <button
+              type="button"
               onClick={() => handleLinkClick('industries')}
               className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
                 isIndustriesActive ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
@@ -352,6 +329,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
 
             <button
+              type="button"
               onClick={() => handleLinkClick('hire-me')}
               className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
                 currentPage === 'hire-me' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
@@ -361,6 +339,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
 
             <button
+              type="button"
               onClick={() => handleLinkClick('references')}
               className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
                 currentPage === 'references' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
@@ -370,6 +349,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
 
             <button
+              type="button"
               onClick={() => handleLinkClick('academy')}
               className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
                 currentPage === 'academy' || currentPage === 'playbook'
@@ -381,8 +361,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
 
             <button
+              type="button"
               onClick={() => handleLinkClick('experience')}
-              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
+              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase col-span-2 ${
                 currentPage === 'experience' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
               }`}
             >
@@ -390,26 +371,9 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </button>
           </div>
 
-          {/* Quick Service Sublinks in Mobile Drawer */}
-          <div className="pt-2 border-t border-zinc-200 space-y-1">
-            <span className="text-[10px] font-display uppercase tracking-wider text-zinc-400 font-bold block px-1">
-              Direct Service Pages:
-            </span>
-            <div className="grid grid-cols-1 gap-1">
-              {servicesData.map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => handleLinkClick(s.slug as PageRoute)}
-                  className="px-2 py-1.5 text-[11px] font-display font-semibold uppercase text-zinc-700 hover:text-[#0077b6] text-left rounded hover:bg-zinc-100"
-                >
-                  • {s.shortTitle}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="pt-2 border-t border-zinc-200">
             <button
+              type="button"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenBooking();

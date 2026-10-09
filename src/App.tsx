@@ -301,6 +301,7 @@ export default function App() {
         )}
       </main>
 
+      {/* Universal Footer for all sub-pages (HomePage includes it directly to prevent duplicate) */}
       {currentPage !== 'home' && (
         <Footer
           onNavigate={handleNavigate}
