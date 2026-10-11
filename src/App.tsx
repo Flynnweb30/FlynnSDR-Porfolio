@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -80,7 +80,7 @@ export default function App() {
       title: 'SDR Sales Floor Leadership & Mentoring Sprints | Flynn James',
       description: 'Hands-on outbound SDR leadership: running daily dial sprints, coaching junior reps through live call reviews, and shortening new hire ramp time.',
     },
-    'hire-me': {
+    'work-with-me': { title: 'Work With Flynn James | Senior SDR & Sales Coach', description: 'Partner with Flynn James for high-impact B2B outbound prospecting, appointment setting, and sales coaching.' }, 'hire-me': {
       title: 'Hire Flynn James | Senior SDR & Outbound Appointment Setter',
       description: 'Hire Flynn James for full-time or part-time Senior SDR execution. 150+ dials/day, rigorous BANT qualification, and 30+ qualified discovery meetings per month.',
     },
@@ -229,7 +229,7 @@ export default function App() {
           />
         )}
 
-        {(currentPage === 'hire-me' || currentPage === 'contact') && (
+        {(currentPage === 'work-with-me' || currentPage === 'hire-me' || currentPage === 'contact') && (
           <ContactPage
             onNavigate={handleNavigate}
             onOpenResume={() => setIsResumeOpen(true)}

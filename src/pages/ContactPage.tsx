@@ -111,11 +111,11 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
           <div className="space-y-3 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#dededb] rounded-full text-[11px] font-mono uppercase tracking-widest text-[#0077b6] font-bold shadow-2xs">
               <Mail className="w-3.5 h-3.5" />
-              <span>Direct Outbound Hiring</span>
+              <span>Work With Me · Partnership & Hiring</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight">
-              Hire or Interview Flynn.
+              Work With Flynn.
             </h1>
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-2xl">
@@ -537,3 +537,4 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
     </div>
   );
 }
+

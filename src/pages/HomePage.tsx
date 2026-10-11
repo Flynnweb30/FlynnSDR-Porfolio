@@ -138,8 +138,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
       {/* =========================================================================
-          HERO SECTION: Fixed Navbar Clearance (pt-24 sm:pt-28), No Duplicate Old Nav,
-          Diagonal Upper-Left Experience Badge, and Lower-Right "Work With Me" CTA
+          HERO SECTION: Fixed Navbar Clearance, Tight Diagonal Badge Framing
          ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
@@ -284,62 +283,65 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Center Column: Profile Image with Diagonal Badge at Upper-Left & Button at Lower-Right (Span 4) */}
-            <div className="lg:col-span-4 flex justify-center items-end relative min-h-[480px] sm:min-h-[540px] lg:min-h-[600px]">
+            {/* Center Column: Portrait Tightly Framed by Diagonal Experience Badge and "Work With Me" CTA */}
+            <div className="lg:col-span-4 flex justify-center items-end relative min-h-[440px] sm:min-h-[480px]">
               {/* Soft ambient backdrop lighting glow */}
-              <div className="absolute inset-x-2 bottom-6 h-80 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
+              <div className="absolute inset-x-2 bottom-4 h-72 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
 
-              {/* DIAGONAL BADGE: "11+ Years of Experience" Positioned diagonally at upper-left corner */}
-              <div className="absolute top-2 sm:top-4 -left-2 sm:-left-4 lg:-left-8 z-20 transform -rotate-6 sm:-rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto">
-                <div className="px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#dededb] rounded-2xl shadow-xl flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
-                    <Award className="w-4 h-4 stroke-[2.5]" />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-[11px] font-display uppercase tracking-wider font-extrabold text-[#0d0e0c] leading-tight">
-                      11+ Years of Experience
+              {/* Tightly Anchored Portrait Frame */}
+              <div className="relative inline-block mx-auto max-w-full">
+                {/* DIAGONAL BADGE: "11+ Years of Experience" Anchored directly at upper-left corner of portrait */}
+                <div className="absolute -top-3 -left-3 sm:-top-5 sm:-left-6 lg:-top-6 lg:-left-8 z-20 transform -rotate-6 sm:-rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto">
+                  <div className="px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#dededb] rounded-2xl shadow-xl flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
+                      <Award className="w-4 h-4 stroke-[2.5]" />
                     </div>
-                    <div className="text-[9px] font-sans text-zinc-500 font-medium">
-                      45,000+ Outbound Calls
+                    <div className="text-left">
+                      <div className="text-[11px] font-display uppercase tracking-wider font-extrabold text-[#0d0e0c] leading-tight">
+                        11+ Years of Experience
+                      </div>
+                      <div className="text-[9px] font-sans text-zinc-500 font-medium">
+                        45,000+ Outbound Calls
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Main Enlarged Profile Portrait */}
-              <div className="relative w-84 sm:w-[420px] md:w-[460px] lg:w-[490px] max-w-full z-10 flex justify-center items-end">
-                <img
-                  src={personalInfo.heroImage}
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    target.onerror = null;
-                    target.src = personalInfo.heroImageFallback;
-                  }}
-                  alt="Flynn James - Senior SDR & B2B Pipeline Specialist"
-                  className="w-full h-auto max-h-[620px] object-contain object-bottom drop-shadow-[0_24px_45px_rgba(0,119,182,0.28)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-all duration-300"
-                />
-              </div>
+                {/* Profile Portrait */}
+                <div className="relative w-76 sm:w-88 md:w-[400px] lg:w-[440px] max-w-full z-10 flex justify-center items-end">
+                  <img
+                    src={personalInfo.heroImage}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.onerror = null;
+                      target.src = personalInfo.heroImageFallback;
+                    }}
+                    alt="Flynn James Q. Pontino - Sales Coach · Team Lead · Senior SDR"
+                    className="w-full h-auto max-h-[560px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.25)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-all duration-300"
+                  />
+                </div>
 
-              {/* LOWER-RIGHT BADGE: "Work With Me" Button */}
-              <div className="absolute bottom-6 -right-2 sm:-right-4 lg:-right-6 z-20 animate-fade-in pointer-events-auto">
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking()}
-                  className="px-4 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white rounded-2xl shadow-xl shadow-[#0077b6]/30 border border-white/30 flex items-center gap-2.5 transition-all duration-200 cursor-pointer group"
-                >
-                  <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-white">
-                    <Sparkles className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-xs font-display uppercase tracking-wider font-extrabold text-white leading-tight flex items-center gap-1">
-                      <span>Work With Me</span>
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                {/* LOWER-RIGHT BADGE: "Work With Me" CTA Button Anchored at lower-right corner of portrait */}
+                <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-5 lg:-bottom-4 lg:-right-6 z-20 animate-fade-in pointer-events-auto">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('work-with-me')}
+                    className="px-4 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white rounded-2xl shadow-xl shadow-[#0077b6]/30 border border-white/30 flex items-center gap-2.5 transition-all duration-200 cursor-pointer group"
+                  >
+                    <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-white">
+                      <Sparkles className="w-3.5 h-3.5" />
                     </div>
-                    <div className="text-[9px] font-sans text-sky-100 font-medium">
-                      Schedule Discovery Intro
+                    <div className="text-left">
+                      <div className="text-xs font-display uppercase tracking-wider font-extrabold text-white leading-tight flex items-center gap-1">
+                        <span>Work With Me</span>
+                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                      <div className="text-[9px] font-sans text-sky-100 font-medium">
+                        Schedule Discovery Intro
+                      </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -348,9 +350,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4">
                 <div className="flex items-center justify-between border-b border-zinc-100 pb-2">
                   <h2 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight text-left">
-                    HIRE OR
+                    WORK WITH
                     <br />
-                    INTERVIEW ME
+                    FLYNN
                   </h2>
                   <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-display uppercase font-bold rounded-md border border-emerald-200">
                     Immediate
@@ -359,7 +361,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
                 <div className="space-y-2.5">
                   <a
-                    href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}?text=Hey%20Flynn,%20I'd%20love%20to%20interview%20you%20for%20a%20Senior%20SDR%20role.`}
+                    href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}?text=Hey%20Flynn,%20I'd%20love%20to%20discuss%20working%20with%20you%20for%20our%20SDR%20outbound%20pipeline.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full px-3.5 py-2.5 bg-white hover:bg-emerald-50 border border-zinc-200 hover:border-emerald-500 rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
@@ -393,7 +395,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   </a>
 
                   <a
-                    href={`mailto:${personalInfo.email}?subject=Interview%20Flynn%20for%20Senior%20SDR%20Role`}
+                    href={`mailto:${personalInfo.email}?subject=Work%20With%20Flynn%20-%20Senior%20SDR%20Partnership`}
                     className="w-full px-3.5 py-2.5 bg-white hover:bg-sky-50 border border-zinc-200 hover:border-[#0077b6] rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
                   >
                     <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
@@ -526,7 +528,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* PROOF I CAN QUALIFY & BOOK (LANDSCAPE PODCAST VISUALIZERS - NO TRANSCRIPTS) */}
+      {/* PROOF I CAN QUALIFY & BOOK */}
       <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
@@ -644,7 +646,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* LEADERSHIP SPRINT VIDEO SECTION WITH EXCLUSIVE PLAYBACK CONTROL */}
+      {/* LEADERSHIP SPRINT VIDEO SECTION */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#dededb] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 text-center">
@@ -670,7 +672,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* PROFESSIONAL RECOMMENDATION SECTION: PLACED BESIDE FLYNN IN OFFICE PHOTO */}
+      {/* PROFESSIONAL RECOMMENDATION SECTION */}
       <section id="testimonials" className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
@@ -806,21 +808,21 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* ROLES COMPARISON */}
+      {/* ROLES / WORK WITH ME COMPARISON */}
       <section id="roles" className="py-14 sm:py-20 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs font-display text-emerald-700 font-extrabold uppercase tracking-wider">
-              Actively looking
+              Work With Flynn
             </span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black uppercase font-display tracking-tight text-[#0d0e0c] mb-2">
-            LOOKING FOR MY NEXT SENIOR SDR ROLE
+            FLEXIBLE OUTBOUND PARTNERSHIPS
           </h2>
           <p className="text-xs sm:text-sm font-sans text-zinc-500 mb-12">
-            Compare opportunities
+            Choose the engagement model that accelerates your sales organization
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
@@ -828,7 +830,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
                   <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
-                    PART-TIME SENIOR SDR
+                    PART-TIME OUTBOUND SPRINT
                   </h3>
                   <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable base</div>
                   <div className="text-3xl font-black font-display text-[#0077b6] mt-1">$600–$900/mo</div>
@@ -882,7 +884,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   onClick={() => onOpenBooking('Part-Time')}
                   className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
                 >
-                  Inquire About Part-Time
+                  Work With Me (Part-Time)
                 </button>
               </div>
             </div>
@@ -891,7 +893,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
                   <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
-                    FULL-TIME SENIOR SDR
+                    FULL-TIME DEDICATED SENIOR SDR
                   </h3>
                   <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable base</div>
                   <div className="text-3xl font-black font-display text-[#0077b6] mt-1">Starting at $1,050/mo</div>
@@ -945,7 +947,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   onClick={() => onOpenBooking('Full-Time')}
                   className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
                 >
-                  Inquire About Full-Time
+                  Work With Me (Full-Time)
                 </button>
               </div>
             </div>

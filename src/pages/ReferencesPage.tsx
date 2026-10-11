@@ -138,7 +138,7 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
                       You were also great with the team. You mentored our junior SDRs, ran live dial sprints with them, and walked them through call recordings to fix their objection pivots without micromanaging them.
                     </p>
                     <p>
-                      Any founder, VP of Sales, or hiring manager looking for a dedicated Senior SDR who can step in on Day 1, run high-volume cold outreach, and build dependable outbound pipeline would be lucky to have you. <strong className="text-[#0d0e0c]">I would recommend hiring Flynn without hesitation.</strong>
+                      Any founder, VP of Sales, or hiring manager looking for a dedicated Senior SDR who can step in on Day 1, run high-volume cold outreach, and build dependable outbound pipeline would be lucky to have you. <strong className="text-[#0d0e0c]">I would recommend working with Flynn without hesitation.</strong>
                     </p>
                     <p className="pt-2">
                       Feel free to have prospective teams reach out to me directly if they ever need a reference.
@@ -338,3 +338,4 @@ export default function ReferencesPage({ onNavigate, onOpenBooking, onOpenResume
     </div>
   );
 }
+

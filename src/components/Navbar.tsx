@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import FlynnLogo from './FlynnLogo';
 import { PageRoute } from '../types';
 import {
@@ -31,6 +31,8 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
     onNavigate(route);
   };
 
+  const isWorkWithMeActive = currentPage === 'work-with-me' || currentPage === 'hire-me';
+
   const isServicesActive =
     currentPage === 'services' ||
     currentPage === 'service-cold-calling' ||
@@ -49,18 +51,31 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#dededb] shadow-2xs py-2.5 sm:py-3 transition-all duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Flynn appears ONLY ONCE as the cursive script brand logo on the left */}
+          {/* Flynn Logo Brand */}
           <div
             onClick={() => handleLinkClick('home')}
-            className="cursor-pointer focus:outline-none"
+            className="cursor-pointer focus:outline-none shrink-0"
             title="Flynn James - Home"
           >
             <FlynnLogo size="sm" variant="dark" />
           </div>
 
-          {/* Desktop Navigation Menu (No duplicate Flynn button) */}
+          {/* Desktop Navigation Menu: "Work With Me" Tab Positioned Immediately Beside Flynn */}
           <nav className="hidden lg:flex items-center gap-1 bg-[#f1f1ee] border border-[#dededb] rounded-full px-3 py-1 shadow-2xs">
-            {/* Services Offered Dropdown */}
+            {/* 1. "Work With Me" Tab - Positioned immediately beside Flynn */}
+            <button
+              type="button"
+              onClick={() => handleLinkClick('work-with-me')}
+              className={`px-3.5 py-1 text-xs font-display font-extrabold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
+                isWorkWithMeActive
+                  ? 'bg-[#0077b6] text-white shadow-xs'
+                  : 'text-zinc-700 hover:text-black hover:bg-white/80'
+              }`}
+            >
+              Work With Me
+            </button>
+
+            {/* 2. Services Offered Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -120,7 +135,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* Industries Dropdown */}
+            {/* 3. Industries Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -180,7 +195,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* Hear My Opener */}
+            {/* 4. Hear My Opener */}
             <button
               type="button"
               onClick={() => handleLinkClick('calls')}
@@ -202,20 +217,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               </span>
             </button>
 
-            {/* Hire Me */}
-            <button
-              type="button"
-              onClick={() => handleLinkClick('hire-me')}
-              className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
-                currentPage === 'hire-me'
-                  ? 'bg-[#0077b6] text-white shadow-xs'
-                  : 'text-zinc-600 hover:text-black hover:bg-white/80'
-              }`}
-            >
-              Hire Me
-            </button>
-
-            {/* References */}
+            {/* 5. References */}
             <button
               type="button"
               onClick={() => handleLinkClick('references')}
@@ -228,7 +230,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               References
             </button>
 
-            {/* Playbook */}
+            {/* 6. Playbook */}
             <button
               type="button"
               onClick={() => handleLinkClick('academy')}
@@ -241,7 +243,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               Playbook
             </button>
 
-            {/* Experience */}
+            {/* 7. Experience */}
             <button
               type="button"
               onClick={() => handleLinkClick('experience')}
@@ -299,6 +301,16 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
           <div className="grid grid-cols-2 gap-2 pt-2">
             <button
               type="button"
+              onClick={() => handleLinkClick('work-with-me')}
+              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
+                isWorkWithMeActive ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
+              }`}
+            >
+              Work With Me
+            </button>
+
+            <button
+              type="button"
               onClick={() => handleLinkClick('calls')}
               className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase flex items-center justify-between ${
                 currentPage === 'calls' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
@@ -326,16 +338,6 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               }`}
             >
               Industries (Hub)
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleLinkClick('hire-me')}
-              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
-                currentPage === 'hire-me' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
-              }`}
-            >
-              Hire Me
             </button>
 
             <button

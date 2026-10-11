@@ -1,5 +1,6 @@
 export type PageRoute = 
   | 'home' 
+  | 'work-with-me'
   | 'hire-me' 
   | 'references' 
   | 'academy'

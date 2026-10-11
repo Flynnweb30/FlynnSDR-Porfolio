@@ -87,7 +87,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                   {personalInfo.fullName}
                 </h1>
                 <p className="text-sm font-display uppercase tracking-wider text-[#0077b6] font-extrabold mt-0.5">
-                  Senior SDR · B2B Cold Caller · Appointment Setter · Outbound Specialist
+                  Sales Coach · Team Lead · Senior SDR
                 </p>
               </div>
 
@@ -229,3 +229,4 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     </div>
   );
 }
+
