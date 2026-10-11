@@ -48,7 +48,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
   const [inquiryType, setInquiryType] = useState<'Interview' | 'SDR Inquiry' | 'Partnership' | 'Other'>('Interview');
-  const [employmentPreference, setEmploymentPreference] = useState<'Full-Time' | 'Part-Time'>('Full-Time');
+  const [employmentPreference, setEmploymentPreference] = useState<'Full-Time' | 'Part-Time' | 'Team Leader'>('Full-Time');
   const [notes, setNotes] = useState('');
   const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -134,42 +134,57 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
         </div>
       </section>
 
-      {/* Availability & Engagement Rates Overview */}
+      {/* Availability & Engagement Rates Overview (3 Models) */}
       <section className="py-8 border-b border-[#dededb] bg-[#fafaf8]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 bg-white border-2 border-[#0077b6] rounded-2xl shadow-xs text-left space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-                  Full-Time TL / Senior SDR
-                </div>
-                <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[9px] font-display uppercase font-bold rounded">
-                  40 Hours / Week
-                </span>
-              </div>
-              <div className="text-2xl font-black font-display text-zinc-950">$639 / month</div>
-              <p className="text-xs leading-relaxed text-zinc-600 font-sans">
-                Full-time dedicated outbound execution and sales floor leadership. Covers 150+ daily dials, 30+ qualified discovery meetings/month, BANT/MEDDIC qualification, junior SDR coaching, and 100% CRM data accuracy during US/UK business hours.
-              </p>
-            </div>
-
-            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs text-left space-y-2">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-5 bg-white border border-[#dededb] rounded-2xl shadow-xs text-left space-y-2">
               <div className="flex items-center justify-between">
                 <div className="text-[10px] font-display uppercase tracking-widest text-zinc-600 font-extrabold">
-                  Part-Time Outbound Sprint
+                  Part-Time Sprint
                 </div>
                 <span className="px-2 py-0.5 bg-zinc-100 text-zinc-700 text-[9px] font-display uppercase font-bold rounded">
-                  20 Hours / Week
+                  20 Hrs / Wk
                 </span>
               </div>
               <div className="text-2xl font-black font-display text-zinc-950">$389 / month</div>
               <p className="text-xs leading-relaxed text-zinc-600 font-sans">
-                Proportionate part-time outbound sprint covering 75–100+ dials/day, 15–20+ qualified meetings/month, BANT prospect qualification, and CRM follow-ups. Ideal for targeted pipeline acceleration campaigns.
+                75–100+ daily dials, 15–20+ qualified meetings/mo, BANT qualification, and CRM follow-ups.
+              </p>
+            </div>
+
+            <div className="p-5 bg-white border-2 border-[#0077b6] rounded-2xl shadow-xs text-left space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
+                  Full-Time Senior SDR
+                </div>
+                <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[9px] font-display uppercase font-bold rounded">
+                  40 Hrs / Wk
+                </span>
+              </div>
+              <div className="text-2xl font-black font-display text-zinc-950">$639 / month</div>
+              <p className="text-xs leading-relaxed text-zinc-600 font-sans">
+                150+ daily dials, 30+ qualified discovery meetings/mo, BANT/MEDDIC qualification, and full CRM ownership.
+              </p>
+            </div>
+
+            <div className="p-5 bg-white border border-[#dededb] rounded-2xl shadow-xs text-left space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="text-[10px] font-display uppercase tracking-widest text-purple-700 font-extrabold">
+                  Team Leader & Coach
+                </div>
+                <span className="px-2 py-0.5 bg-purple-50 text-purple-700 text-[9px] font-display uppercase font-bold rounded">
+                  Custom Pod Scope
+                </span>
+              </div>
+              <div className="text-2xl font-black font-display text-emerald-600">Negotiable</div>
+              <p className="text-xs leading-relaxed text-zinc-600 font-sans">
+                Floor leadership, daily dial sprints, call shadowing, rep coaching, and executive KPI reporting. Discussed based on scope.
               </p>
             </div>
           </div>
           <p className="text-[11px] text-zinc-500 text-center mt-3 font-sans">
-            Rates are guaranteed monthly bases. Performance incentives or commissions can be added based on quota structure.
+            Rates are discussed transparently based on responsibilities, target market, and campaign scope.
           </p>
         </div>
       </section>
@@ -433,15 +448,16 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
 
                       <div>
                         <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 block mb-1 font-bold">
-                          Engagement Preference *
+                          Engagement Model *
                         </label>
                         <select
                           value={employmentPreference}
-                          onChange={(e) => setEmploymentPreference(e.target.value as 'Full-Time' | 'Part-Time')}
+                          onChange={(e) => setEmploymentPreference(e.target.value as 'Full-Time' | 'Part-Time' | 'Team Leader')}
                           className="w-full bg-zinc-50 border border-zinc-200 focus:border-[#0077b6] rounded-xl px-4 py-2.5 text-xs text-zinc-900 focus:outline-none focus:bg-white"
                         >
-                          <option value="Full-Time">Full-Time TL / Senior SDR ($639/mo)</option>
+                          <option value="Full-Time">Full-Time Senior SDR ($639/mo)</option>
                           <option value="Part-Time">Part-Time Outbound Sprint ($389/mo)</option>
+                          <option value="Team Leader">Team Leader (TL) · Negotiable Scope</option>
                         </select>
                       </div>
                     </div>

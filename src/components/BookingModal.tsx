@@ -1,11 +1,11 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { X, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
 import { sendInquiryEmails, InquiryPayload } from '../lib_email';
 
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
-  defaultPreference?: 'Part-Time' | 'Full-Time';
+  defaultPreference?: 'Part-Time' | 'Full-Time' | 'Team Leader';
 }
 
 function nextBusinessDays(count = 7) {
@@ -34,7 +34,7 @@ export default function BookingModal({ isOpen, onClose, defaultPreference }: Boo
   const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
   const [inquiryType, setInquiryType] = useState<'Interview' | 'SDR Inquiry' | 'Partnership' | 'Other'>('Interview');
-  const [preference, setPreference] = useState<'Part-Time' | 'Full-Time'>(defaultPreference || 'Full-Time');
+  const [preference, setPreference] = useState<'Part-Time' | 'Full-Time' | 'Team Leader'>(defaultPreference || 'Full-Time');
   const [message, setMessage] = useState('');
   const [consent, setConsent] = useState(false);
   const [isBooked, setIsBooked] = useState(false);
@@ -100,7 +100,7 @@ export default function BookingModal({ isOpen, onClose, defaultPreference }: Boo
                 Schedule 15-Minute Intro With Flynn
               </h3>
               <p className="text-xs text-zinc-500 font-sans">
-                Direct 1-on-1 intro for Senior SDR, outbound dialing, and appointment setting opportunities.
+                Direct 1-on-1 intro for Team Leader, Senior SDR, and outbound campaign partnerships.
               </p>
             </div>
           </div>
@@ -247,14 +247,15 @@ export default function BookingModal({ isOpen, onClose, defaultPreference }: Boo
                     </select>
                   </div>
                   <div>
-                    <span className="text-[10px] font-display uppercase text-zinc-500 font-bold block mb-1">Employment Preference *</span>
+                    <span className="text-[10px] font-display uppercase text-zinc-500 font-bold block mb-1">Engagement Model *</span>
                     <select
                       value={preference}
-                      onChange={(e) => setPreference(e.target.value as 'Part-Time' | 'Full-Time')}
+                      onChange={(e) => setPreference(e.target.value as 'Part-Time' | 'Full-Time' | 'Team Leader')}
                       className="field"
                     >
-                      <option value="Full-Time">Full-Time Senior SDR</option>
-                      <option value="Part-Time">Part-Time Senior SDR</option>
+                      <option value="Full-Time">Full-Time TL / Senior SDR ($639/mo)</option>
+                      <option value="Part-Time">Part-Time Outbound Sprint ($389/mo)</option>
+                      <option value="Team Leader">Team Leader (TL) · Negotiable Scope</option>
                     </select>
                   </div>
                 </div>
@@ -265,7 +266,7 @@ export default function BookingModal({ isOpen, onClose, defaultPreference }: Boo
                     rows={3}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Tell Flynn about your ICP, monthly discovery meeting targets, or outbound tech stack..."
+                    placeholder="Tell Flynn about your target ICP, monthly booked meeting targets, or outbound tech stack..."
                     className="field resize-none"
                   />
                 </div>
