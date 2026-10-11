@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -23,6 +23,7 @@ export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   const supportedRoutes: PageRoute[] = [
+    'work-with-me',
     'hire-me',
     'references',
     'academy',
@@ -61,8 +62,16 @@ export default function App() {
 
   const seoMap: Record<PageRoute, { title: string; description: string }> = {
     home: {
-      title: 'Flynn James | Senior SDR & B2B Outbound Pipeline Specialist',
-      description: 'Official Senior SDR portfolio for Flynn James Q. Pontino — 11+ years in B2B cold calling, high-volume prospecting, BANT qualification, appointment setting, and $1.8M+ pipeline generation.',
+      title: 'Flynn James | Heavyweight TL & Senior SDR | Outbound Pipeline Leader',
+      description: 'Heavyweight TL & Senior SDR portfolio of Flynn James Q. Pontino — 11+ years outbound cold calling, SDR coaching, and team leadership. Full-time ($639/mo) and part-time ($389/mo) outbound partnerships.',
+    },
+    'work-with-me': {
+      title: 'Work With Flynn James | Heavyweight TL & Senior SDR Partnerships',
+      description: 'Partner with Flynn James for high-impact B2B outbound prospecting, appointment setting, and sales coaching. Full-time ($639/mo) and part-time ($389/mo) engagements.',
+    },
+    'hire-me': {
+      title: 'Work With Flynn James | Heavyweight TL & Senior SDR Partnerships',
+      description: 'Partner with Flynn James for high-impact B2B outbound prospecting, appointment setting, and sales coaching. Full-time ($639/mo) and part-time ($389/mo) engagements.',
     },
     calls: {
       title: 'Hear My Opener: Real Cold Calling & Discovery Recordings | Flynn James',
@@ -79,10 +88,6 @@ export default function App() {
     leadership: {
       title: 'SDR Sales Floor Leadership & Mentoring Sprints | Flynn James',
       description: 'Hands-on outbound SDR leadership: running daily dial sprints, coaching junior reps through live call reviews, and shortening new hire ramp time.',
-    },
-    'work-with-me': { title: 'Work With Flynn James | Senior SDR & Sales Coach', description: 'Partner with Flynn James for high-impact B2B outbound prospecting, appointment setting, and sales coaching.' }, 'hire-me': {
-      title: 'Hire Flynn James | Senior SDR & Outbound Appointment Setter',
-      description: 'Hire Flynn James for full-time or part-time Senior SDR execution. 150+ dials/day, rigorous BANT qualification, and 30+ qualified discovery meetings per month.',
     },
     contact: {
       title: 'Direct Contact & 15-Min Intro Scheduling | Flynn James Senior SDR',
@@ -301,7 +306,6 @@ export default function App() {
         )}
       </main>
 
-      {/* Universal Footer for all sub-pages (HomePage includes it directly to prevent duplicate) */}
       {currentPage !== 'home' && (
         <Footer
           onNavigate={handleNavigate}

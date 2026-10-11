@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { personalInfo } from '../data/flynnData';
 import { sendInquiryEmails, InquiryPayload } from '../lib_email';
 import {
@@ -89,7 +89,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
       consent,
       timestamp: new Date().toISOString(),
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      source: `${window.location.origin}/hire-me`,
+      source: `${window.location.origin}/work-with-me`,
     };
 
     try {
@@ -111,7 +111,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
           <div className="space-y-3 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#dededb] rounded-full text-[11px] font-mono uppercase tracking-widest text-[#0077b6] font-bold shadow-2xs">
               <Mail className="w-3.5 h-3.5" />
-              <span>Work With Me · Partnership & Hiring</span>
+              <span>Work With Flynn · Engagement & Partnership</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight">
@@ -119,7 +119,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
             </h1>
 
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-2xl">
-              Available immediately for Senior SDR, Lead Prospector, and B2B Outbound Specialist roles. Reach out via email, phone, WhatsApp, or reserve your 15-minute introductory sync below.
+              Available immediately for Heavyweight Team Leader, Senior SDR, and Outbound Specialist roles. Reach out via email, phone, WhatsApp, or reserve your 15-minute introductory discussion below.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 pt-1">
@@ -134,31 +134,42 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
         </div>
       </section>
 
-      {/* Availability & Compensation Overview */}
+      {/* Availability & Engagement Rates Overview */}
       <section className="py-8 border-b border-[#dededb] bg-[#fafaf8]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs text-left space-y-2">
-              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-                Full-Time Senior SDR
+            <div className="p-6 bg-white border-2 border-[#0077b6] rounded-2xl shadow-xs text-left space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
+                  Full-Time TL / Senior SDR
+                </div>
+                <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[9px] font-display uppercase font-bold rounded">
+                  40 Hours / Week
+                </span>
               </div>
-              <div className="text-2xl font-black font-display text-zinc-950">Starting at $1,050/month</div>
+              <div className="text-2xl font-black font-display text-zinc-950">$639 / month</div>
               <p className="text-xs leading-relaxed text-zinc-600 font-sans">
-                Full-time dedicated outbound execution covering prospect list building, multi-channel cadences, 150+ daily dials, BANT qualification, and 30+ qualified discovery meetings per month during US/UK business hours.
+                Full-time dedicated outbound execution and sales floor leadership. Covers 150+ daily dials, 30+ qualified discovery meetings/month, BANT/MEDDIC qualification, junior SDR coaching, and 100% CRM data accuracy during US/UK business hours.
               </p>
             </div>
+
             <div className="p-6 bg-white border border-[#dededb] rounded-2xl shadow-xs text-left space-y-2">
-              <div className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-                Part-Time Senior SDR
+              <div className="flex items-center justify-between">
+                <div className="text-[10px] font-display uppercase tracking-widest text-zinc-600 font-extrabold">
+                  Part-Time Outbound Sprint
+                </div>
+                <span className="px-2 py-0.5 bg-zinc-100 text-zinc-700 text-[9px] font-display uppercase font-bold rounded">
+                  20 Hours / Week
+                </span>
               </div>
-              <div className="text-2xl font-black font-display text-zinc-950">Typically $600–$900/month</div>
+              <div className="text-2xl font-black font-display text-zinc-950">$389 / month</div>
               <p className="text-xs leading-relaxed text-zinc-600 font-sans">
-                Tailored for roughly 20–25 hours/week, focused on high-impact dial sprints, prospect qualification, appointment setting, and CRM data hygiene. Performance incentives can be paired when appropriate.
+                Proportionate part-time outbound sprint covering 75–100+ dials/day, 15–20+ qualified meetings/month, BANT prospect qualification, and CRM follow-ups. Ideal for targeted pipeline acceleration campaigns.
               </p>
             </div>
           </div>
           <p className="text-[11px] text-zinc-500 text-center mt-3 font-sans">
-            Compensation is negotiable based on campaign scope, working market, dial volume requirements, and quota structure.
+            Rates are guaranteed monthly bases. Performance incentives or commissions can be added based on quota structure.
           </p>
         </div>
       </section>
@@ -167,8 +178,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
       <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            
-            {/* Left Coordinates & Profile (Span 5) */}
+            {/* Left Coordinates & Profile */}
             <div className="lg:col-span-5 space-y-6 text-left">
               <div className="p-6 bg-white border border-[#dededb] rounded-2xl space-y-5 shadow-xs">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
@@ -184,7 +194,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                   </button>
                 </div>
 
-                {/* Email */}
                 <div className="flex items-start gap-3.5">
                   <div className="w-9 h-9 rounded-lg bg-sky-50 border border-sky-100 flex items-center justify-center text-[#0077b6] shrink-0">
                     <Mail className="w-4 h-4" />
@@ -202,7 +211,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                   </div>
                 </div>
 
-                {/* Phone / WhatsApp */}
                 <div className="flex items-start gap-3.5">
                   <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
                     <Phone className="w-4 h-4" />
@@ -220,7 +228,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                   </div>
                 </div>
 
-                {/* LinkedIn */}
                 <div className="flex items-start gap-3.5">
                   <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
                     <Linkedin className="w-4 h-4" />
@@ -241,7 +248,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                   </div>
                 </div>
 
-                {/* Location */}
                 <div className="flex items-start gap-3.5">
                   <div className="w-9 h-9 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 shrink-0">
                     <MapPin className="w-4 h-4" />
@@ -257,41 +263,9 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                   </div>
                 </div>
               </div>
-
-              {/* Inbound Lead Trigger: Facebook Community */}
-              <div className="p-6 bg-gradient-to-br from-blue-50/80 via-white to-white border-2 border-blue-200 rounded-2xl space-y-4 shadow-xs">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-display font-bold text-[#1877F2] uppercase">
-                    <MessageCircle className="w-4 h-4 fill-[#1877F2]" />
-                    <span>Connect via Facebook</span>
-                  </div>
-                  <span className="text-[10px] font-mono bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">
-                    Messenger
-                  </span>
-                </div>
-
-                <div className="space-y-1">
-                  <h4 className="text-sm font-bold font-display uppercase text-zinc-900 tracking-tight">
-                    Prefer Instant Social Messaging?
-                  </h4>
-                  <p className="text-xs text-zinc-600 leading-relaxed font-sans">
-                    Reach out directly on Facebook Messenger for quick questions, dial requirements, or immediate pipeline inquiries.
-                  </p>
-                </div>
-
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs uppercase font-display tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
-                >
-                  <span>Chat on Facebook Messenger</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
             </div>
 
-            {/* Right: Direct Scheduling & Inquiry (Span 7) */}
+            {/* Right: Direct Scheduling Form */}
             <div className="lg:col-span-7 bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs">
               {submitted ? (
                 <div className="text-center py-10 space-y-6">
@@ -328,7 +302,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     </p>
                   </div>
 
-                  {/* Day Picker */}
                   <div className="space-y-2">
                     <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 font-extrabold block">
                       1. Preferred Day
@@ -354,7 +327,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     </div>
                   </div>
 
-                  {/* Time Picker */}
                   <div className="space-y-2">
                     <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 font-extrabold block">
                       2. Preferred Time Window (EST)
@@ -367,7 +339,7 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                           onClick={() => setSelectedTime(time)}
                           className={`py-2 px-3 rounded-xl border text-xs font-display uppercase text-center transition-all cursor-pointer ${
                             selectedTime === time
-                              ? 'bg-[#0077b6] text-white border-[#0077b6] font-extrabold shadow-xs'
+                              ? 'bg-[#0077b6] text-white border-[#0077b6] font-bold shadow-xs'
                               : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-white'
                           }`}
                         >
@@ -377,7 +349,6 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                     </div>
                   </div>
 
-                  {/* Centralized Form Fields */}
                   <div className="space-y-4 pt-2 border-t border-zinc-100">
                     <label className="text-[11px] font-display uppercase tracking-wider text-zinc-700 font-extrabold block">
                       3. Contact & Opportunity Details
@@ -462,15 +433,15 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
 
                       <div>
                         <label className="text-[11px] font-display uppercase tracking-wider text-zinc-600 block mb-1 font-bold">
-                          Employment Preference *
+                          Engagement Preference *
                         </label>
                         <select
                           value={employmentPreference}
                           onChange={(e) => setEmploymentPreference(e.target.value as 'Full-Time' | 'Part-Time')}
                           className="w-full bg-zinc-50 border border-zinc-200 focus:border-[#0077b6] rounded-xl px-4 py-2.5 text-xs text-zinc-900 focus:outline-none focus:bg-white"
                         >
-                          <option value="Full-Time">Full-Time Senior SDR</option>
-                          <option value="Part-Time">Part-Time Senior SDR</option>
+                          <option value="Full-Time">Full-Time TL / Senior SDR ($639/mo)</option>
+                          <option value="Part-Time">Part-Time Outbound Sprint ($389/mo)</option>
                         </select>
                       </div>
                     </div>
@@ -530,11 +501,9 @@ export default function ContactPage({ onNavigate, onOpenResume }: ContactPagePro
                 </form>
               )}
             </div>
-
           </div>
         </div>
       </section>
     </div>
   );
 }
-

@@ -3,10 +3,10 @@ import { WorkExperience, CallRecording } from '../types';
 export const personalInfo = {
   fullName: 'Flynn James Q. Pontino',
   shortName: 'Flynn',
-  title: 'Sales Coach · Team Lead · Senior SDR',
-  tagline: 'SDR coaching, team performance, outbound sales, call quality, appointment setting, prospect qualification, and pipeline development, with a focus on improving productivity, accountability, and results.',
+  title: 'Heavyweight TL / Senior SDR · Sales Coach',
+  tagline: 'Team leadership, SDR coaching, high-stamina outbound prospecting, BANT qualification, and accelerating sales team revenue from Day 1.',
   executiveSummary:
-    'Results-driven B2B sales professional with 11+ years of experience in outbound sales, lead generation, and appointment setting. Skilled in team leadership, SDR coaching, performance management, CRM optimization, and KPI tracking. Experienced in UK-market campaigns, SaaS prospecting, and international B2B acquisition. Former Sales Coach at Regen Digital and Team Lead at Seek Marketing Partners, focused on improving team performance and pipeline growth.',
+    'Results-driven B2B outbound leader with 11+ years of experience in high-volume phone prospecting, lead generation, appointment setting, and SDR team leadership. Proven track record generating $1.8M+ in pipeline and consistently exceeding quota at 120–150%. Expert in running daily dial sprints, live call shadowing, BANT/MEDDIC qualification, and mentoring junior reps to achieve a +15% team KPI lift. Experienced across US, UK, AU, and SG campaigns.',
   phone: '+63 930 635 9306',
   email: 'va.flynnjames@gmail.com',
   location: 'Toledo, Cebu, Philippines - Remote',
@@ -16,10 +16,12 @@ export const personalInfo = {
   availability: 'Available — Remote roles · Immediate start · 11+ years',
   yearsExperience: '11+ years',
   pipelineSourced: '$1.8M+',
-  roleKeywords: 'Sales Coach · Team Lead · Senior SDR · B2B Cold Caller · Appointment Setter · Lead Qualification',
+  roleKeywords: 'Heavyweight TL / Senior SDR · Sales Coach · Team Lead · B2B Cold Caller · Appointment Setter · Outbound Pipeline Leader',
   meetingsPerMonth: '30+',
   callsPerDay: '150+',
   quotaAttainment: '120–150%',
+  fullTimeRate: '$639/mo',
+  partTimeRate: '$389/mo',
   heroImage: 'https://user42540.na.imgto.link/public/20261009/e84243fcb7461dd413fb7747-flynn-profile.avif',
   heroImageFallback: 'https://user42540.na.imgto.link/public/20261009/e84243fcb7461dd413fb7747-flynn-profile.avif',
   teamImage: '/assets/team-flynn-1.avif',
@@ -31,25 +33,25 @@ export const personalInfo = {
 export const keyAchievements = [
   { label: 'Quota Attainment', value: '120–150%', detail: 'Consistently exceeded on outbound' },
   { label: 'Support Qualified', value: '30+', detail: 'Verified high-intent SQLs booked' },
-  { label: 'Calls/Day', value: '150+', detail: 'Relentless cold calling stamina' },
+  { label: 'Daily Outbound Dials', value: '150+', detail: 'Relentless cold calling stamina' },
   { label: 'Pipeline Sourced', value: '$1.8M', detail: 'Direct outbound pipeline generated' },
-  { label: 'Company Perf.', value: 'Top 5%', detail: 'Ranked top outbound tier' },
-  { label: 'Top Performer', value: '3x', detail: 'Employee of the Month & Top Rep' },
+  { label: 'Team KPI Lift', value: '+15%', detail: 'Junior SDR mentorship & sprints' },
+  { label: 'Performer Awards', value: '3x', detail: 'Employee of the Month & Top Rep' },
 ];
 
 export const coreSkills = [
-  'B2B Lead Generation',
-  'Cold Calling (150/day)',
-  'Outbound Prospecting',
-  'BANT/MEDDIC Qualification',
-  'Appointment Setting',
-  'Pipeline Management',
-  'Objection Handling',
-  'Multi-Channel Outreach',
-  'Consultative Selling',
-  'Sales Forecasting',
-  'Team Leadership',
-  'CRM Data Management',
+  'B2B Outbound Cold Calling',
+  'SDR Team Leadership & Coaching',
+  'High-Volume Prospecting (150/day)',
+  'Appointment Setting (30+/mo)',
+  'BANT & MEDDIC Qualification',
+  'Objection De-Escalation',
+  'Multi-Touch Outbound Cadences',
+  'Live Call Shadowing & Mentoring',
+  'CRM Pipeline Hygiene',
+  'AE Warm Handoff Protocols',
+  'Sales Forecasting & KPI Tracking',
+  'ICP & TAM Account Mapping',
 ];
 
 export const toolsAndTech = [
@@ -185,16 +187,16 @@ export const whyInterviewFlynn = [
     desc: 'Outbound sales, pipeline growth, and team leadership across US, UK, and APAC markets.',
   },
   {
-    title: 'SDR Coaching',
-    desc: 'Call quality, skill development, and KPI accountability with live shadowing.',
+    title: 'SDR Coaching & Mentorship',
+    desc: 'Call quality, skill development, live shadowing, and team KPI accountability.',
   },
   {
     title: 'CRM & Performance Tracking',
-    desc: 'HubSpot, activity monitoring, and pipeline optimization with 100% data hygiene.',
+    desc: 'HubSpot & Salesforce, activity monitoring, and pipeline optimization with 100% data hygiene.',
   },
   {
     title: 'Remote Team Management',
-    desc: 'Productivity, consistency, and results in KPI-driven remote environments.',
+    desc: 'Productivity, consistency, and results in KPI-driven remote sales environments.',
   },
 ];
 

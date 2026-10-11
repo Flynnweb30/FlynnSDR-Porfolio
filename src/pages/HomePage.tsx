@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PageRoute } from '../types';
 import { personalInfo, callRecordings } from '../data/flynnData';
+import BanknoteNav from '../components/BanknoteNav';
 import DiscordButton from '../components/DiscordButton';
 import IntroVideoPlayer from '../components/IntroVideoPlayer';
 import PodcastVisualizer from '../components/PodcastVisualizer';
@@ -17,6 +18,7 @@ import {
   Award,
   ArrowRight,
   Sparkles,
+  Users,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -138,7 +140,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
       {/* =========================================================================
-          HERO SECTION: Fixed Navbar Clearance, Tight Diagonal Badge Framing
+          HERO SECTION: HEAVYWEIGHT TL / SENIOR SDR POSITIONING
          ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
@@ -158,31 +160,35 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-[#0077b6] font-extrabold shadow-2xs">
                   <span className="w-2 h-2 rounded-full bg-[#0077b6] animate-pulse" />
-                  <span>B2B Sales Specialist</span>
+                  <span>Heavyweight TL / Senior SDR</span>
                 </span>
 
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-zinc-700 font-bold shadow-2xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
-                  <span>Pipeline Specialist</span>
+                  <Award className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Sales Coach · 11+ Years</span>
+                </span>
+
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] font-display uppercase tracking-wider text-emerald-800 font-bold shadow-2xs">
+                  <span>+15% Team KPI Lift</span>
                 </span>
               </div>
 
-              {/* Bold Headline */}
+              {/* Bold Headline: Heavyweight TL / Senior SDR */}
               <div className="space-y-0 leading-none">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
-                  HEAVY WEIGHT
+                  HEAVYWEIGHT TL /
                 </h1>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
                   SENIOR SDR
                 </h1>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0077b6] block">
-                  PIPELINE SPECIALIST.
+                  PIPELINE LEADER.
                 </h1>
               </div>
 
               {/* Client-Centric Conversion Copy */}
               <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
-                Filling Account Executive calendars with high-intent discovery calls. Flynn delivers reliable outbound phone stamina (150+ dials/day), rigorous BANT qualification, and zero ramp time—sourcing over <strong className="text-zinc-950 font-bold">$1.8M in pipeline</strong> with consistent <strong className="text-zinc-950 font-bold">120–150% quota attainment</strong>.
+                Combining high-stamina outbound dialing (150+ dials/day) with proven sales floor leadership and SDR coaching. Flynn fills Account Executive calendars with 30+ qualified discovery meetings per month, trains junior reps on objection reversal, and scales pipeline with zero ramp time.
               </p>
 
               {/* Verified Metrics Row 1 */}
@@ -239,13 +245,13 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
 
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
-                  <span className="text-xl">❄️</span>
+                  <span className="text-xl">👥</span>
                   <div>
                     <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
-                      150+
+                      20+ SDRs
                     </div>
                     <div className="text-[9px] font-display font-bold uppercase text-zinc-500 leading-tight mt-0.5">
-                      DAILY OUTBOUND DIALS
+                      COACHED & MENTORED ON FLOOR
                     </div>
                   </div>
                 </div>
@@ -285,10 +291,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
             {/* Center Column: Portrait Tightly Framed by Diagonal Experience Badge and "Work With Me" CTA */}
             <div className="lg:col-span-4 flex justify-center items-end relative min-h-[440px] sm:min-h-[480px]">
-              {/* Soft ambient backdrop lighting glow */}
               <div className="absolute inset-x-2 bottom-4 h-72 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
 
-              {/* Tightly Anchored Portrait Frame */}
               <div className="relative inline-block mx-auto max-w-full">
                 {/* DIAGONAL BADGE: "11+ Years of Experience" Anchored directly at upper-left corner of portrait */}
                 <div className="absolute -top-3 -left-3 sm:-top-5 sm:-left-6 lg:-top-6 lg:-left-8 z-20 transform -rotate-6 sm:-rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto">
@@ -316,7 +320,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       target.onerror = null;
                       target.src = personalInfo.heroImageFallback;
                     }}
-                    alt="Flynn James Q. Pontino - Sales Coach · Team Lead · Senior SDR"
+                    alt="Flynn James Q. Pontino - Heavyweight TL / Senior SDR & Sales Coach"
                     className="w-full h-auto max-h-[560px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.25)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-all duration-300"
                   />
                 </div>
@@ -337,7 +341,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                         <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                       </div>
                       <div className="text-[9px] font-sans text-sky-100 font-medium">
-                        Schedule Discovery Intro
+                        From $639/mo Full-Time
                       </div>
                     </div>
                   </button>
@@ -345,7 +349,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
             </div>
 
-            {/* Right Column: Hire Or Interview Me Deck (Span 3) */}
+            {/* Right Column: Work With Flynn Card (Span 3) */}
             <div className="lg:col-span-3 space-y-4">
               <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4">
                 <div className="flex items-center justify-between border-b border-zinc-100 pb-2">
@@ -395,7 +399,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   </a>
 
                   <a
-                    href={`mailto:${personalInfo.email}?subject=Work%20With%20Flynn%20-%20Senior%20SDR%20Partnership`}
+                    href={`mailto:${personalInfo.email}?subject=Work%20With%20Flynn%20-%20TL%20/%20Senior%20SDR%20Partnership`}
                     className="w-full px-3.5 py-2.5 bg-white hover:bg-sky-50 border border-zinc-200 hover:border-[#0077b6] rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
                   >
                     <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
@@ -415,12 +419,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     ✓
                   </div>
                   <div className="text-left text-xs leading-tight">
-                    <span className="text-zinc-500 text-[10px] block font-sans">Available for</span>
+                    <span className="text-zinc-500 text-[10px] block font-sans">Full-Time Rate</span>
                     <strong className="text-emerald-600 font-display uppercase tracking-tight block text-sm">
-                      IMMEDIATE start
+                      $639 / month
                     </strong>
                     <span className="text-zinc-500 text-[10px] block font-sans">
-                      during US/UK daytime full time
+                      Part-Time from $389/mo
                     </span>
                   </div>
                 </div>
@@ -529,7 +533,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       </section>
 
       {/* PROOF I CAN QUALIFY & BOOK */}
-      <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
+      <section id="proof" className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <h2 className="text-3xl sm:text-4xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
@@ -646,12 +650,19 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* LEADERSHIP SPRINT VIDEO SECTION */}
+      {/* =========================================================================
+          GET TO KNOW YOUR NEXT TL / SENIOR SDR (REFINED WITH LEADERSHIP & COACHING)
+         ========================================================================= */}
       <section className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#dededb] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-50 border border-[#0077b6]/30 rounded-full text-xs font-display text-[#0077b6] font-extrabold uppercase tracking-wider">
+              <Users className="w-3.5 h-3.5" />
+              <span>Outbound Leadership & Sales Floor Coaching</span>
+            </div>
+
             <h2 className="text-3xl sm:text-4xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
-              GET TO KNOW YOUR NEXT SENIOR SDR
+              GET TO KNOW YOUR NEXT TL / SENIOR SDR
             </h2>
 
             <IntroVideoPlayer
@@ -665,9 +676,26 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               }}
             />
 
-            <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl mx-auto font-sans leading-relaxed">
-              Flynn combines 11+ years of relentless cold calling stamina with consultative discovery, coaching newer reps on the sales floor, and converting outbound friction into high-intent discovery calls.
-            </p>
+            <div className="max-w-2xl mx-auto space-y-3 text-left">
+              <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
+                Flynn combines individual outbound execution with proven sales floor leadership and coaching. Former Sales Coach at Regen Digital and Team Lead at Seek Marketing Partners, he has personally mentored 20+ SDRs, run daily dial sprints, and driven a documented <strong className="text-zinc-950 font-bold">+15% monthly KPI lift</strong> across international sales campaigns.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs font-sans">
+                <div className="p-3 bg-[#f7f7f6] rounded-xl border border-zinc-200">
+                  <strong className="block font-display uppercase text-zinc-900 font-bold text-[11px]">Daily Dial Leadership</strong>
+                  <span className="text-zinc-600 text-[11px]">Dials beside reps daily to set floor standard.</span>
+                </div>
+                <div className="p-3 bg-[#f7f7f6] rounded-xl border border-zinc-200">
+                  <strong className="block font-display uppercase text-zinc-900 font-bold text-[11px]">Call Coaching & Reviews</strong>
+                  <span className="text-zinc-600 text-[11px]">Weekly 1-on-1s on objection pivots.</span>
+                </div>
+                <div className="p-3 bg-[#f7f7f6] rounded-xl border border-zinc-200">
+                  <strong className="block font-display uppercase text-zinc-900 font-bold text-[11px]">Ramp Acceleration</strong>
+                  <span className="text-zinc-600 text-[11px]">-25% faster onboarding ramp time.</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -748,7 +776,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     <span className="font-bold font-display uppercase tracking-wider text-[#00a8e8]">
                       Regen Digital Sales Floor
                     </span>
-                    <span className="text-zinc-300 text-[10px]">Level 4 SDR</span>
+                    <span className="text-zinc-300 text-[10px]">Level 4 SDR & Coach</span>
                   </div>
                 </div>
               </div>
@@ -808,7 +836,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         </div>
       </section>
 
-      {/* ROLES / WORK WITH ME COMPARISON */}
+      {/* =========================================================================
+          FLEXIBLE OUTBOUND PARTNERSHIPS: FULL-TIME ($639) & PART-TIME ($389)
+         ========================================================================= */}
       <section id="roles" className="py-14 sm:py-20 bg-[#f7f7f6] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-2 mb-3">
@@ -821,57 +851,77 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
           <h2 className="text-3xl sm:text-5xl font-black uppercase font-display tracking-tight text-[#0d0e0c] mb-2">
             FLEXIBLE OUTBOUND PARTNERSHIPS
           </h2>
-          <p className="text-xs sm:text-sm font-sans text-zinc-500 mb-12">
+          <p className="text-xs sm:text-sm font-sans text-zinc-600 max-w-2xl mx-auto mb-12">
             Choose the engagement model that accelerates your sales organization
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+            {/* PART-TIME MODEL: $389/month */}
             <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
               <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
-                  <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
+                  <span className="text-[10px] font-display uppercase tracking-widest text-zinc-400 font-extrabold block">
+                    SPRINT & QUALIFICATION FOCUS
+                  </span>
+                  <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c] mt-0.5">
                     PART-TIME OUTBOUND SPRINT
                   </h3>
-                  <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable base</div>
-                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">$600–$900/mo</div>
-                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Flexible outbound sprint scope</div>
+                  <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable monthly base</div>
+                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">$389 / month</div>
+                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Proportionate sprint rate · Performance incentives optional</div>
                   <div className="text-xs font-bold font-display uppercase tracking-wider text-zinc-800 mt-2 bg-zinc-100 py-1 rounded-lg">
-                    Incentives on qualified meetings
+                    20 Hours / Week · Flexible US/UK Shifts
                   </div>
                 </div>
 
                 <div className="space-y-1 text-center">
-                  <div className="text-sm font-bold font-display uppercase text-zinc-800">4–5 hours a day</div>
+                  <div className="text-sm font-bold font-display uppercase text-zinc-800">
+                    PART-TIME ENGAGEMENT DELIVERABLES
+                  </div>
                   <div className="text-xs text-zinc-500 font-sans">
-                    Targeted outbound dial sprints, pipeline qualification, and appointment booking.
+                    Structured 4-hour daily dial blocks designed to generate consistent discovery volume.
                   </div>
                 </div>
 
                 <div className="pt-2 border-t border-zinc-100">
-                  <div className="text-xs font-display font-extrabold uppercase text-zinc-800 tracking-wider text-center mb-4">
-                    WHAT FLYNN DELIVERS
-                  </div>
+                  <div className="space-y-3.5 text-xs font-sans text-zinc-600">
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-zinc-900 block font-display uppercase">75–100+ Daily Cold Dials</strong>
+                        <span>Consistent phone execution using pattern interrupts and live objection de-escalation.</span>
+                      </div>
+                    </div>
 
-                  <div className="space-y-4 text-xs font-sans text-zinc-600">
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Consistent Qualified Appointments</strong>
-                        <span>Delivering 15–20+ verified discovery meetings each month for Account Executives.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">15–20+ Qualified Meetings / Month</strong>
+                        <span>High-intent discovery meetings scheduled directly on Account Executive calendars.</span>
                       </div>
                     </div>
+
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Daily Cold Outbound Dials</strong>
-                        <span>75–100+ dials per shift with multi-touch email and LinkedIn cadence follow-ups.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">BANT Prospect Qualification</strong>
+                        <span>Discovery questions to verify budget fit, decision authority, and project timelines.</span>
                       </div>
                     </div>
+
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">CRM Rigor & AE Handoffs</strong>
-                        <span>Clean CRM qualification notes, direct dial enrichment, and structured Zoom handoffs.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">Target Account Enrichment & CRM Hygiene</strong>
+                        <span>Daily lead updates in HubSpot/Salesforce with detailed conversation context.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-zinc-900 block font-display uppercase">Weekly Campaign & Metric Sync</strong>
+                        <span>Transparent connect rates, conversion tracking, and cadence adjustments.</span>
                       </div>
                     </div>
                   </div>
@@ -884,57 +934,81 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   onClick={() => onOpenBooking('Part-Time')}
                   className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
                 >
-                  Work With Me (Part-Time)
+                  Work With Me (Part-Time · $389/mo)
                 </button>
               </div>
             </div>
 
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
+            {/* FULL-TIME MODEL: $639/month */}
+            <div className="bg-white border-2 border-[#0077b6] rounded-2xl p-6 sm:p-8 shadow-md flex flex-col justify-between space-y-6 relative">
+              <div className="absolute -top-3 right-6 bg-[#0077b6] text-white text-[10px] font-display uppercase font-extrabold px-3 py-0.5 rounded-full shadow-xs">
+                Most Popular Engagement
+              </div>
+
               <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
-                  <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
-                    FULL-TIME DEDICATED SENIOR SDR
+                  <span className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold block">
+                    DEDICATED OUTBOUND & LEADERSHIP
+                  </span>
+                  <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c] mt-0.5">
+                    FULL-TIME TL / SENIOR SDR
                   </h3>
-                  <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable base</div>
-                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">Starting at $1,050/mo</div>
-                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Full-time dedicated outbound execution</div>
-                  <div className="text-xs font-bold font-display uppercase tracking-wider text-zinc-800 mt-2 bg-zinc-100 py-1 rounded-lg">
-                    Performance incentives on pipeline
+                  <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable monthly base</div>
+                  <div className="text-3xl font-black font-display text-[#0077b6] mt-1">$639 / month</div>
+                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Full-time dedicated outbound execution · Performance incentives optional</div>
+                  <div className="text-xs font-bold font-display uppercase tracking-wider text-emerald-800 mt-2 bg-emerald-50 py-1 rounded-lg border border-emerald-200">
+                    40 Hours / Week · 8 Hours / Day · US/UK Daytime
                   </div>
                 </div>
 
                 <div className="space-y-1 text-center">
-                  <div className="text-sm font-bold font-display uppercase text-zinc-800">8 hours a day · US Daytime</div>
+                  <div className="text-sm font-bold font-display uppercase text-zinc-800">
+                    FULL-TIME ENGAGEMENT DELIVERABLES
+                  </div>
                   <div className="text-xs text-zinc-500 font-sans">
-                    Full-time outbound prospecting, cold calling, BANT qualification, and CRM ownership.
+                    End-to-end outbound prospecting, AE pipeline acceleration, and sales floor leadership.
                   </div>
                 </div>
 
                 <div className="pt-2 border-t border-zinc-100">
-                  <div className="text-xs font-display font-extrabold uppercase text-zinc-800 tracking-wider text-center mb-4">
-                    WHAT FLYNN DELIVERS
-                  </div>
+                  <div className="space-y-3.5 text-xs font-sans text-zinc-600">
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-zinc-900 block font-display uppercase">150+ Daily Outbound Cold Dials</strong>
+                        <span>High-volume daily phone stamina targeting verified decision-makers (TAM & ICP mapped).</span>
+                      </div>
+                    </div>
 
-                  <div className="space-y-4 text-xs font-sans text-zinc-600">
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">30+ Qualified Meetings / Month</strong>
-                        <span>Consistent high-intent SQLs booked directly onto Account Executive calendars.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">30+ Qualified Discovery Meetings / Month</strong>
+                        <span>Dense calendar booking directly onto Account Executive calendars with 88%+ show-up rate.</span>
                       </div>
                     </div>
+
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">150+ Daily Outbound Dials</strong>
-                        <span>Unmatched phone stamina, objection handling, and pattern-interrupt cold outreach.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">SDR Team Leadership & Coaching Sprints</strong>
+                        <span>Mentoring junior reps, running daily dial sprints, and reviewing call recordings (+15% KPI lift).</span>
                       </div>
                     </div>
+
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Outbound Leadership & Mentoring</strong>
-                        <span>Able to shadow and mentor newer SDRs to raise outbound quota attainment across the floor.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">Strict BANT & MEDDIC Qualification</strong>
+                        <span>85% qualification accuracy; pre-meeting briefings to ensure closers pitch only genuine pain points.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-zinc-900 block font-display uppercase">Full Multi-Channel Cadence & CRM Ownership</strong>
+                        <span>Integrated phone, email, and LinkedIn Sales Nav outreach with 100% CRM data accuracy.</span>
                       </div>
                     </div>
                   </div>
@@ -945,9 +1019,9 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 <button
                   type="button"
                   onClick={() => onOpenBooking('Full-Time')}
-                  className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
+                  className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-md text-center"
                 >
-                  Work With Me (Full-Time)
+                  Work With Me (Full-Time · $639/mo)
                 </button>
               </div>
             </div>
