@@ -4,7 +4,6 @@ import { personalInfo, callRecordings } from '../data/flynnData';
 import DiscordButton from '../components/DiscordButton';
 import IntroVideoPlayer from '../components/IntroVideoPlayer';
 import PodcastVisualizer from '../components/PodcastVisualizer';
-import Footer from '../components/Footer';
 import {
   Calendar,
   Check,
@@ -1090,13 +1089,6 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
           </p>
         </div>
       </section>
-
-      {/* Universal Polished Footer Component */}
-      <Footer
-        onNavigate={onNavigate}
-        onOpenBooking={onOpenBooking}
-        onOpenResume={onOpenResume}
-      />
     </div>
   );
 }

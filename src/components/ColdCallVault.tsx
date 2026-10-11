@@ -79,7 +79,7 @@ export default function ColdCallVault() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-start gap-2 pb-2 border-b border-zinc-200">
         <div className="flex items-center gap-1.5 text-xs font-display uppercase font-bold text-zinc-500 mr-2">
-          <Filter className="w-3.5 h-3.5 text-[#0077b6]" />
+          <Filter className="w-3.5 h-3.5 text-[#0077b6] shrink-0" />
           <span>Category:</span>
         </div>
         {categories.map((cat) => (
@@ -128,7 +128,7 @@ export default function ColdCallVault() {
                   onClick={() => toggle(call.id)}
                   className="shrink-0 px-5 py-3 bg-[#0077b6] hover:bg-[#0284c7] text-white rounded-xl text-xs font-display font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all shadow-xs"
                 >
-                  <Play className="w-4 h-4 fill-current ml-0.5" />
+                  <Play className="w-3.5 h-3.5 fill-current ml-0.5 shrink-0" />
                   <span>Play Call</span>
                 </button>
               ) : (
@@ -199,7 +199,7 @@ export default function ColdCallVault() {
 
       {error && (
         <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center gap-2 font-sans">
-          <Volume2 className="w-4 h-4 shrink-0 text-amber-600" />
+          <Volume2 className="w-3.5 h-3.5 shrink-0 text-amber-600" />
           <span>{error}</span>
         </div>
       )}

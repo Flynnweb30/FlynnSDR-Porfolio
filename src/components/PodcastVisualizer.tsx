@@ -147,7 +147,7 @@ export default function PodcastVisualizer({
 
           {!isPlaying && (
             <div className="absolute inset-0 m-auto w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/75 text-white flex items-center justify-center shadow-md backdrop-blur-xs border border-white/25 pointer-events-none transition-all">
-              <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-white text-white ml-0.5" />
+              <Play className="w-3.5 h-3.5 fill-white text-white shrink-0 ml-0.5" />
             </div>
           )}
         </div>

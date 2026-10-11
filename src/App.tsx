@@ -62,8 +62,8 @@ export default function App() {
 
   const seoMap: Record<PageRoute, { title: string; description: string }> = {
     home: {
-      title: 'Flynn James | Heavyweight TL & Senior SDR | Outbound Pipeline Leader',
-      description: 'Heavyweight TL & Senior SDR portfolio of Flynn James Q. Pontino — 11+ years outbound cold calling, SDR coaching, and team leadership. Full-time ($639/mo) and part-time ($389/mo) outbound partnerships.',
+      title: 'Flynn James | Senior SDR & Sales Team Leader | US & Philippines',
+      description: 'Hire Flynn James Q. Pontino, Senior SDR and sales team leader for US and Philippine businesses. B2B cold calling, outbound prospecting, lead qualification, appointment setting, pipeline generation, and SDR coaching.',
     },
     'work-with-me': {
       title: 'Work With Flynn James | Heavyweight TL & Senior SDR Partnerships',
@@ -306,16 +306,15 @@ export default function App() {
         )}
       </main>
 
-      {currentPage !== 'home' && (
-        <Footer
-          onNavigate={handleNavigate}
-          onOpenBooking={(preference) => {
-            setBookingPreference(preference);
-            setIsBookingOpen(true);
-          }}
-          onOpenResume={() => setIsResumeOpen(true)}
-        />
-      )}
+      {/* Universal Single Footer across all routes */}
+      <Footer
+        onNavigate={handleNavigate}
+        onOpenBooking={(preference) => {
+          setBookingPreference(preference);
+          setIsBookingOpen(true);
+        }}
+        onOpenResume={() => setIsResumeOpen(true)}
+      />
 
       <BookingModal
         isOpen={isBookingOpen}

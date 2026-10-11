@@ -1,21 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PageRoute } from '../types';
-import { industriesData, IndustryItem } from '../data/industriesData';
+import { industriesData } from '../data/industriesData';
 import {
   Building2,
   Calendar,
   PhoneCall,
   CheckCircle2,
   ArrowRight,
-  TrendingUp,
-  Award,
   Users,
   Target,
-  Quote,
   Play,
   Pause,
   Volume2,
-  ShieldCheck,
   Clock,
 } from 'lucide-react';
 
@@ -81,12 +77,11 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
         className="hidden"
       />
 
-      {/* Header Banner */}
       <section className="py-12 border-b border-[#dededb] bg-[#f7f7f6]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="space-y-3 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold shadow-2xs">
-              <Building2 className="w-3.5 h-3.5" />
+              <Building2 className="w-3.5 h-3.5 shrink-0 stroke-[2] text-[#0077b6]" />
               <span>{activeIndustry ? activeIndustry.badge : 'Vertical Market Experience'}</span>
             </div>
 
@@ -106,7 +101,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                 onClick={() => onOpenBooking()}
                 className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-xs"
               >
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4 shrink-0 stroke-[2]" />
                 <span>Discuss Your Industry ICP</span>
               </button>
 
@@ -115,7 +110,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                 onClick={() => onNavigate('calls')}
                 className="px-5 py-2.5 bg-white hover:bg-zinc-50 border border-[#dededb] text-[#0d0e0c] text-xs font-display font-bold uppercase tracking-wider rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-2xs"
               >
-                <PhoneCall className="w-4 h-4 text-[#0077b6]" />
+                <PhoneCall className="w-4 h-4 shrink-0 stroke-[2] text-[#0077b6]" />
                 <span>Listen to Call Recordings</span>
               </button>
             </div>
@@ -123,12 +118,9 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
         </div>
       </section>
 
-      {/* Main Content Area */}
       {activeIndustry ? (
-        /* DEDICATED DEEP-DIVE VIEW FOR SELECTED INDUSTRY (IMAGE 2) */
         <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12 text-left">
-            {/* Visual Hero Banner */}
             <div className="relative rounded-2xl overflow-hidden border border-[#dededb] shadow-md aspect-[21/9] max-h-[360px] bg-zinc-900">
               <img
                 src={activeIndustry.image}
@@ -156,7 +148,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
               </div>
             </div>
 
-            {/* Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {activeIndustry.metrics.map((m, i) => (
                 <div key={i} className="p-5 bg-white border border-[#dededb] rounded-2xl shadow-xs text-center">
@@ -168,13 +159,12 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
               ))}
             </div>
 
-            {/* FEATURED RECORDING SECTION: LIVE DISCOVERY CALL · UNDER 3 MIN BOOKING (IMAGE 2) */}
             {activeIndustry.featuredRecording && (
               <div className="bg-white border-2 border-[#0077b6]/35 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-zinc-100 pb-4">
                   <div>
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-full text-[11px] font-display uppercase tracking-wider font-extrabold mb-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                       <span>Live Discovery Call · Under 3 Min Booking</span>
                     </div>
                     <h3 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
@@ -187,7 +177,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
 
                   <div className="flex items-center gap-2 self-start sm:self-auto">
                     <span className="px-3 py-1 bg-sky-50 border border-sky-100 text-[#0077b6] text-xs font-mono font-bold rounded-lg flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
+                      <Clock className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
                       <span>{activeIndustry.featuredRecording.duration}</span>
                     </span>
                     <span className="px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-display uppercase font-bold rounded-lg">
@@ -197,7 +187,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                  {/* Left: Matching Image with Interactive Play Overlay (Image 2 Player Placeholder) */}
                   <div
                     className="lg:col-span-5 relative aspect-[16/10] rounded-xl overflow-hidden shadow-md group cursor-pointer border border-[#dededb] bg-zinc-900"
                     onClick={handleToggleCall3}
@@ -226,9 +215,9 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                       <div className="w-14 h-14 rounded-full bg-[#0077b6] group-hover:bg-[#0284c7] text-white shadow-xl flex items-center justify-center transition-all group-hover:scale-110 active:scale-95">
                         {isPlayingCall3 ? (
-                          <Pause className="w-6 h-6 fill-white" />
+                          <Pause className="w-6 h-6 fill-white shrink-0" />
                         ) : (
-                          <Play className="w-6 h-6 fill-white ml-0.5" />
+                          <Play className="w-6 h-6 fill-white ml-0.5 shrink-0" />
                         )}
                       </div>
                     </div>
@@ -243,7 +232,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                     </div>
                   </div>
 
-                  {/* Right: Intelligence Breakdown & Working Play Controls */}
                   <div className="lg:col-span-7 space-y-3.5 text-left">
                     <div className="grid grid-cols-2 gap-3 text-xs font-sans">
                       <div className="p-3 bg-[#f7f7f6] rounded-xl border border-zinc-200/80">
@@ -276,12 +264,12 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                       >
                         {isPlayingCall3 ? (
                           <>
-                            <Pause className="w-4 h-4 fill-white" />
+                            <Pause className="w-4 h-4 fill-white shrink-0 stroke-[2]" />
                             <span>Pause Live Call</span>
                           </>
                         ) : (
                           <>
-                            <Play className="w-4 h-4 fill-white ml-0.5" />
+                            <Play className="w-4 h-4 fill-white ml-0.5 shrink-0 stroke-[2]" />
                             <span>Play Recording ({activeIndustry.featuredRecording.duration})</span>
                           </>
                         )}
@@ -292,7 +280,7 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                         onClick={() => onNavigate('calls')}
                         className="px-4 py-2 bg-white hover:bg-zinc-50 border border-[#dededb] text-zinc-800 font-bold text-xs uppercase font-display tracking-wider rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
                       >
-                        <Volume2 className="w-3.5 h-3.5 text-[#0077b6]" />
+                        <Volume2 className="w-3.5 h-3.5 shrink-0 stroke-[2] text-[#0077b6]" />
                         <span>View All 7 Audio Proofs</span>
                       </button>
                     </div>
@@ -301,13 +289,11 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
               </div>
             )}
 
-            {/* Target Personas & Blueprints */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Left Column: Target Decision-Maker Personas (Span 5) */}
               <div className="lg:col-span-5 bg-white border border-[#dededb] rounded-2xl p-6 shadow-xs space-y-4">
                 <div className="border-b border-zinc-100 pb-3">
                   <h3 className="text-base font-black uppercase font-display text-[#0d0e0c] flex items-center gap-2">
-                    <Users className="w-4 h-4 text-[#0077b6]" />
+                    <Users className="w-4 h-4 shrink-0 stroke-[2] text-[#0077b6]" />
                     <span>Target Decision-Makers Engaged</span>
                   </h3>
                   <p className="text-[11px] text-zinc-500 font-sans mt-0.5">
@@ -321,14 +307,13 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                       key={p}
                       className="p-2.5 bg-[#f7f7f6] rounded-xl text-xs font-sans font-medium text-zinc-800 flex items-center gap-2"
                     >
-                      <Target className="w-3.5 h-3.5 text-[#0077b6] shrink-0" />
+                      <Target className="w-3.5 h-3.5 shrink-0 stroke-[2] text-[#0077b6]" />
                       <span>{persona}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Right Column: Challenges Solved (Span 7) */}
               <div className="lg:col-span-7 bg-white border border-[#dededb] rounded-2xl p-6 shadow-xs space-y-4">
                 <div className="border-b border-zinc-100 pb-3">
                   <h3 className="text-base font-black uppercase font-display text-[#0d0e0c]">
@@ -354,7 +339,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
               </div>
             </div>
 
-            {/* Documented Case Study Card */}
             <div className="p-8 bg-white border border-[#dededb] rounded-2xl shadow-xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-100 pb-4">
                 <div>
@@ -382,9 +366,10 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                 <button
                   type="button"
                   onClick={() => onOpenBooking()}
-                  className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl transition-all shadow-xs cursor-pointer"
+                  className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
                 >
-                  Schedule Outbound Discovery
+                  <span>Schedule Outbound Discovery</span>
+                  <ArrowRight className="w-4 h-4 shrink-0 stroke-[2]" />
                 </button>
                 <button
                   type="button"
@@ -398,7 +383,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
           </div>
         </section>
       ) : (
-        /* HUB OVERVIEW: ALL 4 INDUSTRIES (IMAGE 1) */
         <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-10 text-left">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -407,7 +391,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                   key={industry.id}
                   className="bg-white border border-[#dededb] hover:border-[#0077b6]/60 rounded-2xl overflow-hidden shadow-xs flex flex-col justify-between transition-all duration-300 group"
                 >
-                  {/* Top Image Placeholder - Fully populated & clickable */}
                   <div
                     className="relative aspect-[16/9] overflow-hidden bg-zinc-900 cursor-pointer"
                     onClick={() => onNavigate(industry.slug as PageRoute)}
@@ -458,14 +441,13 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                     </div>
 
                     <div className="pt-2 flex items-center justify-between">
-                      {/* View Sector Persona Blueprint button - opens dedicated view (Image 2) */}
                       <button
                         type="button"
                         onClick={() => onNavigate(industry.slug as PageRoute)}
                         className="text-xs font-display font-extrabold uppercase text-[#0077b6] hover:text-[#0284c7] flex items-center gap-1 cursor-pointer transition-colors"
                       >
                         <span>View Sector Persona Blueprint</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <ArrowRight className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
                       </button>
 
                       <button
@@ -479,25 +461,6 @@ export default function IndustriesPage({ currentRoute, onNavigate, onOpenBooking
                   </div>
                 </div>
               ))}
-            </div>
-
-            {/* Bottom Section */}
-            <div className="p-8 bg-[#f7f7f6] border border-[#dededb] rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div>
-                <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
-                  Have a Specialized B2B ICP in Mind?
-                </h3>
-                <p className="text-xs text-zinc-600 font-sans mt-1">
-                  Flynn masters complex technical products quickly and executes high-intent qualification from Day 1.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => onOpenBooking()}
-                className="px-6 py-3 bg-[#0077b6] hover:bg-[#0284c7] text-white font-extrabold text-xs uppercase font-display tracking-wider rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
-              >
-                Schedule 15-Minute Intro
-              </button>
             </div>
           </div>
         </section>
