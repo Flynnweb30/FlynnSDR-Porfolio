@@ -306,7 +306,7 @@ export default function App() {
         )}
       </main>
 
-      {/* Universal Single Footer across all routes */}
+      {/* Universal Polished Footer across all pages */}
       <Footer
         onNavigate={handleNavigate}
         onOpenBooking={(preference) => {

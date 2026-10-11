@@ -21,7 +21,7 @@ import {
 
 interface HomePageProps {
   onNavigate: (page: PageRoute) => void;
-  onOpenBooking: (preference?: 'Part-Time' | 'Full-Time' | 'Team Leader') => void;
+  onOpenBooking: (preference?: 'Part-Time' | 'Full-Time') => void;
   onOpenResume: () => void;
 }
 
@@ -138,7 +138,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
       {/* =========================================================================
-          HERO SECTION: Fixed Navbar Clearance, Tight Diagonal Badge Framing
+          HERO SECTION: Fixed Navbar Clearance, Zero Content Overlap & Diagonal Badge
          ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
@@ -157,12 +157,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               {/* Strategic Badges Row */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-[#0077b6] font-extrabold shadow-2xs">
-                  <span className="w-2 h-2 rounded-full bg-[#0077b6] animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#0077b6] animate-pulse shrink-0" />
                   <span>Heavyweight TL / Senior SDR</span>
                 </span>
 
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-zinc-700 font-bold shadow-2xs">
-                  <Award className="w-3.5 h-3.5 text-amber-500" />
+                  <Award className="w-3.5 h-3.5 shrink-0 text-amber-500 stroke-[2]" />
                   <span>Sales Coach · 11+ Years</span>
                 </span>
 
@@ -171,7 +171,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </span>
               </div>
 
-              {/* Bold Headline: Heavyweight TL / Senior SDR */}
+              {/* Bold Headline */}
               <div className="space-y-0 leading-none">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
                   HEAVYWEIGHT TL /
@@ -266,37 +266,37 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
                     title="LinkedIn"
                   >
-                    <Linkedin className="w-3.5 h-3.5" />
+                    <Linkedin className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
                   </a>
                   <a
                     href={`mailto:${personalInfo.email}`}
                     className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
                     title="Email"
                   >
-                    <Mail className="w-3.5 h-3.5" />
+                    <Mail className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
                   </a>
                   <a
                     href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
                     className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
                     title="Phone"
                   >
-                    <Phone className="w-3.5 h-3.5" />
+                    <Phone className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
                   </a>
                   <DiscordButton />
                 </div>
               </div>
             </div>
 
-            {/* Center Column: Portrait Tightly Framed by Diagonal Experience Badge and "Work With Me" CTA */}
+            {/* Center Column: Portrait with Diagonal Badge at Upper-Left & CTA at Lower-Right (Span 4) */}
             <div className="lg:col-span-4 flex justify-center items-end relative min-h-[440px] sm:min-h-[480px]">
               <div className="absolute inset-x-2 bottom-4 h-72 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
 
               <div className="relative inline-block mx-auto max-w-full">
-                {/* DIAGONAL BADGE: "11+ Years of Experience" Anchored directly at upper-left corner of portrait */}
+                {/* DIAGONAL BADGE: "11+ Years of Experience" Positioned diagonally at upper-left corner */}
                 <div className="absolute -top-3 -left-3 sm:-top-5 sm:-left-6 lg:-top-6 lg:-left-8 z-20 transform -rotate-6 sm:-rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto">
                   <div className="px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#dededb] rounded-2xl shadow-xl flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
-                      <Award className="w-4 h-4 stroke-[2.5]" />
+                      <Award className="w-4 h-4 shrink-0 stroke-[2]" />
                     </div>
                     <div className="text-left">
                       <div className="text-[11px] font-display uppercase tracking-wider font-extrabold text-[#0d0e0c] leading-tight">
@@ -323,23 +323,23 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                   />
                 </div>
 
-                {/* LOWER-RIGHT BADGE: "Work With Me" CTA Button Anchored at lower-right corner of portrait */}
+                {/* LOWER-RIGHT BADGE: "Work With Me" CTA Button */}
                 <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-5 lg:-bottom-4 lg:-right-6 z-20 animate-fade-in pointer-events-auto">
                   <button
                     type="button"
                     onClick={() => onNavigate('work-with-me')}
                     className="px-4 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white rounded-2xl shadow-xl shadow-[#0077b6]/30 border border-white/30 flex items-center gap-2.5 transition-all duration-200 cursor-pointer group"
                   >
-                    <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-white">
-                      <Sparkles className="w-3.5 h-3.5" />
+                    <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-white shrink-0">
+                      <Sparkles className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
                     </div>
                     <div className="text-left">
                       <div className="text-xs font-display uppercase tracking-wider font-extrabold text-white leading-tight flex items-center gap-1">
                         <span>Work With Me</span>
-                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                        <ArrowRight className="w-3 h-3 shrink-0 stroke-[2] group-hover:translate-x-0.5 transition-transform" />
                       </div>
                       <div className="text-[9px] font-sans text-sky-100 font-medium">
-                        Schedule Discovery Intro
+                        From $639/mo Full-Time
                       </div>
                     </div>
                   </button>
@@ -369,8 +369,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     className="w-full px-3.5 py-2.5 bg-white hover:bg-emerald-50 border border-zinc-200 hover:border-emerald-500 rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
                   >
                     <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
-                      <div className="w-6 h-6 rounded-md bg-[#25d366]/15 flex items-center justify-center text-[#25d366]">
-                        <MessageCircle className="w-4 h-4 fill-current" />
+                      <div className="w-6 h-6 rounded-md bg-[#25d366]/15 flex items-center justify-center text-[#25d366] shrink-0">
+                        <MessageCircle className="w-4 h-4 shrink-0 fill-current" />
                       </div>
                       <span>WhatsApp</span>
                     </div>
@@ -386,8 +386,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     className="w-full px-3.5 py-2.5 bg-white hover:bg-indigo-50 border border-zinc-200 hover:border-indigo-500 rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
                   >
                     <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
-                      <div className="w-6 h-6 rounded-md bg-[#5865f2]/15 flex items-center justify-center text-[#5865f2]">
-                        <Linkedin className="w-4 h-4" />
+                      <div className="w-6 h-6 rounded-md bg-[#5865f2]/15 flex items-center justify-center text-[#5865f2] shrink-0">
+                        <Linkedin className="w-4 h-4 shrink-0 stroke-[2]" />
                       </div>
                       <span>LinkedIn</span>
                     </div>
@@ -401,8 +401,8 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     className="w-full px-3.5 py-2.5 bg-white hover:bg-sky-50 border border-zinc-200 hover:border-[#0077b6] rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
                   >
                     <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
-                      <div className="w-6 h-6 rounded-md bg-[#0077b6]/15 flex items-center justify-center text-[#0077b6]">
-                        <Mail className="w-4 h-4" />
+                      <div className="w-6 h-6 rounded-md bg-[#0077b6]/15 flex items-center justify-center text-[#0077b6] shrink-0">
+                        <Mail className="w-4 h-4 shrink-0 stroke-[2]" />
                       </div>
                       <span>Email</span>
                     </div>
@@ -531,7 +531,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       </section>
 
       {/* PROOF I CAN QUALIFY & BOOK */}
-      <section id="proof" className="py-14 sm:py-18 bg-[#f7f7f6] border-b border-[#dededb]">
+      <section id="proof" className="py-14 sm:py-18 bg-[#fafaf8] border-b border-[#dededb]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <h2 className="text-3xl sm:text-4xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
@@ -655,7 +655,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="bg-white border border-[#dededb] rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-50 border border-[#0077b6]/30 rounded-full text-xs font-display text-[#0077b6] font-extrabold uppercase tracking-wider">
-              <Users className="w-3.5 h-3.5" />
+              <Users className="w-3.5 h-3.5 stroke-[2]" />
               <span>Outbound Leadership & Sales Floor Coaching</span>
             </div>
 
@@ -703,7 +703,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-sky-50 border border-[#0077b6]/30 rounded-full text-xs font-display text-[#0077b6] font-extrabold uppercase tracking-wider">
-              <Award className="w-3.5 h-3.5" />
+              <Award className="w-3.5 h-3.5 stroke-[2]" />
               <span>Professional Recommendation</span>
             </span>
             <h2 className="text-3xl sm:text-4xl font-black uppercase font-display tracking-tight text-[#0d0e0c]">
@@ -752,7 +752,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                     className="px-4 py-2 bg-[#fafaf8] hover:bg-zinc-100 border border-zinc-300 text-xs font-display font-extrabold uppercase tracking-wider text-zinc-800 rounded-xl cursor-pointer transition-colors shadow-2xs inline-flex items-center gap-1.5"
                   >
                     <span>Read full recommendation letter</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 stroke-[2]" />
                   </button>
                 </div>
               </div>
@@ -835,10 +835,10 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       </section>
 
       {/* =========================================================================
-          FLEXIBLE OUTBOUND PARTNERSHIPS — 3 ENGAGEMENT OPTIONS (TL ADDED)
+          FLEXIBLE OUTBOUND PARTNERSHIPS: FULL-TIME ($639) & PART-TIME ($389)
          ========================================================================= */}
       <section id="roles" className="py-14 sm:py-20 bg-[#f7f7f6] border-b border-[#dededb]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs font-display text-emerald-700 font-extrabold uppercase tracking-wider">
@@ -853,41 +853,41 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
             Choose the engagement model that accelerates your sales organization
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-left">
-            {/* OPTION 1: PART-TIME OUTBOUND SPRINT ($389/mo) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+            {/* PART-TIME MODEL: $389/month */}
+            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
+              <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
                   <span className="text-[10px] font-display uppercase tracking-widest text-zinc-400 font-extrabold block">
                     SPRINT & QUALIFICATION FOCUS
                   </span>
-                  <h3 className="text-xl font-black uppercase font-display text-[#0d0e0c] mt-0.5">
-                    PART-TIME SPRINT
+                  <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c] mt-0.5">
+                    PART-TIME OUTBOUND SPRINT
                   </h3>
                   <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable monthly base</div>
                   <div className="text-3xl font-black font-display text-[#0077b6] mt-1">$389 / month</div>
-                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Proportionate sprint rate · Incentives optional</div>
+                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Proportionate sprint rate · Performance incentives optional</div>
                   <div className="text-xs font-bold font-display uppercase tracking-wider text-zinc-800 mt-2 bg-zinc-100 py-1 rounded-lg">
                     20 Hours / Week · Flexible US/UK Shifts
                   </div>
                 </div>
 
                 <div className="space-y-1 text-center">
-                  <div className="text-xs font-bold font-display uppercase text-zinc-800">
-                    PART-TIME DELIVERABLES
+                  <div className="text-sm font-bold font-display uppercase text-zinc-800">
+                    PART-TIME ENGAGEMENT DELIVERABLES
                   </div>
-                  <div className="text-[11px] text-zinc-500 font-sans">
-                    Structured 4-hour daily dial blocks for steady discovery volume.
+                  <div className="text-xs text-zinc-500 font-sans">
+                    Structured 4-hour daily dial blocks designed to generate consistent discovery volume.
                   </div>
                 </div>
 
                 <div className="pt-2 border-t border-zinc-100">
-                  <div className="space-y-3 text-xs font-sans text-zinc-600">
+                  <div className="space-y-3.5 text-xs font-sans text-zinc-600">
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-zinc-900 block font-display uppercase">75–100+ Daily Cold Dials</strong>
-                        <span>Consistent phone execution with live objection de-escalation.</span>
+                        <span>Consistent phone execution using pattern interrupts and live objection de-escalation.</span>
                       </div>
                     </div>
 
@@ -895,7 +895,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-zinc-900 block font-display uppercase">15–20+ Qualified Meetings / Month</strong>
-                        <span>High-intent discovery meetings scheduled directly on AE calendars.</span>
+                        <span>High-intent discovery meetings scheduled directly on Account Executive calendars.</span>
                       </div>
                     </div>
 
@@ -903,190 +903,127 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-zinc-900 block font-display uppercase">BANT Prospect Qualification</strong>
-                        <span>Discovery questions verifying budget fit, authority, and timelines.</span>
+                        <span>Discovery questions to verify budget fit, decision authority, and project timelines.</span>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">CRM Logging & Weekly Sync</strong>
-                        <span>Daily updates in HubSpot/Salesforce with conversation context.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">Target Account Enrichment & CRM Hygiene</strong>
+                        <span>Daily lead updates in HubSpot/Salesforce with detailed conversation context.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-zinc-900 block font-display uppercase">Weekly Campaign & Metric Sync</strong>
+                        <span>Transparent connect rates, conversion tracking, and cadence adjustments.</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-4">
                 <button
                   type="button"
                   onClick={() => onOpenBooking('Part-Time')}
-                  className="w-full py-3 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
+                  className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
                 >
-                  Select Part-Time ($389/mo)
+                  Work With Me (Part-Time · $389/mo)
                 </button>
               </div>
             </div>
 
-            {/* OPTION 2: FULL-TIME DEDICATED SENIOR SDR ($639/mo) */}
-            <div className="bg-white border-2 border-[#0077b6] rounded-2xl p-6 sm:p-7 shadow-md flex flex-col justify-between space-y-6 relative">
+            {/* FULL-TIME MODEL: $639/month */}
+            <div className="bg-white border-2 border-[#0077b6] rounded-2xl p-6 sm:p-8 shadow-md flex flex-col justify-between space-y-6 relative">
               <div className="absolute -top-3 right-6 bg-[#0077b6] text-white text-[10px] font-display uppercase font-extrabold px-3 py-0.5 rounded-full shadow-xs">
-                Most Popular
+                Most Popular Engagement
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div className="text-center pb-4 border-b border-zinc-100">
                   <span className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold block">
-                    DEDICATED OUTBOUND EXECUTION
+                    DEDICATED OUTBOUND & LEADERSHIP
                   </span>
-                  <h3 className="text-xl font-black uppercase font-display text-[#0d0e0c] mt-0.5">
-                    FULL-TIME SENIOR SDR
+                  <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c] mt-0.5">
+                    FULL-TIME TL / SENIOR SDR
                   </h3>
                   <div className="text-[11px] font-sans text-zinc-500 mt-1">Guaranteed, non-recoverable monthly base</div>
                   <div className="text-3xl font-black font-display text-[#0077b6] mt-1">$639 / month</div>
-                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Dedicated outbound execution · Incentives optional</div>
+                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Full-time dedicated outbound execution · Performance incentives optional</div>
                   <div className="text-xs font-bold font-display uppercase tracking-wider text-emerald-800 mt-2 bg-emerald-50 py-1 rounded-lg border border-emerald-200">
                     40 Hours / Week · 8 Hours / Day · US/UK Daytime
                   </div>
                 </div>
 
                 <div className="space-y-1 text-center">
-                  <div className="text-xs font-bold font-display uppercase text-zinc-800">
-                    FULL-TIME DELIVERABLES
+                  <div className="text-sm font-bold font-display uppercase text-zinc-800">
+                    FULL-TIME ENGAGEMENT DELIVERABLES
                   </div>
-                  <div className="text-[11px] text-zinc-500 font-sans">
-                    End-to-end outbound prospecting and AE pipeline acceleration.
+                  <div className="text-xs text-zinc-500 font-sans">
+                    End-to-end outbound prospecting, AE pipeline acceleration, and sales floor leadership.
                   </div>
                 </div>
 
                 <div className="pt-2 border-t border-zinc-100">
-                  <div className="space-y-3 text-xs font-sans text-zinc-600">
+                  <div className="space-y-3.5 text-xs font-sans text-zinc-600">
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-zinc-900 block font-display uppercase">150+ Daily Outbound Cold Dials</strong>
-                        <span>High-stamina daily calling targeting decision-makers (TAM/ICP mapped).</span>
+                        <span>High-volume daily phone stamina targeting verified decision-makers (TAM & ICP mapped).</span>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">30+ Qualified Meetings / Month</strong>
-                        <span>Dense calendar booking directly on AE calendars with 88%+ show rate.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">30+ Qualified Discovery Meetings / Month</strong>
+                        <span>Dense calendar booking directly onto Account Executive calendars with 88%+ show-up rate.</span>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">BANT & MEDDIC Qualification</strong>
-                        <span>85% qualification accuracy; pre-meeting briefings for closer alignment.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">SDR Team Leadership & Coaching Sprints</strong>
+                        <span>Mentoring junior reps, running daily dial sprints, and reviewing call recordings (+15% KPI lift).</span>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-2.5">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Multi-Channel Cadence Ownership</strong>
-                        <span>Integrated phone, email, and Sales Nav with 100% CRM accuracy.</span>
+                        <strong className="text-zinc-900 block font-display uppercase">Strict BANT & MEDDIC Qualification</strong>
+                        <span>85% qualification accuracy; pre-meeting briefings to ensure closers pitch only genuine pain points.</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="text-zinc-900 block font-display uppercase">Full Multi-Channel Cadence & CRM Ownership</strong>
+                        <span>Integrated phone, email, and LinkedIn Sales Nav outreach with 100% CRM data accuracy.</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-4">
                 <button
                   type="button"
                   onClick={() => onOpenBooking('Full-Time')}
-                  className="w-full py-3 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-md text-center"
+                  className="w-full py-3.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-md text-center"
                 >
-                  Select Full-Time ($639/mo)
-                </button>
-              </div>
-            </div>
-
-            {/* OPTION 3: TEAM LEADER (TL) & SALES COACH (Negotiable Scope) */}
-            <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="text-center pb-4 border-b border-zinc-100">
-                  <span className="text-[10px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold block">
-                    LEADERSHIP & TEAM COACHING
-                  </span>
-                  <h3 className="text-xl font-black uppercase font-display text-[#0d0e0c] mt-0.5">
-                    TEAM LEADER (TL) & COACH
-                  </h3>
-                  <div className="text-[11px] font-sans text-zinc-500 mt-1">Compensation discussed based on scope</div>
-                  <div className="text-3xl font-black font-display text-emerald-600 mt-1">Negotiable</div>
-                  <div className="text-[10px] font-sans text-zinc-400 mt-0.5">Based on team size, responsibilities & market</div>
-                  <div className="text-xs font-bold font-display uppercase tracking-wider text-purple-900 mt-2 bg-purple-50 py-1 rounded-lg border border-purple-200">
-                    Floor Leadership · Mentorship · Dial Sprints
-                  </div>
-                </div>
-
-                <div className="space-y-1 text-center">
-                  <div className="text-xs font-bold font-display uppercase text-zinc-800">
-                    TL & COACHING DELIVERABLES
-                  </div>
-                  <div className="text-[11px] text-zinc-500 font-sans">
-                    Leading from the front to build high-accountability outbound pods.
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-zinc-100">
-                  <div className="space-y-3 text-xs font-sans text-zinc-600">
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Active Floor Leadership</strong>
-                        <span>Dials beside reps daily to set benchmarks, standards, and rhythm.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Live Call Shadowing & Coaching</strong>
-                        <span>Weekly 1-on-1 call reviews on objection pivots (+15% team KPI lift).</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Ramp Time Acceleration</strong>
-                        <span>Structured onboarding that shortens new SDR ramp by 25%.</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="text-zinc-900 block font-display uppercase">Executive Pipeline Reporting</strong>
-                        <span>KPI tracking, connect conversion analysis, and leadership forecasting.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking('Team Leader')}
-                  className="w-full py-3 bg-zinc-900 hover:bg-[#0077b6] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm text-center"
-                >
-                  Discuss TL Scope & Compensation
+                  Work With Me (Full-Time · $639/mo)
                 </button>
               </div>
             </div>
           </div>
-
-          <p className="text-[11px] text-zinc-500 text-center mt-6 font-sans">
-            Compensation for all models is discussed transparently based on responsibilities, dial expectations, target markets, and campaign scope.
-          </p>
         </div>
       </section>
     </div>

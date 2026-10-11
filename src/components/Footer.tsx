@@ -7,17 +7,16 @@ import {
   Mail,
   Phone,
   Linkedin,
+  MapPin,
   Calendar,
   FileText,
   ShieldCheck,
   Award,
+  Headphones,
   Briefcase,
   Building2,
-  Headphones,
-  Layers,
-  MapPin,
+  Users,
   CheckCircle2,
-  ArrowRight,
 } from 'lucide-react';
 
 interface FooterProps {
@@ -34,50 +33,44 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
   return (
     <footer className="bg-[#f7f7f6] border-t border-[#dededb] pt-14 pb-12 text-[#0d0e0c] select-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Main 5-Column Structured Footer Grid */}
+        {/* Main 4-Column Structured Footer */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 text-left">
           {/* Column 1: Brand & Executive Identity (Span 4) */}
           <div className="lg:col-span-4 space-y-3.5">
             <div
               onClick={() => onNavigate('home')}
-              className="cursor-pointer inline-block focus:outline-none"
-              title="Flynn James - Home"
+              className="cursor-pointer inline-block"
+              title="Flynn James - Homepage"
             >
               <FlynnLogo size="md" variant="dark" />
             </div>
 
-            <div className="space-y-1">
-              <div className="text-xs font-display font-extrabold uppercase tracking-wide text-zinc-900">
-                Heavyweight TL / Senior SDR · Sales Coach
-              </div>
-              <p className="text-xs text-zinc-600 font-sans leading-relaxed max-w-sm">
-                11+ years executing high-volume B2B cold calling (150+ dials/day), consultative BANT/MEDDIC qualification, SDR sales floor coaching, and predictable pipeline generation across US, UK, and APAC campaigns.
-              </p>
+            <div className="text-xs font-display uppercase tracking-wider text-[#0077b6] font-extrabold">
+              Sales Coach · Team Lead · Senior SDR
             </div>
 
-            <div className="pt-1 flex flex-col gap-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] font-mono text-emerald-800 w-fit">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Available · Immediate Start (US/UK/PH)</span>
-              </div>
-              <div className="text-[11px] font-sans text-zinc-500 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                <span>Toledo, Cebu, Philippines (Remote Worldwide)</span>
-              </div>
+            <p className="text-xs text-zinc-600 font-sans leading-relaxed max-w-sm">
+              11+ years executing high-stamina outbound prospecting (150+ dials/day), consultative BANT/MEDDIC qualification, and sales floor mentoring across US and Philippine markets.
+            </p>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] font-mono text-emerald-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span>Available for Remote Roles · Immediate Start</span>
             </div>
           </div>
 
           {/* Column 2: Navigation Hubs (Span 2) */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-              Navigation
+            <h4 className="text-xs font-display uppercase tracking-widest text-[#0077b6] font-extrabold flex items-center gap-1.5">
+              <Briefcase className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
+              <span>Navigation</span>
             </h4>
             <ul className="space-y-2 text-xs font-sans text-zinc-600">
               <li>
                 <button
                   type="button"
                   onClick={() => onNavigate('work-with-me')}
-                  className="hover:text-[#0077b6] transition-colors cursor-pointer text-left font-medium text-zinc-900"
+                  className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
                   Work With Me
                 </button>
@@ -136,13 +129,23 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   Career Track Record
                 </button>
               </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('leadership')}
+                  className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
+                >
+                  Sales Floor Leadership
+                </button>
+              </li>
             </ul>
           </div>
 
-          {/* Column 3: Services Offered (Span 2) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-              Services
+          {/* Column 3: Capabilities & Sectors (Span 3) */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="text-xs font-display uppercase tracking-widest text-[#0077b6] font-extrabold flex items-center gap-1.5">
+              <Building2 className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
+              <span>Core Capabilities</span>
             </h4>
             <ul className="space-y-2 text-xs font-sans text-zinc-600">
               <li>
@@ -151,7 +154,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('service-cold-calling')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  Cold Calling (150+ Dials)
+                  B2B Cold Calling (150+ Dials/Day)
                 </button>
               </li>
               <li>
@@ -160,7 +163,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('service-appointment-setting')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  Appointment Setting
+                  Appointment Setting (30+ SQLs/Mo)
                 </button>
               </li>
               <li>
@@ -169,7 +172,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('service-lead-qualification')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  BANT Qualification
+                  BANT & MEDDIC Qualification
                 </button>
               </li>
               <li>
@@ -178,52 +181,16 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('service-sdr-coaching')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  SDR Team Coaching
+                  SDR Sales Floor Leadership
                 </button>
               </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('services')}
-                  className="hover:text-[#0077b6] transition-colors cursor-pointer text-left font-medium text-[#0077b6] pt-1 block"
-                >
-                  View All Services →
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Industry Verticals (Span 2) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-              Industries
-            </h4>
-            <ul className="space-y-2 text-xs font-sans text-zinc-600">
               <li>
                 <button
                   type="button"
                   onClick={() => onNavigate('industry-saas-tech')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  Enterprise SaaS & Tech
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('industry-marketing-agencies')}
-                  className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
-                >
-                  Marketing Agencies
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('industry-b2b-events')}
-                  className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
-                >
-                  B2B Events & Summits
+                  Enterprise SaaS & Cloud IT
                 </button>
               </li>
               <li>
@@ -232,41 +199,31 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('industry-commercial-contracting')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  Commercial Trades
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('industries')}
-                  className="hover:text-[#0077b6] transition-colors cursor-pointer text-left font-medium text-[#0077b6] pt-1 block"
-                >
-                  View All Verticals →
+                  Commercial Contracting & Trade
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 5: Direct Coordinates & CTAs (Span 2) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-display uppercase tracking-widest text-[#0077b6] font-extrabold">
-              Connect
+          {/* Column 4: Direct Coordinates & Actions (Span 3) */}
+          <div className="lg:col-span-3 space-y-3.5">
+            <h4 className="text-xs font-display uppercase tracking-widest text-[#0077b6] font-extrabold flex items-center gap-1.5">
+              <Phone className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
+              <span>Direct Connect</span>
             </h4>
             <div className="space-y-2 text-xs font-sans text-zinc-600">
               <a
                 href={`mailto:${personalInfo.email}`}
                 className="flex items-center gap-2 text-zinc-800 hover:text-[#0077b6] font-medium transition-colors"
-                title="Email Flynn"
               >
-                <Mail className="w-3.5 h-3.5 text-[#0077b6] shrink-0" />
+                <Mail className="w-3.5 h-3.5 text-[#0077b6] shrink-0 stroke-[2]" />
                 <span className="truncate">{personalInfo.email}</span>
               </a>
               <a
                 href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
                 className="flex items-center gap-2 text-zinc-800 hover:text-[#0077b6] font-medium transition-colors"
-                title="Call or WhatsApp"
               >
-                <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0 stroke-[2]" />
                 <span>{personalInfo.phone}</span>
               </a>
               <a
@@ -274,21 +231,24 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-zinc-800 hover:text-[#0077b6] font-medium transition-colors"
-                title="LinkedIn Profile"
               >
-                <Linkedin className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
-                <span>LinkedIn Profile</span>
+                <Linkedin className="w-3.5 h-3.5 text-indigo-600 shrink-0 stroke-[2]" />
+                <span>linkedin.com/in/fjpontino</span>
               </a>
+              <div className="flex items-center gap-2 text-zinc-500 text-[11px]">
+                <MapPin className="w-3.5 h-3.5 text-amber-500 shrink-0 stroke-[2]" />
+                <span>Toledo, Cebu, Philippines (Remote US/PH)</span>
+              </div>
             </div>
 
-            <div className="pt-2 flex flex-col gap-2">
+            <div className="pt-1 flex flex-col gap-2">
               <button
                 type="button"
                 onClick={() => onOpenBooking()}
                 className="w-full py-2 px-3 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl transition-all cursor-pointer shadow-xs flex items-center justify-center gap-1.5"
               >
-                <Calendar className="w-3.5 h-3.5 shrink-0" />
-                <span>Schedule Intro</span>
+                <Calendar className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
+                <span>Schedule 15-Min Intro</span>
               </button>
 
               <button
@@ -296,27 +256,26 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                 onClick={onOpenResume}
                 className="w-full py-2 px-3 bg-white hover:bg-zinc-100 border border-[#dededb] text-zinc-800 text-xs font-display font-bold uppercase rounded-xl transition-colors cursor-pointer shadow-2xs flex items-center justify-center gap-1.5"
               >
-                <FileText className="w-3.5 h-3.5 text-[#0077b6] shrink-0" />
-                <span>PDF Resume</span>
+                <FileText className="w-3.5 h-3.5 text-[#0077b6] shrink-0 stroke-[2]" />
+                <span>View / Print PDF Resume</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Bottom Legal & Back-to-Top Bar */}
+        {/* Bottom Legal & Back to Top Bar */}
         <div className="pt-8 border-t border-zinc-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-sans text-zinc-500">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-            <span>© 2026 Flynn James Q. Pontino. Heavyweight TL / Senior SDR & B2B Outbound Sales Leader.</span>
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2]" />
+            <span>© 2026 Flynn James Q. Pontino. All rights reserved. Senior SDR & Sales Team Leader (US & Philippines).</span>
           </div>
 
           <button
             type="button"
             onClick={scrollToTop}
             className="hover:text-[#0077b6] cursor-pointer inline-flex items-center gap-1.5 font-medium transition-colors"
-            title="Scroll to top"
           >
-            <ArrowUp className="w-3.5 h-3.5 shrink-0" />
+            <ArrowUp className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
             <span>Back to Top</span>
           </button>
         </div>

@@ -79,7 +79,7 @@ export default function ColdCallVault() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-start gap-2 pb-2 border-b border-zinc-200">
         <div className="flex items-center gap-1.5 text-xs font-display uppercase font-bold text-zinc-500 mr-2">
-          <Filter className="w-3.5 h-3.5 text-[#0077b6] shrink-0" />
+          <Filter className="w-3.5 h-3.5 text-[#0077b6] shrink-0 shrink-0" />
           <span>Category:</span>
         </div>
         {categories.map((cat) => (

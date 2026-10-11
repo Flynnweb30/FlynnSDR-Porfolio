@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import FlynnLogo from './FlynnLogo';
 import { PageRoute } from '../types';
 import {
@@ -51,16 +51,18 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#dededb] shadow-2xs py-2.5 sm:py-3 transition-all duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Flynn Logo Brand */}
-          <div
+          {/* Flynn Logo Brand - Sole representation in header */}
+          <button
+            type="button"
             onClick={() => handleLinkClick('home')}
             className="cursor-pointer focus:outline-none shrink-0"
-            title="Flynn James - Home"
+            title="Flynn James - Homepage"
+            aria-label="Flynn James homepage"
           >
             <FlynnLogo size="sm" variant="dark" />
-          </div>
+          </button>
 
-          {/* Desktop Navigation Menu: "Work With Me" Tab Positioned Immediately Beside Flynn */}
+          {/* Desktop Navigation Menu: "Work With Me" Tab Immediately Beside Flynn */}
           <nav className="hidden lg:flex items-center gap-1 bg-[#f1f1ee] border border-[#dededb] rounded-full px-3 py-1 shadow-2xs">
             {/* 1. "Work With Me" Tab */}
             <button
@@ -97,7 +99,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               >
                 <span>Services Offered</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 shrink-0 stroke-[2] transition-transform duration-200 ${
+                  className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 stroke-[2] ${
                     servicesOpen ? 'rotate-180' : ''
                   }`}
                 />
@@ -157,7 +159,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               >
                 <span>Industries</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 shrink-0 stroke-[2] transition-transform duration-200 ${
+                  className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 stroke-[2] ${
                     industriesOpen ? 'rotate-180' : ''
                   }`}
                 />
@@ -255,12 +257,25 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             >
               Experience
             </button>
+
+            {/* 8. Leadership */}
+            <button
+              type="button"
+              onClick={() => handleLinkClick('leadership')}
+              className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
+                currentPage === 'leadership'
+                  ? 'bg-[#0077b6] text-white shadow-xs'
+                  : 'text-zinc-600 hover:text-black hover:bg-white/80'
+              }`}
+            >
+              Leadership
+            </button>
           </nav>
 
           {/* Right Action CTA */}
           <div className="hidden sm:flex items-center gap-3">
             <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-mono text-emerald-800">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Available · Immediate Start</span>
             </div>
 
@@ -269,7 +284,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               onClick={() => onOpenBooking()}
               className="px-4 py-2 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-lg flex items-center gap-2 transition-all shadow-xs cursor-pointer"
             >
-              <Calendar className="w-4 h-4 shrink-0 stroke-[2]" />
+              <Calendar className="w-3.5 h-3.5 shrink-0 stroke-[2.2]" />
               <span>Schedule Intro</span>
             </button>
           </div>
@@ -289,11 +304,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               className="p-2 text-zinc-700 hover:text-black focus:outline-none cursor-pointer"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? (
-                <X className="w-5 h-5 shrink-0 stroke-[2]" />
-              ) : (
-                <Menu className="w-5 h-5 shrink-0 stroke-[2]" />
-              )}
+              {mobileMenuOpen ? <X className="w-5 h-5 shrink-0 stroke-[2]" /> : <Menu className="w-5 h-5 shrink-0 stroke-[2]" />}
             </button>
           </div>
         </div>
@@ -369,11 +380,21 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             <button
               type="button"
               onClick={() => handleLinkClick('experience')}
-              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase col-span-2 ${
+              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
                 currentPage === 'experience' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
               }`}
             >
               Experience
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleLinkClick('leadership')}
+              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
+                currentPage === 'leadership' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
+              }`}
+            >
+              Leadership
             </button>
           </div>
 
