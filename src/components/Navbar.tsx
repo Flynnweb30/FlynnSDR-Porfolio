@@ -61,31 +61,14 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo on the Left */}
-          <div
-            onClick={() => handleLinkClick('home')}
-            className="cursor-pointer focus:outline-none shrink-0"
-            title="Flynn James"
-          >
+          <button type="button" onClick={() => handleLinkClick('home')} className="cursor-pointer focus:outline-none shrink-0" title="Flynn James" aria-label="Flynn James homepage">
             <FlynnLogo size="sm" variant="dark" />
-          </div>
+          </button>
 
           {/* Desktop Navigation in Exact Required Order:
-              1. Flynn | 2. Experience | 3. Services | 4. Industries | 5. More ▾ */}
+              1. Experience | 2. Services | 3. Industries | 4. More ▾ */}
           <nav className="hidden lg:flex items-center gap-1 bg-[#f1f1ee] border border-[#dededb] rounded-full px-3 py-1 shadow-2xs">
-            {/* 1. Flynn */}
-            <button
-              type="button"
-              onClick={() => handleLinkClick('home')}
-              className={`px-3 py-1 text-xs font-display font-bold uppercase tracking-tight rounded-full transition-all cursor-pointer ${
-                currentPage === 'home'
-                  ? 'bg-[#0077b6] text-white shadow-xs'
-                  : 'text-zinc-600 hover:text-black hover:bg-white/80'
-              }`}
-            >
-              Flynn
-            </button>
-
-            {/* 2. Experience */}
+            {/* 1. Experience */}
             <button
               type="button"
               onClick={() => handleLinkClick('experience')}
@@ -98,7 +81,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               Experience
             </button>
 
-            {/* 3. Services (Interactive Dropdown) */}
+            {/* 2. Services (Interactive Dropdown) */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -158,7 +141,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* 4. Industries (Interactive Dropdown) */}
+            {/* 3. Industries (Interactive Dropdown) */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -218,7 +201,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
               )}
             </div>
 
-            {/* 5. More ▾ Dropdown:
+            {/* 4. More ▾ Dropdown:
                 - Hear My Opener
                 - References
                 - Playbook
@@ -313,7 +296,7 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
             </div>
           </nav>
 
-          {/* 6. Schedule Intro (CTA Button on the Right) */}
+          {/* 5. Schedule Intro (CTA Button on the Right) */}
           <div className="hidden sm:flex items-center gap-3">
             <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-mono text-emerald-800">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -355,16 +338,6 @@ export default function Navbar({ currentPage, onNavigate, onOpenBooking }: Navba
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#fafaf8] border-b border-[#dededb] px-4 pt-2 pb-6 space-y-3 shadow-xl max-h-[85vh] overflow-y-auto">
           <div className="grid grid-cols-2 gap-2 pt-2">
-            <button
-              type="button"
-              onClick={() => handleLinkClick('home')}
-              className={`p-2.5 rounded-lg text-left text-xs font-display font-bold uppercase ${
-                currentPage === 'home' ? 'bg-[#0077b6] text-white' : 'bg-zinc-100 text-zinc-800'
-              }`}
-            >
-              Flynn
-            </button>
-
             <button
               type="button"
               onClick={() => handleLinkClick('experience')}
