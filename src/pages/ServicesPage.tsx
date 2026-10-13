@@ -43,7 +43,7 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
             <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-3xl">
               {activeService
                 ? activeService.overview
-                : 'Accelerating enterprise revenue through high-volume cold calling, rigorous BANT/MEDDIC qualification, and dependable appointment setting that keeps Account Executive calendars full.'}
+                : 'Supporting pipeline growth through high-volume cold calling, rigorous BANT/MEDDIC qualification, and dependable appointment setting that keeps discovery calendars full.'}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-3">

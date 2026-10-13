@@ -18,6 +18,10 @@ import {
   ArrowRight,
   Sparkles,
   Users,
+  DollarSign,
+  Clock,
+  PhoneCall,
+  Flame,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -141,12 +145,12 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
       {/* =========================================================================
           HERO SECTION: Fixed Navbar Clearance, Tight Diagonal Badge Framing
          ========================================================================= */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
+      <section aria-label="Flynn Senior SDR portfolio introduction" className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
-          className="absolute inset-0 opacity-45 mix-blend-screen pointer-events-none bg-cover bg-center"
+          className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif')",
+              "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif'), url('/assets/flynn-sky.jpg')",
           }}
           aria-hidden="true"
         />
@@ -173,27 +177,21 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               </div>
 
               {/* Bold Headline: Heavyweight TL / Senior SDR */}
-              <div className="space-y-0 leading-none">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
-                  HEAVYWEIGHT TL /
-                </h1>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0d0e0c] block">
-                  SENIOR SDR
-                </h1>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight text-[#0077b6] block">
-                  PIPELINE LEADER.
-                </h1>
-              </div>
+              <h1 className="space-y-0 leading-none text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight">
+                <span className="block text-[#0d0e0c]">HEAVYWEIGHT TL /</span>
+                <span className="block text-[#0d0e0c]">SENIOR SDR</span>
+                <span className="block text-[#0077b6]">PIPELINE LEADER.</span>
+              </h1>
 
               {/* Client-Centric Conversion Copy */}
               <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
-                Combining high-volume outbound prospecting (150+ dials/day) with proven sales floor leadership and SDR coaching. Flynn supports 30+ qualified discovery meetings monthly, coaches junior reps on objection handling, and builds pipeline efficiently with a focused ramp plan.
+                Combining high-volume outbound prospecting (150+ dials/day) with proven sales leadership and SDR coaching. Flynn supports 30+ qualified discovery meetings monthly, coaches junior SDRs on objection handling, and builds pipeline efficiently with a structured, low-ramp approach.
               </p>
 
               {/* Verified Metrics Row 1 */}
               <div className="grid grid-cols-3 gap-2 pt-1">
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
-                  <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">💵</div>
+                  <div className="w-7 h-7 flex items-center justify-center mb-0.5 text-[#0077b6]"><DollarSign className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" /></div>
                   <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
                     $1.8M+
                   </div>
@@ -205,7 +203,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
 
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
-                  <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">⏳</div>
+                  <div className="w-7 h-7 flex items-center justify-center mb-0.5 text-[#0077b6]"><Clock className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" /></div>
                   <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
                     11+ YEARS
                   </div>
@@ -217,7 +215,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
 
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
-                  <div className="w-7 h-7 flex items-center justify-center text-lg mb-0.5">📞</div>
+                  <div className="w-7 h-7 flex items-center justify-center mb-0.5 text-[#0077b6]"><PhoneCall className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" /></div>
                   <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
                     45,000+
                   </div>
@@ -232,7 +230,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
               {/* Verified Metrics Row 2 */}
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
-                  <span className="text-xl">🔥</span>
+                  <Flame className="w-5 h-5 text-[#0077b6] shrink-0" strokeWidth={1.8} aria-hidden="true" />
                   <div>
                     <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
                       120–150%
@@ -244,7 +242,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                 </div>
 
                 <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
-                  <span className="text-xl">👥</span>
+                  <Users className="w-5 h-5 text-[#0077b6] shrink-0" strokeWidth={1.8} aria-hidden="true" />
                   <div>
                     <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
                       20+ SDRs
@@ -983,7 +981,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-zinc-900 block font-display uppercase">BANT & MEDDIC Qualification</strong>
-                        <span>85% qualification accuracy; pre-meeting briefings for stronger Account Executive handoffs.</span>
+                        <span>85% qualification accuracy; clear pre-meeting briefs for aligned discovery conversations.</span>
                       </div>
                     </div>
 

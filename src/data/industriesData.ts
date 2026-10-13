@@ -221,7 +221,7 @@ export const industriesData: IndustryItem[] = [
       durationSeconds: 159,
       outcome: 'Monday 4:45 PM Consultation Booked',
       audioSrc:
-        (typeof process !== 'undefined' && process.env?.VITE_AUDIO_CALL_3_URL) ||
+        import.meta.env.VITE_AUDIO_CALL_3_URL ||
         'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
       image: '/assets/contractor-call-player.jpg',
       tacticalNote:
