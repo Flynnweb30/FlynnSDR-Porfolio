@@ -1,6 +1,6 @@
 import React from 'react';
 import ColdCallVault from '../components/ColdCallVault';
-import { Headphones, CheckCircle2, Calendar } from 'lucide-react';
+import { Headphones, CheckCircle2 } from 'lucide-react';
 import { PageRoute } from '../types';
 
 interface CallsPageProps {
@@ -15,7 +15,7 @@ export default function CallsPage({ onNavigate, onOpenBooking }: CallsPageProps)
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="space-y-3 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#dededb] rounded-full text-[11px] font-mono uppercase tracking-widest text-[#0077b6] font-bold shadow-2xs">
-              <Headphones className="w-3.5 h-3.5 shrink-0 shrink-0 shrink-0 stroke-[2] text-[#0077b6]" />
+              <Headphones className="w-3.5 h-3.5" />
               <span>Sales Call Library</span>
             </div>
 
@@ -29,7 +29,7 @@ export default function CallsPage({ onNavigate, onOpenBooking }: CallsPageProps)
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 pt-1">
               <span className="flex items-center gap-1.5 text-emerald-600 font-bold">
-                <CheckCircle2 className="w-3.5 h-3.5 shrink-0 shrink-0 shrink-0 stroke-[2] text-emerald-600" />
+                <CheckCircle2 className="w-4 h-4" />
                 <span>7 Real Outbound Audio Recordings</span>
               </span>
               <span>·</span>
@@ -55,19 +55,16 @@ export default function CallsPage({ onNavigate, onOpenBooking }: CallsPageProps)
           </p>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <button
-              type="button"
               onClick={() => onOpenBooking()}
-              className="px-6 py-3 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white font-bold text-xs uppercase font-display tracking-wider rounded-xl shadow-xs cursor-pointer flex items-center gap-2"
+              className="px-6 py-3 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white font-bold text-xs uppercase font-display tracking-wider rounded-xl shadow-xs cursor-pointer"
             >
-              <Calendar className="w-3.5 h-3.5 shrink-0 shrink-0 shrink-0 stroke-[2]" />
-              <span>Schedule 15-Minute Intro</span>
+              Schedule 15-Minute Intro
             </button>
             <button
-              type="button"
-              onClick={() => onNavigate('work-with-me')}
+              onClick={() => onNavigate('hire-me')}
               className="px-6 py-3 bg-[#fafaf8] hover:bg-zinc-100 border border-zinc-300 text-zinc-900 font-bold text-xs uppercase font-display tracking-wider rounded-xl transition-colors cursor-pointer"
             >
-              Review Engagement Options
+              Review Role Packages & Hire Flynn
             </button>
           </div>
         </div>

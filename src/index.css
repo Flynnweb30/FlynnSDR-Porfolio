@@ -198,3 +198,42 @@
     page-break-inside: avoid !important;
   }
 }
+/* Consistent Lucide icon rendering across the portfolio. Preserve each icon's
+   chosen dimensions while normalizing stroke, alignment, and flex behavior. */
+svg.lucide {
+  stroke-width: 1.8;
+  flex-shrink: 0;
+  vertical-align: middle;
+  shape-rendering: geometricPrecision;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #0077b6;
+  outline-offset: 3px;
+}
+.page-background {
+  background-color: #fafaf8;
+  background-image:
+    linear-gradient(rgba(250, 250, 248, 0.94), rgba(250, 250, 248, 0.94)),
+    url('https://user42540.na.imgto.link/public/20261013/6a61c12010b4a0b3587cfbdd-skyblue-oceanbackground.avif');
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+@media (max-width: 767px) {
+  .page-background {
+    background-attachment: scroll;
+    background-image:
+      linear-gradient(rgba(250, 250, 248, 0.965), rgba(250, 250, 248, 0.965)),
+      url('https://user42540.na.imgto.link/public/20261013/6a61c12010b4a0b3587cfbdd-skyblue-oceanbackground.avif');
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

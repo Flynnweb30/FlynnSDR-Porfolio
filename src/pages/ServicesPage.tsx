@@ -1,13 +1,18 @@
 import React from 'react';
 import { PageRoute } from '../types';
-import { servicesData } from '../data/servicesData';
+import { servicesData, ServiceItem } from '../data/servicesData';
 import {
   Briefcase,
   PhoneCall,
   Calendar,
-  CheckCircle2,
-  Clock,
+  ShieldCheck,
+  Award,
   ArrowRight,
+  CheckCircle2,
+  TrendingUp,
+  Clock,
+  Layers,
+  Sparkles,
 } from 'lucide-react';
 
 interface ServicesPageProps {
@@ -17,6 +22,7 @@ interface ServicesPageProps {
 }
 
 export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }: ServicesPageProps) {
+  // If specific service selected, display dedicated deep-dive view; otherwise hub view
   const activeService = servicesData.find((s) => s.slug === currentRoute);
 
   return (
@@ -26,7 +32,7 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="space-y-3 text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-widest text-[#0077b6] font-extrabold shadow-2xs">
-              <Briefcase className="w-3.5 h-3.5 shrink-0 stroke-[2] text-[#0077b6]" />
+              <Briefcase className="w-3.5 h-3.5" />
               <span>{activeService ? activeService.badge : 'Outbound Sales Capabilities'}</span>
             </div>
 
@@ -42,20 +48,18 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
-                type="button"
                 onClick={() => onOpenBooking()}
                 className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase tracking-wider rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-xs"
               >
-                <Calendar className="w-4 h-4 shrink-0 stroke-[2]" />
+                <Calendar className="w-4 h-4" />
                 <span>Discuss Outbound Scope</span>
               </button>
 
               <button
-                type="button"
                 onClick={() => onNavigate('calls')}
                 className="px-5 py-2.5 bg-white hover:bg-zinc-50 border border-[#dededb] text-[#0d0e0c] text-xs font-display font-bold uppercase tracking-wider rounded-xl flex items-center gap-2 transition-all cursor-pointer shadow-2xs"
               >
-                <PhoneCall className="w-4 h-4 shrink-0 stroke-[2] text-[#0077b6]" />
+                <PhoneCall className="w-4 h-4 text-[#0077b6]" />
                 <span>Hear Real Audio Calls</span>
               </button>
             </div>
@@ -65,8 +69,10 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
 
       {/* Main Content Area */}
       {activeService ? (
+        /* DEDICATED DEEP-DIVE VIEW FOR SELECTED SERVICE */
         <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12 text-left">
+            {/* Visual Hero Banner for Service */}
             <div className="relative rounded-2xl overflow-hidden border border-[#dededb] shadow-md aspect-[21/9] max-h-[360px] bg-zinc-900">
               <img
                 src={activeService.image}
@@ -89,6 +95,7 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
               </div>
             </div>
 
+            {/* Performance Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {activeService.metrics.map((m, i) => (
                 <div key={i} className="p-5 bg-white border border-[#dededb] rounded-2xl shadow-xs text-center">
@@ -100,6 +107,7 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
               ))}
             </div>
 
+            {/* Deliverables Checklist */}
             <div className="bg-white border border-[#dededb] rounded-2xl p-6 sm:p-8 shadow-xs space-y-6">
               <div className="border-b border-zinc-100 pb-4">
                 <h3 className="text-xl font-black uppercase font-display text-[#0d0e0c]">
@@ -114,7 +122,7 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
                 {activeService.deliverables.map((d, idx) => (
                   <div key={idx} className="p-4 bg-[#f7f7f6] rounded-xl border border-zinc-200/80 space-y-1.5">
                     <div className="flex items-center gap-2 text-sm font-bold text-[#0d0e0c] font-display uppercase">
-                      <CheckCircle2 className="w-4 h-4 shrink-0 stroke-[2] text-[#0077b6]" />
+                      <CheckCircle2 className="w-4 h-4 text-[#0077b6] shrink-0" />
                       <span>{d.title}</span>
                     </div>
                     <p className="text-xs text-zinc-600 font-sans leading-relaxed pl-6">{d.desc}</p>
@@ -123,10 +131,11 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
               </div>
             </div>
 
+            {/* Cadence Rhythm & Target Outcome */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white border border-[#dededb] rounded-2xl p-6 shadow-xs space-y-4">
                 <h4 className="text-sm font-extrabold uppercase font-display text-[#0d0e0c] flex items-center gap-2">
-                  <Clock className="w-4 h-4 shrink-0 stroke-[2] text-[#0077b6]" />
+                  <Clock className="w-4 h-4 text-[#0077b6]" />
                   <span>Proven Cadence Rhythm</span>
                 </h4>
                 <ul className="space-y-2 text-xs font-sans text-zinc-700">
@@ -152,15 +161,12 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
 
                 <div className="pt-4 border-t border-zinc-200 flex flex-wrap gap-3">
                   <button
-                    type="button"
                     onClick={() => onOpenBooking()}
-                    className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
+                    className="px-5 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] text-white text-xs font-display font-extrabold uppercase rounded-xl transition-all shadow-xs cursor-pointer"
                   >
-                    <span>Deploy This Service</span>
-                    <ArrowRight className="w-4 h-4 shrink-0 stroke-[2]" />
+                    Deploy This Service
                   </button>
                   <button
-                    type="button"
                     onClick={() => onNavigate('services')}
                     className="px-4 py-2 bg-white border border-zinc-300 text-zinc-800 text-xs font-display font-bold uppercase rounded-xl cursor-pointer hover:bg-zinc-100"
                   >
@@ -172,6 +178,7 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
           </div>
         </section>
       ) : (
+        /* HUB OVERVIEW: ALL 4 SERVICES */
         <section className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-10 text-left">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -214,16 +221,14 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
 
                     <div className="pt-2 flex items-center justify-between">
                       <button
-                        type="button"
                         onClick={() => onNavigate(service.slug as PageRoute)}
                         className="text-xs font-display font-extrabold uppercase text-[#0077b6] hover:text-[#0284c7] flex items-center gap-1 cursor-pointer"
                       >
                         <span>Explore Workflow & Framework</span>
-                        <ArrowRight className="w-3.5 h-3.5 shrink-0 stroke-[2]" />
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </button>
 
                       <button
-                        type="button"
                         onClick={() => onOpenBooking()}
                         className="px-3 py-1.5 bg-zinc-900 hover:bg-[#0077b6] text-white rounded-lg text-[10px] font-display uppercase font-bold transition-colors cursor-pointer"
                       >
@@ -233,6 +238,24 @@ export default function ServicesPage({ currentRoute, onNavigate, onOpenBooking }
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Bottom Call to Action */}
+            <div className="p-8 bg-[#f7f7f6] border border-[#dededb] rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-2xl font-black uppercase font-display text-[#0d0e0c]">
+                  Need Custom Outbound Campaign Coverage?
+                </h3>
+                <p className="text-xs text-zinc-600 font-sans mt-1">
+                  Flynn operates seamlessly across US, UK, and APAC daytime shifts with zero ramp required.
+                </p>
+              </div>
+              <button
+                onClick={() => onOpenBooking()}
+                className="px-6 py-3 bg-[#0077b6] hover:bg-[#0284c7] text-white font-extrabold text-xs uppercase font-display tracking-wider rounded-xl shadow-xs transition-all shrink-0 cursor-pointer"
+              >
+                Schedule 15-Min Intro
+              </button>
             </div>
           </div>
         </section>
