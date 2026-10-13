@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ExperiencePage from './pages/ExperiencePage';
 import CallsPage from './pages/CallsPage';
@@ -199,7 +200,7 @@ export default function App() {
     currentPage === 'industry-commercial-contracting';
 
   return (
-    <div className={`min-h-screen flex flex-col text-[#0d0e0c] selection:bg-[#0077b6] selection:text-white ${currentPage === "home" ? "bg-[#fafaf8]" : "page-background"}`}>
+    <div className="min-h-screen flex flex-col bg-[#fafaf8] text-[#0d0e0c] selection:bg-[#0077b6] selection:text-white">
       <LoadingScreen />
 
       <Navbar
@@ -211,7 +212,7 @@ export default function App() {
         }}
       />
 
-      <main className="flex-1">
+      <main className={`flex-1 page-background page-background-${currentPage}`}>
         {currentPage === 'home' && (
           <HomePage
             onNavigate={handleNavigate}

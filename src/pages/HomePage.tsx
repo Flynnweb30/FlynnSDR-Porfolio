@@ -146,7 +146,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
           className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('https://user42540.na.imgto.link/public/20261013/6a61c12010b4a0b3587cfbdd-skyblue-oceanbackground.avif')",
+              "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif')",
           }}
           aria-hidden="true"
         />
@@ -187,7 +187,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
               {/* Client-Centric Conversion Copy */}
               <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
-                Combining high-stamina outbound dialing (150+ dials/day) with proven sales floor leadership and SDR coaching. Flynn fills Account Executive calendars with 30+ qualified discovery meetings per month, trains junior reps on objection reversal, and scales pipeline with zero ramp time.
+                Combining high-volume outbound prospecting (150+ dials/day) with proven sales leadership and SDR coaching. Flynn generates 30+ qualified discovery meetings monthly, coaches junior SDRs on objection handling, and builds pipeline efficiently with a short ramp-up.
               </p>
 
               {/* Verified Metrics Row 1 */}
