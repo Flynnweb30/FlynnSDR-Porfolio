@@ -108,7 +108,7 @@ export const servicesData: ServiceItem[] = [
     route: 'service-lead-qualification',
     title: 'BANT & MEDDIC Prospect Qualification & Pipeline Hygiene',
     shortTitle: 'Lead Qualification & Hygiene',
-    tagline: 'Protecting closer time by rigorously qualifying Budget, Authority, Need, and Timeline.',
+    tagline: 'Protecting Account Executive time by rigorously qualifying Budget, Authority, Need, and Timeline.',
     badge: '85% Qualification Rate · 100% CRM Hygiene',
     overview:
       'Closers should never spend time pitching unqualified leads. Flynn implements strict BANT and MEDDIC discovery frameworks during outbound dials, ensuring Account Executives only step into meetings where genuine pain, buying authority, and project timelines exist.',

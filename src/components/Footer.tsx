@@ -10,6 +10,7 @@ import {
   Calendar,
   FileText,
   ShieldCheck,
+  Award,
 } from 'lucide-react';
 
 interface FooterProps {
@@ -35,12 +36,12 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
             </div>
 
             <p className="text-xs text-zinc-600 font-sans leading-relaxed max-w-sm">
-              Heavyweight TL / Senior SDR / Pipeline Leader. 11+ years in B2B outbound sales, combining 150+ daily dials with hands-on SDR coaching, objection handling, and 30+ qualified discovery meetings per month.
+              Heavyweight TL / Senior SDR Sales Coach · 11+ Years · +15% Team KPI Lift. Flynn combines 150+ daily outbound dials with SDR coaching, objection-handling development, and efficient pipeline generation—supporting 30+ qualified discovery meetings monthly.
             </p>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] font-mono text-emerald-800">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Heavyweight TL / Senior SDR Sales Coach · 11+ Years · +15% Team KPI Lift</span>
+              <span>Available for Remote Senior SDR & Team Lead Roles</span>
             </div>
           </div>
 
@@ -56,7 +57,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('calls')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer"
                 >
-                  Hear My Opener (7 Calls)
+                  Hear My Opener
                 </button>
               </li>
               <li>
@@ -128,7 +129,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('service-appointment-setting')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  Appointment Setting (30+ SQLs/Mo)
+                  Appointment Setting (30+ Qualified Meetings/Mo)
                 </button>
               </li>
               <li>
@@ -137,7 +138,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('service-lead-qualification')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  BANT / MEDDIC Prospect Qualification
+                  BANT & MEDDIC Lead Qualification
                 </button>
               </li>
               <li>

@@ -198,40 +198,25 @@
     page-break-inside: avoid !important;
   }
 }
-
-/* Consistent Lucide icon rendering across navigation, cards, and CTAs. */
-svg.lucide {
-  stroke-width: 1.8;
-  flex-shrink: 0;
-  vertical-align: middle;
-}
-
-/* Low-opacity branded sky treatment behind transparent page sections. */
-main.page-background {
+/* Subtle, page-specific atmospheric backgrounds; content panels remain opaque for readability. */
+main.page-content,
+main.page-services,
+main.page-industries,
+main.page-leadership,
+main.page-references {
   background-color: #fafaf8;
-  background-image: linear-gradient(rgba(250, 250, 248, 0.94), rgba(250, 250, 248, 0.96)),
-    url('https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-image: radial-gradient(ellipse at 8% 0%, rgba(125, 211, 252, 0.12), transparent 34%),
+    radial-gradient(ellipse at 96% 20%, rgba(99, 102, 241, 0.045), transparent 30%);
+  background-attachment: scroll;
+}
+main.page-services { background-image: radial-gradient(ellipse at 90% 0%, rgba(0, 119, 182, 0.09), transparent 32%); }
+main.page-industries { background-image: radial-gradient(ellipse at 8% 0%, rgba(13, 148, 136, 0.09), transparent 32%); }
+main.page-leadership { background-image: radial-gradient(ellipse at 90% 0%, rgba(245, 158, 11, 0.07), transparent 32%); }
+main.page-references { background-image: radial-gradient(ellipse at 12% 0%, rgba(125, 211, 252, 0.14), transparent 34%); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 
-@media (max-width: 767px) {
-  main.page-background { background-attachment: scroll; }
-}
-
-@media (max-width: 767px) {
-  main.page-background { background-attachment: scroll; }
-}
-
-/* Small route-specific shifts keep the shared sky texture subtle and intentional. */
-main.page-background-references { background-position: 50% 18%; }
-main.page-background-experience,
-main.page-background-leadership { background-position: 50% 35%; }
-main.page-background-calls,
-main.page-background-playbook,
-main.page-background-academy { background-position: 50% 55%; }
-main.page-background-contact,
-main.page-background-hire-me,
-main.page-background-work-with-me { background-position: 50% 72%; }
+/* Consistent Lucide icon treatment across navigation, cards, CTAs, and footer. */
+svg.lucide { stroke-width: 1.8; flex-shrink: 0; vertical-align: middle; }

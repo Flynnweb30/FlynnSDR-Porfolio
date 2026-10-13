@@ -143,7 +143,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
          ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
         <div
-          className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
+          className="absolute inset-0 opacity-45 mix-blend-screen pointer-events-none bg-cover bg-center"
           style={{
             backgroundImage:
               "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif')",
@@ -187,7 +187,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
               {/* Client-Centric Conversion Copy */}
               <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
-                Combining high-volume outbound prospecting (150+ dials/day) with proven sales leadership and SDR coaching. Flynn generates 30+ qualified discovery meetings monthly, coaches junior SDRs on objection handling, and builds pipeline efficiently with a short ramp-up.
+                Combining high-volume outbound prospecting (150+ dials/day) with proven sales floor leadership and SDR coaching. Flynn supports 30+ qualified discovery meetings monthly, coaches junior reps on objection handling, and builds pipeline efficiently with a focused ramp plan.
               </p>
 
               {/* Verified Metrics Row 1 */}
@@ -983,7 +983,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-zinc-900 block font-display uppercase">BANT & MEDDIC Qualification</strong>
-                        <span>85% qualification accuracy; pre-meeting briefings for closer alignment.</span>
+                        <span>85% qualification accuracy; pre-meeting briefings for stronger Account Executive handoffs.</span>
                       </div>
                     </div>
 
