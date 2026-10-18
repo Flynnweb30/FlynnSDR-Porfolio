@@ -77,7 +77,7 @@ export const workExperience: WorkExperience[] = [
     location: 'Remote (Dover, DE)',
     period: 'Jul 2026 – Present',
     achievements: [
-      'Coach SDRs on objection handling, qualification, and closing techniques; share proven scripts and call strategies.',
+      'Coach SDRs on objection handling, qualification, and discovery-setting techniques; share proven scripts and call strategies.',
       'Monitor team metrics and develop sales talent through accountability, coaching, and results-driven leadership.',
       'Support onboarding through structured mentoring, shadowing, and constructive feedback sessions.',
       'Foster a high-performance, collaborative team culture that consistently exceeds monthly KPIs by 15%+.',

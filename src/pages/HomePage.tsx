@@ -18,10 +18,6 @@ import {
   ArrowRight,
   Sparkles,
   Users,
-  DollarSign,
-  Clock,
-  PhoneCall,
-  Flame,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -39,16 +35,16 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
   const audioSources: Record<string, string> = {
     'call-1':
       import.meta.env.VITE_AUDIO_CALL_1_URL ||
-      '/media/my_intro_media_1791404813632_39huk.mp3',
+      'https://www.image2url.com/r2/default/audio/1791216159831-6e22f168-363c-4217-8949-a62c1135a508.opus',
     'call-2':
       import.meta.env.VITE_AUDIO_CALL_2_URL ||
       'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
     'call-3':
       import.meta.env.VITE_AUDIO_CALL_3_URL ||
-      'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
+      'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
     'call-4':
       import.meta.env.VITE_AUDIO_CALL_4_URL ||
-      'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
+      'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
     'call-5':
       import.meta.env.VITE_AUDIO_CALL_5_URL ||
       '/media/call-5-reschedule-cig-builders.mp3',
@@ -142,290 +138,35 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
 
   return (
     <div className="w-full bg-[#fafaf8] text-[#0d0e0c] font-sans">
-      {/* =========================================================================
-          HERO SECTION: Fixed Navbar Clearance, Tight Diagonal Badge Framing
-         ========================================================================= */}
-      <section aria-label="Flynn Senior SDR portfolio introduction" className="relative overflow-hidden bg-gradient-to-b from-[#78baff] via-[#b5d7ff] to-[#fafaf8] pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#dededb]">
-        <div
-          className="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse at top, rgba(255,255,255,0.7), transparent 70%), url('https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif'), url('/assets/flynn-sky.jpg')",
-          }}
-          aria-hidden="true"
-        />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            {/* Left Column: Client-Focused Messaging & Title (Span 5) */}
-            <div className="lg:col-span-5 space-y-4 text-left">
-              {/* Strategic Badges Row */}
-              <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/95 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-[#0077b6] font-extrabold shadow-2xs">
-                  <span className="w-2 h-2 rounded-full bg-[#0077b6] animate-pulse" />
-                  <span>Heavyweight TL / Senior SDR</span>
-                </span>
-
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/90 border border-[#dededb] rounded-full text-[11px] font-display uppercase tracking-wider text-zinc-700 font-bold shadow-2xs">
-                  <Award className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Sales Coach · 11+ Years</span>
-                </span>
-
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] font-display uppercase tracking-wider text-emerald-800 font-bold shadow-2xs">
-                  <span>+15% Team KPI Lift</span>
-                </span>
-              </div>
-
-              {/* Bold Headline: Heavyweight TL / Senior SDR */}
-              <h1 className="space-y-0 leading-none text-4xl sm:text-5xl lg:text-6xl font-black uppercase font-display tracking-tight">
-                <span className="block text-[#0d0e0c]">HEAVYWEIGHT TL /</span>
-                <span className="block text-[#0d0e0c]">SENIOR SDR</span>
-                <span className="block text-[#0077b6]">PIPELINE LEADER.</span>
-              </h1>
-
-              {/* Client-Centric Conversion Copy */}
-              <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
-                Combining high-volume outbound prospecting (150+ dials/day) with proven sales leadership and SDR coaching. Flynn supports 30+ qualified discovery meetings monthly, coaches junior SDRs on objection handling, and builds pipeline efficiently with a structured, low-ramp approach.
-              </p>
-
-              {/* Verified Metrics Row 1 */}
-              <div className="grid grid-cols-3 gap-2 pt-1">
-                <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
-                  <div className="w-7 h-7 flex items-center justify-center mb-0.5 text-[#0077b6]"><DollarSign className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" /></div>
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
-                    $1.8M+
-                  </div>
-                  <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
-                    PIPELINE
-                    <br />
-                    SOURCED
-                  </div>
-                </div>
-
-                <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
-                  <div className="w-7 h-7 flex items-center justify-center mb-0.5 text-[#0077b6]"><Clock className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" /></div>
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
-                    11+ YEARS
-                  </div>
-                  <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
-                    OUTBOUND
-                    <br />
-                    EXPERIENCE
-                  </div>
-                </div>
-
-                <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs text-center flex flex-col items-center justify-center">
-                  <div className="w-7 h-7 flex items-center justify-center mb-0.5 text-[#0077b6]"><PhoneCall className="w-5 h-5" strokeWidth={1.8} aria-hidden="true" /></div>
-                  <div className="text-lg font-black font-display text-[#0d0e0c] leading-tight">
-                    45,000+
-                  </div>
-                  <div className="text-[9px] font-display font-extrabold uppercase text-zinc-500 leading-tight">
-                    SALES CALLS
-                    <br />
-                    COMPLETED
-                  </div>
-                </div>
-              </div>
-
-              {/* Verified Metrics Row 2 */}
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
-                  <Flame className="w-5 h-5 text-[#0077b6] shrink-0" strokeWidth={1.8} aria-hidden="true" />
-                  <div>
-                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
-                      120–150%
-                    </div>
-                    <div className="text-[9px] font-display font-bold uppercase text-zinc-500 leading-tight mt-0.5">
-                      QUOTA ATTAINMENT ON OUTBOUND
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-2.5 bg-white/95 backdrop-blur-xs border border-zinc-200/80 rounded-xl shadow-xs flex items-center gap-2.5">
-                  <Users className="w-5 h-5 text-[#0077b6] shrink-0" strokeWidth={1.8} aria-hidden="true" />
-                  <div>
-                    <div className="text-base font-black font-display text-[#0d0e0c] leading-none">
-                      20+ SDRs
-                    </div>
-                    <div className="text-[9px] font-display font-bold uppercase text-zinc-500 leading-tight mt-0.5">
-                      COACHED & MENTORED ON FLOOR
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Channels Row */}
-              <div className="pt-1 flex flex-wrap items-center justify-between gap-3 text-xs font-display">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold uppercase text-zinc-600">Find me</span>
-                  <a
-                    href={personalInfo.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
-                    title="LinkedIn"
-                  >
-                    <Linkedin className="w-3.5 h-3.5" />
-                  </a>
-                  <a
-                    href={`mailto:${personalInfo.email}`}
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
-                    title="Email"
-                  >
-                    <Mail className="w-3.5 h-3.5" />
-                  </a>
-                  <a
-                    href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
-                    className="p-1.5 bg-white rounded-lg border border-zinc-200 shadow-2xs hover:text-[#0077b6] transition-colors"
-                    title="Phone"
-                  >
-                    <Phone className="w-3.5 h-3.5" />
-                  </a>
-                  <DiscordButton />
-                </div>
-              </div>
+      {/* Flynn Hero — uses the shared site navbar above; no duplicate embedded navigation. */}
+      <section className="flynn-hero-band relative isolate w-full overflow-hidden border-b border-[#dededb]" aria-label="Flynn senior SDR portfolio hero">
+        <div className="flynn-hero-scrim" aria-hidden="true" />
+        <div className="relative z-10 max-w-6xl mx-auto min-h-[560px] sm:min-h-[640px] lg:min-h-[min(820px,calc(100vh-72px))] px-5 sm:px-8 lg:px-10 pt-28 sm:pt-32 pb-12 sm:pb-16 flex items-end justify-end">
+          <div className="flynn-hero-copy w-full max-w-[590px] text-left sm:text-right flex flex-col items-start sm:items-end">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-black/20 px-4 py-2 text-[11px] sm:text-xs font-bold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,.18)]" aria-hidden="true" />
+              Heavyweight TL / Senior SDR · Available for Remote Roles
+            </span>
+            <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.04] tracking-tight text-white drop-shadow-[0_4px_22px_rgba(0,0,0,.5)]">
+              Where conversations<br className="hidden sm:block" /> become qualified opportunities.
+            </h1>
+            <p className="mt-5 max-w-[470px] text-sm sm:text-base leading-relaxed text-white/95 drop-shadow-[0_2px_12px_rgba(0,0,0,.55)]">
+              Senior SDR, B2B cold caller, appointment setter, and pipeline leader. Flynn combines 150+ daily dials with practical qualification, objection handling, and SDR coaching to generate 30+ qualified discovery meetings monthly.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3 sm:justify-end">
+              <button type="button" onClick={() => onNavigate('work-with-me')} className="inline-flex items-center gap-3 rounded-2xl bg-[#0077b6] px-5 py-3.5 text-white shadow-xl shadow-sky-950/25 transition hover:-translate-y-0.5 hover:bg-[#0284c7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/20"><Sparkles className="h-5 w-5" aria-hidden="true" /></span>
+                <span className="text-left"><span className="block text-sm font-extrabold uppercase tracking-wide">Work With Me</span><span className="block text-xs text-sky-100">Discuss an SDR role</span></span>
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <button type="button" onClick={() => onOpenBooking()} className="inline-flex items-center gap-2 rounded-2xl border border-white/55 bg-white/95 px-5 py-3.5 text-sm font-extrabold uppercase tracking-wide text-zinc-900 shadow-lg transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white">
+                <Calendar className="h-4 w-4 text-[#0077b6]" aria-hidden="true" /> Schedule Intro
+              </button>
             </div>
-
-            {/* Center Column: Portrait Tightly Framed by Diagonal Experience Badge and "Work With Me" CTA */}
-            <div className="lg:col-span-4 flex justify-center items-end relative min-h-[440px] sm:min-h-[480px]">
-              <div className="absolute inset-x-2 bottom-4 h-72 bg-gradient-to-t from-sky-400/30 via-white/20 to-transparent blur-3xl rounded-full pointer-events-none" />
-
-              <div className="relative inline-block mx-auto max-w-full">
-                {/* DIAGONAL BADGE: "11+ Years of Experience" Anchored directly at upper-left corner of portrait */}
-                <div className="absolute -top-3 -left-3 sm:-top-5 sm:-left-6 lg:-top-6 lg:-left-8 z-20 transform -rotate-6 sm:-rotate-12 hover:rotate-0 transition-transform duration-300 pointer-events-auto">
-                  <div className="px-3.5 py-2 bg-white/95 backdrop-blur-md border border-[#dededb] rounded-2xl shadow-xl flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0">
-                      <Award className="w-4 h-4 stroke-[2.5]" />
-                    </div>
-                    <div className="text-left">
-                      <div className="text-[11px] font-display uppercase tracking-wider font-extrabold text-[#0d0e0c] leading-tight">
-                        11+ Years of Experience
-                      </div>
-                      <div className="text-[9px] font-sans text-zinc-500 font-medium">
-                        45,000+ Outbound Calls
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Profile Portrait */}
-                <div className="relative w-76 sm:w-88 md:w-[400px] lg:w-[440px] max-w-full z-10 flex justify-center items-end">
-                  <img
-                    src={personalInfo.heroImage}
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.onerror = null;
-                      target.src = personalInfo.heroImageFallback;
-                    }}
-                    alt="Flynn James Q. Pontino - Heavyweight TL / Senior SDR & Sales Coach"
-                    className="w-full h-auto max-h-[560px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(0,119,182,0.25)] select-none pointer-events-none [mask-image:linear-gradient(to_bottom,black_84%,transparent_100%)] transition-all duration-300"
-                  />
-                </div>
-
-                {/* LOWER-RIGHT BADGE: "Work With Me" CTA Button Anchored at lower-right corner of portrait */}
-                <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-5 lg:-bottom-4 lg:-right-6 z-20 animate-fade-in pointer-events-auto">
-                  <button
-                    type="button"
-                    onClick={() => onNavigate('work-with-me')}
-                    className="px-4 py-2.5 bg-[#0077b6] hover:bg-[#0284c7] active:scale-95 text-white rounded-2xl shadow-xl shadow-[#0077b6]/30 border border-white/30 flex items-center gap-2.5 transition-all duration-200 cursor-pointer group"
-                  >
-                    <div className="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-white">
-                      <Sparkles className="w-3.5 h-3.5" />
-                    </div>
-                    <div className="text-left">
-                      <div className="text-xs font-display uppercase tracking-wider font-extrabold text-white leading-tight flex items-center gap-1">
-                        <span>Work With Me</span>
-                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                      </div>
-                      <div className="text-[9px] font-sans text-sky-100 font-medium">
-                        Schedule Discovery Intro
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Work With Flynn Card (Span 3) */}
-            <div className="lg:col-span-3 space-y-4">
-              <div className="bg-white border border-zinc-200/90 rounded-2xl p-5 shadow-lg space-y-4">
-                <div className="flex items-center justify-between border-b border-zinc-100 pb-2">
-                  <h2 className="text-xl sm:text-2xl font-black uppercase font-display tracking-tight text-[#0d0e0c] leading-tight text-left">
-                    WORK WITH
-                    <br />
-                    FLYNN
-                  </h2>
-                  <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-display uppercase font-bold rounded-md border border-emerald-200">
-                    Immediate
-                  </span>
-                </div>
-
-                <div className="space-y-2.5">
-                  <a
-                    href={`https://wa.me/${personalInfo.phone.replace(/[^0-9]/g, '')}?text=Hey%20Flynn,%20I'd%20love%20to%20discuss%20working%20with%20you%20for%20our%20SDR%20outbound%20pipeline.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full px-3.5 py-2.5 bg-white hover:bg-emerald-50 border border-zinc-200 hover:border-emerald-500 rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
-                      <div className="w-6 h-6 rounded-md bg-[#25d366]/15 flex items-center justify-center text-[#25d366]">
-                        <MessageCircle className="w-4 h-4 fill-current" />
-                      </div>
-                      <span>WhatsApp</span>
-                    </div>
-                    <span className="text-zinc-400 group-hover:text-emerald-600 transition-colors font-bold">
-                      →
-                    </span>
-                  </a>
-
-                  <a
-                    href={personalInfo.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full px-3.5 py-2.5 bg-white hover:bg-indigo-50 border border-zinc-200 hover:border-indigo-500 rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
-                      <div className="w-6 h-6 rounded-md bg-[#5865f2]/15 flex items-center justify-center text-[#5865f2]">
-                        <Linkedin className="w-4 h-4" />
-                      </div>
-                      <span>LinkedIn</span>
-                    </div>
-                    <span className="text-zinc-400 group-hover:text-indigo-600 transition-colors font-bold">
-                      →
-                    </span>
-                  </a>
-
-                  <a
-                    href={`mailto:${personalInfo.email}?subject=Work%20With%20Flynn%20-%20TL%20/%20Senior%20SDR%20Partnership`}
-                    className="w-full px-3.5 py-2.5 bg-white hover:bg-sky-50 border border-zinc-200 hover:border-[#0077b6] rounded-xl flex items-center justify-between transition-all group shadow-2xs cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2.5 text-xs font-display font-bold text-[#0d0e0c] uppercase">
-                      <div className="w-6 h-6 rounded-md bg-[#0077b6]/15 flex items-center justify-center text-[#0077b6]">
-                        <Mail className="w-4 h-4" />
-                      </div>
-                      <span>Email</span>
-                    </div>
-                    <span className="text-zinc-400 group-hover:text-[#0077b6] transition-colors font-bold">
-                      →
-                    </span>
-                  </a>
-                </div>
-
-                <div className="pt-2 border-t border-zinc-100 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-bold shrink-0">
-                    ✓
-                  </div>
-                  <div className="text-left text-xs leading-tight">
-                    <span className="text-zinc-500 text-[10px] block font-sans">Full-Time Rate</span>
-                    <strong className="text-emerald-600 font-display uppercase tracking-tight block text-sm">
-                      $639 / month
-                    </strong>
-                    <span className="text-zinc-500 text-[10px] block font-sans">
-                      Part-Time from $389/mo
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div className="mt-7 grid w-full max-w-[520px] grid-cols-3 gap-2 sm:gap-3">
+              <div className="rounded-xl border border-white/30 bg-black/25 px-3 py-3 text-white backdrop-blur-sm"><strong className="block text-xl sm:text-2xl font-black">11+ Years</strong><span className="mt-1 block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white/80">Outbound Experience</span></div>
+              <div className="rounded-xl border border-white/30 bg-black/25 px-3 py-3 text-white backdrop-blur-sm"><strong className="block text-xl sm:text-2xl font-black">150+</strong><span className="mt-1 block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white/80">Dials per Day</span></div>
+              <div className="rounded-xl border border-white/30 bg-black/25 px-3 py-3 text-white backdrop-blur-sm"><strong className="block text-xl sm:text-2xl font-black">30+</strong><span className="mt-1 block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white/80">Meetings Monthly</span></div>
             </div>
           </div>
         </div>
@@ -981,7 +722,7 @@ export default function HomePage({ onNavigate, onOpenBooking, onOpenResume }: Ho
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-zinc-900 block font-display uppercase">BANT & MEDDIC Qualification</strong>
-                        <span>85% qualification accuracy; clear pre-meeting briefs for aligned discovery conversations.</span>
+                        <span>85% qualification accuracy; clear pre-meeting briefs for effective AE handoffs.</span>
                       </div>
                     </div>
 

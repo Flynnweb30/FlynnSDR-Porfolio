@@ -108,10 +108,10 @@ export const servicesData: ServiceItem[] = [
     route: 'service-lead-qualification',
     title: 'BANT & MEDDIC Prospect Qualification & Pipeline Hygiene',
     shortTitle: 'Lead Qualification & Hygiene',
-    tagline: 'Improving discovery quality by rigorously qualifying Budget, Authority, Need, and Timeline.',
+    tagline: 'Improving meeting quality through rigorous Budget, Authority, Need, and Timeline qualification.',
     badge: '85% Qualification Rate · 100% CRM Hygiene',
     overview:
-      'Account Executives need well-qualified discovery conversations. Flynn applies BANT and MEDDIC frameworks during outbound calls to identify business needs, buying authority, and project timing before meetings are booked.',
+      'Closers should never spend time pitching unqualified leads. Flynn implements strict BANT and MEDDIC discovery frameworks during outbound dials, ensuring Account Executives only step into meetings where genuine pain, buying authority, and project timelines exist.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&auto=format&fit=crop&q=80',
     metrics: [
       { label: 'BANT Qualified Rate', value: '85%' },

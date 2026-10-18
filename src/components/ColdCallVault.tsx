@@ -3,10 +3,10 @@ import { Play, Volume2, ShieldCheck, CheckCircle2, Filter } from 'lucide-react';
 import { callRecordings } from '../data/flynnData';
 
 const audioUrls = [
-  (import.meta.env.VITE_AUDIO_CALL_1_URL as string | undefined) || '/media/my_intro_media_1791404813632_39huk.mp3',
+  (import.meta.env.VITE_AUDIO_CALL_1_URL as string | undefined) || 'https://www.image2url.com/r2/default/audio/1791216159831-6e22f168-363c-4217-8949-a62c1135a508.opus',
   (import.meta.env.VITE_AUDIO_CALL_2_URL as string | undefined) || 'https://www.image2url.com/r2/default/audio/1791215970548-fa25088c-671a-4e9a-9297-fa8392d25b0a.opus',
-  (import.meta.env.VITE_AUDIO_CALL_3_URL as string | undefined) || 'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
-  (import.meta.env.VITE_AUDIO_CALL_4_URL as string | undefined) || 'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
+  (import.meta.env.VITE_AUDIO_CALL_3_URL as string | undefined) || 'https://www.image2url.com/r2/default/audio/1791215822662-8c113027-efd5-422b-8508-deb2539de57e.opus',
+  (import.meta.env.VITE_AUDIO_CALL_4_URL as string | undefined) || 'https://www.image2url.com/r2/default/audio/1791216218851-06ad6ad2-41e4-4576-9a3d-db2e0f306959.opus',
   (import.meta.env.VITE_AUDIO_CALL_5_URL as string | undefined) || '/media/call-5-reschedule-cig-builders.mp3',
   (import.meta.env.VITE_AUDIO_CALL_6_URL as string | undefined) || '/media/call-6-reconfirmation-mark.mp3',
   (import.meta.env.VITE_AUDIO_CALL_7_URL as string | undefined) || '/media/call-7-reminder-chris.mp3',

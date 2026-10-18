@@ -34,14 +34,17 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
             <div onClick={() => onNavigate('home')} className="cursor-pointer inline-block" title="Flynn James">
               <FlynnLogo size="md" variant="dark" />
             </div>
+            <p className="text-[11px] font-display font-extrabold uppercase tracking-[0.12em] text-[#0077b6]">
+              Heavyweight TL / Senior SDR / Pipeline Leader
+            </p>
 
             <p className="text-xs text-zinc-600 font-sans leading-relaxed max-w-sm">
-              Heavyweight TL / Senior SDR Sales Coach · 11+ Years · +15% Team KPI Lift. High-volume B2B prospecting (150+ dials/day), qualification, appointment setting, and pipeline generation—backed by hands-on coaching and reliable CRM discipline.
+              Heavyweight TL / Senior SDR Sales Coach · 11+ Years · +15% Team KPI Lift. Flynn combines 150+ dials/day with proven prospecting, qualification, appointment setting, and SDR coaching to generate 30+ qualified discovery meetings monthly and build pipeline efficiently.
             </p>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] font-mono text-emerald-800">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Available · Remote Roles · Immediate Start</span>
+              <span>Available for Remote Roles · Immediate Start</span>
             </div>
           </div>
 
@@ -57,7 +60,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('calls')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer"
                 >
-                  Hear My Opener (7 Calls)
+                  Hear My Opener
                 </button>
               </li>
               <li>
@@ -129,7 +132,7 @@ export default function Footer({ onNavigate, onOpenBooking, onOpenResume }: Foot
                   onClick={() => onNavigate('service-appointment-setting')}
                   className="hover:text-[#0077b6] transition-colors cursor-pointer text-left"
                 >
-                  Appointment Setting (30+ SQLs/Mo)
+                  Appointment Setting (30+ Qualified Meetings/Mo)
                 </button>
               </li>
               <li>

@@ -199,18 +199,27 @@
   }
 }
 
-/* Subtle shared brand atmosphere across inner pages; content stays readable. */
-.site-page-background {
-  background-color: #fafaf8;
-  background-image: linear-gradient(rgba(250,250,248,.94), rgba(250,250,248,.97)), url("https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif");
+/* Hero band based on the supplied Flynn office concept; the shared Navbar remains global. */
+.flynn-hero-band {
+  background-color: #202020;
+  background-image: url('https://user42540.na.imgto.link/public/20261013/bc570a2f275f06e2cdb2f642-flynn-office-bg-v2.avif');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
+.flynn-hero-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,.38) 0%, rgba(0,0,0,.08) 28%, rgba(0,0,0,.12) 50%, rgba(0,0,0,.72) 100%), radial-gradient(ellipse 75% 70% at 100% 100%, rgba(0,0,0,.52), transparent 78%);
+}
+.flynn-hero-copy { text-wrap: pretty; }
+svg.lucide { flex-shrink: 0; vertical-align: middle; stroke-width: 1.9; }
 @media (max-width: 640px) {
-  .site-page-background { background-attachment: scroll; }
+  .flynn-hero-band { background-position: 58% top; }
+  .flynn-hero-scrim { background: linear-gradient(180deg, rgba(0,0,0,.32), rgba(0,0,0,.18) 24%, rgba(0,0,0,.76) 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .flynn-hero-band *, .flynn-hero-band *::before, .flynn-hero-band *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }

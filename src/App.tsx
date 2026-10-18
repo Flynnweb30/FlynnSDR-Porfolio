@@ -115,7 +115,7 @@ export default function App() {
     },
     'service-lead-qualification': {
       title: 'BANT & MEDDIC Prospect Qualification Services | Flynn James',
-      description: 'Improve meeting quality with strict BANT/MEDDIC qualification, 85% qualification accuracy, and disciplined CRM hygiene in HubSpot and Salesforce.',
+      description: 'Support efficient AE handoffs with BANT/MEDDIC qualification, 85% qualification accuracy, and consistent CRM hygiene in HubSpot and Salesforce.',
     },
     'service-sdr-coaching': {
       title: 'SDR Sales Floor Leadership & Mentoring Sprints | Flynn James',
@@ -212,7 +212,7 @@ export default function App() {
         }}
       />
 
-      <main className="site-page-background flex-1">
+      <main className="flex-1">
         {currentPage === 'home' && (
           <HomePage
             onNavigate={handleNavigate}

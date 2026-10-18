@@ -1,6 +1,6 @@
-# Flynn James Q. Pontino — Senior SDR Portfolio
+﻿# Flynn James Q. Pontino — Senior SDR Portfolio
 
-Production-ready Vite/React static portfolio for GitHub + Render. The existing visual system is preserved; content and functionality are focused on Senior SDR, B2B cold calling, appointment setting, lead generation, prospect qualification, objection handling, and SDR mentoring.
+Production-ready Vite/React static portfolio for GitHub + Render. The existing visual system is preserved; content and functionality are focused on Senior SDR, B2B cold calling, appointment setting, lead generation, prospect qualification, objection handling, and SDR mentoring. The homepage hero now uses the supplied Flynn office background concept while reusing the shared site navbar rather than introducing a duplicate navigation bar.
 
 ## Local setup
 
@@ -16,6 +16,9 @@ npm run build
 ```
 
 Publish directory: `dist`
+- Node: `22.14.0` (configured in `render.yaml`)
+- SPA fallback: `/*` → `/index.html`
+- Current source package: 76 files (under the 99-file limit)
 
 ## Render Static Site
 

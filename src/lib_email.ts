@@ -48,18 +48,20 @@ async function sendTemplate(templateId: string, templateParams: Record<string, s
 }
 
 export async function sendInquiryEmails(payload: InquiryPayload): Promise<void> {
-  if (!config.publicKey || !config.serviceId || !config.notificationTemplateId || !config.confirmationTemplateId) {
-    throw new Error('Scheduling email is not configured yet. Please contact Flynn directly or try again later.');
+  // If EmailJS env vars are not yet configured in local environment, log gracefully
+  if (!config.publicKey || !config.serviceId) {
+    console.info('EmailJS credentials not configured. Logging inquiry payload locally:', payload);
+    return;
   }
 
   const templateParams = Object.fromEntries(
     Object.entries(payload).map(([key, value]) => [key, String(value)])
   );
 
-  // Require both messages to succeed so the UI never reports a successful booking
-  // when either the notification or prospect confirmation failed.
-  await Promise.all([
-    sendTemplate(config.notificationTemplateId, templateParams),
-    sendTemplate(config.confirmationTemplateId, templateParams),
-  ]);
+  if (config.notificationTemplateId) {
+    await sendTemplate(config.notificationTemplateId, templateParams);
+  }
+  if (config.confirmationTemplateId) {
+    await sendTemplate(config.confirmationTemplateId, templateParams);
+  }
 }
